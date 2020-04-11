@@ -199,6 +199,26 @@
     <ClInclude Include="third-party\spdlog\tests\utils.h">
       <Filter>third-party\spdlog\tests</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Events\Event.h" />
+    <ClInclude Include="Honey\Events\EventDispatcher.h" />
+    <ClInclude Include="Honey\Events\KeyEvents.h" />
+    <ClInclude Include="Honey\Events\Keys\KeyEvent.h" />
+    <ClInclude Include="Honey\Events\Keys\KeyPressedEvent.h" />
+    <ClInclude Include="Honey\Events\Keys\KeyReleasedEvent.h" />
+    <ClInclude Include="Honey\Events\Keys\KeyTypedEvent.h" />
+    <ClInclude Include="Honey\Events\MouseEvents.h" />
+    <ClInclude Include="Honey\Events\Mouse\MouseMovedEvent.h" />
+    <ClInclude Include="Honey\Events\Mouse\MouseScrolledEvent.h" />
+    <ClInclude Include="Honey\Events\Mouse\MouseButtonEvent.h" />
+    <ClInclude Include="Honey\Events\Mouse\MouseButtonPressedEvent.h" />
+    <ClInclude Include="Honey\Events\Mouse\MouseButtonReleased.h" />
+    <ClInclude Include="Honey\Events\WindowEvents.h" />
+    <ClInclude Include="Honey\Events\Window\WindowResizeEvent.h" />
+    <ClInclude Include="Honey\Events\Window\WindowCloseEvent.h" />
+    <ClInclude Include="Honey\Events\AppEvents.h" />
+    <ClInclude Include="Honey\Events\App\AppTickEvent.h" />
+    <ClInclude Include="Honey\Events\App\AppUpdateEvent.h" />
+    <ClInclude Include="Honey\Events\App\AppRenderEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
