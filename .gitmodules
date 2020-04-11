@@ -1,0 +1,3 @@
+[submodule "Projects/Honey/third-party/spdlog"]
+	path = Projects/Honey/third-party/spdlog
+	url = https://github.com/gabime/spdlog
