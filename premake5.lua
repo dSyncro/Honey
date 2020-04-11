@@ -18,8 +18,10 @@ outputdir = "%{cfg.architecture}/%{cfg.system}/%{cfg.buildcfg}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "Projects/Honey/third-party/glfw/include"
+IncludeDir["GLAD"] = "Projects/Honey/third-party/glad/include"
 
 include "Projects/Honey/third-party/glfw"
+include "Projects/Honey/third-party/glad"
 
 project "Honey"
 	location "Projects/Honey"
@@ -37,6 +39,11 @@ project "Honey"
 		"Projects/%{prj.name}/**.cpp"
 	}
 
+	defines 
+	{
+		"GLFW_INCLUDE_NONE"
+	}
+
 	excludes 
 	{
 		"Projects/%{prj.name}/third-party/**.h",
@@ -48,11 +55,13 @@ project "Honey"
 		"Projects/%{prj.name}",
 		"Projects/%{prj.name}/third-party/spdlog/include",
 		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.GLAD}",
 	}
 
 	links 
 	{
 		"GLFW",
+		"GLAD",
 		"opengl32.lib",
 	}
 

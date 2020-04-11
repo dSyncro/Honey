@@ -5,6 +5,8 @@
 #include <Honey/Events/WindowEvents.h>
 #include <Honey/Logging/Log.h>
 
+#include <glad/glad.h>
+
 using namespace Honey;
 
 Window* Window::Create(const WindowProperties& properties)
@@ -40,6 +42,10 @@ void WinWindow::Init(const WindowProperties& properties)
 
 	_window = glfwCreateWindow(_data.Width, _data.Height, _data.Title.c_str(), nullptr, nullptr);
 	glfwMakeContextCurrent(_window);
+
+	int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+	HNY_CORE_ASSERT(status, "Failed to init GLAD!");
+
 	glfwSetWindowUserPointer(_window, &_data);
 
 	SetVSync(true);
@@ -114,14 +120,14 @@ void WinWindow::Init(const WindowProperties& properties)
 
 	glfwSetScrollCallback(_window, [](GLFWwindow* window, double xOffset, double yOffset) {
 		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-		MouseScrolledEvent e(xOffset, yOffset);
+		MouseScrolledEvent e((float)xOffset, (float)yOffset);
 		data.Callback(e);
 		}
 	);
 
 	glfwSetCursorPosCallback(_window, [](GLFWwindow* window, double xOffset, double yOffset) {
 		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-		MouseMovedEvent e(xOffset, yOffset);
+		MouseMovedEvent e((float)xOffset, (float)yOffset);
 		data.Callback(e);
 		}
 	);

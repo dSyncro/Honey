@@ -4,3 +4,6 @@
 [submodule "Projects/Honey/third-party/glfw"]
 	path = Projects/Honey/third-party/glfw
 	url = https://github.com/dSyncro/HoneyGlfw
+[submodule "Projects/Honey/third-party/glad"]
+	path = Projects/Honey/third-party/glad
+	url = https://github.com/dSyncro/HoneyGlad

@@ -19,8 +19,20 @@
     <Filter Include="Honey\Events\Window">
       <UniqueIdentifier>{334A2652-9FAB-0360-2819-4A1294793A1F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Honey\Layer">
+      <UniqueIdentifier>{B4EE0247-20A4-7B3C-A998-7513154D7240}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Honey\Logging">
       <UniqueIdentifier>{7EECDC32-EAAC-5869-B3E7-A1E61F679D45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Platform">
+      <UniqueIdentifier>{3CC57D4B-2893-7151-1127-E277FD934DB6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Platform\Window">
+      <UniqueIdentifier>{A316A8D9-0F83-63D4-D876-FB3144A2853C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Window">
+      <UniqueIdentifier>{CF3B9441-BB9E-23E6-6424-5C9C5066EF68}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -94,20 +106,40 @@
     <ClInclude Include="Honey\Events\WindowEvents.h">
       <Filter>Honey\Events</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Layer\Layer.h">
+      <Filter>Honey\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Layer\LayerStack.h">
+      <Filter>Honey\Layer</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Logging\Log.h">
       <Filter>Honey\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Window\Window.h" />
-    <ClInclude Include="Honey\Window\WindowProperties.h" />
-    <ClInclude Include="Honey\Platform\Window\WinWindow.h" />
+    <ClInclude Include="Honey\Platform\Window\WinWindow.h">
+      <Filter>Honey\Platform\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Window\Window.h">
+      <Filter>Honey\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Window\WindowProperties.h">
+      <Filter>Honey\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
       <Filter>Honey</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Layer\Layer.cpp">
+      <Filter>Honey\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Layer\LayerStack.cpp">
+      <Filter>Honey\Layer</Filter>
+    </ClCompile>
     <ClCompile Include="Honey\Logging\Log.cpp">
       <Filter>Honey\Logging</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Platform\Window\WinWindow.cpp" />
+    <ClCompile Include="Honey\Platform\Window\WinWindow.cpp">
+      <Filter>Honey\Platform\Window</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

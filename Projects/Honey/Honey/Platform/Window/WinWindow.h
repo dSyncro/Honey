@@ -1,9 +1,9 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
-
 #include <Honey/Logging/Log.h>
 #include <Honey/Window/Window.h>
+
+#include <glfw/glfw3.h>
 
 namespace Honey {
 

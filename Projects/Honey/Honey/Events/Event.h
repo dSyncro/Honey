@@ -1,8 +1,9 @@
 #pragma once
 
-#include <Honey/Core.h>
-
 #include <string>
+#include <ostream>
+
+#include <Honey/Core.h>
 
 namespace Honey {
 
@@ -36,8 +37,8 @@ namespace Honey {
 
 	public:
 
-		Event() {}
-		virtual ~Event() {}
+		Event() = default;
+		virtual ~Event() = default;
 
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
@@ -51,17 +52,16 @@ namespace Honey {
 
 		bool HasBeenHandled = false;
 	};
-
 }
 
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; } \
-								virtual EventType GetEventType() const override { return GetStaticType(); } \
-								virtual const char* GetName() const override { return #type; }
+									virtual EventType GetEventType() const override { return GetStaticType(); } \
+									virtual const char* GetName() const override { return #type; }
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
 
-inline std::ostream& operator <<(std::ostream& stream, const Honey::Event& e)
+inline std::ostream& operator<<(std::ostream& stream, const Honey::Event& e)
 {
 	return stream << e.ToString();
 }
