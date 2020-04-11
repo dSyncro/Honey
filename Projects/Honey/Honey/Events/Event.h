@@ -61,7 +61,7 @@ namespace Honey {
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
 
-std::ostream& operator <<(std::ostream& stream, const Honey::Event& e)
+inline std::ostream& operator <<(std::ostream& stream, const Honey::Event& e)
 {
 	return stream << e.ToString();
 }

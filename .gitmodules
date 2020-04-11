@@ -1,3 +1,6 @@
 [submodule "Projects/Honey/third-party/spdlog"]
 	path = Projects/Honey/third-party/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Projects/Honey/third-party/glfw"]
+	path = Projects/Honey/third-party/glfw
+	url = https://github.com/dSyncro/HoneyGlfw

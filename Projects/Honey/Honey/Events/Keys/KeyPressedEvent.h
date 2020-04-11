@@ -17,7 +17,7 @@ namespace Honey {
 		std::string ToString() const override
 		{
 			std::stringstream stream;
-			stream << "KeyPressedEvent: " << _keycode << " (" << _repeatCount << "repeats)";
+			stream << "KeyPressedEvent: " << _keycode << " (" << _repeatCount << " repeats)";
 			return stream.str();
 		}
 

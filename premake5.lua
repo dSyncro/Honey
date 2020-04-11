@@ -16,6 +16,11 @@ workspace "Honey"
 
 outputdir = "%{cfg.architecture}/%{cfg.system}/%{cfg.buildcfg}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "Projects/Honey/third-party/glfw/include"
+
+include "Projects/Honey/third-party/glfw"
+
 project "Honey"
 	location "Projects/Honey"
 	kind "StaticLib"
@@ -32,10 +37,23 @@ project "Honey"
 		"Projects/%{prj.name}/**.cpp"
 	}
 
+	excludes 
+	{
+		"Projects/%{prj.name}/third-party/**.h",
+		"Projects/%{prj.name}/third-party/**.cpp"
+	}
+
 	includedirs
 	{
 		"Projects/%{prj.name}",
 		"Projects/%{prj.name}/third-party/spdlog/include",
+		"%{IncludeDir.GLFW}",
+	}
+
+	links 
+	{
+		"GLFW",
+		"opengl32.lib",
 	}
 
 	filter "system:windows"

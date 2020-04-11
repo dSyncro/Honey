@@ -4,47 +4,23 @@
     <Filter Include="Honey">
       <UniqueIdentifier>{E8A3540D-54B8-7CBE-1D3A-201E890D79EF}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Honey\Events">
+      <UniqueIdentifier>{CCDA7D18-B83D-0DBD-61C3-45734D05D93F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Events\App">
+      <UniqueIdentifier>{FC496186-E842-80D8-1175-655DFDCC5FE4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Events\Keys">
+      <UniqueIdentifier>{17D88F52-83EE-8DE8-CC65-190A38BB5E70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Events\Mouse">
+      <UniqueIdentifier>{2477B4A4-105B-75FA-79BB-6F4D65BE5F7C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Events\Window">
+      <UniqueIdentifier>{334A2652-9FAB-0360-2819-4A1294793A1F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Honey\Logging">
       <UniqueIdentifier>{7EECDC32-EAAC-5869-B3E7-A1E61F679D45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party">
-      <UniqueIdentifier>{9DC1EB7C-0977-6472-926B-5E49FE1F5B76}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog">
-      <UniqueIdentifier>{35FFBD22-21E3-7E78-8A43-79CB764669FA}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog\bench">
-      <UniqueIdentifier>{44ED9823-3012-E8A3-595D-CD3345E1E6C1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog\example">
-      <UniqueIdentifier>{1076E47F-FC85-9050-653F-F56E516E7FE9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog\include">
-      <UniqueIdentifier>{A88B9D9C-949B-496D-FD54-AE8BE9833806}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog\include\spdlog">
-      <UniqueIdentifier>{E0AE1CAA-4C1D-7229-9506-2D2901B467C5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog\include\spdlog\cfg">
-      <UniqueIdentifier>{5F97B4B4-CB5B-B3A4-94C1-E36E00454FDA}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog\include\spdlog\details">
-      <UniqueIdentifier>{557FA6ED-C199-098F-0ABC-192376153196}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog\include\spdlog\fmt">
-      <UniqueIdentifier>{16A5B4B4-8269-B3A4-4BCF-E36EB7524FDA}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog\include\spdlog\fmt\bundled">
-      <UniqueIdentifier>{037A0751-6FEA-09CA-3809-8452A43842CB}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog\include\spdlog\sinks">
-      <UniqueIdentifier>{57445BB5-C3D3-1CA0-CCCF-FDB738DE57AC}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog\src">
-      <UniqueIdentifier>{CC4F8043-B849-A995-A1B6-3FA68D4F0F02}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="third-party\spdlog\tests">
-      <UniqueIdentifier>{D7BDDE24-C3E2-2DA5-EC2D-1335D8B12CC3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,167 +34,72 @@
     <ClInclude Include="Honey\Entrypoint.h">
       <Filter>Honey</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Events\App\AppRenderEvent.h">
+      <Filter>Honey\Events\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\App\AppTickEvent.h">
+      <Filter>Honey\Events\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\App\AppUpdateEvent.h">
+      <Filter>Honey\Events\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\AppEvents.h">
+      <Filter>Honey\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Event.h">
+      <Filter>Honey\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\EventDispatcher.h">
+      <Filter>Honey\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\KeyEvents.h">
+      <Filter>Honey\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Keys\KeyEvent.h">
+      <Filter>Honey\Events\Keys</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Keys\KeyPressedEvent.h">
+      <Filter>Honey\Events\Keys</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Keys\KeyReleasedEvent.h">
+      <Filter>Honey\Events\Keys</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Keys\KeyTypedEvent.h">
+      <Filter>Honey\Events\Keys</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Mouse\MouseButtonEvent.h">
+      <Filter>Honey\Events\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Mouse\MouseButtonPressedEvent.h">
+      <Filter>Honey\Events\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Mouse\MouseButtonReleased.h">
+      <Filter>Honey\Events\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Mouse\MouseMovedEvent.h">
+      <Filter>Honey\Events\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Mouse\MouseScrolledEvent.h">
+      <Filter>Honey\Events\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\MouseEvents.h">
+      <Filter>Honey\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Window\WindowCloseEvent.h">
+      <Filter>Honey\Events\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\Window\WindowResizeEvent.h">
+      <Filter>Honey\Events\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Events\WindowEvents.h">
+      <Filter>Honey\Events</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Logging\Log.h">
       <Filter>Honey\Logging</Filter>
     </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\async.h">
-      <Filter>third-party\spdlog\include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\async_logger.h">
-      <Filter>third-party\spdlog\include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\common.h">
-      <Filter>third-party\spdlog\include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\circular_q.h">
-      <Filter>third-party\spdlog\include\spdlog\details</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\console_globals.h">
-      <Filter>third-party\spdlog\include\spdlog\details</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\file_helper.h">
-      <Filter>third-party\spdlog\include\spdlog\details</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\fmt_helper.h">
-      <Filter>third-party\spdlog\include\spdlog\details</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\log_msg.h">
-      <Filter>third-party\spdlog\include\spdlog\details</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\mpmc_blocking_q.h">
-      <Filter>third-party\spdlog\include\spdlog\details</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\null_mutex.h">
-      <Filter>third-party\spdlog\include\spdlog\details</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\os.h">
-      <Filter>third-party\spdlog\include\spdlog\details</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\periodic_worker.h">
-      <Filter>third-party\spdlog\include\spdlog\details</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\registry.h">
-      <Filter>third-party\spdlog\include\spdlog\details</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\thread_pool.h">
-      <Filter>third-party\spdlog\include\spdlog\details</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bin_to_hex.h">
-      <Filter>third-party\spdlog\include\spdlog\fmt</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\core.h">
-      <Filter>third-party\spdlog\include\spdlog\fmt\bundled</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\format-inl.h">
-      <Filter>third-party\spdlog\include\spdlog\fmt\bundled</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\format.h">
-      <Filter>third-party\spdlog\include\spdlog\fmt\bundled</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\ostream.h">
-      <Filter>third-party\spdlog\include\spdlog\fmt\bundled</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\posix.h">
-      <Filter>third-party\spdlog\include\spdlog\fmt\bundled</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\printf.h">
-      <Filter>third-party\spdlog\include\spdlog\fmt\bundled</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\ranges.h">
-      <Filter>third-party\spdlog\include\spdlog\fmt\bundled</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\fmt.h">
-      <Filter>third-party\spdlog\include\spdlog\fmt</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\ostr.h">
-      <Filter>third-party\spdlog\include\spdlog\fmt</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\formatter.h">
-      <Filter>third-party\spdlog\include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\logger.h">
-      <Filter>third-party\spdlog\include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\android_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\ansicolor_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\base_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\basic_file_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\daily_file_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\dist_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\msvc_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\null_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\ostream_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\rotating_file_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\stdout_color_sinks.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\stdout_sinks.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\syslog_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\wincolor_sink.h">
-      <Filter>third-party\spdlog\include\spdlog\sinks</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\spdlog.h">
-      <Filter>third-party\spdlog\include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\tweakme.h">
-      <Filter>third-party\spdlog\include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\include\spdlog\version.h">
-      <Filter>third-party\spdlog\include\spdlog</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\tests\test_sink.h">
-      <Filter>third-party\spdlog\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="third-party\spdlog\tests\utils.h">
-      <Filter>third-party\spdlog\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="Honey\Events\Event.h" />
-    <ClInclude Include="Honey\Events\EventDispatcher.h" />
-    <ClInclude Include="Honey\Events\KeyEvents.h" />
-    <ClInclude Include="Honey\Events\Keys\KeyEvent.h" />
-    <ClInclude Include="Honey\Events\Keys\KeyPressedEvent.h" />
-    <ClInclude Include="Honey\Events\Keys\KeyReleasedEvent.h" />
-    <ClInclude Include="Honey\Events\Keys\KeyTypedEvent.h" />
-    <ClInclude Include="Honey\Events\MouseEvents.h" />
-    <ClInclude Include="Honey\Events\Mouse\MouseMovedEvent.h" />
-    <ClInclude Include="Honey\Events\Mouse\MouseScrolledEvent.h" />
-    <ClInclude Include="Honey\Events\Mouse\MouseButtonEvent.h" />
-    <ClInclude Include="Honey\Events\Mouse\MouseButtonPressedEvent.h" />
-    <ClInclude Include="Honey\Events\Mouse\MouseButtonReleased.h" />
-    <ClInclude Include="Honey\Events\WindowEvents.h" />
-    <ClInclude Include="Honey\Events\Window\WindowResizeEvent.h" />
-    <ClInclude Include="Honey\Events\Window\WindowCloseEvent.h" />
-    <ClInclude Include="Honey\Events\AppEvents.h" />
-    <ClInclude Include="Honey\Events\App\AppTickEvent.h" />
-    <ClInclude Include="Honey\Events\App\AppUpdateEvent.h" />
-    <ClInclude Include="Honey\Events\App\AppRenderEvent.h" />
+    <ClInclude Include="Honey\Window\Window.h" />
+    <ClInclude Include="Honey\Window\WindowProperties.h" />
+    <ClInclude Include="Honey\Platform\Window\WinWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -227,29 +108,6 @@
     <ClCompile Include="Honey\Logging\Log.cpp">
       <Filter>Honey\Logging</Filter>
     </ClCompile>
-    <ClCompile Include="third-party\spdlog\example\example.cpp">
-      <Filter>third-party\spdlog\example</Filter>
-    </ClCompile>
-    <ClCompile Include="third-party\spdlog\tests\test_fmt_helper.cpp">
-      <Filter>third-party\spdlog\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="third-party\spdlog\tests\test_macros.cpp">
-      <Filter>third-party\spdlog\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="third-party\spdlog\tests\test_misc.cpp">
-      <Filter>third-party\spdlog\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="third-party\spdlog\tests\test_mpmc_q.cpp">
-      <Filter>third-party\spdlog\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="third-party\spdlog\tests\test_pattern_formatter.cpp">
-      <Filter>third-party\spdlog\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="third-party\spdlog\tests\test_registry.cpp">
-      <Filter>third-party\spdlog\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="third-party\spdlog\tests\utils.cpp">
-      <Filter>third-party\spdlog\tests</Filter>
-    </ClCompile>
+    <ClCompile Include="Honey\Platform\Window\WinWindow.cpp" />
   </ItemGroup>
 </Project>
