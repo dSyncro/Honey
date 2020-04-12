@@ -19,8 +19,8 @@
     <Filter Include="Honey\Events\Window">
       <UniqueIdentifier>{334A2652-9FAB-0360-2819-4A1294793A1F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Honey\Layer">
-      <UniqueIdentifier>{B4EE0247-20A4-7B3C-A998-7513154D7240}</UniqueIdentifier>
+    <Filter Include="Honey\Layers">
+      <UniqueIdentifier>{A7C56027-9328-F0CB-3CAE-288228F0BB4E}</UniqueIdentifier>
     </Filter>
     <Filter Include="Honey\Logging">
       <UniqueIdentifier>{7EECDC32-EAAC-5869-B3E7-A1E61F679D45}</UniqueIdentifier>
@@ -106,11 +106,11 @@
     <ClInclude Include="Honey\Events\WindowEvents.h">
       <Filter>Honey\Events</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Layer\Layer.h">
-      <Filter>Honey\Layer</Filter>
+    <ClInclude Include="Honey\Layers\Layer.h">
+      <Filter>Honey\Layers</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Layer\LayerStack.h">
-      <Filter>Honey\Layer</Filter>
+    <ClInclude Include="Honey\Layers\LayerStack.h">
+      <Filter>Honey\Layers</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Logging\Log.h">
       <Filter>Honey\Logging</Filter>
@@ -124,16 +124,19 @@
     <ClInclude Include="Honey\Window\WindowProperties.h">
       <Filter>Honey\Window</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Layers\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="third-party\ImGui\examples\imgui_impl_opengl3.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
       <Filter>Honey</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Layer\Layer.cpp">
-      <Filter>Honey\Layer</Filter>
+    <ClCompile Include="Honey\Layers\Layer.cpp">
+      <Filter>Honey\Layers</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Layer\LayerStack.cpp">
-      <Filter>Honey\Layer</Filter>
+    <ClCompile Include="Honey\Layers\LayerStack.cpp">
+      <Filter>Honey\Layers</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Logging\Log.cpp">
       <Filter>Honey\Logging</Filter>
@@ -141,5 +144,8 @@
     <ClCompile Include="Honey\Platform\Window\WinWindow.cpp">
       <Filter>Honey\Platform\Window</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Layers\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="third-party\ImGui\examples\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
   </ItemGroup>
 </Project>

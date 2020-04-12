@@ -12,8 +12,8 @@ namespace Honey {
 
 		MouseMovedEvent(float x, float y) : _x(x), _y(y) { }
 
-		float GetXOffset() const { return _x; }
-		float GetYOffset() const { return _y; }
+		float GetX() const { return _x; }
+		float GetY() const { return _y; }
 
 		std::string ToString() const override
 		{

@@ -6,12 +6,15 @@
 
 using namespace Honey;
 
-#define BIND_EVENT_CALLBACK(x) std::bind(&Application::x, this, std::placeholders::_1)
+Application* Application::s_Instance = nullptr;
 
 Application::Application()
 {
+	HNY_CORE_ASSERT(!s_Instance, "Application already exists!");
+	s_Instance = this;
+
 	_window = std::unique_ptr<Window>(Window::Create());
-	_window->SetEventCallback(BIND_EVENT_CALLBACK(OnEvent));
+	_window->SetEventCallback(HNY_BIND_EVENT_CALLBACK(Application::OnEvent));
 }
 
 Application::~Application()
@@ -34,19 +37,21 @@ void Application::Run()
 void Application::PushLayer(Layer* layer)
 {
 	_layerStack.PushLayer(layer);
+	layer->OnAttach();
 }
 
 void Application::PushOverlay(Layer* overlay)
 {
 	_layerStack.PushOverlay(overlay);
+	overlay->OnAttach();
 }
 
 void Application::OnEvent(Event& e)
 {
 	EventDispatcher dispatcher(e);
-	dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_CALLBACK(OnWindowClose));
+	dispatcher.Dispatch<WindowCloseEvent>(HNY_BIND_EVENT_CALLBACK(Application::OnWindowClose));
 
-	HNY_CORE_TRACE("{0}", e);
+	HNY_CORE_INFO("{0}", e);
 
 	for (auto it = _layerStack.end(); it != _layerStack.begin(); )
 	{

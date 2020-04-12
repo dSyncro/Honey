@@ -11,8 +11,8 @@ int main(int argc, char** argv)
 {
 	Honey::Log::Init();
 
-	HNY_APP_INFO("info");
-	HNY_CORE_INFO("info");
+	HNY_APP_INFO("App logger attached");
+	HNY_CORE_INFO("Core logger attached");
 
 	Honey::Application* app = Honey::CreateApplication();
 	app->Run();

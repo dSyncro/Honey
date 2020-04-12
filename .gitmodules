@@ -7,3 +7,6 @@
 [submodule "Projects/Honey/third-party/glad"]
 	path = Projects/Honey/third-party/glad
 	url = https://github.com/dSyncro/HoneyGlad
+[submodule "Projects/Honey/third-party/ImGui"]
+	path = Projects/Honey/third-party/ImGui
+	url = https://github.com/dSyncro/HoneyImGui

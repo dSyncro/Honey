@@ -3,7 +3,7 @@
 #include "Core.h"
 
 #include <Honey/Events/WindowEvents.h>
-#include <Honey/Layer/LayerStack.h>
+#include <Honey/Layers/LayerStack.h>
 #include <Honey/Window/Window.h>
 
 namespace Honey {
@@ -22,6 +22,10 @@ namespace Honey {
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 
+		inline Window& GetWindow() { return *_window; }
+
+		inline static Application& Get() { return *s_Instance; }
+
 	private:
 
 		bool OnWindowClose(WindowCloseEvent& e);
@@ -30,6 +34,8 @@ namespace Honey {
 		bool _running = false;
 
 		LayerStack _layerStack;
+
+		static Application* s_Instance;
 	};
 
 	Application* CreateApplication();

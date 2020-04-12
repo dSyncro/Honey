@@ -96,6 +96,13 @@ void WinWindow::Init(const WindowProperties& properties)
 		}
 	);
 
+	glfwSetCharCallback(_window, [](GLFWwindow* window, unsigned int keycode) {
+		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+		KeyTypedEvent e(keycode);
+		data.Callback(e);
+		}
+	);
+
 	glfwSetMouseButtonCallback(_window, [](GLFWwindow* window, int button, int action, int mods) {
 		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 

@@ -23,3 +23,5 @@
 #endif
 
 #define BIT(x) 1 << x
+
+#define HNY_BIND_EVENT_CALLBACK(callback) std::bind(&callback, this, std::placeholders::_1)
