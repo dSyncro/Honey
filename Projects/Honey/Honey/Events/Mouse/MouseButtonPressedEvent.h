@@ -8,7 +8,7 @@ namespace Honey {
 
 	public:
 
-		MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {}
+		MouseButtonPressedEvent(MouseButton button) : MouseButtonEvent(button) {}
 
 		std::string ToString() const override
 		{

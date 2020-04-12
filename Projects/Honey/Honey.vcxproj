@@ -165,11 +165,15 @@
     <ClInclude Include="Honey\Events\Window\WindowCloseEvent.h" />
     <ClInclude Include="Honey\Events\Window\WindowResizeEvent.h" />
     <ClInclude Include="Honey\Events\WindowEvents.h" />
+    <ClInclude Include="Honey\Input\Input.h" />
+    <ClInclude Include="Honey\Input\Keycode.h" />
+    <ClInclude Include="Honey\Input\MouseButtons.h" />
     <ClInclude Include="Honey\Layers\ImGui\ImGuiLayer.h" />
     <ClInclude Include="Honey\Layers\Layer.h" />
     <ClInclude Include="Honey\Layers\LayerStack.h" />
     <ClInclude Include="Honey\Logging\Log.h" />
     <ClInclude Include="Honey\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="Honey\Platform\Window\WindowsInput.h" />
     <ClInclude Include="Honey\Platform\Window\WinWindow.h" />
     <ClInclude Include="Honey\Window\Window.h" />
     <ClInclude Include="Honey\Window\WindowProperties.h" />
@@ -182,6 +186,7 @@
     <ClCompile Include="Honey\Layers\LayerStack.cpp" />
     <ClCompile Include="Honey\Logging\Log.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="Honey\Platform\Window\WindowsInput.cpp" />
     <ClCompile Include="Honey\Platform\Window\WinWindow.cpp" />
     <ClCompile Include="third-party\ImGui\examples\imgui_impl_opengl3.cpp" />
   </ItemGroup>

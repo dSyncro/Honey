@@ -7,7 +7,7 @@
 
 namespace Honey {
 
-	static bool _isGLFWInitialized = false;
+	static bool s_isGLFWInitialized = false;
 
 	static void GLFWErrorCallback(int error, const char* description)
 	{
@@ -30,6 +30,8 @@ namespace Honey {
 
 		void SetVSync(bool enabled) override;
 		bool IsVSyncEnabled() const override;
+
+		inline void* GetNativeWindow() const override { return _window; }
 
 	private:
 

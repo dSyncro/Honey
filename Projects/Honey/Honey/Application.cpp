@@ -4,6 +4,8 @@
 #include <Honey/Events/EventDispatcher.h>
 #include <Honey/Events/Window/WindowResizeEvent.h>
 
+#include <glad/glad.h>
+
 using namespace Honey;
 
 Application* Application::s_Instance = nullptr;
@@ -27,6 +29,9 @@ void Application::Run()
 	_running = true;
 	while (_running)
 	{
+		glClearColor(0, 0, 0, 1);
+		glClear(GL_COLOR_BUFFER_BIT);
+
 		for (Layer* layer : _layerStack)
 			layer->OnUpdate();
 

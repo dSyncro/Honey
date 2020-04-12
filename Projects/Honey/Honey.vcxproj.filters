@@ -127,6 +127,10 @@
     <ClInclude Include="Honey\Layers\ImGui\ImGuiLayer.h" />
     <ClInclude Include="third-party\ImGui\examples\imgui_impl_opengl3.h" />
     <ClInclude Include="Honey\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="Honey\Platform\Window\WindowsInput.h" />
+    <ClInclude Include="Honey\Input\Input.h" />
+    <ClInclude Include="Honey\Input\Keycode.h" />
+    <ClInclude Include="Honey\Input\MouseButtons.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -147,5 +151,6 @@
     <ClCompile Include="Honey\Layers\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="third-party\ImGui\examples\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="Honey\Platform\Window\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Honey/Events/Event.h>
+#include <Honey/Input/Keycode.h>
 
 namespace Honey {
 
@@ -8,15 +9,15 @@ namespace Honey {
 
 	public:
 
-		int GetKeyCode() const { return _keycode; };
+		Keycode GetKeyCode() const { return _keycode; };
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 
 	protected:
 
-		KeyEvent(int keycode) : _keycode(keycode) {}
+		KeyEvent(Keycode keycode) : _keycode(keycode) {}
 
-		int _keycode;
+		Keycode _keycode;
 	};
 
 }

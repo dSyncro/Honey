@@ -32,12 +32,12 @@ void WinWindow::Init(const WindowProperties& properties)
 
 	HNY_CORE_INFO("Creating window {0} ({1}; {2})", properties.Title, properties.Width, properties.Height);
 
-	if (!_isGLFWInitialized)
+	if (!s_isGLFWInitialized)
 	{
 		int success = glfwInit();
 		HNY_CORE_ASSERT(success, "Could not init GLFW!");
 		glfwSetErrorCallback(GLFWErrorCallback);
-		_isGLFWInitialized = true;
+		s_isGLFWInitialized = true;
 	}
 
 	_window = glfwCreateWindow(_data.Width, _data.Height, _data.Title.c_str(), nullptr, nullptr);
@@ -74,21 +74,21 @@ void WinWindow::Init(const WindowProperties& properties)
 		{
 			case GLFW_PRESS:
 			{
-				KeyPressedEvent e(key, 0);
+				KeyPressedEvent e((Keycode)key, 0);
 				data.Callback(e);
 				break;
 			}
 
 			case GLFW_RELEASE:
 			{
-				KeyReleasedEvent e(key);
+				KeyReleasedEvent e((Keycode)key);
 				data.Callback(e);
 				break;
 			}
 
 			case GLFW_REPEAT:
 			{
-				KeyPressedEvent e(key, 1);
+				KeyPressedEvent e((Keycode)key, 1);
 				data.Callback(e);
 				break;
 			}
@@ -98,7 +98,7 @@ void WinWindow::Init(const WindowProperties& properties)
 
 	glfwSetCharCallback(_window, [](GLFWwindow* window, unsigned int keycode) {
 		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-		KeyTypedEvent e(keycode);
+		KeyTypedEvent e((Keycode)keycode);
 		data.Callback(e);
 		}
 	);
@@ -110,14 +110,14 @@ void WinWindow::Init(const WindowProperties& properties)
 		{
 			case GLFW_PRESS:
 			{
-				MouseButtonPressedEvent e(button);
+				MouseButtonPressedEvent e((MouseButton)button);
 				data.Callback(e);
 				break;
 			}
 
 			case GLFW_RELEASE:
 			{
-				MouseButtonReleasedEvent e(button);
+				MouseButtonReleasedEvent e((MouseButton)button);
 				data.Callback(e);
 				break;
 			}

@@ -10,7 +10,7 @@ namespace Honey {
 
 	public:
 
-		KeyPressedEvent(int keycode, int repeatCount) : KeyEvent(keycode), _repeatCount(repeatCount) {}
+		KeyPressedEvent(Keycode keycode, int repeatCount) : KeyEvent(keycode), _repeatCount(repeatCount) {}
 
 		int GetRepeatCount() const { return _repeatCount; }
 

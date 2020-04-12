@@ -4,21 +4,23 @@
 
 #include <Honey/Events/Event.h>
 
+#include <Honey/Input/MouseButtons.h>
+
 namespace Honey {
 
 	class HONEY_API MouseButtonEvent : public Event {
 
 	public:
 
-		int GetMouseButton() const { return _mouseButton; }
+		MouseButton GetMouseButton() const { return _mouseButton; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
 	protected:
 
-		MouseButtonEvent(int button) : _mouseButton(button) {}
+		MouseButtonEvent(MouseButton button) : _mouseButton(button) {}
 
-		int _mouseButton;
+		MouseButton _mouseButton;
 	};
 
 }

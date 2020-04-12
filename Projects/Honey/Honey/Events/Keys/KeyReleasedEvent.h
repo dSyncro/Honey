@@ -10,7 +10,7 @@ namespace Honey {
 
 	public:
 
-		KeyReleasedEvent(int keycode) : KeyEvent(keycode) {}
+		KeyReleasedEvent(Keycode keycode) : KeyEvent(keycode) {}
 
 		std::string ToString() const override
 		{
