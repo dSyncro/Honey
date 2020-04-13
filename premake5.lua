@@ -19,6 +19,7 @@ outputdir = "%{cfg.architecture}/%{cfg.system}/%{cfg.buildcfg}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Projects/Honey/third-party/glfw/include"
 IncludeDir["GLAD"] = "Projects/Honey/third-party/glad/include"
+IncludeDir["GLM"] = "Projects/Honey/third-party/glm"
 IncludeDir["ImGui"] = "Projects/Honey/third-party/ImGui"
 
 include "Projects/Honey/third-party/glfw"
@@ -38,7 +39,9 @@ project "Honey"
 	files
 	{
 		"Projects/%{prj.name}/**.h",
-		"Projects/%{prj.name}/**.cpp"
+		"Projects/%{prj.name}/**.cpp",
+		"Projects/%{prj.name}/third-party/glm/glm/**.inl",
+		"Projects/%{prj.name}/third-party/glm/glm/**.hpp",
 	}
 
 	defines 
@@ -58,6 +61,7 @@ project "Honey"
 		"Projects/%{prj.name}/third-party/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.GLAD}",
+		"%{IncludeDir.GLM}",
 		"%{IncludeDir.ImGui}",
 	}
 
@@ -112,6 +116,7 @@ project "Sandbox"
 	{
 		"Projects/Honey/third-party/spdlog/include",
 		"Projects/Honey/",
+		"%{IncludeDir.GLM}",
 	}
 
 	links

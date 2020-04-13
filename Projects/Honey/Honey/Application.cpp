@@ -17,6 +17,9 @@ Application::Application()
 
 	_window = std::unique_ptr<Window>(Window::Create());
 	_window->SetEventCallback(HNY_BIND_EVENT_CALLBACK(Application::OnEvent));
+
+	_imGuiLayer = new ImGuiLayer();
+	PushOverlay(_imGuiLayer);
 }
 
 Application::~Application()
@@ -34,6 +37,11 @@ void Application::Run()
 
 		for (Layer* layer : _layerStack)
 			layer->OnUpdate();
+
+		_imGuiLayer->Begin();
+		for (Layer* layer : _layerStack)
+			layer->OnImGuiRender();
+		_imGuiLayer->End();
 
 		_window->OnUpdate();
 	}

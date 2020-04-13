@@ -4,6 +4,7 @@
 
 #include <Honey/Events/WindowEvents.h>
 #include <Honey/Layers/LayerStack.h>
+#include <Honey/Layers/ImGui/ImGuiLayer.h>
 #include <Honey/Window/Window.h>
 
 namespace Honey {
@@ -31,6 +32,8 @@ namespace Honey {
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> _window;
+		ImGuiLayer* _imGuiLayer;
+
 		bool _running = false;
 
 		LayerStack _layerStack;
