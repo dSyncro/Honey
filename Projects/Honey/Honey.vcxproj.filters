@@ -1396,6 +1396,10 @@
     <ClInclude Include="third-party\glm\glm\vector_relational.hpp">
       <Filter>third-party\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Platform\OpenGL\ImGuiOpenGLRender.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\ImGuiGlfwImplementation.h" />
+    <ClInclude Include="Honey\Renderer\GraphicsContext.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1419,7 +1423,9 @@
     <ClCompile Include="Honey\Platform\Window\WindowsInput.cpp">
       <Filter>Honey\Platform\Window</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Platform\OpenGL\ImGuiBuild.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\ImGuiGlfwImplementation.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\OpenGLContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="third-party\glm\test\glm.cppcheck">

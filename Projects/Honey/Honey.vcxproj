@@ -172,8 +172,12 @@
     <ClInclude Include="Honey\Layers\Layer.h" />
     <ClInclude Include="Honey\Layers\LayerStack.h" />
     <ClInclude Include="Honey\Logging\Log.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\ImGuiGlfwImplementation.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\ImGuiOpenGLRender.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="Honey\Platform\Window\WinWindow.h" />
     <ClInclude Include="Honey\Platform\Window\WindowsInput.h" />
+    <ClInclude Include="Honey\Renderer\GraphicsContext.h" />
     <ClInclude Include="Honey\Window\Window.h" />
     <ClInclude Include="Honey\Window\WindowProperties.h" />
     <ClInclude Include="third-party\glm\glm\common.hpp" />
@@ -591,7 +595,9 @@
     <ClCompile Include="Honey\Layers\Layer.cpp" />
     <ClCompile Include="Honey\Layers\LayerStack.cpp" />
     <ClCompile Include="Honey\Logging\Log.cpp" />
-    <ClCompile Include="Honey\Platform\OpenGL\ImGuiBuild.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\ImGuiGlfwImplementation.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="Honey\Platform\Window\WinWindow.cpp" />
     <ClCompile Include="Honey\Platform\Window\WindowsInput.cpp" />
   </ItemGroup>

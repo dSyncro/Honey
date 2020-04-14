@@ -37,6 +37,7 @@ namespace Honey {
 		bool _running = false;
 
 		LayerStack _layerStack;
+		unsigned int _vertexArray, _vertexBuffer, _indexBuffer;
 
 		static Application* s_Instance;
 	};

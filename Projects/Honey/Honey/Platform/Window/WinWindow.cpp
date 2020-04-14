@@ -4,8 +4,7 @@
 #include <Honey/Events/MouseEvents.h>
 #include <Honey/Events/WindowEvents.h>
 #include <Honey/Logging/Log.h>
-
-#include <glad/glad.h>
+#include <Honey/Platform/OpenGL/OpenGLContext.h>
 
 using namespace Honey;
 
@@ -41,10 +40,9 @@ void WinWindow::Init(const WindowProperties& properties)
 	}
 
 	_window = glfwCreateWindow(_data.Width, _data.Height, _data.Title.c_str(), nullptr, nullptr);
-	glfwMakeContextCurrent(_window);
 
-	int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-	HNY_CORE_ASSERT(status, "Failed to init GLAD!");
+	_context = new OpenGLContext(_window);
+	_context->Init();
 
 	glfwSetWindowUserPointer(_window, &_data);
 
@@ -148,7 +146,7 @@ void WinWindow::Shutdown()
 void WinWindow::OnUpdate()
 {
 	glfwPollEvents();
-	glfwSwapBuffers(_window);
+	_context->SwapBuffers();
 }
 
 void WinWindow::SetVSync(bool enabled)

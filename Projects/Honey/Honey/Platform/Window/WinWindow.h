@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Honey/Logging/Log.h>
+#include <Honey/Renderer/GraphicsContext.h>
 #include <Honey/Window/Window.h>
 
 #include <glfw/glfw3.h>
@@ -39,6 +40,7 @@ namespace Honey {
 		virtual void Shutdown();
 
 		GLFWwindow* _window;
+		GraphicsContext* _context;
 
 		struct WindowData {
 			std::string Title;
