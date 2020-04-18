@@ -8,6 +8,11 @@
 
 using namespace Honey;
 
+static void GLFWErrorCallback(int error, const char* description)
+{
+	HNY_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
+}
+
 Window* Window::Create(const WindowProperties& properties)
 {
 	return new WinWindow(properties);
@@ -25,12 +30,14 @@ WinWindow::~WinWindow()
 
 void WinWindow::Init(const WindowProperties& properties)
 {
+	// Setup Window Data
 	_data.Title = properties.Title;
 	_data.Width = properties.Width;
 	_data.Height = properties.Height;
 
 	HNY_CORE_INFO("Creating window {0} ({1}; {2})", properties.Title, properties.Width, properties.Height);
 
+	// Init GLFW if needed
 	if (!s_isGLFWInitialized)
 	{
 		int success = glfwInit();
@@ -41,6 +48,7 @@ void WinWindow::Init(const WindowProperties& properties)
 
 	_window = glfwCreateWindow(_data.Width, _data.Height, _data.Title.c_str(), nullptr, nullptr);
 
+	// Init the context
 	_context = new OpenGLContext(_window);
 	_context->Init();
 

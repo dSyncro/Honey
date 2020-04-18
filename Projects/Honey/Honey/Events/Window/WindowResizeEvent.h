@@ -12,10 +12,10 @@ namespace Honey {
 
 		WindowResizeEvent(unsigned int width, unsigned int height) : _width(width), _height(height) {}
 
-		unsigned int GetWidth() const { return _width; }
-		unsigned int GetHeight() const { return _height; }
+		inline unsigned int GetWidth() const { return _width; }
+		inline unsigned int GetHeight() const { return _height; }
 
-		std::string ToString() const override
+		virtual std::string ToString() const override
 		{
 			std::stringstream stream;
 			stream << "WindowResizeEvent: " << _width << ", " << _height;

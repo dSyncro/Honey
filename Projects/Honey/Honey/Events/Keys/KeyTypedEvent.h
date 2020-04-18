@@ -12,7 +12,7 @@ namespace Honey {
 
 		KeyTypedEvent(Keycode keycode) : KeyEvent(keycode) {}
 
-		std::string ToString() const override
+		virtual std::string ToString() const override
 		{
 			std::stringstream stream;
 			stream << "KeyTypedEvent: " << _keycode;

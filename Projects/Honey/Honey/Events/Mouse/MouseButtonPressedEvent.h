@@ -10,7 +10,7 @@ namespace Honey {
 
 		MouseButtonPressedEvent(MouseButton button) : MouseButtonEvent(button) {}
 
-		std::string ToString() const override
+		virtual std::string ToString() const override
 		{
 			std::stringstream stream;
 			stream << "MouseButtonPressedEvent: " << _mouseButton;

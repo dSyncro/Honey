@@ -12,10 +12,10 @@ namespace Honey {
 
 		MouseMovedEvent(float x, float y) : _x(x), _y(y) { }
 
-		float GetX() const { return _x; }
-		float GetY() const { return _y; }
+		inline float GetX() const { return _x; }
+		inline float GetY() const { return _y; }
 
-		std::string ToString() const override
+		virtual std::string ToString() const override
 		{
 			std::stringstream stream;
 			stream << "MouseMovedEvent: " << _x << ", " << _y;

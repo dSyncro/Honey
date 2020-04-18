@@ -15,13 +15,13 @@ namespace Honey {
 
 		static void Init();
 
-		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return _coreLogger; }
-		inline static std::shared_ptr<spdlog::logger>& GetAppLogger() { return _appLogger; }
+		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
+		inline static std::shared_ptr<spdlog::logger>& GetAppLogger() { return s_AppLogger; }
 
 	private:
 
-		static std::shared_ptr<spdlog::logger> _coreLogger;
-		static std::shared_ptr<spdlog::logger> _appLogger;
+		static std::shared_ptr<spdlog::logger> s_CoreLogger;
+		static std::shared_ptr<spdlog::logger> s_AppLogger;
 
 	};
 

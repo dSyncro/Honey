@@ -1,25 +1,23 @@
 #include "ImGuiLayer.h"
 
 #include <Honey/Application.h>
-#include <Honey/Events/EventDispatcher.h>
 
-#include <examples/imgui_impl_glfw.h>
-#include <Honey/Platform/OpenGL/ImGuiOpenGLRender.h>
+#include <Honey/Events/EventDispatcher.h>
+#include <Honey/Events/KeyEvents.h>
+#include <Honey/Events/MouseEvents.h>
+#include <Honey/Events/WindowEvents.h>
+
+#include <Honey/Platform/ImGui/ImGuiGlfwImplementation.h>
+#include <Honey/Platform/ImGui/ImGuiOpenGLRender.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 using namespace Honey;
 
-ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
-{
+ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
 
-}
-
-ImGuiLayer::~ImGuiLayer()
-{
-
-}
+ImGuiLayer::~ImGuiLayer() = default;
 
 void ImGuiLayer::OnAttach()
 {

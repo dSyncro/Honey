@@ -18,12 +18,10 @@ namespace Honey {
 		template <typename T>
 		bool Dispatch(EventCallback<T> callback)
 		{
-			if (_event.GetEventType() == T::GetStaticType())
-			{
-				_event.HasBeenHandled = callback(*(T*)&_event);
-				return true;
-			}
-			return false;
+			if (_event.GetEventType() != T::GetStaticType()) return false;
+
+			_event.HasBeenHandled = callback(static_cast<T&>(_event));
+			return true;
 		}
 
 	private:

@@ -1,46 +1,44 @@
 #include "LayerStack.h"
 
-namespace Honey {
+using namespace Honey;
 
-	LayerStack::~LayerStack()
+LayerStack::~LayerStack()
+{
+	for (Layer* layer : _layers)
 	{
-		for (Layer* layer : _layers)
-		{
-			layer->OnDetach();
-			delete layer;
-		}
+		layer->OnDetach();
+		delete layer;
 	}
+}
 
-	void LayerStack::PushLayer(Layer* layer)
-	{
-		_layers.emplace(_layers.begin() + _layerInsertIndex, layer);
-		_layerInsertIndex++;
-	}
+void LayerStack::PushLayer(Layer* layer)
+{
+	_layers.emplace(_layers.begin() + _layerInsertIndex, layer);
+	_layerInsertIndex++;
+}
 
-	void LayerStack::PushOverlay(Layer* overlay)
-	{
-		_layers.emplace_back(overlay);
-	}
+void LayerStack::PushOverlay(Layer* overlay)
+{
+	_layers.emplace_back(overlay);
+}
 
-	void LayerStack::PopLayer(Layer* layer)
-	{
-		auto it = std::find(_layers.begin(), _layers.begin() + _layerInsertIndex, layer);
-		if (it != _layers.begin() + _layerInsertIndex)
-		{
-			layer->OnDetach();
-			_layers.erase(it);
-			_layerInsertIndex--;
-		}
-	}
+void LayerStack::PopLayer(Layer* layer)
+{
+	std::vector<Layer*>::iterator it = std::find(_layers.begin(), _layers.begin() + _layerInsertIndex, layer);
 
-	void LayerStack::PopOverlay(Layer* overlay)
-	{
-		auto it = std::find(_layers.begin() + _layerInsertIndex, _layers.end(), overlay);
-		if (it != _layers.end())
-		{
-			overlay->OnDetach();
-			_layers.erase(it);
-		}
-	}
+	if (it == _layers.begin() + _layerInsertIndex) return;
+	
+	layer->OnDetach();
+	_layers.erase(it);
+	_layerInsertIndex--;
+}
 
+void LayerStack::PopOverlay(Layer* overlay)
+{
+	std::vector<Layer*>::iterator it = std::find(_layers.begin() + _layerInsertIndex, _layers.end(), overlay);
+
+	if (it == _layers.end()) return;
+
+	overlay->OnDetach();
+	_layers.erase(it);
 }

@@ -12,9 +12,9 @@ namespace Honey {
 
 		KeyPressedEvent(Keycode keycode, int repeatCount) : KeyEvent(keycode), _repeatCount(repeatCount) {}
 
-		int GetRepeatCount() const { return _repeatCount; }
+		inline int GetRepeatCount() const { return _repeatCount; }
 
-		std::string ToString() const override
+		virtual std::string ToString() const override
 		{
 			std::stringstream stream;
 			stream << "KeyPressedEvent: " << _keycode << " (" << _repeatCount << " repeats)";

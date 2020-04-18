@@ -4,16 +4,16 @@
 
 using namespace Honey;
 
-std::shared_ptr<spdlog::logger> Log::_coreLogger;
-std::shared_ptr<spdlog::logger> Log::_appLogger;
+std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
+std::shared_ptr<spdlog::logger> Log::s_AppLogger;
 
 void Log::Init()
 {
 	spdlog::set_pattern("%^[%T] %n: %v%$");
 
-	_coreLogger = spdlog::stdout_color_mt("HONEY");
-	_coreLogger->set_level(spdlog::level::level_enum::trace);
+	s_CoreLogger = spdlog::stdout_color_mt("HONEY");
+	s_CoreLogger->set_level(spdlog::level::level_enum::trace);
 
-	_appLogger = spdlog::stdout_color_mt("APPLICATION");
-	_appLogger->set_level(spdlog::level::level_enum::trace);
+	s_AppLogger = spdlog::stdout_color_mt("APPLICATION");
+	s_AppLogger->set_level(spdlog::level::level_enum::trace);
 }

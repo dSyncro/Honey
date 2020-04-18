@@ -1,11 +1,8 @@
 #pragma once
 
-namespace Honey {
+#include "RendererAPI.h"
 
-	enum class RendererAPI {
-		None,
-		OpenGL,
-	};
+namespace Honey {
 
 	class Renderer {
 

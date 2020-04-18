@@ -1,14 +1,10 @@
 #pragma once
 
-#include <Honey/Events/KeyEvents.h>
-#include <Honey/Events/MouseEvents.h>
-#include <Honey/Events/WindowEvents.h>
-
 #include <Honey/Layers/Layer.h>
 
 namespace Honey {
 
-	class ImGuiLayer : public Layer {
+	class ImGuiLayer final : public Layer {
 
 	public:
 
@@ -21,10 +17,6 @@ namespace Honey {
 
 		void Begin();
 		void End();
-
-	private:
-
-		float _time = .0f;
 	};
 
 }
