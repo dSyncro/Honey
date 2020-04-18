@@ -5,6 +5,9 @@
 #include <Honey/Events/WindowEvents.h>
 #include <Honey/Layers/LayerStack.h>
 #include <Honey/Layers/ImGui/ImGuiLayer.h>
+#include <Honey/Renderer/Buffers/VertexBuffer.h>
+#include <Honey/Renderer/Buffers/IndexBuffer.h>
+#include <Honey/Renderer/Shader.h>
 #include <Honey/Window/Window.h>
 
 namespace Honey {
@@ -31,13 +34,18 @@ namespace Honey {
 
 		bool OnWindowClose(WindowCloseEvent& e);
 
+		std::unique_ptr<Shader> _shader;
+
+		std::unique_ptr<VertexBuffer> _vertexBuffer;
+		std::unique_ptr<IndexBuffer> _indexBuffer;
+
 		std::unique_ptr<Window> _window;
 		ImGuiLayer* _imGuiLayer;
 
 		bool _running = false;
 
 		LayerStack _layerStack;
-		unsigned int _vertexArray, _vertexBuffer, _indexBuffer;
+		unsigned int _vertexArray;
 
 		static Application* s_Instance;
 	};

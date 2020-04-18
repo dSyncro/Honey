@@ -1400,6 +1400,12 @@
     <ClInclude Include="Honey\Platform\OpenGL\ImGuiGlfwImplementation.h" />
     <ClInclude Include="Honey\Renderer\GraphicsContext.h" />
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="Honey\Renderer\Shader.h" />
+    <ClInclude Include="Honey\Renderer\Buffers\VertexBuffer.h" />
+    <ClInclude Include="Honey\Renderer\Buffers\IndexBuffer.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.h" />
+    <ClInclude Include="Honey\Renderer\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1426,6 +1432,12 @@
     <ClCompile Include="Honey\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\ImGuiGlfwImplementation.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="Honey\Renderer\Shader.cpp" />
+    <ClCompile Include="Honey\Renderer\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="Honey\Renderer\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="Honey\Renderer\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="third-party\glm\test\glm.cppcheck">
