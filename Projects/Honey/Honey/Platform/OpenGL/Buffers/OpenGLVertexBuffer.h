@@ -15,9 +15,13 @@ namespace Honey {
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
+		virtual void SetLayout(const BufferLayout& layout) override { _layout = layout; }
+		virtual const BufferLayout& GetLayout() const override { return _layout; }
+
 	private:
 
 		uint32_t _rendererID;
+		BufferLayout _layout;
 	};
 
 }

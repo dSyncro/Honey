@@ -3,6 +3,7 @@
 #include <Honey/Logging/Log.h>
 #include <Honey/Events/EventDispatcher.h>
 #include <Honey/Events/Window/WindowResizeEvent.h>
+#include <Honey/Renderer/Buffers/BufferLayout.h>
 
 #include <glad/glad.h>
 
@@ -21,35 +22,41 @@ Application::Application()
 	_imGuiLayer = new ImGuiLayer();
 	PushOverlay(_imGuiLayer);
 
-	glGenVertexArrays(1, &_vertexArray);
-	glBindVertexArray(_vertexArray);
+	_vertexArray.reset(VertexArray::Create());
 
-	float vertices[3 * 3] = {
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f,
+	float vertices[3 * 7] = {
+		-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+		 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+		 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 	};
 
 	_vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-	_vertexBuffer->Bind();
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+	BufferLayout layout = {
+		{ ShaderDataType::Float3, "a_Position" },
+		{ ShaderDataType::Float4, "a_Color" },
+	};
+
+	_vertexBuffer->SetLayout(layout);
+	_vertexArray->AddVertexBuffer(_vertexBuffer);
 
 	unsigned int indices[3] = { 0, 1, 2 };
 
 	_indexBuffer.reset(IndexBuffer::Create(indices, 3));
-	_indexBuffer->Bind();
+	_vertexArray->SetIndexBuffer(_indexBuffer);
 
 	std::string vertexSource = R"(
 		#version 330 core
 
 		layout(location = 0) in vec3 a_Position;
+		layout(location = 1) in vec4 a_Color;
 
 		out vec3 v_Position;
+		out vec4 v_Color;
 
 		void main() {
 			v_Position = a_Position;
+			v_Color = a_Color;
 			gl_Position = vec4(a_Position, 1.0);
 		}
 	)";
@@ -60,9 +67,10 @@ Application::Application()
 		layout(location = 0) out vec4 color;
 
 		in vec3 v_Position;
+		in vec4 v_Color;
 
 		void main() {
-			color = vec4(v_Position * .5 +.5f, 1);
+			color = v_Color;
 		}
 	)";
 
@@ -85,7 +93,7 @@ void Application::Run()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		_shader->Bind();
-		_vertexBuffer->Bind();
+		_vertexArray->Bind();
 		glDrawElements(GL_TRIANGLES, _indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 		for (Layer* layer : _layerStack)

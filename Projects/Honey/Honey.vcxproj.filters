@@ -1409,6 +1409,11 @@
     <ClInclude Include="Honey\Platform\OpenGL\Buffers.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiOpenGLRender.h" />
+    <ClInclude Include="Honey\Renderer\Buffers\BufferLayout.h" />
+    <ClInclude Include="Honey\Renderer\ShaderDataType.h" />
+    <ClInclude Include="Honey\Renderer\Buffers\BufferElement.h" />
+    <ClInclude Include="Honey\Renderer\VertexArray.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLVertexArray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1441,6 +1446,8 @@
     <ClCompile Include="Honey\Renderer\Renderer.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp" />
+    <ClCompile Include="Honey\Renderer\VertexArray.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="third-party\glm\test\glm.cppcheck">

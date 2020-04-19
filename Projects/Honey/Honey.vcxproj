@@ -178,15 +178,20 @@
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.h" />
     <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="Honey\Platform\Window\WinWindow.h" />
     <ClInclude Include="Honey\Platform\Window\WindowsInput.h" />
     <ClInclude Include="Honey\Renderer\Buffers.h" />
+    <ClInclude Include="Honey\Renderer\Buffers\BufferElement.h" />
+    <ClInclude Include="Honey\Renderer\Buffers\BufferLayout.h" />
     <ClInclude Include="Honey\Renderer\Buffers\IndexBuffer.h" />
     <ClInclude Include="Honey\Renderer\GraphicsContext.h" />
     <ClInclude Include="Honey\Renderer\Renderer.h" />
     <ClInclude Include="Honey\Renderer\RendererAPI.h" />
     <ClInclude Include="Honey\Renderer\Shader.h" />
     <ClInclude Include="Honey\Renderer\Buffers\VertexBuffer.h" />
+    <ClInclude Include="Honey\Renderer\ShaderDataType.h" />
+    <ClInclude Include="Honey\Renderer\VertexArray.h" />
     <ClInclude Include="Honey\Window\Window.h" />
     <ClInclude Include="Honey\Window\WindowProperties.h" />
     <ClInclude Include="third-party\glm\glm\common.hpp" />
@@ -609,12 +614,14 @@
     <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="Honey\Platform\Window\WinWindow.cpp" />
     <ClCompile Include="Honey\Platform\Window\WindowsInput.cpp" />
     <ClCompile Include="Honey\Renderer\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Honey\Renderer\Renderer.cpp" />
     <ClCompile Include="Honey\Renderer\Shader.cpp" />
     <ClCompile Include="Honey\Renderer\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="Honey\Renderer\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="third-party\glm\test\glm.cppcheck" />
