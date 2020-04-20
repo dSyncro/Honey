@@ -1414,6 +1414,9 @@
     <ClInclude Include="Honey\Renderer\Buffers\BufferElement.h" />
     <ClInclude Include="Honey\Renderer\VertexArray.h" />
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="Honey\Renderer\RenderCommand.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="Honey\Renderer\OrthographicCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1448,6 +1451,10 @@
     <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp" />
     <ClCompile Include="Honey\Renderer\VertexArray.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="Honey\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="Honey\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="Honey\Renderer\OrthographicCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="third-party\glm\test\glm.cppcheck">

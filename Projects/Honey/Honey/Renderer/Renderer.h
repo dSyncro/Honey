@@ -1,6 +1,11 @@
 #pragma once
 
 #include "RendererAPI.h"
+#include "RenderCommand.h"
+#include "OrthographicCamera.h"
+
+#include <Honey/Renderer/Shader.h>
+#include <glm/glm.hpp>
 
 namespace Honey {
 
@@ -8,11 +13,22 @@ namespace Honey {
 
 	public:
 
-		inline static RendererAPI GetAPI() { return s_RendererAPI; }
+		static void BeginScene(OrthographicCamera& camera);
+		static void EndScene();
+
+		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray);
+
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
 	private:
 
-		static RendererAPI s_RendererAPI;
+		struct SceneData {
+
+			glm::mat4 ViewProjectionMatrix;
+
+		};
+
+		static SceneData* s_SceneData;
 	};
 
 }

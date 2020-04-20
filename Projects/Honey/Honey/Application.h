@@ -5,6 +5,7 @@
 #include <Honey/Events/WindowEvents.h>
 #include <Honey/Layers/LayerStack.h>
 #include <Honey/Layers/ImGui/ImGuiLayer.h>
+#include <Honey/Renderer/OrthographicCamera.h>
 #include <Honey/Renderer/VertexArray.h>
 #include <Honey/Renderer/Buffers/VertexBuffer.h>
 #include <Honey/Renderer/Buffers/IndexBuffer.h>
@@ -47,6 +48,8 @@ namespace Honey {
 		bool _running = false;
 
 		LayerStack _layerStack;
+
+		OrthographicCamera _camera;
 
 		static Application* s_Instance;
 	};

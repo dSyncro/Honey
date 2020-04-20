@@ -4,14 +4,14 @@
 #include <Honey/Events/EventDispatcher.h>
 #include <Honey/Events/Window/WindowResizeEvent.h>
 #include <Honey/Renderer/Buffers/BufferLayout.h>
-
-#include <glad/glad.h>
+#include <Honey/Renderer/Renderer.h>
 
 using namespace Honey;
 
 Application* Application::s_Instance = nullptr;
 
 Application::Application()
+	: _camera(-1.6f, 1.6f, -0.9f, 0.9f)
 {
 	HNY_CORE_ASSERT(!s_Instance, "Application already exists!");
 	s_Instance = this;
@@ -51,13 +51,15 @@ Application::Application()
 		layout(location = 0) in vec3 a_Position;
 		layout(location = 1) in vec4 a_Color;
 
+		uniform mat4 u_ViewProjection;
+
 		out vec3 v_Position;
 		out vec4 v_Color;
 
 		void main() {
 			v_Position = a_Position;
 			v_Color = a_Color;
-			gl_Position = vec4(a_Position, 1.0);
+			gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
 		}
 	)";
 
@@ -75,8 +77,6 @@ Application::Application()
 	)";
 
 	_shader.reset(new Shader(vertexSource, fragmentSource));
-
-	glGetError();
 }
 
 Application::~Application()
@@ -87,14 +87,20 @@ Application::~Application()
 void Application::Run()
 {
 	_running = true;
+	RenderCommand::SetClearColor({ .1f, .1f, .1f, 1 });
+
 	while (_running)
 	{
-		glClearColor(.1f, .1f, .1f, 1);
-		glClear(GL_COLOR_BUFFER_BIT);
+		RenderCommand::Clear();
 
-		_shader->Bind();
-		_vertexArray->Bind();
-		glDrawElements(GL_TRIANGLES, _indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+		_camera.SetPosition({ .5f, .5f, 0.0f });
+		_camera.SetRotation(30.0f);
+
+		Renderer::BeginScene(_camera);
+
+		Renderer::Submit(_shader, _vertexArray);
+
+		Renderer::EndScene();
 
 		for (Layer* layer : _layerStack)
 			layer->OnUpdate();

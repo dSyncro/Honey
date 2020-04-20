@@ -5,6 +5,7 @@
 #include <Honey/Logging/Log.h>
 
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 
 using namespace Honey;
 
@@ -134,4 +135,10 @@ void Shader::Bind() const
 void Shader::Unbind() const
 {
 	glUseProgram(0);
+}
+
+void Shader::SetUniformMat4(const std::string& name, const glm::mat4& matrix)
+{
+	int id = glGetUniformLocation(_rendererID, name.c_str());
+	glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
 }
