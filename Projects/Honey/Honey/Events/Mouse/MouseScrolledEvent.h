@@ -12,8 +12,8 @@ namespace Honey {
 
 		MouseScrolledEvent(float xOffset, float yOffset) : _xOffset(xOffset), _yOffset(yOffset) {}
 
-		inline float GetXOffset() const { return _xOffset; }
-		inline float GetYOffset() const { return _yOffset; }
+		float GetXOffset() const { return _xOffset; }
+		float GetYOffset() const { return _yOffset; }
 
 		virtual std::string ToString() const override
 		{

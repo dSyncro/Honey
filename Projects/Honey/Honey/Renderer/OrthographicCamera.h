@@ -10,15 +10,15 @@ namespace Honey {
 
 		OrthographicCamera(float left, float right, float bottom, float top);
 
-		inline const glm::vec3& GetPosition() const { return _position; }
+		const glm::vec3& GetPosition() const { return _position; }
 		void SetPosition(const glm::vec3& position);
 
-		inline float GetRotation() const { return _rotation; }
+		float GetRotation() const { return _rotation; }
 		void SetRotation(float rotation);
 
-		inline const glm::mat4& GetViewMatrix() const { return _viewMatrix; }
-		inline const glm::mat4& GetProjectionMatrix() const { return _projectionMatrix; }
-		inline const glm::mat4& GetViewProjectionMatrix() const { return _viewProjectionMatrix; }
+		const glm::mat4& GetViewMatrix() const { return _viewMatrix; }
+		const glm::mat4& GetProjectionMatrix() const { return _projectionMatrix; }
+		const glm::mat4& GetViewProjectionMatrix() const { return _viewProjectionMatrix; }
 
 	private:
 

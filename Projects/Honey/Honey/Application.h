@@ -36,20 +36,13 @@ namespace Honey {
 
 		bool OnWindowClose(WindowCloseEvent& e);
 
-		std::shared_ptr<Shader> _shader;
-
-		std::shared_ptr<VertexArray> _vertexArray;
-		std::shared_ptr<VertexBuffer> _vertexBuffer;
-		std::shared_ptr<IndexBuffer> _indexBuffer;
-
 		std::unique_ptr<Window> _window;
 		ImGuiLayer* _imGuiLayer;
 
 		bool _running = false;
+		float _lastFrameTime = 0.0f;
 
 		LayerStack _layerStack;
-
-		OrthographicCamera _camera;
 
 		static Application* s_Instance;
 	};

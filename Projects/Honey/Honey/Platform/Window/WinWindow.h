@@ -18,15 +18,15 @@ namespace Honey {
 
 		virtual void OnUpdate() override;
 
-		inline unsigned int GetWidth() const override { return _data.Width; }
-		inline unsigned int GetHeight() const override { return _data.Height; }
+		unsigned int GetWidth() const override { return _data.Width; }
+		unsigned int GetHeight() const override { return _data.Height; }
 
-		inline void SetEventCallback(const WindowEventCallback& callback) override { _data.Callback = callback; }
+		void SetEventCallback(const WindowEventCallback& callback) override { _data.Callback = callback; }
 
 		virtual void SetVSync(bool enabled) override;
 		virtual bool IsVSyncEnabled() const override;
 
-		inline void* GetNativeWindow() const override { return _window; }
+		void* GetNativeWindow() const override { return _window; }
 
 	private:
 
@@ -45,6 +45,14 @@ namespace Honey {
 		};
 
 		WindowData _data;
+
+		static void WindowResizeCallback(GLFWwindow* window, int width, int height);
+		static void WindowCloseCallback(GLFWwindow* window);
+		static void WindowKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+		static void WindowCharCallback(GLFWwindow* window, unsigned int keycode);
+		static void WindowMouseCallback(GLFWwindow* window, int button, int action, int mods);
+		static void WindowScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
+		static void WindowCursorPositionCallback(GLFWwindow* window, double xOffset, double yOffset);
 	};
 
 }

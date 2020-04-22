@@ -45,7 +45,7 @@ namespace Honey {
 		virtual int GetCategoryFlags() const = 0;
 		virtual std::string ToString() const { return GetName(); }
 
-		inline bool IsInCategory(int category) { return GetCategoryFlags() & category; }
+		bool IsInCategory(int category) { return GetCategoryFlags() & category; }
 
 		bool HasBeenHandled = false;
 	};

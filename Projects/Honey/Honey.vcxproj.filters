@@ -1417,6 +1417,9 @@
     <ClInclude Include="Honey\Renderer\RenderCommand.h" />
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="Honey\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="Honey\Timing\Time.h" />
+    <ClInclude Include="Honey\Timing\EngineTime.h" />
+    <ClInclude Include="Honey\Timing\Timestamp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1455,6 +1458,8 @@
     <ClCompile Include="Honey\Renderer\RenderCommand.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="Honey\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="Honey\Timing\Time.cpp" />
+    <ClCompile Include="Honey\Timing\EngineTime.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="third-party\glm\test\glm.cppcheck">

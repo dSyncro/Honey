@@ -144,6 +144,7 @@
     <ClInclude Include="Honey.h" />
     <ClInclude Include="Honey\Application.h" />
     <ClInclude Include="Honey\Core.h" />
+    <ClInclude Include="Honey\Timing\EngineTime.h" />
     <ClInclude Include="Honey\Entrypoint.h" />
     <ClInclude Include="Honey\Events\App\AppRenderEvent.h" />
     <ClInclude Include="Honey\Events\App\AppTickEvent.h" />
@@ -195,6 +196,8 @@
     <ClInclude Include="Honey\Renderer\Buffers\VertexBuffer.h" />
     <ClInclude Include="Honey\Renderer\ShaderDataType.h" />
     <ClInclude Include="Honey\Renderer\VertexArray.h" />
+    <ClInclude Include="Honey\Timing\Time.h" />
+    <ClInclude Include="Honey\Timing\Timestamp.h" />
     <ClInclude Include="Honey\Window\Window.h" />
     <ClInclude Include="Honey\Window\WindowProperties.h" />
     <ClInclude Include="third-party\glm\glm\common.hpp" />
@@ -608,6 +611,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp" />
+    <ClCompile Include="Honey\Timing\EngineTime.cpp" />
     <ClCompile Include="Honey\Layers\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="Honey\Layers\Layer.cpp" />
     <ClCompile Include="Honey\Layers\LayerStack.cpp" />
@@ -629,6 +633,7 @@
     <ClCompile Include="Honey\Renderer\Shader.cpp" />
     <ClCompile Include="Honey\Renderer\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Honey\Renderer\VertexArray.cpp" />
+    <ClCompile Include="Honey\Timing\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="third-party\glm\test\glm.cppcheck" />

@@ -15,10 +15,11 @@ void OpenGLContext::Init()
 	int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	HNY_CORE_ASSERT(status, "Failed to init GLAD!");
 	
-	HNY_CORE_INFO("OpenGL Info");
+	HNY_CORE_INFO("## OpenGL Info ##");
 	HNY_CORE_INFO("\tVendor: {0}", glGetString(GL_VENDOR));
 	HNY_CORE_INFO("\tVersion: {0}", glGetString(GL_VERSION));
 	HNY_CORE_INFO("\tRenderer: {0}", glGetString(GL_RENDERER));
+	HNY_CORE_INFO("#################");
 }
 
 void OpenGLContext::SwapBuffers()
