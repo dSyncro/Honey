@@ -50,7 +50,7 @@ void OpenGLVertexArray::Unbind() const
 	glBindVertexArray(0);
 }
 
-void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& buffer)
+void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 {
 	HNY_CORE_ASSERT(buffer->GetLayout().GetElements().size(), "Layout not set on Vertex Buffer!");
 
@@ -79,7 +79,7 @@ void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& buf
 	_vertexBuffers.push_back(buffer);
 }
 
-void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& buffer)
+void OpenGLVertexArray::SetIndexBuffer(const Reference<IndexBuffer>& buffer)
 {
 	glBindVertexArray(_rendererID);
 	buffer->Bind();

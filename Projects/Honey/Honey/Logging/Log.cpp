@@ -4,8 +4,8 @@
 
 using namespace Honey;
 
-std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
-std::shared_ptr<spdlog::logger> Log::s_AppLogger;
+Reference<spdlog::logger> Log::s_CoreLogger;
+Reference<spdlog::logger> Log::s_AppLogger;
 
 void Log::Init()
 {

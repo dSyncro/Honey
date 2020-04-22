@@ -144,7 +144,6 @@
     <ClInclude Include="Honey.h" />
     <ClInclude Include="Honey\Application.h" />
     <ClInclude Include="Honey\Core.h" />
-    <ClInclude Include="Honey\Timing\EngineTime.h" />
     <ClInclude Include="Honey\Entrypoint.h" />
     <ClInclude Include="Honey\Events\App\AppRenderEvent.h" />
     <ClInclude Include="Honey\Events\App\AppTickEvent.h" />
@@ -173,13 +172,14 @@
     <ClInclude Include="Honey\Layers\Layer.h" />
     <ClInclude Include="Honey\Layers\LayerStack.h" />
     <ClInclude Include="Honey\Logging\Log.h" />
-    <ClInclude Include="Honey\Platform\OpenGL\Buffers.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiOpenGLRender.h" />
-    <ClInclude Include="Honey\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\Buffers.h" />
     <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.h" />
     <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="Honey\Platform\Window\WinWindow.h" />
     <ClInclude Include="Honey\Platform\Window\WindowsInput.h" />
@@ -187,15 +187,16 @@
     <ClInclude Include="Honey\Renderer\Buffers\BufferElement.h" />
     <ClInclude Include="Honey\Renderer\Buffers\BufferLayout.h" />
     <ClInclude Include="Honey\Renderer\Buffers\IndexBuffer.h" />
+    <ClInclude Include="Honey\Renderer\Buffers\VertexBuffer.h" />
     <ClInclude Include="Honey\Renderer\GraphicsContext.h" />
     <ClInclude Include="Honey\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="Honey\Renderer\RenderCommand.h" />
     <ClInclude Include="Honey\Renderer\Renderer.h" />
     <ClInclude Include="Honey\Renderer\RendererAPI.h" />
-    <ClInclude Include="Honey\Renderer\RenderCommand.h" />
     <ClInclude Include="Honey\Renderer\Shader.h" />
-    <ClInclude Include="Honey\Renderer\Buffers\VertexBuffer.h" />
     <ClInclude Include="Honey\Renderer\ShaderDataType.h" />
     <ClInclude Include="Honey\Renderer\VertexArray.h" />
+    <ClInclude Include="Honey\Timing\EngineTime.h" />
     <ClInclude Include="Honey\Timing\Time.h" />
     <ClInclude Include="Honey\Timing\Timestamp.h" />
     <ClInclude Include="Honey\Window\Window.h" />
@@ -611,28 +612,29 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp" />
-    <ClCompile Include="Honey\Timing\EngineTime.cpp" />
     <ClCompile Include="Honey\Layers\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="Honey\Layers\Layer.cpp" />
     <ClCompile Include="Honey\Layers\LayerStack.cpp" />
     <ClCompile Include="Honey\Logging\Log.cpp" />
-    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp" />
-    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="Honey\Platform\Window\WinWindow.cpp" />
     <ClCompile Include="Honey\Platform\Window\WindowsInput.cpp" />
     <ClCompile Include="Honey\Renderer\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="Honey\Renderer\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Honey\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="Honey\Renderer\RenderCommand.cpp" />
     <ClCompile Include="Honey\Renderer\Renderer.cpp" />
     <ClCompile Include="Honey\Renderer\RendererAPI.cpp" />
     <ClCompile Include="Honey\Renderer\Shader.cpp" />
-    <ClCompile Include="Honey\Renderer\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Honey\Renderer\VertexArray.cpp" />
+    <ClCompile Include="Honey\Timing\EngineTime.cpp" />
     <ClCompile Include="Honey\Timing\Time.cpp" />
   </ItemGroup>
   <ItemGroup>

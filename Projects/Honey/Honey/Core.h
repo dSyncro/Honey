@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 // DLL export macro
 #ifdef HNY_PLATFORM_WINDOWS
 #	ifdef HNY_DYNAMIC_BUILD
@@ -29,3 +31,10 @@
 
 // Event Callback Binding
 #define HNY_BIND_EVENT_CALLBACK(callback) std::bind(&callback, this, std::placeholders::_1)
+
+namespace Honey {
+
+	template<typename T>
+	using Reference = std::shared_ptr<T>;
+
+}

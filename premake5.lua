@@ -116,6 +116,7 @@ project "Sandbox"
 	{
 		"Projects/Honey/third-party/spdlog/include",
 		"Projects/Honey/",
+		"Projects/Honey/third-party",
 		"%{IncludeDir.GLM}",
 	}
 

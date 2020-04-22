@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 #include <Honey/Core.h>
 
 #include <spdlog/spdlog.h>
@@ -15,13 +13,13 @@ namespace Honey {
 
 		static void Init();
 
-		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
-		inline static std::shared_ptr<spdlog::logger>& GetAppLogger() { return s_AppLogger; }
+		inline static Reference<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
+		inline static Reference<spdlog::logger>& GetAppLogger() { return s_AppLogger; }
 
 	private:
 
-		static std::shared_ptr<spdlog::logger> s_CoreLogger;
-		static std::shared_ptr<spdlog::logger> s_AppLogger;
+		static Reference<spdlog::logger> s_CoreLogger;
+		static Reference<spdlog::logger> s_AppLogger;
 
 	};
 

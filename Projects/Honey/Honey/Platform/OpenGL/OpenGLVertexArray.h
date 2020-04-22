@@ -14,16 +14,16 @@ namespace Honey {
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
-		virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer> & buffer) override;
-		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer> & buffer) override;
+		virtual void AddVertexBuffer(const Reference<VertexBuffer> & buffer) override;
+		virtual void SetIndexBuffer(const Reference<IndexBuffer> & buffer) override;
 
-		virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffers() const override { return _vertexBuffers; }
-		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const override { return _indexBuffer; }
+		virtual const std::vector<Reference<VertexBuffer>>& GetVertexBuffers() const override { return _vertexBuffers; }
+		virtual const Reference<IndexBuffer>& GetIndexBuffer() const override { return _indexBuffer; }
 
 	private:
 
-		std::vector<std::shared_ptr<VertexBuffer>> _vertexBuffers;
-		std::shared_ptr<IndexBuffer> _indexBuffer;
+		std::vector<Reference<VertexBuffer>> _vertexBuffers;
+		Reference<IndexBuffer> _indexBuffer;
 
 		uint32_t _rendererID;
 	};

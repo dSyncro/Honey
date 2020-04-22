@@ -34,11 +34,26 @@
     <Filter Include="Honey\Platform">
       <UniqueIdentifier>{3CC57D4B-2893-7151-1127-E277FD934DB6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Honey\Platform\ImGui">
+      <UniqueIdentifier>{6637AC43-52C6-350D-FBE4-4908E75246B3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Honey\Platform\OpenGL">
       <UniqueIdentifier>{F0B278C7-5C1F-34C2-2513-CC1F913E562A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Honey\Platform\OpenGL\Buffers">
+      <UniqueIdentifier>{6C62A9CB-D87A-90F5-A127-208F0DFF248F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Honey\Platform\Window">
       <UniqueIdentifier>{A316A8D9-0F83-63D4-D876-FB3144A2853C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Renderer">
+      <UniqueIdentifier>{8ECC5A26-7A9A-4E2C-632E-BF524F9B2A91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Renderer\Buffers">
+      <UniqueIdentifier>{0A3A62F8-F633-8B4A-DFA0-215BCB39F1B6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Timing">
+      <UniqueIdentifier>{9F4A943A-8BAD-23DF-3433-5C952075EF61}</UniqueIdentifier>
     </Filter>
     <Filter Include="Honey\Window">
       <UniqueIdentifier>{CF3B9441-BB9E-23E6-6424-5C9C5066EF68}</UniqueIdentifier>
@@ -160,11 +175,86 @@
     <ClInclude Include="Honey\Logging\Log.h">
       <Filter>Honey\Logging</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h">
+      <Filter>Honey\Platform\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\ImGui\ImGuiOpenGLRender.h">
+      <Filter>Honey\Platform\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\OpenGL\Buffers.h">
+      <Filter>Honey\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.h">
+      <Filter>Honey\Platform\OpenGL\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.h">
+      <Filter>Honey\Platform\OpenGL\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLContext.h">
+      <Filter>Honey\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>Honey\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLShader.h">
+      <Filter>Honey\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>Honey\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Platform\Window\WinWindow.h">
       <Filter>Honey\Platform\Window</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Platform\Window\WindowsInput.h">
       <Filter>Honey\Platform\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\Buffers.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\Buffers\BufferElement.h">
+      <Filter>Honey\Renderer\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\Buffers\BufferLayout.h">
+      <Filter>Honey\Renderer\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\Buffers\IndexBuffer.h">
+      <Filter>Honey\Renderer\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\Buffers\VertexBuffer.h">
+      <Filter>Honey\Renderer\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\GraphicsContext.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\OrthographicCamera.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\RenderCommand.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\Renderer.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\RendererAPI.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\Shader.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\ShaderDataType.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\VertexArray.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Timing\EngineTime.h">
+      <Filter>Honey\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Timing\Time.h">
+      <Filter>Honey\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Timing\Timestamp.h">
+      <Filter>Honey\Timing</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Window\Window.h">
       <Filter>Honey\Window</Filter>
@@ -1396,30 +1486,6 @@
     <ClInclude Include="third-party\glm\glm\vector_relational.hpp">
       <Filter>third-party\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Renderer\GraphicsContext.h" />
-    <ClInclude Include="Honey\Platform\OpenGL\OpenGLContext.h" />
-    <ClInclude Include="Honey\Renderer\Shader.h" />
-    <ClInclude Include="Honey\Renderer\Buffers\VertexBuffer.h" />
-    <ClInclude Include="Honey\Renderer\Buffers\IndexBuffer.h" />
-    <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.h" />
-    <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.h" />
-    <ClInclude Include="Honey\Renderer\Renderer.h" />
-    <ClInclude Include="Honey\Renderer\RendererAPI.h" />
-    <ClInclude Include="Honey\Renderer\Buffers.h" />
-    <ClInclude Include="Honey\Platform\OpenGL\Buffers.h" />
-    <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h" />
-    <ClInclude Include="Honey\Platform\ImGui\ImGuiOpenGLRender.h" />
-    <ClInclude Include="Honey\Renderer\Buffers\BufferLayout.h" />
-    <ClInclude Include="Honey\Renderer\ShaderDataType.h" />
-    <ClInclude Include="Honey\Renderer\Buffers\BufferElement.h" />
-    <ClInclude Include="Honey\Renderer\VertexArray.h" />
-    <ClInclude Include="Honey\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="Honey\Renderer\RenderCommand.h" />
-    <ClInclude Include="Honey\Platform\OpenGL\OpenGLRendererAPI.h" />
-    <ClInclude Include="Honey\Renderer\OrthographicCamera.h" />
-    <ClInclude Include="Honey\Timing\Time.h" />
-    <ClInclude Include="Honey\Timing\EngineTime.h" />
-    <ClInclude Include="Honey\Timing\Timestamp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1437,29 +1503,66 @@
     <ClCompile Include="Honey\Logging\Log.cpp">
       <Filter>Honey\Logging</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp">
+      <Filter>Honey\Platform\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp">
+      <Filter>Honey\Platform\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp">
+      <Filter>Honey\Platform\OpenGL\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.cpp">
+      <Filter>Honey\Platform\OpenGL\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>Honey\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>Honey\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>Honey\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>Honey\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="Honey\Platform\Window\WinWindow.cpp">
       <Filter>Honey\Platform\Window</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Platform\Window\WindowsInput.cpp">
       <Filter>Honey\Platform\Window</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Platform\OpenGL\OpenGLContext.cpp" />
-    <ClCompile Include="Honey\Renderer\Shader.cpp" />
-    <ClCompile Include="Honey\Renderer\Buffers\VertexBuffer.cpp" />
-    <ClCompile Include="Honey\Renderer\Buffers\IndexBuffer.cpp" />
-    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.cpp" />
-    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp" />
-    <ClCompile Include="Honey\Renderer\Renderer.cpp" />
-    <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp" />
-    <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp" />
-    <ClCompile Include="Honey\Renderer\VertexArray.cpp" />
-    <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="Honey\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="Honey\Renderer\RenderCommand.cpp" />
-    <ClCompile Include="Honey\Platform\OpenGL\OpenGLRendererAPI.cpp" />
-    <ClCompile Include="Honey\Renderer\OrthographicCamera.cpp" />
-    <ClCompile Include="Honey\Timing\Time.cpp" />
-    <ClCompile Include="Honey\Timing\EngineTime.cpp" />
+    <ClCompile Include="Honey\Renderer\Buffers\IndexBuffer.cpp">
+      <Filter>Honey\Renderer\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Renderer\Buffers\VertexBuffer.cpp">
+      <Filter>Honey\Renderer\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Renderer\OrthographicCamera.cpp">
+      <Filter>Honey\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Renderer\RenderCommand.cpp">
+      <Filter>Honey\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Renderer\Renderer.cpp">
+      <Filter>Honey\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Renderer\RendererAPI.cpp">
+      <Filter>Honey\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Renderer\Shader.cpp">
+      <Filter>Honey\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Renderer\VertexArray.cpp">
+      <Filter>Honey\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Timing\EngineTime.cpp">
+      <Filter>Honey\Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Timing\Time.cpp">
+      <Filter>Honey\Timing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="third-party\glm\test\glm.cppcheck">
