@@ -72,7 +72,9 @@ public:
 		)";
 		
 		_shader.reset(Honey::Shader::Create(vertexSource, fragmentSource));
+
 		_texture = Honey::Texture2D::Create("assets/textures/checkerboard.png");
+		_transparentTexture = Honey::Texture2D::Create("assets/textures/logo.png");
 
 		std::dynamic_pointer_cast<Honey::OpenGLShader>(_shader)->Bind();
 		std::dynamic_pointer_cast<Honey::OpenGLShader>(_shader)->SetUniformInt("u_Texture", 0);
@@ -125,7 +127,11 @@ public:
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), _squarePosition);
 
-		_texture->Bind(0);
+		_texture->Bind();
+		Honey::Renderer::Submit(_shader, _vertexArray, transform);
+
+		transform = glm::translate(transform, glm::vec3(0.25f));
+		_transparentTexture->Bind();
 		Honey::Renderer::Submit(_shader, _vertexArray, transform);
 
 		Honey::Renderer::EndScene();
@@ -142,7 +148,9 @@ private:
 
 	Honey::Reference<Honey::Shader> _shader;
 	Honey::Reference<Honey::VertexArray> _vertexArray;
+
 	Honey::Reference<Honey::Texture2D> _texture;
+	Honey::Reference<Honey::Texture2D> _transparentTexture;
 
 	glm::vec3 _cameraPosition = glm::vec3(0, 0, 0);
 	float _cameraRotation = 0.0f;

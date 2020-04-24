@@ -5,3 +5,8 @@
 using namespace Honey;
 
 RendererAPI* RenderCommand::s_RendererAPI = new OpenGLRendererAPI();
+
+void RenderCommand::Init()
+{
+	s_RendererAPI->Init();
+}

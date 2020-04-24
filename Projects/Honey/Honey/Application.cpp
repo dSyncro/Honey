@@ -19,6 +19,8 @@ Application::Application()
 	_window->SetEventCallback(HNY_BIND_EVENT_CALLBACK(Application::OnEvent));
 	_window->SetVSync(false);
 
+	Renderer::Init();
+
 	_imGuiLayer = new ImGuiLayer();
 	PushOverlay(_imGuiLayer);
 }

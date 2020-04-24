@@ -141,6 +141,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Honey.h" />
     <ClInclude Include="Honey\Application.h" />
     <ClInclude Include="Honey\Core.h" />
     <ClInclude Include="Honey\Entrypoint.h" />

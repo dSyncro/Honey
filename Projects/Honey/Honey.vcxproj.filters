@@ -84,6 +84,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Honey.h" />
     <ClInclude Include="Honey\Application.h">
       <Filter>Honey</Filter>
     </ClInclude>

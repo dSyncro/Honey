@@ -40,8 +40,8 @@ project "Honey"
 
 	files
 	{
-		"Projects/%{prj.name}/Honey/*.h",
-		"Projects/%{prj.name}/Honey/*.cpp",
+		"Projects/%{prj.name}/*.h",
+		"Projects/%{prj.name}/*.cpp",
 
 		"Projects/%{prj.name}/Honey/**.h",
 		"Projects/%{prj.name}/Honey/**.cpp",
