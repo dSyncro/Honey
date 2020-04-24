@@ -79,12 +79,11 @@
     <Filter Include="third-party\glm\glm\gtx">
       <UniqueIdentifier>{9D23CCD7-095B-146F-1265-78927E1B3B68}</UniqueIdentifier>
     </Filter>
-    <Filter Include="third-party\glm\test">
-      <UniqueIdentifier>{7B0EED93-679D-765D-10BC-8A58FC298703}</UniqueIdentifier>
+    <Filter Include="third-party\stb_image">
+      <UniqueIdentifier>{77DAE609-E346-A204-AC3A-3A621866C46C}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Honey.h" />
     <ClInclude Include="Honey\Application.h">
       <Filter>Honey</Filter>
     </ClInclude>
@@ -199,6 +198,9 @@
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLShader.h">
       <Filter>Honey\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Platform\OpenGL\OpenGLTexture.h">
+      <Filter>Honey\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>Honey\Platform\OpenGL</Filter>
     </ClInclude>
@@ -242,6 +244,9 @@
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Renderer\ShaderDataType.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\Texture.h">
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Renderer\VertexArray.h">
@@ -1486,6 +1491,9 @@
     <ClInclude Include="third-party\glm\glm\vector_relational.hpp">
       <Filter>third-party\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="third-party\stb_image\stb_image.h">
+      <Filter>third-party\stb_image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1524,6 +1532,9 @@
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLShader.cpp">
       <Filter>Honey\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>Honey\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>Honey\Platform\OpenGL</Filter>
     </ClCompile>
@@ -1554,6 +1565,9 @@
     <ClCompile Include="Honey\Renderer\Shader.cpp">
       <Filter>Honey\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Renderer\Texture.cpp">
+      <Filter>Honey\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="Honey\Renderer\VertexArray.cpp">
       <Filter>Honey\Renderer</Filter>
     </ClCompile>
@@ -1563,10 +1577,8 @@
     <ClCompile Include="Honey\Timing\Time.cpp">
       <Filter>Honey\Timing</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="third-party\glm\test\glm.cppcheck">
-      <Filter>third-party\glm\test</Filter>
-    </None>
+    <ClCompile Include="third-party\stb_image\stb_image.cpp">
+      <Filter>third-party\stb_image</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -25,6 +25,7 @@
 // Rendering
 #include <Honey/Renderer/Renderer.h>
 #include <Honey/Renderer/RenderCommand.h>
+#include <Honey/Renderer/Texture.h>
 
 // Time
 #include <Honey/Timing/Time.h>

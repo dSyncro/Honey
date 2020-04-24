@@ -21,12 +21,14 @@ IncludeDir["GLFW"] = "Projects/Honey/third-party/glfw/include"
 IncludeDir["GLAD"] = "Projects/Honey/third-party/glad/include"
 IncludeDir["GLM"] = "Projects/Honey/third-party/glm"
 IncludeDir["ImGui"] = "Projects/Honey/third-party/ImGui"
+IncludeDir["StbImage"] = "Projects/Honey/third-party/stb_image"
 
 include "Projects/Honey/third-party/glfw"
 include "Projects/Honey/third-party/glad"
 include "Projects/Honey/third-party/ImGui"
 
 project "Honey"
+
 	location "Projects/Honey"
 	kind "StaticLib"
 	language "C++"
@@ -38,21 +40,22 @@ project "Honey"
 
 	files
 	{
-		"Projects/%{prj.name}/**.h",
-		"Projects/%{prj.name}/**.cpp",
+		"Projects/%{prj.name}/Honey/*.h",
+		"Projects/%{prj.name}/Honey/*.cpp",
+
+		"Projects/%{prj.name}/Honey/**.h",
+		"Projects/%{prj.name}/Honey/**.cpp",
+
 		"Projects/%{prj.name}/third-party/glm/glm/**.inl",
 		"Projects/%{prj.name}/third-party/glm/glm/**.hpp",
+
+		"Projects/%{prj.name}/third-party/stb_image/**.h",
+		"Projects/%{prj.name}/third-party/stb_image/**.cpp",
 	}
 
 	defines 
 	{
 		"GLFW_INCLUDE_NONE"
-	}
-
-	excludes 
-	{
-		"Projects/%{prj.name}/third-party/**.h",
-		"Projects/%{prj.name}/third-party/**.cpp"
 	}
 
 	includedirs
@@ -63,6 +66,7 @@ project "Honey"
 		"%{IncludeDir.GLAD}",
 		"%{IncludeDir.GLM}",
 		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.StbImage}",
 	}
 
 	links 
