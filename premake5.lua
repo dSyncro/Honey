@@ -17,6 +17,7 @@ workspace "Honey"
 outputdir = "%{cfg.architecture}/%{cfg.system}/%{cfg.buildcfg}"
 
 IncludeDir = {}
+IncludeDir["spdlog"] = "Projects/Honey/third-party/spdlog/include"
 IncludeDir["GLFW"] = "Projects/Honey/third-party/glfw/include"
 IncludeDir["GLAD"] = "Projects/Honey/third-party/glad/include"
 IncludeDir["GLM"] = "Projects/Honey/third-party/glm"
@@ -46,6 +47,8 @@ project "Honey"
 		"Projects/%{prj.name}/Honey/**.h",
 		"Projects/%{prj.name}/Honey/**.cpp",
 
+		"Projects/%{prj.name}/third-party/spdlog/include/**.h",
+
 		"Projects/%{prj.name}/third-party/glm/glm/**.inl",
 		"Projects/%{prj.name}/third-party/glm/glm/**.hpp",
 
@@ -61,7 +64,7 @@ project "Honey"
 	includedirs
 	{
 		"Projects/%{prj.name}",
-		"Projects/%{prj.name}/third-party/spdlog/include",
+		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.GLAD}",
 		"%{IncludeDir.GLM}",

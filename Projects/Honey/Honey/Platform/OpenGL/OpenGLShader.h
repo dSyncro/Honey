@@ -1,8 +1,13 @@
 #pragma once
 
+#include <string>
+#include <unordered_map>
+
 #include <Honey/Renderer/Shader.h>
 
 #include <glm/glm.hpp>
+
+typedef unsigned int GLenum;
 
 namespace Honey {
 
@@ -10,6 +15,7 @@ namespace Honey {
 
 	public:
 
+		OpenGLShader(const std::string& path);
 		OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource);
 		virtual ~OpenGLShader();
 
@@ -29,6 +35,11 @@ namespace Honey {
 	private:
 
 		uint32_t _rendererID = 0;
+
+		void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
+
+		static std::string OpenGLShader::ReadFile(const std::string& path);
+		static std::unordered_map<GLenum, std::string> Process(const std::string& source);
 	};
 
 }

@@ -71,7 +71,7 @@ public:
 			}
 		)";
 		
-		_shader.reset(Honey::Shader::Create(vertexSource, fragmentSource));
+		_shader.reset(Honey::Shader::Create("assets/shaders/texture.glsl"));
 
 		_texture = Honey::Texture2D::Create("assets/textures/checkerboard.png");
 		_transparentTexture = Honey::Texture2D::Create("assets/textures/logo.png");
@@ -173,10 +173,7 @@ public:
 		PushLayer(new BaseLayer());
 	}
 
-	~Sandbox()
-	{
-
-	}
+	~Sandbox() = default;
 };
 
 Honey::Application* Honey::CreateApplication()

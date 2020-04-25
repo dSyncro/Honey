@@ -1,9 +1,10 @@
 #pragma once
 
+#include <glfw/glfw3.h>
+
 #include <Honey/Renderer/GraphicsContext.h>
 #include <Honey/Window/Window.h>
 
-#include <glfw/glfw3.h>
 
 namespace Honey {
 
@@ -37,11 +38,11 @@ namespace Honey {
 		GraphicsContext* _context;
 
 		struct WindowData {
-			std::string Title;
-			unsigned int Width, Height;
-			bool VSync;
+			std::string Title = "";
+			unsigned int Width = 0, Height = 0;
+			bool VSync = false;
 
-			WindowEventCallback Callback;
+			WindowEventCallback Callback = nullptr;
 		};
 
 		WindowData _data;
