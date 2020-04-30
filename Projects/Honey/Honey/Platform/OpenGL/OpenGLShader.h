@@ -15,12 +15,17 @@ namespace Honey {
 
 	public:
 
-		OpenGLShader(const std::string& path);
-		OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource);
+		OpenGLShader(const std::string& name, const std::unordered_map<GLenum, std::string>& shaders);
+
+		static Reference<OpenGLShader> FromFile(const std::string& path);
+		static Reference<OpenGLShader> FromSource(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource);
+
 		virtual ~OpenGLShader();
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
+
+		virtual const std::string& GetName() const override { return _name; }
 
 		void SetUniformInt(const std::string& name, int value);
 
@@ -35,6 +40,7 @@ namespace Honey {
 	private:
 
 		uint32_t _rendererID = 0;
+		std::string _name;
 
 		void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 

@@ -10,6 +10,12 @@ OrthographicCamera::OrthographicCamera(float left, float right, float bottom, fl
 	_viewProjectionMatrix = _projectionMatrix * _viewMatrix;
 }
 
+void OrthographicCamera::SetProjection(float left, float right, float bottom, float top)
+{
+	_projectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+	_viewProjectionMatrix = _projectionMatrix * _viewMatrix;
+}
+
 void OrthographicCamera::SetPosition(const glm::vec3& position)
 { 
 	_position = position; 

@@ -7,12 +7,12 @@
 
 using namespace Honey;
 
-Shader* Shader::Create(const std::string& path)
+Reference<Shader> Shader::CreateFromFile(const std::string& path)
 {
 	switch (Renderer::GetAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL: return new OpenGLShader(path);
+		case RendererAPI::API::OpenGL: return OpenGLShader::FromFile(path);
 	}
 
 	HNY_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -20,12 +20,12 @@ Shader* Shader::Create(const std::string& path)
 }
 
 
-Shader* Shader::Create(const std::string& vertexSource, const std::string& fragmentSource)
+Reference<Shader> Shader::CreateFromSource(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
 {
 	switch (Renderer::GetAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL: return new OpenGLShader(vertexSource, fragmentSource);
+		case RendererAPI::API::OpenGL: return OpenGLShader::FromSource(name, vertexSource, fragmentSource);
 	}
 
 	HNY_CORE_ASSERT(false, "Unknown RendererAPI!");

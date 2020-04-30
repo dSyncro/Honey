@@ -26,6 +26,7 @@
 #include <Honey/Renderer/Renderer.h>
 #include <Honey/Renderer/RenderCommand.h>
 #include <Honey/Renderer/Texture.h>
+#include <Honey/Renderer/Camera/OrthographicCameraController.h>
 
 // Time
 #include <Honey/Timing/Time.h>

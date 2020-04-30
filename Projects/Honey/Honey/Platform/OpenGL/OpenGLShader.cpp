@@ -75,8 +75,10 @@ std::unordered_map<GLenum, std::string> OpenGLShader::Process(const std::string&
 void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 {
 	GLuint program = glCreateProgram();
+
 	HNY_CORE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now");
 	std::array<GLenum, 2> glShaderIDs;
+
 	int glShaderIDIndex = 0;
 	for (const std::pair<const GLenum, std::string>& kv : shaderSources)
 	{
@@ -146,19 +148,35 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
 	}
 }
 
-OpenGLShader::OpenGLShader(const std::string& path)
+Reference<OpenGLShader> OpenGLShader::FromFile(const std::string& path)
 {
 	std::string source = ReadFile(path);
 	std::unordered_map<GLenum, std::string> shaderSources = Process(source);
-	Compile(shaderSources);
+
+	std::size_t lastSlash = path.find_last_of("/\\");
+	lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+	std::size_t lastDot = path.rfind('.');
+
+	std::size_t length = lastDot == std::string::npos ? path.size() - lastSlash : lastDot - lastSlash;
+	std::string name = path.substr(lastSlash, length);
+
+	return std::make_shared<OpenGLShader>(name, shaderSources);
 }
 
-OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource)
+Reference<OpenGLShader> OpenGLShader::FromSource(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
 {
-	std::unordered_map<GLenum, std::string> sources;
-	sources[GL_VERTEX_SHADER] = vertexSource;
-	sources[GL_FRAGMENT_SHADER] = fragmentSource;
-	Compile(sources);
+	std::unordered_map<GLenum, std::string> shaderSources = {
+		{ GL_VERTEX_SHADER, vertexSource },
+		{ GL_FRAGMENT_SHADER, fragmentSource },
+	};
+
+	return std::make_shared<OpenGLShader>(name, shaderSources);
+}
+
+OpenGLShader::OpenGLShader(const std::string& name, const std::unordered_map<GLenum, std::string>& shaders)
+	: _name(name)
+{
+	Compile(shaders);
 }
 
 OpenGLShader::~OpenGLShader()

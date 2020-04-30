@@ -4,7 +4,9 @@
 
 namespace Honey {
 
-	struct EngineTime {
+	class EngineTime {
+
+	public:
 
 		static Timestamp Time;
 		static Timestamp DeltaTime;

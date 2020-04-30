@@ -4,7 +4,9 @@
 
 namespace Honey {
 
-	struct Time {
+	class Time {
+
+	public:
 
 		static Timestamp GetTime();
 		static Timestamp GetDeltaTime();
@@ -12,5 +14,4 @@ namespace Honey {
 		static unsigned int GetFrameCount();
 
 	};
-
 }

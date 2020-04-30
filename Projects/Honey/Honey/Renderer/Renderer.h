@@ -2,7 +2,7 @@
 
 #include "RendererAPI.h"
 #include "RenderCommand.h"
-#include "OrthographicCamera.h"
+#include "Camera/OrthographicCamera.h"
 
 #include <Honey/Renderer/Shader.h>
 #include <glm/glm.hpp>
@@ -21,6 +21,8 @@ namespace Honey {
 		static void Submit(const Reference<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
 
 		static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
+
+		static void OnWindowResize(uint32_t width, uint32_t height);
 
 	private:
 

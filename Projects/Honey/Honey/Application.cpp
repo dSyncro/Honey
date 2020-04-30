@@ -32,14 +32,17 @@ Application::~Application()
 
 void Application::Run()
 {
-	_running = true;
+	_isRunning = true;
 
-	while (_running)
+	while (_isRunning)
 	{
 		_window->OnUpdate();
 
-		for (Layer* layer : _layerStack)
-			layer->OnUpdate();
+		if (!_isMinimized)
+		{
+			for (Layer* layer : _layerStack)
+				layer->OnUpdate();
+		}
 
 		_imGuiLayer->Begin();
 		for (Layer* layer : _layerStack)
@@ -65,6 +68,7 @@ void Application::OnEvent(Event& e)
 {
 	EventDispatcher dispatcher(e);
 	dispatcher.Dispatch<WindowCloseEvent>(HNY_BIND_EVENT_CALLBACK(Application::OnWindowClose));
+	dispatcher.Dispatch<WindowResizeEvent>(HNY_BIND_EVENT_CALLBACK(Application::OnWindowResize));
 
 	HNY_CORE_INFO("{0}", e);
 
@@ -77,6 +81,23 @@ void Application::OnEvent(Event& e)
 
 bool Application::OnWindowClose(WindowCloseEvent& e)
 {
-	_running = false;
+	_isRunning = false;
 	return true;
+}
+
+bool Application::OnWindowResize(WindowResizeEvent& e)
+{
+	uint32_t width = e.GetWidth();
+	uint32_t height = e.GetHeight();
+
+	if (width == 0 || height == 0)
+	{
+		_isMinimized = true;
+		return false;
+	}
+
+	_isMinimized = false;
+	Renderer::OnWindowResize(width, height);
+
+	return false;
 }

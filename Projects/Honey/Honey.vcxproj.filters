@@ -253,9 +253,6 @@
     <ClInclude Include="Honey\Renderer\GraphicsContext.h">
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Renderer\OrthographicCamera.h">
-      <Filter>Honey\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Honey\Renderer\RenderCommand.h">
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
@@ -1780,6 +1777,11 @@
     <ClInclude Include="third-party\stb_image\stb_image.h">
       <Filter>third-party\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Renderer\ShaderLibrary.h" />
+    <ClInclude Include="Honey\Renderer\Camera\OrthographicCamera.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\Camera\OrthographicCameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1836,9 +1838,6 @@
     <ClCompile Include="Honey\Renderer\Buffers\VertexBuffer.cpp">
       <Filter>Honey\Renderer\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Renderer\OrthographicCamera.cpp">
-      <Filter>Honey\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="Honey\Renderer\RenderCommand.cpp">
       <Filter>Honey\Renderer</Filter>
     </ClCompile>
@@ -1866,5 +1865,10 @@
     <ClCompile Include="third-party\stb_image\stb_image.cpp">
       <Filter>third-party\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Renderer\ShaderLibrary.cpp" />
+    <ClCompile Include="Honey\Renderer\Camera\OrthographicCamera.cpp">
+      <Filter>Honey\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Renderer\Camera\OrthographicCameraController.cpp" />
   </ItemGroup>
 </Project>
