@@ -25,27 +25,27 @@ namespace Honey {
 	{
 		switch (type)
 		{
-			case Honey::ShaderDataType::Float:
-			case Honey::ShaderDataType::Int:
+			case ShaderDataType::Float:
+			case ShaderDataType::Int:
 				return 4;
 
-			case Honey::ShaderDataType::Float2:
-			case Honey::ShaderDataType::Int2:
+			case ShaderDataType::Float2:
+			case ShaderDataType::Int2:
 				return 8;
 
-			case Honey::ShaderDataType::Float3:
-			case Honey::ShaderDataType::Int3:
+			case ShaderDataType::Float3:
+			case ShaderDataType::Int3:
 				return 12;
 
-			case Honey::ShaderDataType::Float4:
-			case Honey::ShaderDataType::Int4:
+			case ShaderDataType::Float4:
+			case ShaderDataType::Int4:
 				return 16;
 
-			case Honey::ShaderDataType::Mat3: return 36;
+			case ShaderDataType::Mat3: return 36;
 
-			case Honey::ShaderDataType::Mat4: return 64;
+			case ShaderDataType::Mat4: return 64;
 
-			case Honey::ShaderDataType::Bool: return 1;
+			case ShaderDataType::Bool: return 1;
 
 			default: break;
 		}

@@ -1782,6 +1782,7 @@
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Renderer\Camera\OrthographicCameraController.h" />
+    <ClInclude Include="Honey\Renderer\Renderer2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1870,5 +1871,8 @@
       <Filter>Honey\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Renderer\Camera\OrthographicCameraController.cpp" />
+    <ClCompile Include="Honey\Renderer\Renderer2D.cpp" />
+    <ClCompile Include="Honey\Renderer\GraphicsContext.cpp" />
+    <ClCompile Include="Honey\Window\Window.cpp" />
   </ItemGroup>
 </Project>

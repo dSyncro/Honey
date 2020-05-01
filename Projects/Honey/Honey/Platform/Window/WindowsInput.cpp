@@ -6,7 +6,7 @@
 
 using namespace Honey;
 
-Input* Input::s_Instance = new WindowsInput();
+Unique<Input> Input::s_Instance = CreateUnique<WindowsInput>();
 
 bool WindowsInput::IsKeyPressedImpl(Keycode keycode)
 {

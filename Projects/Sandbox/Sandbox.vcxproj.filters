@@ -18,8 +18,13 @@
     <ClCompile Include="SandboxApplication.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="Sandbox2D.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\texture.glsl" />
+    <ClInclude Include="Sandbox2D.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

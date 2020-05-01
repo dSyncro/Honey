@@ -27,7 +27,7 @@ namespace Honey {
 
 		virtual void* GetNativeWindow() const = 0;
 
-		static Window* Create(const WindowProperties& properties = WindowProperties());
+		static Unique<Window> Create(const WindowProperties& properties = WindowProperties());
 
 	};
 

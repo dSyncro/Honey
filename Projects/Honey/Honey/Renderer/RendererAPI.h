@@ -25,6 +25,7 @@ namespace Honey {
 		virtual void DrawIndexed(const Reference<VertexArray>& vertexArray) = 0;
 
 		static API GetAPI() { return s_API; }
+		static Unique<RendererAPI> Create();
 
 	private:
 

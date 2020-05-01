@@ -2,6 +2,8 @@
 
 #include <memory>
 
+#define HNY_DEBUGBREAK() __debugbreak()
+
 // DLL export macro
 #ifdef HNY_PLATFORM_WINDOWS
 #	ifdef HNY_DYNAMIC_BUILD
@@ -19,8 +21,8 @@
 
 // Assertion
 #ifdef HNY_ENABLE_ASSERTS
-#	define HNY_APP_ASSERT(x, ...) if (!x) { HNY_APP_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); }
-#	define HNY_CORE_ASSERT(x, ...) if (!x) { HNY_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); }
+#	define HNY_APP_ASSERT(x, ...) if (!x) { HNY_APP_ERROR("Assertion Failed: {0}", __VA_ARGS__); HNY_DEBUGBREAK(); }
+#	define HNY_CORE_ASSERT(x, ...) if (!x) { HNY_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); HNY_DEBUGBREAK(); }
 #else
 #	define HNY_APP_ASSERT(x, ...)
 #	define HNY_CORE_ASSERT(x, ...)
@@ -36,5 +38,20 @@ namespace Honey {
 
 	template<typename T>
 	using Reference = std::shared_ptr<T>;
+
+	template<typename T, typename ... Args>
+	constexpr Reference<T> CreateReference(Args&& ... args)
+	{
+		return std::make_shared<T>(std::forward<Args>(args)...);
+	}
+
+	template <typename T>
+	using Unique = std::unique_ptr<T>;
+
+	template<typename T, typename ... Args>
+	constexpr Unique<T> CreateUnique(Args&& ... args)
+	{
+		return std::make_unique<T>(std::forward<Args>(args)...);
+	}
 
 }

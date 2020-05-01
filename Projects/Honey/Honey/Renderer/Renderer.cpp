@@ -1,14 +1,17 @@
 #include "Renderer.h"
 
+#include "Renderer2D.h"
+
 #include <Honey/Platform/OpenGL/OpenGLShader.h>
 
 using namespace Honey;
 
-Renderer::SceneData* Renderer::s_SceneData = new Renderer::SceneData();
+Unique<Renderer::SceneData> Renderer::s_SceneData = CreateUnique<Renderer::SceneData>();
 
 void Renderer::Init()
 {
 	RenderCommand::Init();
+	Renderer2D::Init();
 }
 
 void Renderer::BeginScene(OrthographicCamera& camera)

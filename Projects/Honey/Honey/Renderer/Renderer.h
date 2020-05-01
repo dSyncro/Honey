@@ -32,7 +32,7 @@ namespace Honey {
 
 		};
 
-		static SceneData* s_SceneData;
+		static Unique<SceneData> s_SceneData;
 	};
 
 }

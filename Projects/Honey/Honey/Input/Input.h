@@ -11,12 +11,17 @@ namespace Honey {
 
 	public:
 
+		Input(const Input&) = delete;
+		Input& operator =(const Input&) = delete;
+
 		static bool IsKeyPressed(Keycode keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
 		static bool IsMouseButtonPressed(MouseButton button) { return s_Instance->IsMouseButtonPressedImpl(button); }
 		static float GetMouseX() { return s_Instance->GetMouseXImpl(); }
 		static float GetMouseY() { return s_Instance->GetMouseYImpl(); }
 
 	protected:
+
+		Input() = default;
 
 		virtual bool IsKeyPressedImpl(Keycode keycode) = 0;
 		virtual bool IsMouseButtonPressedImpl(MouseButton button) = 0;
@@ -25,7 +30,7 @@ namespace Honey {
 
 	private:
 
-		static Input* s_Instance;
+		static Unique<Input> s_Instance;
 	};
 
 }

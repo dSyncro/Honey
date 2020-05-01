@@ -1,16 +1,16 @@
-#include "VertexBuffer.h"
+#include "GraphicsContext.h"
 
 #include <Honey/Renderer/Renderer.h>
-#include <Honey/Platform/OpenGL/Buffers/OpenGLVertexBuffer.h>
+#include <Honey/Platform/OpenGL/OpenGLContext.h>
 
 using namespace Honey;
 
-Reference<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
+Unique<GraphicsContext> GraphicsContext::Create(void* window)
 {
 	switch (Renderer::GetAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL: return std::make_shared<OpenGLVertexBuffer>(vertices, size);
+		case RendererAPI::API::OpenGL: return CreateUnique<OpenGLContext>(static_cast<GLFWwindow*>(window));
 	}
 
 	HNY_CORE_ASSERT(false, "Unknown RendererAPI!");

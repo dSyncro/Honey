@@ -1,11 +1,13 @@
 #include <Honey.h>
+#include <Honey/Entrypoint.h>
 
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 #include <ImGui/imgui.h>
-#include <Honey/Renderer/ShaderLibrary.h>
 #include <Honey/Platform/OpenGL/OpenGLShader.h>
+
+#include "Sandbox2D.h"
 
 class BaseLayer : public Honey::Layer {
 
@@ -13,7 +15,7 @@ public:
 
 	BaseLayer() : Honey::Layer("Sandbox Layer"), _cameraController(16.0f, 9.0f) 
 	{
-		_vertexArray.reset(Honey::VertexArray::Create());
+		_vertexArray = Honey::VertexArray::Create();
 
 		const unsigned int vertexCount = 4;
 		const unsigned int bufferStride = 5;
@@ -25,7 +27,7 @@ public:
 		};
 
 		Honey::Reference<Honey::VertexBuffer> _vertexBuffer;
-		_vertexBuffer.reset(Honey::VertexBuffer::Create(vertices, sizeof(vertices)));
+		_vertexBuffer = Honey::VertexBuffer::Create(vertices, sizeof(vertices));
 
 		Honey::BufferLayout layout = {
 			{ Honey::ShaderDataType::Float3, "a_Position" },
@@ -38,7 +40,7 @@ public:
 		unsigned int indices[3 * 2] = { 0, 1, 2, 2, 3, 0 };
 
 		Honey::Reference<Honey::IndexBuffer> _indexBuffer;
-		_indexBuffer.reset(Honey::IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
+		_indexBuffer = Honey::IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int));
 		_vertexArray->SetIndexBuffer(_indexBuffer);
 		
 		Honey::Reference<Honey::Shader> textureShader = _shaderLib.Load("assets/shaders/texture.glsl");
@@ -124,7 +126,8 @@ public:
 
 	Sandbox()
 	{
-		PushLayer(new BaseLayer());
+		// PushLayer(new BaseLayer());
+		PushLayer(new Sandbox2D());
 	}
 
 	~Sandbox() = default;

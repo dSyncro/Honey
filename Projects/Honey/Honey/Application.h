@@ -37,7 +37,7 @@ namespace Honey {
 		bool OnWindowClose(WindowCloseEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);
 
-		std::unique_ptr<Window> _window;
+		Unique<Window> _window;
 		ImGuiLayer* _imGuiLayer;
 
 		bool _isRunning = false;

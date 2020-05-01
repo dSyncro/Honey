@@ -15,7 +15,7 @@ Application::Application()
 	HNY_CORE_ASSERT(!s_Instance, "Application already exists!");
 	s_Instance = this;
 
-	_window = std::unique_ptr<Window>(Window::Create());
+	_window = Window::Create();
 	_window->SetEventCallback(HNY_BIND_EVENT_CALLBACK(Application::OnEvent));
 	_window->SetVSync(false);
 
@@ -27,7 +27,7 @@ Application::Application()
 
 Application::~Application()
 {
-
+	//Renderer::Shutdown();
 }
 
 void Application::Run()

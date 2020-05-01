@@ -4,6 +4,7 @@
 #include <Honey/Events/MouseEvents.h>
 #include <Honey/Events/WindowEvents.h>
 #include <Honey/Logging/Log.h>
+#include <Honey/Renderer/Renderer.h>
 #include <Honey/Platform/OpenGL/OpenGLContext.h>
 #include <Honey/Timing/EngineTime.h>
 
@@ -12,11 +13,6 @@ using namespace Honey;
 static void GLFWErrorCallback(int error, const char* description)
 {
 	HNY_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
-}
-
-Window* Window::Create(const WindowProperties& properties)
-{
-	return new WinWindow(properties);
 }
 
 WinWindow::WinWindow(const WindowProperties& properties)
@@ -47,15 +43,18 @@ void WinWindow::Init(const WindowProperties& properties)
 		s_isGLFWInitialized = true;
 	}
 
-	_window = glfwCreateWindow(_data.Width, _data.Height, _data.Title.c_str(), nullptr, nullptr);
+	_window = glfwCreateWindow((int)_data.Width, (int)_data.Height, _data.Title.c_str(), nullptr, nullptr);
 
 	// Init the context
-	_context = new OpenGLContext(_window);
+	_context = GraphicsContext::Create(_window);
 	_context->Init();
 
 	glfwSetWindowUserPointer(_window, &_data);
 
-	SetVSync(true);
+#if defined(HNY_DEBUG)
+	if (Renderer::GetAPI() == RendererAPI::API::OpenGL)
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+#endif
 
 	glfwSetWindowSizeCallback(_window, &WinWindow::WindowResizeCallback);
 	glfwSetWindowCloseCallback(_window, &WinWindow::WindowCloseCallback);

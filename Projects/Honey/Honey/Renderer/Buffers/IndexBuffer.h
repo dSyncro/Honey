@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#include <Honey/Core.h>
+
 namespace Honey {
 
 	class IndexBuffer {
@@ -15,7 +17,7 @@ namespace Honey {
 
 		virtual uint32_t GetCount() const = 0;
 
-		static IndexBuffer* Create(uint32_t* indices, uint32_t count);
+		static Reference<IndexBuffer> Create(uint32_t* indices, uint32_t count);
 	};
 
 }

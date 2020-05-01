@@ -35,7 +35,7 @@ namespace Honey {
 		virtual void Shutdown();
 
 		GLFWwindow* _window;
-		GraphicsContext* _context;
+		Unique<GraphicsContext> _context;
 
 		struct WindowData {
 			std::string Title = "";

@@ -160,7 +160,7 @@ Reference<OpenGLShader> OpenGLShader::FromFile(const std::string& path)
 	std::size_t length = lastDot == std::string::npos ? path.size() - lastSlash : lastDot - lastSlash;
 	std::string name = path.substr(lastSlash, length);
 
-	return std::make_shared<OpenGLShader>(name, shaderSources);
+	return CreateReference<OpenGLShader>(name, shaderSources);
 }
 
 Reference<OpenGLShader> OpenGLShader::FromSource(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
@@ -170,7 +170,7 @@ Reference<OpenGLShader> OpenGLShader::FromSource(const std::string& name, const 
 		{ GL_FRAGMENT_SHADER, fragmentSource },
 	};
 
-	return std::make_shared<OpenGLShader>(name, shaderSources);
+	return CreateReference<OpenGLShader>(name, shaderSources);
 }
 
 OpenGLShader::OpenGLShader(const std::string& name, const std::unordered_map<GLenum, std::string>& shaders)
