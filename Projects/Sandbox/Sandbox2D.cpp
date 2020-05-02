@@ -31,11 +31,11 @@ void Sandbox2D::OnUpdate()
 
 	Honey::Renderer2D::BeginScene(_cameraController.GetCamera());
 
-	for (int y = 0; y < 10; y++)
+	for (int y = 0; y < 3; y++)
 	{
-		for (int x = 0; x < 10; x++)
+		for (int x = 0; x < 3; x++)
 		{
-			Honey::Renderer2D::DrawQuad({ x, y }, { 0.9f, 0.9f }, { x / 10.0f, y / 10.0f, 0.8f, 1.0f });
+			Honey::Renderer2D::DrawQuad({ x + 5.0f, y + 5.0f }, { 0.9f, 0.9f }, { x / 3.0f, y / 3.0f, 0.8f, 1.0f });
 		}
 	}
 

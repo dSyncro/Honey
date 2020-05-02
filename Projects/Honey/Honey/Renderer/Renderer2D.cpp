@@ -12,8 +12,8 @@ using namespace Honey;
 struct Renderer2DStorage {
 
 	Reference<VertexArray> QuadVertexArray;
-	Reference<Shader> ColorShader;
-	Reference<Shader> TextureShader;
+	Reference<Shader> StandardShader;
+	Reference<Texture2D> StandardTexture;
 
 };
 
@@ -51,19 +51,19 @@ void Renderer2D::Init()
 	_indexBuffer = IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int));
 	s_Data->QuadVertexArray->SetIndexBuffer(_indexBuffer);
 
-	s_Data->ColorShader = Shader::CreateFromFile("assets/shaders/color.glsl");
-	s_Data->TextureShader = Shader::CreateFromFile("assets/shaders/texture.glsl");
-	s_Data->TextureShader->Bind();
-	s_Data->TextureShader->SetInt("u_Texture", 0);
+	s_Data->StandardTexture = Texture2D::Create(1, 1);
+	uint32_t whiteData = 0xFFFFFFFF;
+	s_Data->StandardTexture->SetData(&whiteData, sizeof(uint32_t));
+
+	s_Data->StandardShader = Shader::CreateFromFile("assets/shaders/standard2D.glsl");
+	s_Data->StandardShader->Bind();
+	s_Data->StandardShader->SetInt("u_Texture", 0);
 }
 
 void Renderer2D::BeginScene(const OrthographicCamera& camera)
 {
-	s_Data->ColorShader->Bind();
-	s_Data->ColorShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
-
-	s_Data->TextureShader->Bind();
-	s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
+	s_Data->StandardShader->Bind();
+	s_Data->StandardShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 }
 
 void Renderer2D::EndScene()
@@ -83,12 +83,12 @@ void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, cons
 
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 {
-	s_Data->ColorShader->Bind();
-	s_Data->ColorShader->SetVec4("u_Color", color);
+	s_Data->StandardShader->SetVec4("u_Color", color);
+	s_Data->StandardTexture->Bind();
 
 	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 		glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-	s_Data->ColorShader->SetMat4("u_Transform", transform);
+	s_Data->StandardShader->SetMat4("u_Transform", transform);
 
 	s_Data->QuadVertexArray->Bind();
 	RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
@@ -101,13 +101,13 @@ void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, cons
 
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Reference<Texture2D>& texture)
 {
-	s_Data->TextureShader->Bind();
+	s_Data->StandardShader->SetVec4("u_Color", glm::vec4(1.0f));
+	texture->Bind();
 
 	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 		glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-	s_Data->TextureShader->SetMat4("u_Transform", transform);
+	s_Data->StandardShader->SetMat4("u_Transform", transform);
 
-	texture->Bind();
 	s_Data->QuadVertexArray->Bind();
 	RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
 }

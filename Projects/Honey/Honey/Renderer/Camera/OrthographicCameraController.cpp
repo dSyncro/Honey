@@ -1,6 +1,6 @@
 #include "OrthographicCameraController.h"
 
-#include <Honey/Timing/Time.cpp>
+#include <Honey/Timing/Time.h>
 #include <Honey/Input/Input.h>
 #include <Honey/Events/EventDispatcher.h>
 
