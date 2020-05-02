@@ -6,7 +6,7 @@
 
 namespace Honey {
 
-	class HONEY_API WindowResizeEvent : public Event {
+	class WindowResizeEvent final : public Event {
 
 	public:
 

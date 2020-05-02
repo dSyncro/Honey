@@ -4,7 +4,7 @@
 
 namespace Honey {
 
-	class HONEY_API AppUpdateEvent : public Event {
+	class AppUpdateEvent final : public Event {
 
 	public:
 

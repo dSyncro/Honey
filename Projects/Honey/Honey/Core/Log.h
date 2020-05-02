@@ -1,13 +1,13 @@
 #pragma once
 
-#include <Honey/Core.h>
-
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
 
+#include <Honey/Core/MemoryManagement.h>
+
 namespace Honey {
 
-	class HONEY_API Log {
+	class Log {
 
 	public:
 

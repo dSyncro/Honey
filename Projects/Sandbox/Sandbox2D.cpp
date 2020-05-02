@@ -32,11 +32,6 @@ void Sandbox2D::OnUpdate()
 	Honey::Renderer2D::BeginScene(_cameraController.GetCamera());
 	Honey::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, _squareColor);
 
-	Honey::Reference<Honey::Shader> colorShader = _shaderLib.Get("color");
-	
-	//colorShader->Bind();
-	//std::dynamic_pointer_cast<Honey::OpenGLShader>(colorShader)->SetUniformVec4("u_Color", _squareColor);
-
 	Honey::Renderer2D::EndScene();
 }
 

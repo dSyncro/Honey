@@ -2,8 +2,6 @@
 
 #include <glad/glad.h>
 
-#include <Honey/Logging/Log.h>
-
 using namespace Honey;
 
 void OpenGLMessageCallback(

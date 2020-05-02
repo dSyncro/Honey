@@ -6,7 +6,7 @@
 
 namespace Honey {
 
-	class HONEY_API KeyReleasedEvent : public KeyEvent {
+	class KeyReleasedEvent final : public KeyEvent {
 
 	public:
 

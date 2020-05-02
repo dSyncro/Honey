@@ -4,7 +4,7 @@
 
 namespace Honey {
 
-	class OpenGLIndexBuffer : public IndexBuffer {
+	class OpenGLIndexBuffer final : public IndexBuffer {
 
 	public:
 

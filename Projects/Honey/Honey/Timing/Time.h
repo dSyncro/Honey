@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>
+
 #include "Timestamp.h"
 
 namespace Honey {
@@ -11,7 +13,7 @@ namespace Honey {
 		static Timestamp GetTime();
 		static Timestamp GetDeltaTime();
 		static float GetFrameRate();
-		static unsigned int GetFrameCount();
+		static std::size_t GetFrameCount();
 
 	};
 }

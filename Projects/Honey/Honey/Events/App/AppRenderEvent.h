@@ -4,7 +4,7 @@
 
 namespace Honey {
 
-	class HONEY_API AppRenderEvent : public Event {
+	class AppRenderEvent final : public Event {
 
 	public:
 

@@ -6,7 +6,7 @@
 
 namespace Honey {
 
-	class OpenGLContext : public GraphicsContext {
+	class OpenGLContext final : public GraphicsContext {
 
 	public:
 

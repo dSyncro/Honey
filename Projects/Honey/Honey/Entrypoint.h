@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Application.h"
-#include "Logging/Log.h"
+#include "Core/Log.h"
 
 #ifdef HNY_PLATFORM_WINDOWS
 

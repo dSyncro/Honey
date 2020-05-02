@@ -6,7 +6,7 @@
 
 namespace Honey {
 
-	class HONEY_API EventDispatcher {
+	class EventDispatcher {
 
 		template <typename T>
 		using EventCallback = std::function<bool(T&)>;

@@ -33,7 +33,7 @@ namespace Honey {
 		EventCategoryMouseButton = BIT(4)
 	};
 
-	class HONEY_API Event {
+	class Event {
 
 	public:
 

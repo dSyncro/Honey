@@ -11,7 +11,7 @@ typedef unsigned int GLenum;
 
 namespace Honey {
 
-	class OpenGLShader : public Shader {
+	class OpenGLShader final : public Shader {
 
 	public:
 
@@ -27,15 +27,16 @@ namespace Honey {
 
 		virtual const std::string& GetName() const override { return _name; }
 
-		void SetUniformInt(const std::string& name, int value);
+		virtual void SetInt(const std::string& name, int value) override;
 
-		void SetUniformFloat(const std::string& name, float value);
-		void SetUniformVec2(const std::string& name, const glm::vec2& value);
-		void SetUniformVec3(const std::string& name, const glm::vec3& value);
-		void SetUniformVec4(const std::string& name, const glm::vec4& value);
+		virtual void SetFloat(const std::string& name, float value) override;
+		virtual void SetVec2(const std::string& name, const glm::vec2& value) override;
+		virtual void SetVec3(const std::string& name, const glm::vec3& value) override;
+		virtual void SetVec4(const std::string& name, const glm::vec4& value) override;
 
-		void SetUniformMat3(const std::string& name, const glm::mat3& matrix);
-		void SetUniformMat4(const std::string& name, const glm::mat4& matrix);
+		virtual void SetMat2(const std::string& name, const glm::mat2& matrix) override;
+		virtual void SetMat3(const std::string& name, const glm::mat3& matrix) override;
+		virtual void SetMat4(const std::string& name, const glm::mat4& matrix) override;
 
 	private:
 

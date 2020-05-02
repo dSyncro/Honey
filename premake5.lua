@@ -58,6 +58,7 @@ project "Honey"
 
 	defines 
 	{
+		"_CRT_SECURE_NO_WARNINGS",
 		"GLFW_INCLUDE_NONE"
 	}
 
@@ -82,11 +83,6 @@ project "Honey"
 
 	filter "system:windows"
 		systemversion "latest"
-
-		defines 
-		{
-			"HNY_PLATFORM_WINDOWS",
-		}
 		
 	filter "configurations:Debug"
 		defines "HNY_DEBUG"
@@ -134,11 +130,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		systemversion "latest"
-
-		defines 
-		{
-			"HNY_PLATFORM_WINDOWS"
-		}
 		
 	filter "configurations:Debug"
 		defines "HNY_DEBUG"

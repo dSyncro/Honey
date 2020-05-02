@@ -2,11 +2,9 @@
 
 #include <string>
 
-#include <Honey/Core.h>
-
 namespace Honey {
 
-	struct HONEY_API WindowProperties {
+	struct WindowProperties {
 
 		std::string Title;
 		unsigned int Width;

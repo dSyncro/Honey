@@ -3,8 +3,6 @@
 #include <fstream>
 #include <vector>
 
-#include <Honey/Logging/Log.h>
-
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -194,43 +192,49 @@ void OpenGLShader::Unbind() const
 	glUseProgram(0);
 }
 
-void OpenGLShader::SetUniformInt(const std::string& name, int value)
+void OpenGLShader::SetInt(const std::string& name, int value)
 {
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform1i(id, value);
 }
 
-void OpenGLShader::SetUniformFloat(const std::string& name, float value)
+void OpenGLShader::SetFloat(const std::string& name, float value)
 {
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform1f(id, value);
 }
 
-void OpenGLShader::SetUniformVec2(const std::string& name, const glm::vec2& value)
+void OpenGLShader::SetVec2(const std::string& name, const glm::vec2& value)
 {
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform2f(id, value.x, value.y);
 }
 
-void OpenGLShader::SetUniformVec3(const std::string& name, const glm::vec3& value)
+void OpenGLShader::SetVec3(const std::string& name, const glm::vec3& value)
 {
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform3f(id, value.x, value.y, value.z);
 }
 
-void OpenGLShader::SetUniformVec4(const std::string& name, const glm::vec4& value)
+void OpenGLShader::SetVec4(const std::string& name, const glm::vec4& value)
 {
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform4f(id, value.x, value.y, value.z, value.w);
 }
 
-void OpenGLShader::SetUniformMat3(const std::string& name, const glm::mat3& matrix)
+void OpenGLShader::SetMat2(const std::string& name, const glm::mat2& matrix)
+{
+	int id = glGetUniformLocation(_rendererID, name.c_str());
+	glUniformMatrix2fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
+void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)
 {
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniformMatrix3fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
-void OpenGLShader::SetUniformMat4(const std::string& name, const glm::mat4& matrix)
+void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)
 {
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(matrix));

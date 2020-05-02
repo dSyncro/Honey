@@ -1,7 +1,6 @@
 #include "OpenGLContext.h"
 
-#include <Honey/Core.h>
-#include <Honey/Logging/Log.h>
+#include <Honey/Core/Log.h>
 
 #include <glad/glad.h>
 

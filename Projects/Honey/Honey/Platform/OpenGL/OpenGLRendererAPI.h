@@ -4,7 +4,7 @@
 
 namespace Honey {
 
-	class OpenGLRendererAPI : public RendererAPI {
+	class OpenGLRendererAPI final : public RendererAPI {
 
 	public:
 

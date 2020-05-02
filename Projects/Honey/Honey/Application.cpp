@@ -1,6 +1,6 @@
 #include "Application.h"
 
-#include <Honey/Logging/Log.h>
+#include <Honey/Core.h>
 #include <Honey/Events/EventDispatcher.h>
 #include <Honey/Events/Window/WindowResizeEvent.h>
 #include <Honey/Renderer/Buffers/BufferLayout.h>

@@ -3,7 +3,6 @@
 #include <Honey/Events/KeyEvents.h>
 #include <Honey/Events/MouseEvents.h>
 #include <Honey/Events/WindowEvents.h>
-#include <Honey/Logging/Log.h>
 #include <Honey/Renderer/Renderer.h>
 #include <Honey/Platform/OpenGL/OpenGLContext.h>
 #include <Honey/Timing/EngineTime.h>
@@ -68,6 +67,7 @@ void WinWindow::Init(const WindowProperties& properties)
 void WinWindow::Shutdown()
 {
 	glfwDestroyWindow(_window);
+	glfwTerminate();
 }
 
 void WinWindow::OnUpdate()
@@ -75,11 +75,11 @@ void WinWindow::OnUpdate()
 	glfwPollEvents();
 	_context->SwapBuffers();
 
-	EngineTime::FrameCount++;
+	EngineTime::SetFrameCount(EngineTime::GetFrameCount() + 1);
 
 	float time = (float)glfwGetTime();
-	EngineTime::DeltaTime = time - EngineTime::Time;
-	EngineTime::Time = time;
+	EngineTime::SetDeltaTime(time - EngineTime::GetTime());
+	EngineTime::SetTime(time);
 }
 
 void WinWindow::SetVSync(bool enabled)

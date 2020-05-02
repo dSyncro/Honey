@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Core.h"
-
 #include <Honey/Events/WindowEvents.h>
 #include <Honey/Layers/LayerStack.h>
 #include <Honey/Layers/ImGui/ImGuiLayer.h>
@@ -14,7 +12,7 @@
 
 namespace Honey {
 
-	class HONEY_API Application
+	class Application
 	{
 	public:
 

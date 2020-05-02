@@ -4,7 +4,7 @@
 
 namespace Honey {
 
-	class HONEY_API MouseButtonPressedEvent : public MouseButtonEvent {
+	class MouseButtonPressedEvent final : public MouseButtonEvent {
 
 	public:
 

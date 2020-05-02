@@ -1,13 +1,13 @@
 #pragma once
 
-#include <Honey/Core.h>
+#include <Honey/Core/MemoryManagement.h>
 
 #include "Keycode.h"
 #include "MouseButtons.h"
 
 namespace Honey {
 
-	class HONEY_API Input {
+	class Input {
 
 	public:
 

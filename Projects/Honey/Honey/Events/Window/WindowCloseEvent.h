@@ -4,7 +4,7 @@
 
 namespace Honey {
 
-	class HONEY_API WindowCloseEvent : public Event {
+	class WindowCloseEvent final : public Event {
 
 	public:
 

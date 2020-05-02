@@ -6,20 +6,20 @@ using namespace Honey;
 
 Timestamp Time::GetTime()
 {
-	return EngineTime::Time;
+	return EngineTime::GetTime();
 }
 
 Timestamp Time::GetDeltaTime()
 {
-	return EngineTime::DeltaTime;
+	return EngineTime::GetDeltaTime();
 }
 
 float Time::GetFrameRate()
 {
-	return 1 / EngineTime::DeltaTime;
+	return 1 / EngineTime::GetDeltaTime();
 }
 
-unsigned int Time::GetFrameCount()
+std::size_t Time::GetFrameCount()
 {
-	return EngineTime::FrameCount;
+	return EngineTime::GetFrameCount();
 }

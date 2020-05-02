@@ -10,7 +10,7 @@ namespace Honey {
 
 	static bool s_isGLFWInitialized = false;
 
-	class HONEY_API WinWindow : public Window {
+	class WinWindow : public Window {
 
 	public:
 

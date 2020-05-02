@@ -3,6 +3,9 @@
 // Application
 #include "Honey/Application.h"
 
+// Time
+#include <Honey/Timing/Time.h>
+
 // Events
 #include <Honey/Events/EventDispatcher.h>
 #include <Honey/Events/AppEvents.h>
@@ -19,9 +22,6 @@
 #include "Honey/Layers/Layer.h"
 #include "Honey/Layers/ImGui/ImGuiLayer.h"
 
-// Logging
-#include "Honey/Logging/Log.h"
-
 // Rendering
 #include <Honey/Renderer/Renderer.h>
 #include <Honey/Renderer/Renderer2D.h>
@@ -29,6 +29,3 @@
 #include <Honey/Renderer/Texture.h>
 #include <Honey/Renderer/ShaderLibrary.h>
 #include <Honey/Renderer/Camera/OrthographicCameraController.h>
-
-// Time
-#include <Honey/Timing/Time.h>

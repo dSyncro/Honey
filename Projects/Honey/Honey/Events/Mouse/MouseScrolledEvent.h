@@ -6,7 +6,7 @@
 
 namespace Honey {
 
-	class HONEY_API MouseScrolledEvent : public Event {
+	class MouseScrolledEvent final : public Event {
 
 	public:
 

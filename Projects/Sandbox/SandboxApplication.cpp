@@ -5,7 +5,6 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <ImGui/imgui.h>
-#include <Honey/Platform/OpenGL/OpenGLShader.h>
 
 #include "Sandbox2D.h"
 
@@ -48,8 +47,8 @@ public:
 		_texture = Honey::Texture2D::Create("assets/textures/checkerboard.png");
 		_transparentTexture = Honey::Texture2D::Create("assets/textures/logo.png");
 
-		std::dynamic_pointer_cast<Honey::OpenGLShader>(textureShader)->Bind();
-		std::dynamic_pointer_cast<Honey::OpenGLShader>(textureShader)->SetUniformInt("u_Texture", 0);
+		textureShader->Bind();
+		textureShader->SetInt("u_Texture", 0);
 
 	}
 
