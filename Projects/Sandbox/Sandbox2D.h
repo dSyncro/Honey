@@ -18,6 +18,7 @@ public:
 private:
 
 	Honey::Reference<Honey::VertexArray> _vertexArray;
+	Honey::Reference<Honey::Texture2D> _texture;
 
 	Honey::ShaderLibrary _shaderLib;
 	Honey::OrthographicCameraController _cameraController;
