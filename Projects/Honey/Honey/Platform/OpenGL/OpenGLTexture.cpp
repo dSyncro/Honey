@@ -7,6 +7,8 @@ using namespace Honey;
 OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
 	: _width(width), _height(height)
 {
+	HNY_PROFILE_FUNCTION();
+
 	_internalFormat = GL_RGBA8;
 	_dataFormat = GL_RGBA;
 
@@ -22,6 +24,8 @@ OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
 
 OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : _path(path)
 {
+	HNY_PROFILE_FUNCTION();
+
 	int width, height, channels;
 	stbi_set_flip_vertically_on_load(1);
 	stbi_uc* data = stbi_load(_path.c_str(), &width, &height, &channels, 0);
@@ -59,11 +63,15 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : _path(path)
 
 OpenGLTexture2D::~OpenGLTexture2D()
 {
+	HNY_PROFILE_FUNCTION();
+
 	glDeleteTextures(1, &_rendererID);
 }
 
 void OpenGLTexture2D::SetData(void* data, uint32_t size)
 {
+	HNY_PROFILE_FUNCTION();
+
 	uint32_t bpp = _dataFormat == GL_RGBA ? 4 : 3;
 	HNY_CORE_ASSERT(size == _width * _height * bpp, "Provided size does not equal texture size");
 	glTextureSubImage2D(_rendererID, 0, 0, 0, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data);
@@ -71,5 +79,7 @@ void OpenGLTexture2D::SetData(void* data, uint32_t size)
 
 void OpenGLTexture2D::Bind(uint32_t slot) const
 {
+	HNY_PROFILE_FUNCTION();
+
 	glBindTextureUnit(slot, _rendererID);
 }

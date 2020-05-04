@@ -26,6 +26,7 @@ void OpenGLMessageCallback(
 
 void OpenGLRendererAPI::Init()
 {
+	HNY_PROFILE_FUNCTION();
 
 #ifdef HNY_DEBUG
 	glEnable(GL_DEBUG_OUTPUT);

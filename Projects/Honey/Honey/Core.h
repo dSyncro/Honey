@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Core/Assertion.h"
+#include "Core/Profiling.h"
+#include "Core/MemoryTracking.h"
 // #include "Core/DLLAutomation.h"
 
 // Bitmasking

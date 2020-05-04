@@ -1797,6 +1797,12 @@
     <ClInclude Include="Honey\Core\Log.h">
       <Filter>Honey\Logging</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Core\Profiling.h" />
+    <ClInclude Include="Honey\Profiling\Instrumentor.h" />
+    <ClInclude Include="Honey\Profiling\InstrumentationTimer.h" />
+    <ClInclude Include="Honey\Profiling\ProfileResult.h" />
+    <ClInclude Include="Honey\Core\MemoryTracking.h" />
+    <ClInclude Include="Honey\Core\FunctionIdentification.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1898,5 +1904,6 @@
     <ClCompile Include="Honey\Core\Log.cpp">
       <Filter>Honey\Logging</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Core\MemoryTracking.cpp" />
   </ItemGroup>
 </Project>

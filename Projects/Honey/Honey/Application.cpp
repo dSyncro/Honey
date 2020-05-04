@@ -12,6 +12,8 @@ Application* Application::s_Instance = nullptr;
 
 Application::Application()
 {
+	HNY_PROFILE_FUNCTION();
+
 	HNY_CORE_ASSERT(!s_Instance, "Application already exists!");
 	s_Instance = this;
 
@@ -27,45 +29,59 @@ Application::Application()
 
 Application::~Application()
 {
-	//Renderer::Shutdown();
+	HNY_PROFILE_FUNCTION();
+
+	Renderer::Shutdown();
 }
 
 void Application::Run()
 {
-	_isRunning = true;
+	HNY_PROFILE_FUNCTION();
 
+	_isRunning = true;
 	while (_isRunning)
 	{
+		HNY_PROFILE_SCOPE("Run Loop");
+
 		_window->OnUpdate();
 
 		if (!_isMinimized)
 		{
+			HNY_PROFILE_SCOPE("Layer OnUpdate");
 			for (Layer* layer : _layerStack)
 				layer->OnUpdate();
 		}
 
 		_imGuiLayer->Begin();
-		for (Layer* layer : _layerStack)
-			layer->OnImGuiRender();
+		{
+			HNY_PROFILE_SCOPE("Layer OnImGuiRender");
+			for (Layer* layer : _layerStack)
+				layer->OnImGuiRender();
+		}
 		_imGuiLayer->End();
-
 	}
 }
 
 void Application::PushLayer(Layer* layer)
 {
+	HNY_PROFILE_FUNCTION();
+
 	_layerStack.PushLayer(layer);
 	layer->OnAttach();
 }
 
 void Application::PushOverlay(Layer* overlay)
 {
+	HNY_PROFILE_FUNCTION();
+
 	_layerStack.PushOverlay(overlay);
 	overlay->OnAttach();
 }
 
 void Application::OnEvent(Event& e)
 {
+	HNY_PROFILE_FUNCTION();
+
 	EventDispatcher dispatcher(e);
 	dispatcher.Dispatch<WindowCloseEvent>(HNY_BIND_EVENT_CALLBACK(Application::OnWindowClose));
 	dispatcher.Dispatch<WindowResizeEvent>(HNY_BIND_EVENT_CALLBACK(Application::OnWindowResize));
@@ -87,6 +103,8 @@ bool Application::OnWindowClose(WindowCloseEvent& e)
 
 bool Application::OnWindowResize(WindowResizeEvent& e)
 {
+	HNY_PROFILE_FUNCTION();
+
 	uint32_t width = e.GetWidth();
 	uint32_t height = e.GetHeight();
 

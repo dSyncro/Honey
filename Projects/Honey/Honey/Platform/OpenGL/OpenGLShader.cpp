@@ -21,6 +21,8 @@ static GLenum ShaderTypeFromString(const std::string& type)
 
 std::string OpenGLShader::ReadFile(const std::string& path)
 {
+	HNY_PROFILE_FUNCTION();
+
 	std::string result;
 	std::ifstream file(path, std::ios::in | std::ios::binary);
 	if (file)
@@ -43,6 +45,8 @@ std::string OpenGLShader::ReadFile(const std::string& path)
 
 std::unordered_map<GLenum, std::string> OpenGLShader::Process(const std::string& source)
 {
+	HNY_PROFILE_FUNCTION();
+
 	std::unordered_map<GLenum, std::string> shaderSources;
 
 	const char* typeToken = "#type";
@@ -72,6 +76,8 @@ std::unordered_map<GLenum, std::string> OpenGLShader::Process(const std::string&
 
 void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 {
+	HNY_PROFILE_FUNCTION();
+
 	GLuint program = glCreateProgram();
 
 	HNY_CORE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now");
@@ -148,6 +154,8 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
 
 Reference<OpenGLShader> OpenGLShader::FromFile(const std::string& path)
 {
+	HNY_PROFILE_FUNCTION();
+
 	std::string source = ReadFile(path);
 	std::unordered_map<GLenum, std::string> shaderSources = Process(source);
 
@@ -163,6 +171,8 @@ Reference<OpenGLShader> OpenGLShader::FromFile(const std::string& path)
 
 Reference<OpenGLShader> OpenGLShader::FromSource(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
 {
+	HNY_PROFILE_FUNCTION();
+
 	std::unordered_map<GLenum, std::string> shaderSources = {
 		{ GL_VERTEX_SHADER, vertexSource },
 		{ GL_FRAGMENT_SHADER, fragmentSource },
@@ -174,21 +184,29 @@ Reference<OpenGLShader> OpenGLShader::FromSource(const std::string& name, const 
 OpenGLShader::OpenGLShader(const std::string& name, const std::unordered_map<GLenum, std::string>& shaders)
 	: _name(name)
 {
+	HNY_PROFILE_FUNCTION();
+
 	Compile(shaders);
 }
 
 OpenGLShader::~OpenGLShader()
 {
+	HNY_PROFILE_FUNCTION();
+
 	glDeleteProgram(_rendererID);
 }
 
 void OpenGLShader::Bind() const
 {
+	HNY_PROFILE_FUNCTION();
+
 	glUseProgram(_rendererID);
 }
 
 void OpenGLShader::Unbind() const
 {
+	HNY_PROFILE_FUNCTION();
+
 	glUseProgram(0);
 }
 

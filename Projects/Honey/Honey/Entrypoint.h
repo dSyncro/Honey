@@ -11,12 +11,17 @@ int main(int argc, char** argv)
 {
 	Honey::Log::Init();
 
-	HNY_APP_INFO("App logger attached");
-	HNY_CORE_INFO("Core logger attached");
-
+	HNY_PROFILE_BEGIN_SESSION("Startup", "HoneyProfile-Startup.json");
 	Honey::Application* app = Honey::CreateApplication();
+	HNY_PROFILE_END_SESSION();
+
+	HNY_PROFILE_BEGIN_SESSION("Runtime", "HoneyProfile-Runtime.json");
 	app->Run();
+	HNY_PROFILE_END_SESSION();
+
+	HNY_PROFILE_BEGIN_SESSION("Shutdown", "HoneyProfile-Shutdown.json");
 	delete app;
+	HNY_PROFILE_END_SESSION();
 }
 
 #endif

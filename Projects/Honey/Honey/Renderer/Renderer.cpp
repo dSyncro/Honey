@@ -10,8 +10,17 @@ Unique<Renderer::SceneData> Renderer::s_SceneData = CreateUnique<Renderer::Scene
 
 void Renderer::Init()
 {
+	HNY_PROFILE_FUNCTION();
+
 	RenderCommand::Init();
 	Renderer2D::Init();
+}
+
+void Renderer::Shutdown()
+{
+	HNY_PROFILE_FUNCTION();
+
+	Renderer2D::Shutdown();
 }
 
 void Renderer::BeginScene(OrthographicCamera& camera)

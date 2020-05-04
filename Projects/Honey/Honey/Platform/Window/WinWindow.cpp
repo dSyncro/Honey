@@ -9,6 +9,8 @@
 
 using namespace Honey;
 
+std::size_t Honey::s_GLFWWindowCount = 0;
+
 static void GLFWErrorCallback(int error, const char* description)
 {
 	HNY_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
@@ -16,16 +18,22 @@ static void GLFWErrorCallback(int error, const char* description)
 
 WinWindow::WinWindow(const WindowProperties& properties)
 {
+	HNY_PROFILE_FUNCTION();
+
 	Init(properties);
 }
 
 WinWindow::~WinWindow()
 {
+	HNY_PROFILE_FUNCTION();
+
 	Shutdown();
 }
 
 void WinWindow::Init(const WindowProperties& properties)
 {
+	HNY_PROFILE_FUNCTION();
+
 	// Setup Window Data
 	_data.Title = properties.Title;
 	_data.Width = properties.Width;
@@ -34,15 +42,15 @@ void WinWindow::Init(const WindowProperties& properties)
 	HNY_CORE_INFO("Creating window {0} ({1}; {2})", properties.Title, properties.Width, properties.Height);
 
 	// Init GLFW if needed
-	if (!s_isGLFWInitialized)
+	if (!s_GLFWWindowCount)
 	{
 		int success = glfwInit();
 		HNY_CORE_ASSERT(success, "Could not init GLFW!");
 		glfwSetErrorCallback(GLFWErrorCallback);
-		s_isGLFWInitialized = true;
 	}
 
 	_window = glfwCreateWindow((int)_data.Width, (int)_data.Height, _data.Title.c_str(), nullptr, nullptr);
+	s_GLFWWindowCount++;
 
 	// Init the context
 	_context = GraphicsContext::Create(_window);
@@ -66,12 +74,16 @@ void WinWindow::Init(const WindowProperties& properties)
 
 void WinWindow::Shutdown()
 {
+	HNY_PROFILE_FUNCTION();
+
 	glfwDestroyWindow(_window);
-	glfwTerminate();
+	if (!s_GLFWWindowCount) glfwTerminate();
 }
 
 void WinWindow::OnUpdate()
 {
+	HNY_PROFILE_FUNCTION();
+
 	glfwPollEvents();
 	_context->SwapBuffers();
 
@@ -84,6 +96,8 @@ void WinWindow::OnUpdate()
 
 void WinWindow::SetVSync(bool enabled)
 {
+	HNY_PROFILE_FUNCTION();
+
 	glfwSwapInterval(enabled);
 	_data.VSync = enabled;
 }

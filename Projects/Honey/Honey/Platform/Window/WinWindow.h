@@ -8,7 +8,7 @@
 
 namespace Honey {
 
-	static bool s_isGLFWInitialized = false;
+	extern std::size_t s_GLFWWindowCount;
 
 	class WinWindow : public Window {
 

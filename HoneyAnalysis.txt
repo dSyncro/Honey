@@ -1,33 +1,0 @@
-     100 files     200 files     300 files     400 files     500 files     600 files     700 files     800 files     900 files    1000 files    1100 files    1200 files    1300 files    1400 files    1500 files    1600 files    1700 files    1800 files    1900 files    2000 files    2000 text files.
-classified 1999 filesDuplicate file check 1999 files (1559 known unique)Unique:      100 files                                          Unique:      200 files                                          Unique:      300 files                                          Unique:      400 files                                          Unique:      500 files                                          Unique:      600 files                                          Unique:      700 files                                          Unique:      800 files                                          Unique:      900 files                                          Unique:     1000 files                                          Unique:     1100 files                                          Unique:     1200 files                                          Unique:     1300 files                                          Unique:     1400 files                                          Unique:     1500 files                                              1985 unique files.                              
-Counting:  100Counting:  200Counting:  300Counting:  400Counting:  500Counting:  600Counting:  700Counting:  800Counting:  900Counting:  1000Counting:  1100Counting:  1200Counting:  1300Counting:  1400Counting:  1500Counting:  1600Counting:  1700Counting:  1800Counting:  1900     276 files ignored.
-
-github.com/AlDanial/cloc v 1.84  T=3.00 s (635.3 files/s, 157167.3 lines/s)
------------------------------------------------------------------------------------
-Language                         files          blank        comment           code
------------------------------------------------------------------------------------
-HTML                               699           6192           3662         143770
-C/C++ Header                       465          15628          34307          88091
-C++                                413          15298           8636          82876
-C                                   67           5461           3853          32103
-XML                                 46             22             17           6672
-JavaScript                          94             82             95           5235
-Markdown                            18           1483              0           4408
-Objective C                          7            703            337           2913
-CSS                                  4            291             49           1488
-YAML                                 9            146             16           1472
-CMake                               35            288            215           1368
-Objective C++                        7            292            215           1240
-SVG                                  1              1              1            875
-make                                14            185            193            417
-LESS                                 1             85             28            301
-Lua                                  4             55              0            244
-DOS Batch                           13              7              0             57
-GLSL                                 2              7              0             32
-Bourne Shell                         4              7              0             26
-INI                                  1              7              0             24
-reStructuredText                     1              4              0             19
-Windows Resource File                1              2              0              1
------------------------------------------------------------------------------------
-SUM:                              1906          46246          51624         373632
------------------------------------------------------------------------------------

@@ -7,16 +7,19 @@
 
 void Sandbox2D::OnAttach()
 {
+	HNY_PROFILE_FUNCTION();
 	_texture = Honey::Texture2D::Create("assets/textures/checkerboard.png");
 }
 
 void Sandbox2D::OnDetach()
 {
-
+	HNY_PROFILE_FUNCTION();
 }
 
 void Sandbox2D::OnUpdate()
 {
+	HNY_PROFILE_FUNCTION();
+
 	_cameraController.OnUpdate();
 	float deltaTime = Honey::Time::GetDeltaTime();
 
@@ -31,13 +34,9 @@ void Sandbox2D::OnUpdate()
 
 	Honey::Renderer2D::BeginScene(_cameraController.GetCamera());
 
-	for (int y = 0; y < 3; y++)
-	{
+	for (int y = 0; y < 3; y++) 
 		for (int x = 0; x < 3; x++)
-		{
 			Honey::Renderer2D::DrawQuad({ x + 5.0f, y + 5.0f }, { 0.9f, 0.9f }, { x / 3.0f, y / 3.0f, 0.8f, 1.0f });
-		}
-	}
 
 	Honey::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, _squareColor);
 	Honey::Renderer2D::DrawQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, _texture);
@@ -47,11 +46,13 @@ void Sandbox2D::OnUpdate()
 
 void Sandbox2D::OnEvent(Honey::Event& e)
 {
+	HNY_PROFILE_FUNCTION();
 	_cameraController.OnEvent(e);
 }
 
 void Sandbox2D::OnImGuiRender()
 {
+	HNY_PROFILE_FUNCTION();
 	ImGui::Begin("Settings");
 	ImGui::ColorEdit4("Square Color", glm::value_ptr(_squareColor));
 	ImGui::End();

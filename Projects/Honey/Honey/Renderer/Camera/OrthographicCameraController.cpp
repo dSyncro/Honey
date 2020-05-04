@@ -24,6 +24,8 @@ void OrthographicCameraController::OnEvent(Event& e)
 
 void OrthographicCameraController::OnUpdate()
 {
+	HNY_PROFILE_FUNCTION();
+
 	Timestamp deltaTime = Time::GetDeltaTime();
 
 	if (Input::IsKeyPressed(Keycode::A))
@@ -46,6 +48,8 @@ void OrthographicCameraController::OnUpdate()
 
 bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 {
+	HNY_PROFILE_FUNCTION();
+
 	_zoomLevel -= e.GetYOffset();
 	_zoomLevel = std::fmax(_zoomLevel, 0.1f);
 	_camera.SetProjection(-_aspectRatio * _zoomLevel, _aspectRatio * _zoomLevel, -_zoomLevel, _zoomLevel);
@@ -54,6 +58,8 @@ bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 
 bool OrthographicCameraController::OnWindowResize(WindowResizeEvent& e)
 {
+	HNY_PROFILE_FUNCTION();
+
 	_aspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 	_camera.SetProjection(-_aspectRatio * _zoomLevel, _aspectRatio * _zoomLevel, -_zoomLevel, _zoomLevel);
 	return false;

@@ -21,6 +21,8 @@ static Renderer2DStorage* s_Data;
 
 void Renderer2D::Init()
 {
+	HNY_PROFILE_FUNCTION();
+
 	s_Data = new Renderer2DStorage();
 
 	s_Data->QuadVertexArray = VertexArray::Create();
@@ -62,17 +64,21 @@ void Renderer2D::Init()
 
 void Renderer2D::BeginScene(const OrthographicCamera& camera)
 {
+	HNY_PROFILE_FUNCTION();
+
 	s_Data->StandardShader->Bind();
 	s_Data->StandardShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 }
 
 void Renderer2D::EndScene()
 {
-
+	HNY_PROFILE_FUNCTION();
 }
 
 void Renderer2D::Shutdown()
 {
+	HNY_PROFILE_FUNCTION();
+
 	delete s_Data;
 }
 
@@ -83,6 +89,8 @@ void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, cons
 
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 {
+	HNY_PROFILE_FUNCTION();
+
 	s_Data->StandardShader->SetVec4("u_Color", color);
 	s_Data->StandardTexture->Bind();
 
@@ -101,6 +109,8 @@ void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, cons
 
 void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Reference<Texture2D>& texture)
 {
+	HNY_PROFILE_FUNCTION();
+
 	s_Data->StandardShader->SetVec4("u_Color", glm::vec4(1.0f));
 	texture->Bind();
 
