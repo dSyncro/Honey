@@ -45,7 +45,7 @@ namespace Honey {
 
 		void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 
-		static std::string OpenGLShader::ReadFile(const std::string& path);
+		static std::string ReadFile(const std::string& path);
 		static std::unordered_map<GLenum, std::string> Process(const std::string& source);
 	};
 

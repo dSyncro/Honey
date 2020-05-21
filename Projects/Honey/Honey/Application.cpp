@@ -88,9 +88,9 @@ void Application::OnEvent(Event& e)
 
 	HNY_CORE_INFO("{0}", e);
 
-	for (auto it = _layerStack.end(); it != _layerStack.begin(); )
+	for (std::vector<Layer*>::reverse_iterator it = _layerStack.rbegin(); it != _layerStack.rend(); it++)
 	{
-		(*--it)->OnEvent(e);
+		(*it)->OnEvent(e);
 		if (e.HasBeenHandled) break;
 	}
 }

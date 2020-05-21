@@ -13,6 +13,7 @@ namespace Honey {
 
 		static void BeginScene(const OrthographicCamera& camera);
 		static void EndScene();
+		static void Flush();
 
 		static void Shutdown();
 

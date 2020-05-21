@@ -18,7 +18,7 @@ namespace Honey {
 			s_RendererAPI->SetViewport(x, y, width, height);
 		}
 
-		static void DrawIndexed(const Reference<VertexArray>& vertexArray)
+		static void DrawIndexed(const Reference<VertexArray>& vertexArray, uint32_t indexCount = 0)
 		{
 			s_RendererAPI->DrawIndexed(vertexArray);
 		}

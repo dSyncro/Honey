@@ -39,7 +39,7 @@ void Sandbox2D::OnUpdate()
 			Honey::Renderer2D::DrawQuad({ x + 5.0f, y + 5.0f }, { 0.9f, 0.9f }, { x / 3.0f, y / 3.0f, 0.8f, 1.0f });
 
 	Honey::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, _squareColor);
-	Honey::Renderer2D::DrawQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, _texture);
+	//Honey::Renderer2D::DrawQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, _texture);
 
 	Honey::Renderer2D::EndScene();
 }

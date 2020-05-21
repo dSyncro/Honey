@@ -10,8 +10,8 @@ namespace Honey {
 
 		operator float() const { return _time; }
 
-		Timestamp operator +=(float amount) { _time += amount; }
-		Timestamp operator -=(float amount) { _time -= amount; }
+		Timestamp operator +=(float amount) { return _time += amount; }
+		Timestamp operator -=(float amount) { return _time -= amount; }
 
 		float GetSeconds() const { return _time; }
 		float GetMilliseconds() const { return _time * 1000.0f; }
