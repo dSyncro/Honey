@@ -83,3 +83,13 @@ void OpenGLTexture2D::Bind(uint32_t slot) const
 
 	glBindTextureUnit(slot, _rendererID);
 }
+
+bool OpenGLTexture2D::operator ==(const Texture2D& other) const
+{
+	return ((const OpenGLTexture2D&)other)._rendererID == _rendererID;
+}
+
+bool OpenGLTexture2D::operator !=(const Texture2D& other) const
+{
+	return !(*this == other);
+}

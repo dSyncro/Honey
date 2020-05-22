@@ -216,6 +216,12 @@ void OpenGLShader::SetInt(const std::string& name, int value)
 	glUniform1i(id, value);
 }
 
+void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t count)
+{
+	int id = glGetUniformLocation(_rendererID, name.c_str());
+	glUniform1iv(id, count, values);
+}
+
 void OpenGLShader::SetFloat(const std::string& name, float value)
 {
 	int id = glGetUniformLocation(_rendererID, name.c_str());

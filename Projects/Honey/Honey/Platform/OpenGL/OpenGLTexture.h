@@ -21,6 +21,9 @@ namespace Honey {
 
 		virtual void Bind(uint32_t slot = 0) const override;
 
+		virtual bool operator ==(const Texture2D& other) const override;
+		virtual bool operator !=(const Texture2D& other) const override;
+
 	private:
 
 		std::string _path;
