@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "Core/Log.h"
 
-#ifdef HNY_PLATFORM_WINDOWS
+#if defined(HNY_PLATFORM_WINDOWS) || defined(HNY_PLATFORM_LINUX)
 
 extern Honey::Application* Honey::CreateApplication();
 

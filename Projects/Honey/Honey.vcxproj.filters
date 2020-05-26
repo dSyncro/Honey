@@ -4,6 +4,9 @@
     <Filter Include="Honey">
       <UniqueIdentifier>{E8A3540D-54B8-7CBE-1D3A-201E890D79EF}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Honey\Core">
+      <UniqueIdentifier>{407958DB-2C31-9A28-9538-7384810F3519}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Honey\Events">
       <UniqueIdentifier>{CCDA7D18-B83D-0DBD-61C3-45734D05D93F}</UniqueIdentifier>
     </Filter>
@@ -28,9 +31,6 @@
     <Filter Include="Honey\Layers\ImGui">
       <UniqueIdentifier>{119C666A-FD7F-27C0-66E0-211352E31142}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Honey\Logging">
-      <UniqueIdentifier>{7EECDC32-EAAC-5869-B3E7-A1E61F679D45}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Honey\Platform">
       <UniqueIdentifier>{3CC57D4B-2893-7151-1127-E277FD934DB6}</UniqueIdentifier>
     </Filter>
@@ -45,6 +45,9 @@
     </Filter>
     <Filter Include="Honey\Platform\Window">
       <UniqueIdentifier>{A316A8D9-0F83-63D4-D876-FB3144A2853C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Profiling">
+      <UniqueIdentifier>{6102FD59-CD8D-6A1E-D69E-ED1242A9C61E}</UniqueIdentifier>
     </Filter>
     <Filter Include="Honey\Renderer">
       <UniqueIdentifier>{8ECC5A26-7A9A-4E2C-632E-BF524F9B2A91}</UniqueIdentifier>
@@ -114,6 +117,36 @@
     <ClInclude Include="Honey.h" />
     <ClInclude Include="Honey\Application.h">
       <Filter>Honey</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Core.h">
+      <Filter>Honey</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Core\Assertion.h">
+      <Filter>Honey\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Core\Breakpoint.h">
+      <Filter>Honey\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Core\DLLAutomation.h">
+      <Filter>Honey\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Core\FunctionIdentification.h">
+      <Filter>Honey\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Core\Log.h">
+      <Filter>Honey\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Core\MemoryManagement.h">
+      <Filter>Honey\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Core\MemoryTracking.h">
+      <Filter>Honey\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Core\OS.h">
+      <Filter>Honey\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Core\Profiling.h">
+      <Filter>Honey\Core</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Entrypoint.h">
       <Filter>Honey</Filter>
@@ -232,6 +265,15 @@
     <ClInclude Include="Honey\Platform\Window\WindowsInput.h">
       <Filter>Honey\Platform\Window</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Profiling\InstrumentationTimer.h">
+      <Filter>Honey\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Profiling\Instrumentor.h">
+      <Filter>Honey\Profiling</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Profiling\ProfileResult.h">
+      <Filter>Honey\Profiling</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Renderer\Buffers.h">
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
@@ -260,9 +302,6 @@
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Renderer\Renderer.h">
-      <Filter>Honey\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Honey\Renderer\Renderer2D.h">
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Renderer\RendererAPI.h">
@@ -1786,27 +1825,20 @@
     <ClInclude Include="third-party\stb_image\stb_image.h">
       <Filter>third-party\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Core.h">
-      <Filter>Honey</Filter>
+    <ClInclude Include="Honey\Renderer\2D\Renderer2D.h">
+      <Filter>Honey\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Core\Assertion.h" />
-    <ClInclude Include="Honey\Core\Breakpoint.h" />
-    <ClInclude Include="Honey\Core\OS.h" />
-    <ClInclude Include="Honey\Core\DLLAutomation.h" />
-    <ClInclude Include="Honey\Core\MemoryManagement.h" />
-    <ClInclude Include="Honey\Core\Log.h">
-      <Filter>Honey\Logging</Filter>
-    </ClInclude>
-    <ClInclude Include="Honey\Core\Profiling.h" />
-    <ClInclude Include="Honey\Profiling\Instrumentor.h" />
-    <ClInclude Include="Honey\Profiling\InstrumentationTimer.h" />
-    <ClInclude Include="Honey\Profiling\ProfileResult.h" />
-    <ClInclude Include="Honey\Core\MemoryTracking.h" />
-    <ClInclude Include="Honey\Core\FunctionIdentification.h" />
+    <ClInclude Include="Honey\Renderer\2D\Quad.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
       <Filter>Honey</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Core\Log.cpp">
+      <Filter>Honey\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Core\MemoryTracking.cpp">
+      <Filter>Honey\Core</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Layers\ImGui\ImGuiLayer.cpp">
       <Filter>Honey\Layers\ImGui</Filter>
@@ -1871,9 +1903,6 @@
     <ClCompile Include="Honey\Renderer\Renderer.cpp">
       <Filter>Honey\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Renderer\Renderer2D.cpp">
-      <Filter>Honey\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="Honey\Renderer\RendererAPI.cpp">
       <Filter>Honey\Renderer</Filter>
     </ClCompile>
@@ -1901,9 +1930,9 @@
     <ClCompile Include="third-party\stb_image\stb_image.cpp">
       <Filter>third-party\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Core\Log.cpp">
-      <Filter>Honey\Logging</Filter>
+    <ClCompile Include="Honey\Renderer\2D\Renderer2D.cpp">
+      <Filter>Honey\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Core\MemoryTracking.cpp" />
+    <ClCompile Include="Honey\Renderer\2D\Quad.cpp" />
   </ItemGroup>
 </Project>
