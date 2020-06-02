@@ -24,7 +24,7 @@
 
 // Rendering
 #include <Honey/Renderer/Renderer.h>
-#include <Honey/Renderer/Renderer2D.h>
+#include <Honey/Renderer/2D/Renderer2D.h>
 #include <Honey/Renderer/RenderCommand.h>
 #include <Honey/Renderer/Texture.h>
 #include <Honey/Renderer/ShaderLibrary.h>

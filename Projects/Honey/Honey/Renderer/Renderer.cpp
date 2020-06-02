@@ -1,8 +1,7 @@
 #include "Renderer.h"
 
-#include "Renderer2D.h"
-
 #include <Honey/Platform/OpenGL/OpenGLShader.h>
+#include <Honey/Renderer/2D/Renderer2D.h>
 
 using namespace Honey;
 

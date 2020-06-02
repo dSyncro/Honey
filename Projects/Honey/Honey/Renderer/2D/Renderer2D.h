@@ -26,8 +26,8 @@ namespace Honey {
 
 		static void BeginScene(const OrthographicCamera& camera);
 		static void EndScene();
+		static void NewBatch();
 		static void Flush();
-		static void FlushAndReset();
 
 		static void Shutdown();
 
@@ -41,6 +41,10 @@ namespace Honey {
 
 		static void ResetStatistics();
 		static const Statistics& GetStatistics();
+
+	private:
+
+		static void FlushAndReset();
 	};
 
 }

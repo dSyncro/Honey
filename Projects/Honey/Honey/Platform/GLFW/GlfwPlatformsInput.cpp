@@ -1,4 +1,4 @@
-#include "WindowsInput.h"
+#include "GlfwPlatformsInput.h"
 
 #include <Honey/Application.h>
 
@@ -6,23 +6,23 @@
 
 using namespace Honey;
 
-Unique<Input> Input::s_Instance = CreateUnique<WindowsInput>();
+Unique<Input> Input::s_Instance = CreateUnique<GlfwPlatformsInput>();
 
-bool WindowsInput::IsKeyPressedImpl(Keycode keycode)
+bool GlfwPlatformsInput::IsKeyPressedImpl(Keycode keycode)
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	int state = glfwGetKey(window, (int)keycode);
 	return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
-bool WindowsInput::IsMouseButtonPressedImpl(MouseButton button)
+bool GlfwPlatformsInput::IsMouseButtonPressedImpl(MouseButton button)
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	int state = glfwGetMouseButton(window, (int)button);
 	return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
-float WindowsInput::GetMouseXImpl()
+float GlfwPlatformsInput::GetMouseXImpl()
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	double xPos, yPos;
@@ -30,7 +30,7 @@ float WindowsInput::GetMouseXImpl()
 	return (float)xPos;
 }
 
-float WindowsInput::GetMouseYImpl()
+float GlfwPlatformsInput::GetMouseYImpl()
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	double xPos, yPos;

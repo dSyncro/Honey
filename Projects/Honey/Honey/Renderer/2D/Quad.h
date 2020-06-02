@@ -28,6 +28,14 @@ namespace Honey {
 		Quad(const Vertex& first, const Vertex& second, const Vertex& third, const Vertex& forth);
 
 		static constexpr uint32_t VertexCount = 4;
+
+		static constexpr glm::vec4 VertexPositions[VertexCount] = {
+			{ -0.5f, -0.5f, 0.0f, 1.0f },
+			{  0.5f, -0.5f, 0.0f, 1.0f },
+			{  0.5f,  0.5f, 0.0f, 1.0f },
+			{ -0.5f,  0.5f, 0.0f, 1.0f }
+		};
+
 		static constexpr glm::vec2 TextureCoords[VertexCount] = {
 			{ 0.0f, 0.0f }, { 1.0f, 0.0f },
 			{ 1.0f, 1.0f }, { 0.0f, 1.0f }

@@ -27,13 +27,6 @@ struct Renderer2DData {
 	Quad* QuadBufferBase = nullptr;
 	Quad* QuadBufferPtr = nullptr;
 
-	glm::vec4 QuadVertexPositions[4] = {
-		{ -0.5f, -0.5f, 0.0f, 1.0f },
-		{  0.5f, -0.5f, 0.0f, 1.0f },
-		{  0.5f,  0.5f, 0.0f, 1.0f },
-		{ -0.5f,  0.5f, 0.0f, 1.0f }
-	};
-
 	std::array<Reference<Texture2D>, MaxTextureSlots> TextureSlots;
 	uint32_t TextureSlotIndex = 1; // White Texture = 0
 
@@ -96,8 +89,7 @@ void Renderer2D::Init()
 	s_Data.StandardTexture->SetData(&whiteData, sizeof(uint32_t));
 
 	int samplers[s_Data.MaxTextureSlots];
-	for (int i = 0; i < s_Data.MaxTextureSlots; i++)
-		samplers[i] = i;
+	for (int i = 0; i < s_Data.MaxTextureSlots; i++) samplers[i] = i;
 
 	// Setup Shader
 	s_Data.StandardShader = Shader::CreateFromFile("assets/shaders/standard2D.glsl");
@@ -115,10 +107,7 @@ void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	s_Data.StandardShader->Bind();
 	s_Data.StandardShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 
-	s_Data.QuadIndexCount = 0;
-	s_Data.QuadBufferPtr = s_Data.QuadBufferBase;
-
-	s_Data.TextureSlotIndex = 1;
+	NewBatch();
 }
 
 void Renderer2D::EndScene()
@@ -129,6 +118,14 @@ void Renderer2D::EndScene()
 	s_Data.QuadVertexBuffer->SetData(s_Data.QuadBufferBase, dataSize);
 
 	Flush();
+}
+
+void Renderer2D::NewBatch()
+{
+	s_Data.QuadIndexCount = 0;
+	s_Data.QuadBufferPtr = s_Data.QuadBufferBase;
+
+	s_Data.TextureSlotIndex = 1;
 }
 
 void Renderer2D::Flush()
@@ -146,11 +143,7 @@ void Renderer2D::Flush()
 void Renderer2D::FlushAndReset()
 {
 	EndScene();
-
-	s_Data.QuadIndexCount = 0;
-	s_Data.QuadBufferPtr = s_Data.QuadBufferBase;
-
-	s_Data.TextureSlotIndex = 1;
+	NewBatch();
 }
 
 void Renderer2D::Shutdown()
@@ -176,10 +169,9 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, cons
 	for (uint32_t i = 0; i < Quad::VertexCount; i++)
 	{
 		Quad::Vertex& vertex = s_Data.QuadBufferPtr->Vertices[i];
-		vertex.Set(transform * s_Data.QuadVertexPositions[i], color, Quad::TextureCoords[i], 0);
+		vertex.Set(transform * Quad::VertexPositions[i], color, Quad::TextureCoords[i], 0);
 	}
 	s_Data.QuadBufferPtr++;
-
 	s_Data.QuadIndexCount += 6;
 
 	s_Data.Stats.QuadCount++;
@@ -199,7 +191,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, cons
 	if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices) FlushAndReset();
 
 	uint32_t slot = 0;
-	for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
+	for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++)
 	{
 		if (*texture.get() != *s_Data.TextureSlots[i].get()) continue;
 
@@ -220,7 +212,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, cons
 	for (uint32_t i = 0; i < Quad::VertexCount; i++)
 	{
 		Quad::Vertex& vertex = s_Data.QuadBufferPtr->Vertices[i];
-		vertex.Set(transform * s_Data.QuadVertexPositions[i], white, Quad::TextureCoords[i], (float)slot);
+		vertex.Set(transform * Quad::VertexPositions[i], white, Quad::TextureCoords[i], slot);
 	}
 	s_Data.QuadBufferPtr++;
 
@@ -264,7 +256,7 @@ void Renderer2D::DrawRotatedQuad(const glm::vec3& position, float rotation, cons
 	for (uint32_t i = 0; i < Quad::VertexCount; i++)
 	{
 		Quad::Vertex& vertex = s_Data.QuadBufferPtr->Vertices[i];
-		vertex.Set(transform * s_Data.QuadVertexPositions[i], white, Quad::TextureCoords[i], (float)slot);
+		vertex.Set(transform * Quad::VertexPositions[i], white, Quad::TextureCoords[i], (float)slot);
 	}
 	s_Data.QuadBufferPtr++;
 

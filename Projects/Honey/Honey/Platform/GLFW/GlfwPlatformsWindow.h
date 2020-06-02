@@ -10,12 +10,12 @@ namespace Honey {
 
 	extern std::size_t s_GLFWWindowCount;
 
-	class WinWindow : public Window {
+	class GlfwPlatformsWindow : public Window {
 
 	public:
 
-		WinWindow(const WindowProperties& properties);
-		virtual ~WinWindow();
+		GlfwPlatformsWindow(const WindowProperties& properties);
+		virtual ~GlfwPlatformsWindow();
 
 		virtual void OnUpdate() override;
 

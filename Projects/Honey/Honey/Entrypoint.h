@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "Core/Log.h"
 
-#if defined(HNY_PLATFORM_WINDOWS) || defined(HNY_PLATFORM_LINUX)
+#if defined(HNY_PLATFORM_GLFW)
 
 extern Honey::Application* Honey::CreateApplication();
 
@@ -24,4 +24,6 @@ int main(int argc, char** argv)
 	HNY_PROFILE_END_SESSION();
 }
 
+#else
+#	error "Unknown platform!"
 #endif

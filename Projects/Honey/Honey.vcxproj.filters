@@ -259,12 +259,6 @@
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>Honey\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Platform\Window\WinWindow.h">
-      <Filter>Honey\Platform\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Honey\Platform\Window\WindowsInput.h">
-      <Filter>Honey\Platform\Window</Filter>
-    </ClInclude>
     <ClInclude Include="Honey\Profiling\InstrumentationTimer.h">
       <Filter>Honey\Profiling</Filter>
     </ClInclude>
@@ -1829,6 +1823,12 @@
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Renderer\2D\Quad.h" />
+    <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsInput.h">
+      <Filter>Honey\Platform\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h">
+      <Filter>Honey\Platform\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1875,12 +1875,6 @@
     </ClCompile>
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>Honey\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="Honey\Platform\Window\WinWindow.cpp">
-      <Filter>Honey\Platform\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="Honey\Platform\Window\WindowsInput.cpp">
-      <Filter>Honey\Platform\Window</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Renderer\Buffers\IndexBuffer.cpp">
       <Filter>Honey\Renderer\Buffers</Filter>
@@ -1934,5 +1928,11 @@
       <Filter>Honey\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Renderer\2D\Quad.cpp" />
+    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsInput.cpp">
+      <Filter>Honey\Platform\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsWindow.cpp">
+      <Filter>Honey\Platform\Window</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

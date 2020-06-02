@@ -26,7 +26,11 @@
 #	error "Android is not supported!"
 #elif defined(__linux__)
 #	define HNY_PLATFORM_LINUX
-#	error "Linux is not supported!"
+//#	error "Linux is not supported!"
 #else
 #	error "Unknown platform!"
+#endif
+
+#if defined(HNY_PLATFORM_WINDOWS) || defined(HNY_PLATFORM_LINUX)
+#	define HNY_PLATFORM_GLFW
 #endif

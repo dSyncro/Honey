@@ -1,4 +1,4 @@
-#include "WinWindow.h"
+#include "GlfwPlatformsWindow.h"
 
 #include <Honey/Events/KeyEvents.h>
 #include <Honey/Events/MouseEvents.h>
@@ -16,21 +16,21 @@ static void GLFWErrorCallback(int error, const char* description)
 	HNY_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 }
 
-WinWindow::WinWindow(const WindowProperties& properties)
+GlfwPlatformsWindow::GlfwPlatformsWindow(const WindowProperties& properties)
 {
 	HNY_PROFILE_FUNCTION();
 
 	Init(properties);
 }
 
-WinWindow::~WinWindow()
+GlfwPlatformsWindow::~GlfwPlatformsWindow()
 {
 	HNY_PROFILE_FUNCTION();
 
 	Shutdown();
 }
 
-void WinWindow::Init(const WindowProperties& properties)
+void GlfwPlatformsWindow::Init(const WindowProperties& properties)
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -63,16 +63,16 @@ void WinWindow::Init(const WindowProperties& properties)
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 #endif
 
-	glfwSetWindowSizeCallback(_window, &WinWindow::WindowResizeCallback);
-	glfwSetWindowCloseCallback(_window, &WinWindow::WindowCloseCallback);
-	glfwSetKeyCallback(_window, &WinWindow::WindowKeyCallback);
-	glfwSetCharCallback(_window, &WinWindow::WindowCharCallback);
-	glfwSetMouseButtonCallback(_window, &WinWindow::WindowMouseCallback);
-	glfwSetScrollCallback(_window, &WinWindow::WindowScrollCallback);
-	glfwSetCursorPosCallback(_window, &WinWindow::WindowCursorPositionCallback);
+	glfwSetWindowSizeCallback  (_window, &GlfwPlatformsWindow::WindowResizeCallback        );
+	glfwSetWindowCloseCallback (_window, &GlfwPlatformsWindow::WindowCloseCallback         );
+	glfwSetKeyCallback         (_window, &GlfwPlatformsWindow::WindowKeyCallback           );
+	glfwSetCharCallback        (_window, &GlfwPlatformsWindow::WindowCharCallback          );
+	glfwSetMouseButtonCallback (_window, &GlfwPlatformsWindow::WindowMouseCallback         );
+	glfwSetScrollCallback      (_window, &GlfwPlatformsWindow::WindowScrollCallback        );
+	glfwSetCursorPosCallback   (_window, &GlfwPlatformsWindow::WindowCursorPositionCallback);
 }
 
-void WinWindow::Shutdown()
+void GlfwPlatformsWindow::Shutdown()
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -80,7 +80,7 @@ void WinWindow::Shutdown()
 	if (!s_GLFWWindowCount) glfwTerminate();
 }
 
-void WinWindow::OnUpdate()
+void GlfwPlatformsWindow::OnUpdate()
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -94,7 +94,7 @@ void WinWindow::OnUpdate()
 	EngineTime::SetTime(time);
 }
 
-void WinWindow::SetVSync(bool enabled)
+void GlfwPlatformsWindow::SetVSync(bool enabled)
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -102,9 +102,9 @@ void WinWindow::SetVSync(bool enabled)
 	_data.VSync = enabled;
 }
 
-bool WinWindow::IsVSyncEnabled() const { return _data.VSync; }
+bool GlfwPlatformsWindow::IsVSyncEnabled() const { return _data.VSync; }
 
-void WinWindow::WindowResizeCallback(GLFWwindow* window, int width, int height)
+void GlfwPlatformsWindow::WindowResizeCallback(GLFWwindow* window, int width, int height)
 {
 	WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 	data.Width = width;
@@ -114,14 +114,14 @@ void WinWindow::WindowResizeCallback(GLFWwindow* window, int width, int height)
 	data.Callback(e);
 }
 
-void WinWindow::WindowCloseCallback(GLFWwindow* window)
+void GlfwPlatformsWindow::WindowCloseCallback(GLFWwindow* window)
 {
 	WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 	WindowCloseEvent e = WindowCloseEvent();
 	data.Callback(e);
 }
 
-void WinWindow::WindowKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void GlfwPlatformsWindow::WindowKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -150,14 +150,14 @@ void WinWindow::WindowKeyCallback(GLFWwindow* window, int key, int scancode, int
 	}
 }
 
-void WinWindow::WindowCharCallback(GLFWwindow* window, unsigned int keycode)
+void GlfwPlatformsWindow::WindowCharCallback(GLFWwindow* window, unsigned int keycode)
 {
 	WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 	KeyTypedEvent e((Keycode)keycode);
 	data.Callback(e);
 }
 
-void WinWindow::WindowMouseCallback(GLFWwindow* window, int button, int action, int mods)
+void GlfwPlatformsWindow::WindowMouseCallback(GLFWwindow* window, int button, int action, int mods)
 {
 	WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -179,14 +179,14 @@ void WinWindow::WindowMouseCallback(GLFWwindow* window, int button, int action, 
 	}
 }
 
-void WinWindow::WindowScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
+void GlfwPlatformsWindow::WindowScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 {
 	WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 	MouseScrolledEvent e((float)xOffset, (float)yOffset);
 	data.Callback(e);
 }
 
-void WinWindow::WindowCursorPositionCallback(GLFWwindow* window, double xOffset, double yOffset)
+void GlfwPlatformsWindow::WindowCursorPositionCallback(GLFWwindow* window, double xOffset, double yOffset)
 {
 	WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 	MouseMovedEvent e((float)xOffset, (float)yOffset);

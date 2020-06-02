@@ -4,7 +4,7 @@
 
 namespace Honey{
 
-	class WindowsInput final : public Input {
+	class GlfwPlatformsInput final : public Input {
 
 	protected:
 
