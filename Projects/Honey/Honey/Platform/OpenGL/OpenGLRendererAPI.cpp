@@ -1,6 +1,8 @@
 #include "OpenGLRendererAPI.h"
 
+extern "C" {
 #include <glad/glad.h>
+}
 
 using namespace Honey;
 

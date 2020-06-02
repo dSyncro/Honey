@@ -3,7 +3,10 @@
 #include <fstream>
 #include <vector>
 
+extern "C" {
 #include <glad/glad.h>
+}
+
 #include <glm/gtc/type_ptr.hpp>
 
 using namespace Honey;

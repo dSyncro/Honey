@@ -2,7 +2,9 @@
 
 #include <Honey/Renderer/Texture.h>
 
+extern "C" {
 #include <glad/glad.h>
+}
 
 namespace Honey {
 

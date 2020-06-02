@@ -10,8 +10,9 @@
 #include <Honey/Platform/ImGui/ImGuiGlfwImplementation.h>
 #include <Honey/Platform/ImGui/ImGuiOpenGLRender.h>
 
-#include <glad/glad.h>
+extern "C" {
 #include <GLFW/glfw3.h>
+}
 
 using namespace Honey;
 

@@ -1,6 +1,8 @@
 #pragma once
 
+extern "C" {
 #include <glfw/glfw3.h>
+}
 
 #include <Honey/Renderer/GraphicsContext.h>
 #include <Honey/Window/Window.h>

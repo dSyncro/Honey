@@ -2,7 +2,9 @@
 
 #include <Honey/Application.h>
 
+extern "C"{
 #include <GLFW/glfw3.h>
+}
 
 using namespace Honey;
 

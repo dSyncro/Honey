@@ -2,7 +2,9 @@
 
 #include <Honey/Core/Log.h>
 
+extern "C" {
 #include <glad/glad.h>
+}
 
 using namespace Honey;
 

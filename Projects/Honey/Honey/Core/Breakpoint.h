@@ -14,5 +14,5 @@
 #	endif
 #	define HNY_ENABLE_ASSERTS
 #else
-#	define HNY_DEBUGBRAK()
+#	define HNY_DEBUGBREAK()
 #endif

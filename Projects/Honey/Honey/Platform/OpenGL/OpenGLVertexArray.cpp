@@ -2,7 +2,9 @@
 
 using namespace Honey;
 
+extern "C" {
 #include <glad/glad.h>
+}
 
 static GLenum ShaderToOpenGLDataType(ShaderDataType type)
 {
