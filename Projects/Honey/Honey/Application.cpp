@@ -19,7 +19,6 @@ Application::Application()
 
 	_window = Window::Create();
 	_window->SetEventCallback(HNY_BIND_EVENT_CALLBACK(Application::OnEvent));
-	_window->SetVSync(false);
 
 	Renderer::Init();
 
@@ -43,8 +42,6 @@ void Application::Run()
 	{
 		HNY_PROFILE_SCOPE("Run Loop");
 
-		_window->OnUpdate();
-
 		if (!_isMinimized)
 		{
 			HNY_PROFILE_SCOPE("Layer OnUpdate");
@@ -59,6 +56,8 @@ void Application::Run()
 				layer->OnImGuiRender();
 		}
 		_imGuiLayer->End();
+
+		_window->OnUpdate();
 	}
 }
 

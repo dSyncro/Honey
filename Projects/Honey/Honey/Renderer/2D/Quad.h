@@ -14,12 +14,14 @@ namespace Honey {
 			glm::vec4 Color;
 			glm::vec2 TexCoord;
 			float TextureIndex;
+			float TilingFactor;
 
 			void Set(
 				const glm::vec3& position = glm::vec3(0.0f), 
 				const glm::vec4& color = glm::vec4(1.0f), 
 				const glm::vec2& texCoord = glm::vec2(0.0f), 
-				float textureIndex = 0.0f
+				float textureIndex = 0.0f,
+				float tilingFactor = 1.0f
 			);
 
 		};

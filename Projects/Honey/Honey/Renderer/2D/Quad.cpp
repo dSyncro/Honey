@@ -4,12 +4,13 @@
 
 using namespace Honey;
 
-void Quad::Vertex::Set(const glm::vec3& position, const glm::vec4& color, const glm::vec2& texCoord, float textureIndex)
+void Quad::Vertex::Set(const glm::vec3& position, const glm::vec4& color, const glm::vec2& texCoord, float textureIndex, float tilingFactor)
 {
 	Position = position;
 	Color = color;
 	TexCoord = texCoord;
 	TextureIndex = textureIndex;
+	TilingFactor = tilingFactor;
 }
 
 Quad::Quad(const Vertex& first, const Vertex& second, const Vertex& third, const Vertex& forth)

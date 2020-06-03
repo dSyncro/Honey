@@ -9,7 +9,7 @@
 
 using namespace Honey;
 
-std::size_t Honey::s_GLFWWindowCount = 0;
+static uint8_t s_GLFWWindowCount = 0;
 
 static void GLFWErrorCallback(int error, const char* description)
 {
@@ -49,6 +49,11 @@ void GlfwPlatformsWindow::Init(const WindowProperties& properties)
 		glfwSetErrorCallback(GLFWErrorCallback);
 	}
 
+#if defined(HNY_DEBUG)
+	if (Renderer::GetAPI() == RendererAPI::API::OpenGL)
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+#endif
+
 	_window = glfwCreateWindow((int)_data.Width, (int)_data.Height, _data.Title.c_str(), nullptr, nullptr);
 	s_GLFWWindowCount++;
 
@@ -57,11 +62,6 @@ void GlfwPlatformsWindow::Init(const WindowProperties& properties)
 	_context->Init();
 
 	glfwSetWindowUserPointer(_window, &_data);
-
-#if defined(HNY_DEBUG)
-	if (Renderer::GetAPI() == RendererAPI::API::OpenGL)
-		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
-#endif
 
 	glfwSetWindowSizeCallback  (_window, &GlfwPlatformsWindow::WindowResizeCallback        );
 	glfwSetWindowCloseCallback (_window, &GlfwPlatformsWindow::WindowCloseCallback         );
@@ -77,6 +77,7 @@ void GlfwPlatformsWindow::Shutdown()
 	HNY_PROFILE_FUNCTION();
 
 	glfwDestroyWindow(_window);
+	s_GLFWWindowCount--;
 	if (!s_GLFWWindowCount) glfwTerminate();
 }
 

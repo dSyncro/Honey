@@ -15,7 +15,7 @@ OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
 	glCreateTextures(GL_TEXTURE_2D, 1, &_rendererID);
 	glTextureStorage2D(_rendererID, 1, _internalFormat, _width, _height);
 
-	glTextureParameteri(_rendererID, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTextureParameteri(_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTextureParameteri(_rendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -34,23 +34,27 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : _path(path)
 	_width = width;
 	_height = height;
 
+	GLenum internalFormat = 0, dataFormat = 0;
 	if (channels == 4)
 	{
-		_internalFormat = GL_RGBA8;
-		_dataFormat = GL_RGBA;
+		internalFormat = GL_RGBA8;
+		dataFormat = GL_RGBA;
 	}
 	else if (channels == 3)
 	{
-		_internalFormat = GL_RGB8;
-		_dataFormat = GL_RGB;
+		internalFormat = GL_RGB8;
+		dataFormat = GL_RGB;
 	}
+
+	_internalFormat = internalFormat;
+	_dataFormat = dataFormat;
 
 	HNY_CORE_ASSERT(_internalFormat & _dataFormat, "Format not supported!");
 
 	glCreateTextures(GL_TEXTURE_2D, 1, &_rendererID);
 	glTextureStorage2D(_rendererID, 1, _internalFormat, _width, _height);
 
-	glTextureParameteri(_rendererID, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTextureParameteri(_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTextureParameteri(_rendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);

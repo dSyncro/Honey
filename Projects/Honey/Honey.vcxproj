@@ -196,6 +196,7 @@
     <ClInclude Include="Honey\Profiling\Instrumentor.h" />
     <ClInclude Include="Honey\Profiling\ProfileResult.h" />
     <ClInclude Include="Honey\Renderer\2D\Quad.h" />
+    <ClInclude Include="Honey\Renderer\2D\Renderer2D.h" />
     <ClInclude Include="Honey\Renderer\Buffers.h" />
     <ClInclude Include="Honey\Renderer\Buffers\BufferElement.h" />
     <ClInclude Include="Honey\Renderer\Buffers\BufferLayout.h" />
@@ -206,7 +207,6 @@
     <ClInclude Include="Honey\Renderer\GraphicsContext.h" />
     <ClInclude Include="Honey\Renderer\RenderCommand.h" />
     <ClInclude Include="Honey\Renderer\Renderer.h" />
-    <ClInclude Include="Honey\Renderer\2D\Renderer2D.h" />
     <ClInclude Include="Honey\Renderer\RendererAPI.h" />
     <ClInclude Include="Honey\Renderer\Shader.h" />
     <ClInclude Include="Honey\Renderer\ShaderDataType.h" />
@@ -734,6 +734,7 @@
     <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsWindow.cpp" />
     <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsInput.cpp" />
     <ClCompile Include="Honey\Renderer\2D\Quad.cpp" />
+    <ClCompile Include="Honey\Renderer\2D\Renderer2D.cpp" />
     <ClCompile Include="Honey\Renderer\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Honey\Renderer\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Honey\Renderer\Camera\OrthographicCamera.cpp" />
@@ -741,7 +742,6 @@
     <ClCompile Include="Honey\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="Honey\Renderer\RenderCommand.cpp" />
     <ClCompile Include="Honey\Renderer\Renderer.cpp" />
-    <ClCompile Include="Honey\Renderer\2D\Renderer2D.cpp" />
     <ClCompile Include="Honey\Renderer\RendererAPI.cpp" />
     <ClCompile Include="Honey\Renderer\Shader.cpp" />
     <ClCompile Include="Honey\Renderer\ShaderLibrary.cpp" />

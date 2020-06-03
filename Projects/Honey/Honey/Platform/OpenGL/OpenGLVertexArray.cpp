@@ -36,14 +36,14 @@ OpenGLVertexArray::OpenGLVertexArray()
 {
 	HNY_PROFILE_FUNCTION();
 
-	glGenBuffers(1, &_rendererID);
+	glGenVertexArrays(1, &_rendererID);
 }
 
 OpenGLVertexArray::~OpenGLVertexArray()
 {
 	HNY_PROFILE_FUNCTION();
 
-	glDeleteBuffers(1, &_rendererID);
+	glDeleteVertexArrays(1, &_rendererID);
 }
 
 void OpenGLVertexArray::Bind() const

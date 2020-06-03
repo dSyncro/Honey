@@ -51,6 +51,7 @@ void Renderer2D::Init()
 		{ ShaderDataType::Float4, "a_Color" },
 		{ ShaderDataType::Float2, "a_TexCoord" },
 		{ ShaderDataType::Float, "a_TexIndex" },
+		{ ShaderDataType::Float, "a_TilingFactor" },
 	};
 	s_Data.QuadVertexBuffer->SetLayout(layout);
 

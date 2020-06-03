@@ -10,8 +10,6 @@ extern "C" {
 
 namespace Honey {
 
-	extern std::size_t s_GLFWWindowCount;
-
 	class GlfwPlatformsWindow : public Window {
 
 	public:

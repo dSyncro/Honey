@@ -1819,9 +1819,6 @@
     <ClInclude Include="third-party\stb_image\stb_image.h">
       <Filter>third-party\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Renderer\2D\Renderer2D.h">
-      <Filter>Honey\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Honey\Renderer\2D\Quad.h" />
     <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsInput.h">
       <Filter>Honey\Platform\Window</Filter>
@@ -1829,6 +1826,7 @@
     <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h">
       <Filter>Honey\Platform\Window</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Renderer\2D\Renderer2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1924,9 +1922,6 @@
     <ClCompile Include="third-party\stb_image\stb_image.cpp">
       <Filter>third-party\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Renderer\2D\Renderer2D.cpp">
-      <Filter>Honey\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="Honey\Renderer\2D\Quad.cpp" />
     <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsInput.cpp">
       <Filter>Honey\Platform\Window</Filter>
@@ -1934,5 +1929,6 @@
     <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsWindow.cpp">
       <Filter>Honey\Platform\Window</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Renderer\2D\Renderer2D.cpp" />
   </ItemGroup>
 </Project>

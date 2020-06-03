@@ -17,10 +17,10 @@ void OpenGLMessageCallback(
 {
 	switch (severity)
 	{
-		case GL_DEBUG_SEVERITY_HIGH:         HNY_CORE_CRITICAL(message); return;
-		case GL_DEBUG_SEVERITY_MEDIUM:       HNY_CORE_ERROR(message); return;
-		case GL_DEBUG_SEVERITY_LOW:          HNY_CORE_WARN(message); return;
-		case GL_DEBUG_SEVERITY_NOTIFICATION: HNY_CORE_TRACE(message); return;
+		case GL_DEBUG_SEVERITY_HIGH:         HNY_CORE_CRITICAL (message); return;
+		case GL_DEBUG_SEVERITY_MEDIUM:       HNY_CORE_ERROR    (message); return;
+		case GL_DEBUG_SEVERITY_LOW:          HNY_CORE_WARN     (message); return;
+		case GL_DEBUG_SEVERITY_NOTIFICATION: HNY_CORE_TRACE    (message); return;
 	}
 
 	HNY_CORE_ASSERT(false, "Unknown severity level!");
