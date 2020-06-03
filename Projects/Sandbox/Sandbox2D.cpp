@@ -28,7 +28,7 @@ void Sandbox2D::OnUpdate()
 
 	_cameraController.OnUpdate();
 
-	//Honey::Renderer2D::ResetStatistics();
+	Honey::Renderer2D::ResetStatistics();
 	Honey::RenderCommand::SetClearColor({ .1f, .1f, .1f, 1 });
 	Honey::RenderCommand::Clear();
 
@@ -55,11 +55,11 @@ void Sandbox2D::OnImGuiRender()
 	HNY_PROFILE_FUNCTION();
 	ImGui::Begin("Settings");
 	ImGui::Text("Renderer2D Stats");
-	//const Honey::Renderer2D::Statistics& stats = Honey::Renderer2D::GetStatistics();
-	//ImGui::Text("Draw Calls: %d", stats.DrawCalls);
-	//ImGui::Text("Quad Count: %d", stats.QuadCount);
-	//ImGui::Text("Vertex Count: %d", stats.GetVertexCount());
-	//ImGui::Text("Index Count: %d", stats.GetIndexCount());
+	const Honey::Renderer2D::Statistics& stats = Honey::Renderer2D::GetStatistics();
+	ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+	ImGui::Text("Quad Count: %d", stats.QuadCount);
+	ImGui::Text("Vertex Count: %d", stats.GetVertexCount());
+	ImGui::Text("Index Count: %d", stats.GetIndexCount());
 	ImGui::ColorEdit4("Square Color", glm::value_ptr(_squareColor));
 	ImGui::End();
 }
