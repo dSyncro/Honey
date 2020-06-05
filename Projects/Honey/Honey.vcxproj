@@ -180,6 +180,12 @@
     <ClInclude Include="Honey\Layers\ImGui\ImGuiLayer.h" />
     <ClInclude Include="Honey\Layers\Layer.h" />
     <ClInclude Include="Honey\Layers\LayerStack.h" />
+    <ClInclude Include="Honey\Math\Math.h" />
+    <ClInclude Include="Honey\Math\MathFunctions.h" />
+    <ClInclude Include="Honey\Math\Random.h" />
+    <ClInclude Include="Honey\Math\Vector\IVector.h" />
+    <ClInclude Include="Honey\Math\Vector\Vector2.h" />
+    <ClInclude Include="Honey\Math\Vector\Vector3.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiOpenGLRender.h" />
     <ClInclude Include="Honey\Platform\OpenGL\Buffers.h" />
@@ -722,6 +728,9 @@
     <ClCompile Include="Honey\Layers\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="Honey\Layers\Layer.cpp" />
     <ClCompile Include="Honey\Layers\LayerStack.cpp" />
+    <ClCompile Include="Honey\Math\Random.cpp" />
+    <ClCompile Include="Honey\Math\Vector\Vector2.cpp" />
+    <ClCompile Include="Honey\Math\Vector\Vector3.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp" />

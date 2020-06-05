@@ -61,6 +61,11 @@ void Application::Run()
 	}
 }
 
+void Application::Close()
+{
+	_isRunning = false;
+}
+
 void Application::PushLayer(Layer* layer)
 {
 	HNY_PROFILE_FUNCTION();

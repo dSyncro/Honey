@@ -1827,6 +1827,12 @@
       <Filter>Honey\Platform\Window</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Renderer\2D\Renderer2D.h" />
+    <ClInclude Include="Honey\Math\Math.h" />
+    <ClInclude Include="Honey\Math\MathFunctions.h" />
+    <ClInclude Include="Honey\Math\Random.h" />
+    <ClInclude Include="Honey\Math\Vector\Vector2.h" />
+    <ClInclude Include="Honey\Math\Vector\IVector.h" />
+    <ClInclude Include="Honey\Math\Vector\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1930,5 +1936,8 @@
       <Filter>Honey\Platform\Window</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Renderer\2D\Renderer2D.cpp" />
+    <ClCompile Include="Honey\Math\Random.cpp" />
+    <ClCompile Include="Honey\Math\Vector\Vector2.cpp" />
+    <ClCompile Include="Honey\Math\Vector\Vector3.cpp" />
   </ItemGroup>
 </Project>
