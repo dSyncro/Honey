@@ -12,7 +12,7 @@ bool Random::Bool()
 	return dist(mt);
 }
 
-double Random::Double(double min, float max)
+double Random::Double(double min, double max)
 {
 	HNY_CORE_ASSERT(min < max, "min is > max");
 	std::uniform_real_distribution<double> dist = std::uniform_real_distribution<double>(min, max);

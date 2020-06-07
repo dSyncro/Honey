@@ -1831,7 +1831,6 @@
     <ClInclude Include="Honey\Math\MathFunctions.h" />
     <ClInclude Include="Honey\Math\Random.h" />
     <ClInclude Include="Honey\Math\Vector\Vector2.h" />
-    <ClInclude Include="Honey\Math\Vector\IVector.h" />
     <ClInclude Include="Honey\Math\Vector\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
