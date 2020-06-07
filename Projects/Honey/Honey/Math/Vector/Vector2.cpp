@@ -1,10 +1,14 @@
 #include "Vector2.h"
 
+#include <Honey/Math/MathFunctions.h>
+
 #include "Vector3.h"
+#include "Vector4.h"
 
 using namespace Honey::Math;
 
 Vector2::Vector2(const Vector3& vector) : X(vector.X), Y(vector.Y) {}
+Vector2::Vector2(const Vector4& vector) : X(vector.X), Y(vector.Y) {}
 
 const Vector2 Vector2::Left  = Vector2(-1.0f,  0.0f);
 const Vector2 Vector2::Right = Vector2( 1.0f,  0.0f);
@@ -18,6 +22,7 @@ const Vector2 Vector2::Infinity         = Vector2(Mathf::Infinity);
 const Vector2 Vector2::NegativeInfinity = Vector2(Mathf::NegativeInfinity);
 
 Vector2::operator Vector3() const { return Vector3(*this); }
+Vector2::operator Vector4() const { return Vector4(*this); }
 
 void Vector2::Normalize()
 {

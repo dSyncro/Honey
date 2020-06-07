@@ -20,6 +20,7 @@ namespace Honey::Math {
 		Vector2(float value = 0.0f) : X(value), Y(value) {}
 		Vector2(float x, float y) : X(x), Y(y) {}
 		Vector2(const Vector3& vector);
+		Vector2(const Vector4& vector);
 
 		static const Vector2 Left; // Vector2(-1.0f, 0.0f)
 		static const Vector2 Right; // Vector2(1.0f, 0.0f)
@@ -33,7 +34,8 @@ namespace Honey::Math {
 		static const Vector2 NegativeInfinity; // Vector2(-Infinity, -Infinity)
 
 		operator glm::vec2() const { return glm::vec2(X, Y); }
-		operator Vector3() const;
+		explicit operator Vector3() const;
+		explicit operator Vector4() const;
 
 		// Methods
 		void Normalize();

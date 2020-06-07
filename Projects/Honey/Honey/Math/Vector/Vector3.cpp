@@ -3,10 +3,12 @@
 #include <Honey/Math/MathFunctions.h>
 
 #include "Vector2.h"
+#include "Vector4.h"
 
 using namespace Honey::Math;
 
 Vector3::Vector3(const Vector2& vector) : X(vector.X), Y(vector.Y), Z(0.0f) {}
+Vector3::Vector3(const Vector4& vector) : X(vector.X), Y(vector.Y), Z(vector.Z) {}
 
 const Vector3 Vector3::Left    = Vector3(-1.0f,  0.0f,  0.0f);
 const Vector3 Vector3::Right   = Vector3( 1.0f,  0.0f,  0.0f);
@@ -22,6 +24,7 @@ const Vector3 Vector3::Infinity          = Vector3(Mathf::Infinity);
 const Vector3 Vector3::NegativeInfinity  = Vector3(Mathf::NegativeInfinity);
 
 Vector3::operator Vector2() const { return Vector2(*this); }
+Vector3::operator Vector4() const { return Vector4(*this); }
 
 void Vector3::Normalize()
 {

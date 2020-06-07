@@ -5,6 +5,7 @@
 namespace Honey::Math {
 
 	struct Vector2;
+	struct Vector4;
 
 	struct Vector3 {
 
@@ -18,6 +19,7 @@ namespace Honey::Math {
 		Vector3(float value = 0.0f) : X(value), Y(value), Z(value) {}
 		Vector3(float x, float y, float z) : X(x), Y(y), Z(z) {}
 		Vector3(const Vector2& vector);
+		Vector3(const Vector4& vector);
 
 		// Shorthands
 		static const Vector3 Left;
@@ -35,7 +37,8 @@ namespace Honey::Math {
 
 		// Conversion operators
 		operator glm::vec3() const { return glm::vec3(X, Y, Z); }
-		operator Vector2() const;
+		explicit operator Vector2() const;
+		explicit operator Vector4() const;
 
 		// Methods
 		void Normalize();
