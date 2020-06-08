@@ -122,11 +122,7 @@ Vector4 Vector4::Project(const Vector4& vector, const Vector4& normal)
 
 Vector4 Vector4::Lerp(const Vector4& a, const Vector4& b, float t)
 {
-	return Vector4(
-		a.X + (b.X - a.X) * t,
-		a.Y + (b.Y - a.Y) * t,
-		a.Z + (b.Z - a.Z) * t,
-		a.W + (b.W - a.W) * t);
+	return a + (b - a) * t;
 }
 
 Vector4 Vector4::LerpClamped(const Vector4& a, const Vector4& b, float t)

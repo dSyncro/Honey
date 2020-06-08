@@ -146,9 +146,7 @@ Vector2 Vector2::Reflect(const Vector2& vector, const Vector2& normal)
 
 Vector2 Vector2::Lerp(const Vector2& a, const Vector2& b, float t)
 {
-	return Vector2(
-		a.X + (b.X - a.X) * t,
-		a.Y + (b.Y - a.Y) * t);
+	return a + (b - a) * t;
 }
 
 Vector2 Vector2::LerpClamped(const Vector2& a, const Vector2& b, float t)

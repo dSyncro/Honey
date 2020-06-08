@@ -1832,6 +1832,7 @@
     <ClInclude Include="Honey\Math\Random.h" />
     <ClInclude Include="Honey\Math\Vector\Vector2.h" />
     <ClInclude Include="Honey\Math\Vector\Vector3.h" />
+    <ClInclude Include="Honey\Math\Vector\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1938,5 +1939,6 @@
     <ClCompile Include="Honey\Math\Random.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector2.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector3.cpp" />
+    <ClCompile Include="Honey\Math\Vector\Vector4.cpp" />
   </ItemGroup>
 </Project>

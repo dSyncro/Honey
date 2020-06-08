@@ -153,10 +153,7 @@ Vector3 Vector3::Reflect(const Vector3& vector, const Vector3& normal)
 
 Vector3 Vector3::Lerp(const Vector3& a, const Vector3& b, float t)
 {
-	return Vector3(
-		a.X + (b.X - a.X) * t,
-		a.Y + (b.Y - a.Y) * t,
-		a.Z + (b.Z - a.Z) * t);
+	return a + (b - a) * t;
 }
 
 Vector3 Vector3::LerpClamped(const Vector3& a, const Vector3& b, float t)

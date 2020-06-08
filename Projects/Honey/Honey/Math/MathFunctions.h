@@ -27,51 +27,51 @@ namespace Honey {
 		// Trigonometry
 
 		/**
-		 * Compute cosine of a value
-		 * @param x The value to compute the cosine of (expressed in radians).
+		 * @brief Compute cosine of a value
+		 * @param x -> The value to compute the cosine of (expressed in radians).
 		 * @return The cosine of `x`.
 		 */
 		inline float  Cos(float x) { return std::cos(x); }
 
 		/**
-		 * Compute sine of a value
-		 * @param x The value to compute the sine of (expressed in radians).
+		 * @brief Compute sine of a value
+		 * @param x -> The value to compute the sine of (expressed in radians).
 		 * @return The sine of `x`.
 		 */
 		inline float  Sin(float x) { return std::sin(x); }
 
 		/**
-		 * Compute tangent of a value
-		 * @param x The value to compute the tangent of (expressed in radians).
+		 * @brief Compute tangent of a value
+		 * @param x -> The value to compute the tangent of (expressed in radians).
 		 * @return The tangent of `x`.
 		 */
 		inline float  Tan(float x) { return std::tan(x); }
 
 		/**
-		 * Compute arc cosine of a value
-		 * @param x The value to compute the arc cosine of. Must be in range -1.0f to 1.0f.
+		 * @brief Compute arc cosine of a value
+		 * @param x -> The value to compute the arc cosine of. Must be in range -1.0f to 1.0f.
 		 * @return The arc cosine of `x` expressed in radians.
 		 */
 		inline float  Acos(float x) { return std::acos(x); }
 
 		/**
-		 * Compute arc sine of a value
-		 * @param x The value to compute the arc sine of. Must be in range -1.0f to 1.0f.
+		 * @brief Compute arc sine of a value
+		 * @param x -> The value to compute the arc sine of. Must be in range -1.0f to 1.0f.
 		 * @return The arc sine of `x` expressed in radians.
 		 */
 		inline float  Asin(float x) { return std::asin(x); }
 
 		/**
-		 * Compute arc tangent of a value
-		 * @param x The value to compute the arc tangent of.
+		 * @brief Compute arc tangent of a value
+		 * @param x -> The value to compute the arc tangent of.
 		 * @return The arc tangent of `x` expressed in radians.
 		 */
 		inline float  Atan(float x) { return std::atan(x); }
 
 		/**
-		 * Compute arc tangent of y/x
-		 * @param y The y component.
-		 * @param x The x component.
+		 * @brief Compute arc tangent of y/x
+		 * @param y -> The y component.
+		 * @param x -> The x component.
 		 * @return The arc tangent of `y/x` expressed in radians.
 		 */
 		inline float  Atan2(float y, float x) { return std::atan2(y, x); }

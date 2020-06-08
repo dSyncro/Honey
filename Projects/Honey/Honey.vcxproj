@@ -185,6 +185,7 @@
     <ClInclude Include="Honey\Math\Random.h" />
     <ClInclude Include="Honey\Math\Vector\Vector2.h" />
     <ClInclude Include="Honey\Math\Vector\Vector3.h" />
+    <ClInclude Include="Honey\Math\Vector\Vector4.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiOpenGLRender.h" />
     <ClInclude Include="Honey\Platform\OpenGL\Buffers.h" />
@@ -730,6 +731,7 @@
     <ClCompile Include="Honey\Math\Random.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector2.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector3.cpp" />
+    <ClCompile Include="Honey\Math\Vector\Vector4.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp" />
