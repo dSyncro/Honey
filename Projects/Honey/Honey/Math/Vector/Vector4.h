@@ -19,8 +19,8 @@ namespace Honey::Math {
 		// Constructors
 		Vector4(float value = 0.0f) : X(value), Y(value), Z(value), W(value) {}
 		Vector4(float x, float y, float z, float w) : X(x), Y(y), Z(z), W(w) {}
-		Vector4(const Vector2& vector);
-		Vector4(const Vector3& vector);
+		explicit Vector4(const Vector2& vector);
+		explicit Vector4(const Vector3& vector);
 
 		// Shorthands
 		static const Vector4 Zero;
@@ -93,6 +93,6 @@ namespace Honey::Math {
 		float X, Y, Z, W;
 	};
 
-	Vector4 operator *(float scalar, const Vector4& vector) { return vector * scalar; }
+	static Vector4 operator *(float scalar, const Vector4& vector) { return vector * scalar; }
 
 }

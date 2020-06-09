@@ -9,6 +9,8 @@ void Sandbox2D::OnAttach()
 {
 	HNY_PROFILE_FUNCTION();
 	_texture = Honey::Texture2D::Create("assets/textures/logo.png");
+    Honey::FrameBufferSpecification specification = { 1280, 720 };
+    _frameBuffer = Honey::FrameBuffer::Create(specification);
 }
 
 void Sandbox2D::OnDetach()
@@ -29,6 +31,9 @@ void Sandbox2D::OnUpdate()
 	_cameraController.OnUpdate();
 
 	Honey::Renderer2D::ResetStatistics();
+
+    _frameBuffer->Bind();
+
 	Honey::RenderCommand::SetClearColor({ .1f, .1f, .1f, 1 });
 	Honey::RenderCommand::Clear();
 
@@ -42,6 +47,8 @@ void Sandbox2D::OnUpdate()
 	Honey::Renderer2D::DrawQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, _texture);
 
 	Honey::Renderer2D::EndScene();
+
+    _frameBuffer->Unbind();
 }
 
 void Sandbox2D::OnEvent(Honey::Event& e)
@@ -123,6 +130,13 @@ void Sandbox2D::OnImGuiRender()
         ImGui::Text("Vertex Count: %d", stats.GetVertexCount());
         ImGui::Text("Index Count: %d", stats.GetIndexCount());
         ImGui::ColorEdit4("Square Color", glm::value_ptr(_squareColor));
+        ImGui::End();
+    }
+
+    {
+        HNY_PROFILE_SCOPE("Viewport");
+        ImGui::Begin("Viewport");
+        ImGui::Image((void*)_frameBuffer->GetColorAttachmentRendererID(), ImVec2{ 1280.0f, 720.0f }, ImVec2(0, 1), ImVec2(1, 0));
         ImGui::End();
     }
 

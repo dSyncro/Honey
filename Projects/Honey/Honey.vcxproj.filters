@@ -1833,6 +1833,12 @@
     <ClInclude Include="Honey\Math\Vector\Vector2.h" />
     <ClInclude Include="Honey\Math\Vector\Vector3.h" />
     <ClInclude Include="Honey\Math\Vector\Vector4.h" />
+    <ClInclude Include="Honey\Math\Matrix\Matrix4x4.h" />
+    <ClInclude Include="Honey\Core\Compiler.h" />
+    <ClInclude Include="Honey\Core\SIMDInfo.h" />
+    <ClInclude Include="Honey\Math\Quaternion.h" />
+    <ClInclude Include="Honey\Renderer\Buffers\FrameBuffer.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLFrameBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1940,5 +1946,9 @@
     <ClCompile Include="Honey\Math\Vector\Vector2.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector3.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector4.cpp" />
+    <ClCompile Include="Honey\Math\Matrix\Matrix4x4.cpp" />
+    <ClCompile Include="Honey\Math\Quaternion.cpp" />
+    <ClCompile Include="Honey\Renderer\Buffers\FrameBuffer.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLFrameBuffer.cpp" />
   </ItemGroup>
 </Project>

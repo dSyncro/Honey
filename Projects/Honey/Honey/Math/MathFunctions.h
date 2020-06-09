@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#include <Honey/Core.h>
+
 namespace Honey {
 
 	namespace Math::Functions {
@@ -16,13 +18,46 @@ namespace Honey {
 		const float Infinity = +INFINITY;
 		const float NegativeInfinity = -INFINITY;
 
-		inline float  Abs(float x) { return std::abs(x); }
+		static HNY_ALWAYS_INLINE float  Abs(float x) { return std::abs(x); }
 
-		inline int    Sign(int x) { return -(x < 0); }
-		inline float  Sign(float x) { return (float)(-(x < 0)); }
+		static HNY_ALWAYS_INLINE int    Sign(int x) { return -(x < 0); }
+		static HNY_ALWAYS_INLINE float  Sign(float x) { return (float)(-(x < 0)); }
 
-		inline bool IsPowerOfTwo(int x) { return x & !(x & (x - 1)) && x >= 0; }
-		inline bool IsPowerOfTwo(unsigned int x) { return x & !(x & (x - 1)); }
+		// Powers of 2
+
+		static HNY_ALWAYS_INLINE bool IsPowerOfTwo(int x) { return x & !(x & (x - 1)) && x >= 0; }
+		static HNY_ALWAYS_INLINE bool IsPowerOfTwo(unsigned int x) { return x & !(x & (x - 1)); }
+
+		static HNY_ALWAYS_INLINE unsigned int NextPowerOfTwo(unsigned int x)
+		{
+			if (!x) return 0;
+
+			x--;
+			x |= x >> 1;
+			x |= x >> 2;
+			x |= x >> 4;
+			x |= x >> 8;
+			x |= x >> 16;
+
+			return x++;
+		}
+
+		static HNY_ALWAYS_INLINE unsigned int PreviousPowerOfTwo(unsigned int x)
+		{
+			x |= x >> 1;
+			x |= x >> 2;
+			x |= x >> 4;
+			x |= x >> 8;
+			x |= x >> 16;
+			return x - (x >> 1);
+		}
+
+		static HNY_ALWAYS_INLINE unsigned int ClosestPowerOfTwo(unsigned int x)
+		{
+			unsigned int nx = NextPowerOfTwo(x);
+			unsigned int px = PreviousPowerOfTwo(x);
+			return (nx - x) > (x - px) ? px : nx;
+		}
 
 		// Trigonometry
 
@@ -31,42 +66,42 @@ namespace Honey {
 		 * @param x -> The value to compute the cosine of (expressed in radians).
 		 * @return The cosine of `x`.
 		 */
-		inline float  Cos(float x) { return std::cos(x); }
+		static HNY_ALWAYS_INLINE float  Cos(float x) { return std::cos(x); }
 
 		/**
 		 * @brief Compute sine of a value
 		 * @param x -> The value to compute the sine of (expressed in radians).
 		 * @return The sine of `x`.
 		 */
-		inline float  Sin(float x) { return std::sin(x); }
+		static HNY_ALWAYS_INLINE float  Sin(float x) { return std::sin(x); }
 
 		/**
 		 * @brief Compute tangent of a value
 		 * @param x -> The value to compute the tangent of (expressed in radians).
 		 * @return The tangent of `x`.
 		 */
-		inline float  Tan(float x) { return std::tan(x); }
+		static HNY_ALWAYS_INLINE float  Tan(float x) { return std::tan(x); }
 
 		/**
 		 * @brief Compute arc cosine of a value
 		 * @param x -> The value to compute the arc cosine of. Must be in range -1.0f to 1.0f.
 		 * @return The arc cosine of `x` expressed in radians.
 		 */
-		inline float  Acos(float x) { return std::acos(x); }
+		static HNY_ALWAYS_INLINE float  Acos(float x) { return std::acos(x); }
 
 		/**
 		 * @brief Compute arc sine of a value
 		 * @param x -> The value to compute the arc sine of. Must be in range -1.0f to 1.0f.
 		 * @return The arc sine of `x` expressed in radians.
 		 */
-		inline float  Asin(float x) { return std::asin(x); }
+		static HNY_ALWAYS_INLINE float  Asin(float x) { return std::asin(x); }
 
 		/**
 		 * @brief Compute arc tangent of a value
 		 * @param x -> The value to compute the arc tangent of.
 		 * @return The arc tangent of `x` expressed in radians.
 		 */
-		inline float  Atan(float x) { return std::atan(x); }
+		static HNY_ALWAYS_INLINE float  Atan(float x) { return std::atan(x); }
 
 		/**
 		 * @brief Compute arc tangent of y/x
@@ -74,7 +109,7 @@ namespace Honey {
 		 * @param x -> The x component.
 		 * @return The arc tangent of `y/x` expressed in radians.
 		 */
-		inline float  Atan2(float y, float x) { return std::atan2(y, x); }
+		static HNY_ALWAYS_INLINE float  Atan2(float y, float x) { return std::atan2(y, x); }
 
 		// Hyperbolic
 
@@ -85,75 +120,75 @@ namespace Honey {
 		 * @param x The value to compute the hyperbolic cosine of.
 		 * @return The hyperbolic cosine of `x`.
 		 */
-		inline float  Cosh(float x) { return std::cosh(x); }
+		static HNY_ALWAYS_INLINE float  Cosh(float x) { return std::cosh(x); }
 
 		/**
 		 * Compute hyperbolic sine of x
 		 * @param x The value to compute the hyperbolic sine of.
 		 * @return The hyperbolic sine of `x`.
 		 */
-		inline float  Sinh(float x) { return std::sinh(x); }
+		static HNY_ALWAYS_INLINE float  Sinh(float x) { return std::sinh(x); }
 
 		/**
 		 * Compute hyperbolic tangent of x
 		 * @param x The value to compute the hyperbolic tangent of.
 		 * @return The hyperbolic tangent of `x`.
 		 */
-		inline float  Tanh(float x) { return std::tanh(x); }
+		static HNY_ALWAYS_INLINE float  Tanh(float x) { return std::tanh(x); }
 
 		/**
 		 * Compute hyperbolic arc cosine of x
 		 * @param x The value to compute the hyperbolic arc cosine of.
 		 * @return The hyperbolic arc cosine of `x` [0, +Inf].
 		 */
-		inline float  Acosh(float x) { return std::acosh(x); }
+		static HNY_ALWAYS_INLINE float  Acosh(float x) { return std::acosh(x); }
 
 		/**
 		 * Compute hyperbolic arc sine of x
 		 * @param x The value to compute the hyperbolic arc sine of.
 		 * @return The hyperbolic arc sine of `x` [0, +Inf].
 		 */
-		inline float  Asinh(float x) { return std::asinh(x); }
+		static HNY_ALWAYS_INLINE float  Asinh(float x) { return std::asinh(x); }
 
 		/**
 		 * Compute hyperbolic arc tangent of x
 		 * @param x The value to compute the hyperbolic arc tangent of.
 		 * @return The hyperbolic arc tangent of `x` [0, +Inf].
 		 */
-		inline float  Atanh(float x) { return std::atanh(x); }
+		static HNY_ALWAYS_INLINE float  Atanh(float x) { return std::atanh(x); }
 
 	#endif
 
 		// Exponential and Logarithmic
-		inline float  Exp(float x) { return std::exp(x); }
-		inline float  Exp2(float x) { return std::exp2(x); }
-		inline float  Ln(float x) { return std::log(x); }
-		inline float  Log2(float x) { return std::log2(x); }
-		inline float  Log10(float x) { return std::log10(x); }
-		inline float  Log(float base, float x) { return Log2(x) / Log2(base); }
+		static HNY_ALWAYS_INLINE float  Exp(float x) { return std::exp(x); }
+		static HNY_ALWAYS_INLINE float  Exp2(float x) { return std::exp2(x); }
+		static HNY_ALWAYS_INLINE float  Ln(float x) { return std::log(x); }
+		static HNY_ALWAYS_INLINE float  Log2(float x) { return std::log2(x); }
+		static HNY_ALWAYS_INLINE float  Log10(float x) { return std::log10(x); }
+		static HNY_ALWAYS_INLINE float  Log(float base, float x) { return Log2(x) / Log2(base); }
 
 		// Power
-		inline float  Pow(float x, float y) { return std::pow(x, y); }
-		inline float  Sqrt(float x) { return std::sqrt(x); }
-		inline float  Cbrt(float x) { return std::cbrt(x); }
+		static HNY_ALWAYS_INLINE float  Pow(float x, float y) { return std::pow(x, y); }
+		static HNY_ALWAYS_INLINE float  Sqrt(float x) { return std::sqrt(x); }
+		static HNY_ALWAYS_INLINE float  Cbrt(float x) { return std::cbrt(x); }
 
 		// Rounding and remainder
-		inline float  Ceil(float x) { return std::ceil(x); }
-		inline float  Floor(float x) { return std::floor(x); }
-		inline float  Truncate(float x) { return std::trunc(x); }
-		inline float  Round(float x) { return std::round(x); }
-		inline float  Mod(float x, float y) { return std::fmod(x, y); }
-		inline float  Remainder(float x, float y) { return std::remainder(x, y); }
+		static HNY_ALWAYS_INLINE float  Ceil(float x) { return std::ceil(x); }
+		static HNY_ALWAYS_INLINE float  Floor(float x) { return std::floor(x); }
+		static HNY_ALWAYS_INLINE float  Truncate(float x) { return std::trunc(x); }
+		static HNY_ALWAYS_INLINE float  Round(float x) { return std::round(x); }
+		static HNY_ALWAYS_INLINE float  Mod(float x, float y) { return std::fmod(x, y); }
+		static HNY_ALWAYS_INLINE float  Remainder(float x, float y) { return std::remainder(x, y); }
 
 		// Min - max - difference
-		inline float  Min(float x, float y) { return std::fmin(x, y); }
-		inline float  Max(float x, float y) { return std::fmax(x, y); }
-		inline float  PositiveDifference(float x, float y) { return std::fdim(x, y); }
+		static HNY_ALWAYS_INLINE float  Min(float x, float y) { return std::fmin(x, y); }
+		static HNY_ALWAYS_INLINE float  Max(float x, float y) { return std::fmax(x, y); }
+		static HNY_ALWAYS_INLINE float  PositiveDifference(float x, float y) { return std::fdim(x, y); }
 
-		inline float  Clamp(float x, float min, float max) { return Min(max, Max(min, x)); }
-		inline float  Clamp01(float x) { return Clamp(x, 0.0f, 1.0f); }
+		static HNY_ALWAYS_INLINE float  Clamp(float x, float min, float max) { return Min(max, Max(min, x)); }
+		static HNY_ALWAYS_INLINE float  Clamp01(float x) { return Clamp(x, 0.0f, 1.0f); }
 
-		inline bool ApproximatelyEquals(float x, float y) { return PositiveDifference(x, y) < Epsilon; }
+		static HNY_ALWAYS_INLINE bool ApproximatelyEquals(float x, float y) { return PositiveDifference(x, y) < Epsilon; }
 	}
 
 	namespace Mathf = Math::Functions;

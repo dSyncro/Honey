@@ -83,6 +83,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -106,6 +107,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -130,6 +132,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,6 +149,7 @@
     <ClInclude Include="Honey\Core.h" />
     <ClInclude Include="Honey\Core\Assertion.h" />
     <ClInclude Include="Honey\Core\Breakpoint.h" />
+    <ClInclude Include="Honey\Core\Compiler.h" />
     <ClInclude Include="Honey\Core\DLLAutomation.h" />
     <ClInclude Include="Honey\Core\FunctionIdentification.h" />
     <ClInclude Include="Honey\Core\Log.h" />
@@ -153,6 +157,7 @@
     <ClInclude Include="Honey\Core\MemoryTracking.h" />
     <ClInclude Include="Honey\Core\OS.h" />
     <ClInclude Include="Honey\Core\Profiling.h" />
+    <ClInclude Include="Honey\Core\SIMDInfo.h" />
     <ClInclude Include="Honey\Entrypoint.h" />
     <ClInclude Include="Honey\Events\App\AppRenderEvent.h" />
     <ClInclude Include="Honey\Events\App\AppTickEvent.h" />
@@ -182,6 +187,8 @@
     <ClInclude Include="Honey\Layers\LayerStack.h" />
     <ClInclude Include="Honey\Math\Math.h" />
     <ClInclude Include="Honey\Math\MathFunctions.h" />
+    <ClInclude Include="Honey\Math\Matrix\Matrix4x4.h" />
+    <ClInclude Include="Honey\Math\Quaternion.h" />
     <ClInclude Include="Honey\Math\Random.h" />
     <ClInclude Include="Honey\Math\Vector\Vector2.h" />
     <ClInclude Include="Honey\Math\Vector\Vector3.h" />
@@ -189,6 +196,7 @@
     <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiOpenGLRender.h" />
     <ClInclude Include="Honey\Platform\OpenGL\Buffers.h" />
+    <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLFrameBuffer.h" />
     <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.h" />
     <ClInclude Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.h" />
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLContext.h" />
@@ -206,6 +214,7 @@
     <ClInclude Include="Honey\Renderer\Buffers.h" />
     <ClInclude Include="Honey\Renderer\Buffers\BufferElement.h" />
     <ClInclude Include="Honey\Renderer\Buffers\BufferLayout.h" />
+    <ClInclude Include="Honey\Renderer\Buffers\FrameBuffer.h" />
     <ClInclude Include="Honey\Renderer\Buffers\IndexBuffer.h" />
     <ClInclude Include="Honey\Renderer\Buffers\VertexBuffer.h" />
     <ClInclude Include="Honey\Renderer\Camera\OrthographicCamera.h" />
@@ -728,12 +737,15 @@
     <ClCompile Include="Honey\Layers\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="Honey\Layers\Layer.cpp" />
     <ClCompile Include="Honey\Layers\LayerStack.cpp" />
+    <ClCompile Include="Honey\Math\Matrix\Matrix4x4.cpp" />
+    <ClCompile Include="Honey\Math\Quaternion.cpp" />
     <ClCompile Include="Honey\Math\Random.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector2.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector3.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector4.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLFrameBuffer.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLIndexBuffer.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLContext.cpp" />
@@ -745,6 +757,7 @@
     <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsInput.cpp" />
     <ClCompile Include="Honey\Renderer\2D\Quad.cpp" />
     <ClCompile Include="Honey\Renderer\2D\Renderer2D.cpp" />
+    <ClCompile Include="Honey\Renderer\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="Honey\Renderer\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Honey\Renderer\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Honey\Renderer\Camera\OrthographicCamera.cpp" />

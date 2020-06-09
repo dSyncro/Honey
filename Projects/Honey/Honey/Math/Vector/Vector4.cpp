@@ -104,7 +104,7 @@ Vector4 Vector4::Max(const Vector4& a, const Vector4& b)
 
 Vector4 Vector4::Min(const Vector4& a, const Vector4& b)
 {
-	Vector3 min = Vector3(Mathf::Min(a.X, b.X), Mathf::Min(a.Y, b.Y), Mathf::Min(a.Z, b.Z));
+	Vector4 min = Vector4(Mathf::Min(a.X, b.X), Mathf::Min(a.Y, b.Y), Mathf::Min(a.Z, b.Z), Mathf::Min(a.W, b.W));
 	return min;
 }
 

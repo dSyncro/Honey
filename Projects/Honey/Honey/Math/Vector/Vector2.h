@@ -7,6 +7,7 @@
 namespace Honey::Math {
 
 	struct Vector3;
+	struct Vector4;
 
 	/** 
 	 * @struct Vector2
@@ -41,14 +42,14 @@ namespace Honey::Math {
 		 * @param vector -> The vector.
 		 * @overload
 		 */
-		Vector2(const Vector3& vector);
+		explicit Vector2(const Vector3& vector);
 
 		/**
 		 * @brief Construct Vector2 from a Vector4.
 		 * @param vector -> The vector.
 		 * @overload
 		 */
-		Vector2(const Vector4& vector);
+		explicit Vector2(const Vector4& vector);
 
 		// Shorthands
 		
@@ -413,6 +414,6 @@ namespace Honey::Math {
 	 * @param vector -> The vector.
 	 * @return scalar * vector [equivalent to vector * scalar]. (used when the scalar preceides the vector)
 	 */
-	Vector2 operator *(float scalar, const Vector2& vector) { return vector * scalar; }
+	static Vector2 operator *(float scalar, const Vector2& vector) { return vector * scalar; }
 
 }
