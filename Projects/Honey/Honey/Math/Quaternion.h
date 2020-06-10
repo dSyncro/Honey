@@ -257,7 +257,7 @@ namespace Honey::Math {
 		 * @param quaternion -> Quaternion to assign.
 		 * @return Reference to this quaternion.
 		 */
-		Quaternion& Quaternion::operator =(const Quaternion& quaternion)
+		Quaternion& operator =(const Quaternion& quaternion)
 		{
 			Set(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W);
 			return *this;

@@ -78,12 +78,17 @@ project "Honey"
 	{
 		"GLFW",
 		"GLAD",
-		"ImGui",
-		"opengl32.lib",
+		"ImGui"
+		
 	}
 
 	filter "system:windows"
 		systemversion "latest"
+		
+		links 
+		{
+			"opengl32.lib",
+		}
 		
 	filter "configurations:Debug"
 		defines "HNY_DEBUG"
@@ -101,6 +106,7 @@ project "Honey"
         optimize "on"
 
 project "Sandbox"
+
 	location "Projects/Sandbox"
 	kind "ConsoleApp"
 	language "C++"
@@ -123,14 +129,29 @@ project "Sandbox"
 		"Projects/Honey/third-party",
 		"%{IncludeDir.GLM}",
 	}
+	
+	
 
 	links
 	{
-		"Honey"
+		"Honey",
+		
 	}
 
 	filter "system:windows"
 		systemversion "latest"
+		
+	filter "system:linux"
+		systemversion "latest"
+		
+		links 
+		{
+			"GLFW",
+			"GLAD",
+			"ImGui",
+			"pthread",
+			"dl"
+		}
 		
 	filter "configurations:Debug"
 		defines "HNY_DEBUG"
