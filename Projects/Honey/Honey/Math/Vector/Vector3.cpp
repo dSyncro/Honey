@@ -26,24 +26,26 @@ const Vector3 Vector3::NegativeInfinity  = Vector3(Mathf::NegativeInfinity);
 Vector3::operator Vector2() const { return Vector2(*this); }
 Vector3::operator Vector4() const { return Vector4(*this); }
 
-void Vector3::Normalize()
+Vector3& Vector3::Normalize()
 {
 	float magnitude = GetMagnitude();
-	*this /= magnitude;
+	return *this /= magnitude;
 }
 
-void Vector3::Round()
+Vector3& Vector3::Round()
 {
 	X = Mathf::Round(X);
 	Y = Mathf::Round(Y);
 	Z = Mathf::Round(Z);
+	return *this;
 }
 
-void Vector3::Set(float x, float y, float z)
+Vector3& Vector3::Set(float x, float y, float z)
 {
 	X = x;
 	Y = y;
 	Z = z;
+	return *this;
 }
 
 bool Vector3::ExactlyEquals(const Vector3& other) { return X == other.X && Y == other.Y && Z == other.Z; }

@@ -19,26 +19,28 @@ const Vector4 Vector4::NegativeInfinity = Vector4(Mathf::NegativeInfinity);
 Vector4::operator Vector2() const { return Vector2(*this); }
 Vector4::operator Vector3() const { return Vector3(*this); }
 
-void Vector4::Normalize()
+Vector4& Vector4::Normalize()
 {
 	float magnitude = GetMagnitude();
-	*this /= magnitude;
+	return *this /= magnitude;
 }
 
-void Vector4::Round()
+Vector4& Vector4::Round()
 {
 	X = Mathf::Round(X);
 	Y = Mathf::Round(Y);
 	Z = Mathf::Round(Z);
 	W = Mathf::Round(W);
+	return *this;
 }
 
-void Vector4::Set(float x, float y, float z, float w)
+Vector4& Vector4::Set(float x, float y, float z, float w)
 {
 	X = x;
 	Y = y;
 	Z = z;
 	W = w;
+	return *this;
 }
 
 bool Vector4::ExactlyEquals(const Vector4& other) { return X == other.X && Y == other.Y && Z == other.Z && W == other.W; }

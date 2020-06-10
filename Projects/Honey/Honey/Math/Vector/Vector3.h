@@ -41,9 +41,9 @@ namespace Honey::Math {
 		explicit operator Vector4() const;
 
 		// Methods
-		void Normalize();
-		void Round();
-		void Set(float x, float y, float z);
+		Vector3& Normalize();
+		Vector3& Round();
+		Vector3& Set(float x, float y, float z);
 		bool ExactlyEquals(const Vector3& other);
 		bool EssentiallyEquals(const Vector3& other);
 

@@ -21,6 +21,7 @@ namespace Honey::Math {
 		Vector4(float x, float y, float z, float w) : X(x), Y(y), Z(z), W(w) {}
 		explicit Vector4(const Vector2& vector);
 		explicit Vector4(const Vector3& vector);
+		explicit Vector4(const Vector3& vector, float w);
 
 		// Shorthands
 		static const Vector4 Zero;
@@ -35,9 +36,9 @@ namespace Honey::Math {
 		explicit operator Vector3() const;
 
 		// Methods
-		void Normalize();
-		void Round();
-		void Set(float x, float y, float z, float w);
+		Vector4& Normalize();
+		Vector4& Round();
+		Vector4& Set(float x, float y, float z, float w);
 		bool ExactlyEquals(const Vector4& other);
 		bool EssentiallyEquals(const Vector4& other);
 

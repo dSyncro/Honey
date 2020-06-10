@@ -79,17 +79,17 @@ namespace Honey::Math {
 		 * It means that the vector will be converted to a vector
 		 * with same direction and magnitude equal to one.
 		 */
-		void Normalize();
+		Vector2& Normalize();
 
 		/** @brief Round the components of this vector. */
-		void Round();
+		Vector2& Round();
 
 		/**
 		 * @brief Set the components of this vector.
 		 * @param x -> `X` component of the vector.
 		 * @param y -> `Y` component of the vector.
 		 */
-		void Set(float x, float y);
+		Vector2& Set(float x, float y);
 
 		/**
 		 * @brief Check if all the components of the vector are exactly equal to the ones of another vector.

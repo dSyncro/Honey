@@ -6,29 +6,31 @@ using namespace Honey::Math;
 
 Matrix4x4::Matrix4x4()
 {
-	memset(elements, 0, 4 * 4 * sizeof(float));
+	memset(Elements, 0, 4 * 4 * sizeof(float));
 }
 
 Matrix4x4::Matrix4x4(float diagonal)
 {
-	memset(elements, 0, 4 * 4 * sizeof(float));
-	elements[0 + 0 * 4] = diagonal;
-	elements[1 + 1 * 4] = diagonal;
-	elements[2 + 2 * 4] = diagonal;
-	elements[3 + 3 * 4] = diagonal;
+	memset(Elements, 0, 4 * 4 * sizeof(float));
+	Elements[0 + 0 * 4] = diagonal;
+	Elements[1 + 1 * 4] = diagonal;
+	Elements[2 + 2 * 4] = diagonal;
+	Elements[3 + 3 * 4] = diagonal;
 }
 
+/*
 Matrix4x4::Matrix4x4(float* elements)
 {
-	memcpy(this->elements, elements, 4 * 4 * sizeof(float));
+	memcpy(this->Elements, elements, 4 * 4 * sizeof(float));
 }
+*/
 
 Matrix4x4::Matrix4x4(const Vector4& row0, const Vector4& row1, const Vector4& row2, const Vector4& row3)
 {
-	rows[0] = row0;
-	rows[1] = row1;
-	rows[2] = row2;
-	rows[3] = row3;
+	Rows[0] = row0;
+	Rows[1] = row1;
+	Rows[2] = row2;
+	Rows[3] = row3;
 }
 
 Matrix4x4& Matrix4x4::Multiply(const Matrix4x4& other)
@@ -40,11 +42,11 @@ Matrix4x4& Matrix4x4::Multiply(const Matrix4x4& other)
 		{
 			float sum = 0.0f;
 			for (int e = 0; e < 4; e++)
-				sum += elements[e + row * 4] * other.elements[col + e * 4];
+				sum += Elements[e + row * 4] * other.Elements[col + e * 4];
 			data[col + row * 4] = sum;
 		}
 	}
-	memcpy(elements, data, 4 * 4 * sizeof(float));
+	memcpy(Elements, data, 4 * 4 * sizeof(float));
 	return *this;
 }
 
@@ -84,153 +86,153 @@ Matrix4x4& Matrix4x4::Invert()
 {
 	float temp[16];
 
-	temp[0] = elements[5] * elements[10] * elements[15] -
-		elements[5] * elements[11] * elements[14] -
-		elements[9] * elements[6] * elements[15] +
-		elements[9] * elements[7] * elements[14] +
-		elements[13] * elements[6] * elements[11] -
-		elements[13] * elements[7] * elements[10];
+	temp[0] = Elements[5] * Elements[10] * Elements[15] -
+		Elements[5] * Elements[11] * Elements[14] -
+		Elements[9] * Elements[6] * Elements[15] +
+		Elements[9] * Elements[7] * Elements[14] +
+		Elements[13] * Elements[6] * Elements[11] -
+		Elements[13] * Elements[7] * Elements[10];
 
-	temp[4] = -elements[4] * elements[10] * elements[15] +
-		elements[4] * elements[11] * elements[14] +
-		elements[8] * elements[6] * elements[15] -
-		elements[8] * elements[7] * elements[14] -
-		elements[12] * elements[6] * elements[11] +
-		elements[12] * elements[7] * elements[10];
+	temp[4] = -Elements[4] * Elements[10] * Elements[15] +
+		Elements[4] * Elements[11] * Elements[14] +
+		Elements[8] * Elements[6] * Elements[15] -
+		Elements[8] * Elements[7] * Elements[14] -
+		Elements[12] * Elements[6] * Elements[11] +
+		Elements[12] * Elements[7] * Elements[10];
 
-	temp[8] = elements[4] * elements[9] * elements[15] -
-		elements[4] * elements[11] * elements[13] -
-		elements[8] * elements[5] * elements[15] +
-		elements[8] * elements[7] * elements[13] +
-		elements[12] * elements[5] * elements[11] -
-		elements[12] * elements[7] * elements[9];
+	temp[8] = Elements[4] * Elements[9] * Elements[15] -
+		Elements[4] * Elements[11] * Elements[13] -
+		Elements[8] * Elements[5] * Elements[15] +
+		Elements[8] * Elements[7] * Elements[13] +
+		Elements[12] * Elements[5] * Elements[11] -
+		Elements[12] * Elements[7] * Elements[9];
 
-	temp[12] = -elements[4] * elements[9] * elements[14] +
-		elements[4] * elements[10] * elements[13] +
-		elements[8] * elements[5] * elements[14] -
-		elements[8] * elements[6] * elements[13] -
-		elements[12] * elements[5] * elements[10] +
-		elements[12] * elements[6] * elements[9];
+	temp[12] = -Elements[4] * Elements[9] * Elements[14] +
+		Elements[4] * Elements[10] * Elements[13] +
+		Elements[8] * Elements[5] * Elements[14] -
+		Elements[8] * Elements[6] * Elements[13] -
+		Elements[12] * Elements[5] * Elements[10] +
+		Elements[12] * Elements[6] * Elements[9];
 
-	temp[1] = -elements[1] * elements[10] * elements[15] +
-		elements[1] * elements[11] * elements[14] +
-		elements[9] * elements[2] * elements[15] -
-		elements[9] * elements[3] * elements[14] -
-		elements[13] * elements[2] * elements[11] +
-		elements[13] * elements[3] * elements[10];
+	temp[1] = -Elements[1] * Elements[10] * Elements[15] +
+		Elements[1] * Elements[11] * Elements[14] +
+		Elements[9] * Elements[2] * Elements[15] -
+		Elements[9] * Elements[3] * Elements[14] -
+		Elements[13] * Elements[2] * Elements[11] +
+		Elements[13] * Elements[3] * Elements[10];
 
-	temp[5] = elements[0] * elements[10] * elements[15] -
-		elements[0] * elements[11] * elements[14] -
-		elements[8] * elements[2] * elements[15] +
-		elements[8] * elements[3] * elements[14] +
-		elements[12] * elements[2] * elements[11] -
-		elements[12] * elements[3] * elements[10];
+	temp[5] = Elements[0] * Elements[10] * Elements[15] -
+		Elements[0] * Elements[11] * Elements[14] -
+		Elements[8] * Elements[2] * Elements[15] +
+		Elements[8] * Elements[3] * Elements[14] +
+		Elements[12] * Elements[2] * Elements[11] -
+		Elements[12] * Elements[3] * Elements[10];
 
-	temp[9] = -elements[0] * elements[9] * elements[15] +
-		elements[0] * elements[11] * elements[13] +
-		elements[8] * elements[1] * elements[15] -
-		elements[8] * elements[3] * elements[13] -
-		elements[12] * elements[1] * elements[11] +
-		elements[12] * elements[3] * elements[9];
+	temp[9] = -Elements[0] * Elements[9] * Elements[15] +
+		Elements[0] * Elements[11] * Elements[13] +
+		Elements[8] * Elements[1] * Elements[15] -
+		Elements[8] * Elements[3] * Elements[13] -
+		Elements[12] * Elements[1] * Elements[11] +
+		Elements[12] * Elements[3] * Elements[9];
 
-	temp[13] = elements[0] * elements[9] * elements[14] -
-		elements[0] * elements[10] * elements[13] -
-		elements[8] * elements[1] * elements[14] +
-		elements[8] * elements[2] * elements[13] +
-		elements[12] * elements[1] * elements[10] -
-		elements[12] * elements[2] * elements[9];
+	temp[13] = Elements[0] * Elements[9] * Elements[14] -
+		Elements[0] * Elements[10] * Elements[13] -
+		Elements[8] * Elements[1] * Elements[14] +
+		Elements[8] * Elements[2] * Elements[13] +
+		Elements[12] * Elements[1] * Elements[10] -
+		Elements[12] * Elements[2] * Elements[9];
 
-	temp[2] = elements[1] * elements[6] * elements[15] -
-		elements[1] * elements[7] * elements[14] -
-		elements[5] * elements[2] * elements[15] +
-		elements[5] * elements[3] * elements[14] +
-		elements[13] * elements[2] * elements[7] -
-		elements[13] * elements[3] * elements[6];
+	temp[2] = Elements[1] * Elements[6] * Elements[15] -
+		Elements[1] * Elements[7] * Elements[14] -
+		Elements[5] * Elements[2] * Elements[15] +
+		Elements[5] * Elements[3] * Elements[14] +
+		Elements[13] * Elements[2] * Elements[7] -
+		Elements[13] * Elements[3] * Elements[6];
 
-	temp[6] = -elements[0] * elements[6] * elements[15] +
-		elements[0] * elements[7] * elements[14] +
-		elements[4] * elements[2] * elements[15] -
-		elements[4] * elements[3] * elements[14] -
-		elements[12] * elements[2] * elements[7] +
-		elements[12] * elements[3] * elements[6];
+	temp[6] = -Elements[0] * Elements[6] * Elements[15] +
+		Elements[0] * Elements[7] * Elements[14] +
+		Elements[4] * Elements[2] * Elements[15] -
+		Elements[4] * Elements[3] * Elements[14] -
+		Elements[12] * Elements[2] * Elements[7] +
+		Elements[12] * Elements[3] * Elements[6];
 
-	temp[10] = elements[0] * elements[5] * elements[15] -
-		elements[0] * elements[7] * elements[13] -
-		elements[4] * elements[1] * elements[15] +
-		elements[4] * elements[3] * elements[13] +
-		elements[12] * elements[1] * elements[7] -
-		elements[12] * elements[3] * elements[5];
+	temp[10] = Elements[0] * Elements[5] * Elements[15] -
+		Elements[0] * Elements[7] * Elements[13] -
+		Elements[4] * Elements[1] * Elements[15] +
+		Elements[4] * Elements[3] * Elements[13] +
+		Elements[12] * Elements[1] * Elements[7] -
+		Elements[12] * Elements[3] * Elements[5];
 
-	temp[14] = -elements[0] * elements[5] * elements[14] +
-		elements[0] * elements[6] * elements[13] +
-		elements[4] * elements[1] * elements[14] -
-		elements[4] * elements[2] * elements[13] -
-		elements[12] * elements[1] * elements[6] +
-		elements[12] * elements[2] * elements[5];
+	temp[14] = -Elements[0] * Elements[5] * Elements[14] +
+		Elements[0] * Elements[6] * Elements[13] +
+		Elements[4] * Elements[1] * Elements[14] -
+		Elements[4] * Elements[2] * Elements[13] -
+		Elements[12] * Elements[1] * Elements[6] +
+		Elements[12] * Elements[2] * Elements[5];
 
-	temp[3] = -elements[1] * elements[6] * elements[11] +
-		elements[1] * elements[7] * elements[10] +
-		elements[5] * elements[2] * elements[11] -
-		elements[5] * elements[3] * elements[10] -
-		elements[9] * elements[2] * elements[7] +
-		elements[9] * elements[3] * elements[6];
+	temp[3] = -Elements[1] * Elements[6] * Elements[11] +
+		Elements[1] * Elements[7] * Elements[10] +
+		Elements[5] * Elements[2] * Elements[11] -
+		Elements[5] * Elements[3] * Elements[10] -
+		Elements[9] * Elements[2] * Elements[7] +
+		Elements[9] * Elements[3] * Elements[6];
 
-	temp[7] = elements[0] * elements[6] * elements[11] -
-		elements[0] * elements[7] * elements[10] -
-		elements[4] * elements[2] * elements[11] +
-		elements[4] * elements[3] * elements[10] +
-		elements[8] * elements[2] * elements[7] -
-		elements[8] * elements[3] * elements[6];
+	temp[7] = Elements[0] * Elements[6] * Elements[11] -
+		Elements[0] * Elements[7] * Elements[10] -
+		Elements[4] * Elements[2] * Elements[11] +
+		Elements[4] * Elements[3] * Elements[10] +
+		Elements[8] * Elements[2] * Elements[7] -
+		Elements[8] * Elements[3] * Elements[6];
 
-	temp[11] = -elements[0] * elements[5] * elements[11] +
-		elements[0] * elements[7] * elements[9] +
-		elements[4] * elements[1] * elements[11] -
-		elements[4] * elements[3] * elements[9] -
-		elements[8] * elements[1] * elements[7] +
-		elements[8] * elements[3] * elements[5];
+	temp[11] = -Elements[0] * Elements[5] * Elements[11] +
+		Elements[0] * Elements[7] * Elements[9] +
+		Elements[4] * Elements[1] * Elements[11] -
+		Elements[4] * Elements[3] * Elements[9] -
+		Elements[8] * Elements[1] * Elements[7] +
+		Elements[8] * Elements[3] * Elements[5];
 
-	temp[15] = elements[0] * elements[5] * elements[10] -
-		elements[0] * elements[6] * elements[9] -
-		elements[4] * elements[1] * elements[10] +
-		elements[4] * elements[2] * elements[9] +
-		elements[8] * elements[1] * elements[6] -
-		elements[8] * elements[2] * elements[5];
+	temp[15] = Elements[0] * Elements[5] * Elements[10] -
+		Elements[0] * Elements[6] * Elements[9] -
+		Elements[4] * Elements[1] * Elements[10] +
+		Elements[4] * Elements[2] * Elements[9] +
+		Elements[8] * Elements[1] * Elements[6] -
+		Elements[8] * Elements[2] * Elements[5];
 
-	float determinant = elements[0] * temp[0] + elements[1] * temp[4] + elements[2] * temp[8] + elements[3] * temp[12];
+	float determinant = Elements[0] * temp[0] + Elements[1] * temp[4] + Elements[2] * temp[8] + Elements[3] * temp[12];
 	determinant = 1.0f / determinant;
 
 	for (int i = 0; i < 4 * 4; i++)
-		elements[i] = temp[i] * determinant;
+		Elements[i] = temp[i] * determinant;
 
 	return *this;
 }
 
 Vector4 Matrix4x4::GetColumn(int index) const
 {
-	return Vector4(elements[index + 0 * 4], elements[index + 1 * 4], elements[index + 2 * 4], elements[index + 3 * 4]);
+	return Vector4(Elements[index + 0 * 4], Elements[index + 1 * 4], Elements[index + 2 * 4], Elements[index + 3 * 4]);
 }
 
 void Matrix4x4::SetColumn(unsigned int index, const Vector4& column)
 {
-	elements[index + 0 * 4] = column.X;
-	elements[index + 1 * 4] = column.Y;
-	elements[index + 2 * 4] = column.Z;
-	elements[index + 3 * 4] = column.W;
+	Elements[index + 0 * 4] = column.X;
+	Elements[index + 1 * 4] = column.Y;
+	Elements[index + 2 * 4] = column.Z;
+	Elements[index + 3 * 4] = column.W;
 }
 
 Matrix4x4 Matrix4x4::Orthographic(float left, float right, float bottom, float top, float near, float far)
 {
 	Matrix4x4 result(1.0f);
 
-	result.elements[0 + 0 * 4] = 2.0f / (right - left);
+	result.Elements[0 + 0 * 4] = 2.0f / (right - left);
 
-	result.elements[1 + 1 * 4] = 2.0f / (top - bottom);
+	result.Elements[1 + 1 * 4] = 2.0f / (top - bottom);
 
-	result.elements[2 + 2 * 4] = 2.0f / (near - far);
+	result.Elements[2 + 2 * 4] = 2.0f / (near - far);
 
-	result.elements[3 + 0 * 4] = (left + right) / (left - right);
-	result.elements[3 + 1 * 4] = (bottom + top) / (bottom - top);
-	result.elements[3 + 2 * 4] = (far + near) / (far - near);
+	result.Elements[3 + 0 * 4] = (left + right) / (left - right);
+	result.Elements[3 + 1 * 4] = (bottom + top) / (bottom - top);
+	result.Elements[3 + 2 * 4] = (far + near) / (far - near);
 
 	return result;
 }
@@ -245,11 +247,11 @@ Matrix4x4 Matrix4x4::Perspective(float fov, float aspectRatio, float near, float
 	float b = (near + far) / (near - far);
 	float c = (2.0f * near * far) / (near - far);
 
-	result.elements[0 + 0 * 4] = a;
-	result.elements[1 + 1 * 4] = q;
-	result.elements[2 + 2 * 4] = b;
-	result.elements[2 + 3 * 4] = -1.0f;
-	result.elements[3 + 2 * 4] = c;
+	result.Elements[0 + 0 * 4] = a;
+	result.Elements[1 + 1 * 4] = q;
+	result.Elements[2 + 2 * 4] = b;
+	result.Elements[2 + 3 * 4] = -1.0f;
+	result.Elements[3 + 2 * 4] = c;
 
 	return result;
 }
@@ -257,32 +259,32 @@ Matrix4x4 Matrix4x4::Perspective(float fov, float aspectRatio, float near, float
 Matrix4x4 Matrix4x4::LookAt(const Vector3& camera, const Vector3& object, const Vector3& up)
 {
 	Matrix4x4 result = Identity;
-	Vector3 f = (object - camera).Normalized();
+	Vector3 f = (object - camera).Normalize();
 	Vector3 s = Vector3::Cross(f, up.Normalized());
 	Vector3 u = Vector3::Cross(s, f);
 
-	result.elements[0 + 0 * 4] = s.X;
-	result.elements[0 + 1 * 4] = s.Y;
-	result.elements[0 + 2 * 4] = s.Z;
+	result.Elements[0 + 0 * 4] = s.X;
+	result.Elements[0 + 1 * 4] = s.Y;
+	result.Elements[0 + 2 * 4] = s.Z;
 
-	result.elements[1 + 0 * 4] = u.X;
-	result.elements[1 + 1 * 4] = u.Y;
-	result.elements[1 + 2 * 4] = u.Z;
+	result.Elements[1 + 0 * 4] = u.X;
+	result.Elements[1 + 1 * 4] = u.Y;
+	result.Elements[1 + 2 * 4] = u.Z;
 
-	result.elements[2 + 0 * 4] = -f.X;
-	result.elements[2 + 1 * 4] = -f.Y;
-	result.elements[2 + 2 * 4] = -f.Z;
+	result.Elements[2 + 0 * 4] = -f.X;
+	result.Elements[2 + 1 * 4] = -f.Y;
+	result.Elements[2 + 2 * 4] = -f.Z;
 
-	return result * Translate(Vector3(-camera.X, -camera.Y, -camera.Z));
+	return result * Translate(-camera);
 }
 
 Matrix4x4 Matrix4x4::Translate(const Vector3& translation)
 {
 	Matrix4x4 result = Identity;
 
-	result.elements[3 + 0 * 4] = translation.X;
-	result.elements[3 + 1 * 4] = translation.Y;
-	result.elements[3 + 2 * 4] = translation.Z;
+	result.Elements[3 + 0 * 4] = translation.X;
+	result.Elements[3 + 1 * 4] = translation.Y;
+	result.Elements[3 + 2 * 4] = translation.Z;
 
 	return result;
 }
@@ -300,17 +302,17 @@ Matrix4x4 Matrix4x4::Rotate(float angle, const Vector3& axis)
 	float y = axis.Y;
 	float z = axis.Z;
 
-	result.elements[0 + 0 * 4] = x * x * omc + c;
-	result.elements[0 + 1 * 4] = y * x * omc + z * s;
-	result.elements[0 + 2 * 4] = x * z * omc - y * s;
+	result.Elements[0 + 0 * 4] = x * x * omc + c;
+	result.Elements[0 + 1 * 4] = y * x * omc + z * s;
+	result.Elements[0 + 2 * 4] = x * z * omc - y * s;
 
-	result.elements[1 + 0 * 4] = x * y * omc - z * s;
-	result.elements[1 + 1 * 4] = y * y * omc + c;
-	result.elements[1 + 2 * 4] = y * z * omc + x * s;
+	result.Elements[1 + 0 * 4] = x * y * omc - z * s;
+	result.Elements[1 + 1 * 4] = y * y * omc + c;
+	result.Elements[1 + 2 * 4] = y * z * omc + x * s;
 
-	result.elements[2 + 0 * 4] = x * z * omc + y * s;
-	result.elements[2 + 1 * 4] = y * z * omc - x * s;
-	result.elements[2 + 2 * 4] = z * z * omc + c;
+	result.Elements[2 + 0 * 4] = x * z * omc + y * s;
+	result.Elements[2 + 1 * 4] = y * z * omc - x * s;
+	result.Elements[2 + 2 * 4] = z * z * omc + c;
 
 	return result;
 }
@@ -342,9 +344,9 @@ Matrix4x4 Matrix4x4::Rotate(const Quaternion& quat)
 	qzqz2 = (qz * qz2);
 	qzqw2 = (qw * qz2);
 
-	result.rows[0] = Vector4(((1.0f - qyqy2) - qzqz2), (qxqy2 - qzqw2), (qxqz2 + qyqw2), 0.0f);
-	result.rows[1] = Vector4((qxqy2 + qzqw2), ((1.0f - qxqx2) - qzqz2), (qyqz2 - qxqw2), 0.0f);
-	result.rows[2] = Vector4((qxqz2 - qyqw2), (qyqz2 + qxqw2), ((1.0f - qxqx2) - qyqy2), 0.0f);
+	result.Rows[0] = Vector4(((1.0f - qyqy2) - qzqz2), (qxqy2 - qzqw2), (qxqz2 + qyqw2), 0.0f);
+	result.Rows[1] = Vector4((qxqy2 + qzqw2), ((1.0f - qxqx2) - qzqz2), (qyqz2 - qxqw2), 0.0f);
+	result.Rows[2] = Vector4((qxqz2 - qyqw2), (qyqz2 + qxqw2), ((1.0f - qxqx2) - qyqy2), 0.0f);
 
 	return result;
 }
@@ -353,9 +355,9 @@ Matrix4x4 Matrix4x4::Scale(const Vector3& scale)
 {
 	Matrix4x4 result(1.0f);
 
-	result.elements[0 + 0 * 4] = scale.X;
-	result.elements[1 + 1 * 4] = scale.Y;
-	result.elements[2 + 2 * 4] = scale.Z;
+	result.Elements[0 + 0 * 4] = scale.X;
+	result.Elements[1 + 1 * 4] = scale.Y;
+	result.Elements[2 + 2 * 4] = scale.Z;
 
 	return result;
 }
@@ -369,9 +371,9 @@ Matrix4x4 Matrix4x4::Invert(const Matrix4x4& matrix)
 Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& matrix)
 {
 	return Matrix4x4(
-		Vector4(matrix.rows[0].X, matrix.rows[1].X, matrix.rows[2].X, matrix.rows[3].X),
-		Vector4(matrix.rows[0].Y, matrix.rows[1].Y, matrix.rows[2].Y, matrix.rows[3].Y),
-		Vector4(matrix.rows[0].Z, matrix.rows[1].Z, matrix.rows[2].Z, matrix.rows[3].Z),
-		Vector4(matrix.rows[0].W, matrix.rows[1].W, matrix.rows[2].W, matrix.rows[3].W)
+		Vector4(matrix.Rows[0].X, matrix.Rows[1].X, matrix.Rows[2].X, matrix.Rows[3].X),
+		Vector4(matrix.Rows[0].Y, matrix.Rows[1].Y, matrix.Rows[2].Y, matrix.Rows[3].Y),
+		Vector4(matrix.Rows[0].Z, matrix.Rows[1].Z, matrix.Rows[2].Z, matrix.Rows[3].Z),
+		Vector4(matrix.Rows[0].W, matrix.Rows[1].W, matrix.Rows[2].W, matrix.Rows[3].W)
 	);
 }

@@ -24,22 +24,24 @@ const Vector2 Vector2::NegativeInfinity = Vector2(Mathf::NegativeInfinity);
 Vector2::operator Vector3() const { return Vector3(*this); }
 Vector2::operator Vector4() const { return Vector4(*this); }
 
-void Vector2::Normalize()
+Vector2& Vector2::Normalize()
 {
 	float magnitude = GetMagnitude();
-	*this /= magnitude;
+	return *this /= magnitude;
 }
 
-void Vector2::Round()
+Vector2& Vector2::Round()
 {
 	X = Mathf::Round(X);
 	Y = Mathf::Round(Y);
+	return *this;
 }
 
-void Vector2::Set(float x, float y)
+Vector2& Vector2::Set(float x, float y)
 {
 	X = x;
 	Y = y;
+	return *this;
 }
 
 bool Vector2::ExactlyEquals(const Vector2& other) { return X == other.X && Y == other.Y; }
