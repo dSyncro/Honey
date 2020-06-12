@@ -83,7 +83,6 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -107,7 +106,6 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -132,7 +130,6 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -193,6 +190,8 @@
     <ClInclude Include="Honey\Math\Vector\Vector2.h" />
     <ClInclude Include="Honey\Math\Vector\Vector3.h" />
     <ClInclude Include="Honey\Math\Vector\Vector4.h" />
+    <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsInput.h" />
+    <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiOpenGLRender.h" />
     <ClInclude Include="Honey\Platform\OpenGL\Buffers.h" />
@@ -204,8 +203,6 @@
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h" />
-    <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsInput.h" />
     <ClInclude Include="Honey\Profiling\InstrumentationTimer.h" />
     <ClInclude Include="Honey\Profiling\Instrumentor.h" />
     <ClInclude Include="Honey\Profiling\ProfileResult.h" />
@@ -743,6 +740,8 @@
     <ClCompile Include="Honey\Math\Vector\Vector2.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector3.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector4.cpp" />
+    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsInput.cpp" />
+    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsWindow.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLFrameBuffer.cpp" />
@@ -753,8 +752,6 @@
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsWindow.cpp" />
-    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsInput.cpp" />
     <ClCompile Include="Honey\Renderer\2D\Quad.cpp" />
     <ClCompile Include="Honey\Renderer\2D\Renderer2D.cpp" />
     <ClCompile Include="Honey\Renderer\Buffers\FrameBuffer.cpp" />

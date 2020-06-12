@@ -1,4 +1,5 @@
 workspace "Honey"
+
 	architecture "x86_64"
 	startproject "Sandbox"
 
@@ -24,9 +25,13 @@ IncludeDir["GLM"] = "Projects/Honey/third-party/glm"
 IncludeDir["ImGui"] = "Projects/Honey/third-party/ImGui"
 IncludeDir["StbImage"] = "Projects/Honey/third-party/stb_image"
 
-include "Projects/Honey/third-party/glfw"
-include "Projects/Honey/third-party/glad"
-include "Projects/Honey/third-party/ImGui"
+group "Dependencies"
+
+	include "Projects/Honey/third-party/glfw"
+	include "Projects/Honey/third-party/glad"
+	include "Projects/Honey/third-party/ImGui"
+
+group ""
 
 project "Honey"
 
@@ -134,8 +139,129 @@ project "Sandbox"
 
 	links
 	{
-		"Honey",
+		"Honey",	
+	}
+
+	filter "system:windows"
+		systemversion "latest"
 		
+	filter "system:linux"
+		systemversion "latest"
+		
+		links 
+		{
+			"GLFW",
+			"GLAD",
+			"ImGui",
+			"pthread",
+			"dl"
+		}
+		
+	filter "configurations:Debug"
+		defines "HNY_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "HNY_RELEASE"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "HNY_DIST"
+		runtime "Release"
+		optimize "on"
+
+group "Tools"
+
+project "Honeycomb"
+
+	location "Projects/Honeycomb"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin/intermediates/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"Projects/%{prj.name}/**.h",
+		"Projects/%{prj.name}/**.cpp"
+	}
+
+	includedirs
+	{
+		"Projects/Honey/third-party/spdlog/include",
+		"Projects/Honey/",
+		"Projects/Honey/third-party",
+		"%{IncludeDir.GLM}",
+	}
+
+	links
+	{
+		"Honey",
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+		
+	filter "system:linux"
+		systemversion "latest"
+		
+		links 
+		{
+			"GLFW",
+			"GLAD",
+			"ImGui",
+			"pthread",
+			"dl"
+		}
+		
+	filter "configurations:Debug"
+		defines "HNY_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "HNY_RELEASE"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "HNY_DIST"
+		runtime "Release"
+		optimize "on"
+
+project "Honeypot"
+
+	location "Projects/Honeypot"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin/intermediates/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"Projects/%{prj.name}/**.h",
+		"Projects/%{prj.name}/**.cpp"
+	}
+
+	includedirs
+	{
+		"Projects/Honey/third-party/spdlog/include",
+		"Projects/Honey/",
+		"Projects/Honey/third-party",
+		"%{IncludeDir.GLM}",
+	}
+
+	links
+	{
+		"Honey",
 	}
 
 	filter "system:windows"

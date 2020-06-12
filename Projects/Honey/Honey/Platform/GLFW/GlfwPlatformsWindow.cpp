@@ -19,7 +19,7 @@ static void GLFWErrorCallback(int error, const char* description)
 GlfwPlatformsWindow::GlfwPlatformsWindow(const WindowProperties& properties)
 {
 	HNY_PROFILE_FUNCTION();
-
+	
 	Init(properties);
 }
 

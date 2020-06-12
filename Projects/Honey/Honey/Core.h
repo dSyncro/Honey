@@ -6,7 +6,6 @@
 #include "Core/MemoryTracking.h"
 // #include "Core/DLLAutomation.h"
 
-
 // Always inline
 #if defined(HNY_COMPILER_GCC)
 #	define HNY_ALWAYS_INLINE __attribute__((always_inline)) inline
