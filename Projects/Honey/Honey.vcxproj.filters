@@ -1879,6 +1879,7 @@
     <ClInclude Include="third-party\stb_image\stb_image.h">
       <Filter>third-party\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Math\Vectors.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">

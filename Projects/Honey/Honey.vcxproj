@@ -190,6 +190,7 @@
     <ClInclude Include="Honey\Math\Vector\Vector2.h" />
     <ClInclude Include="Honey\Math\Vector\Vector3.h" />
     <ClInclude Include="Honey\Math\Vector\Vector4.h" />
+    <ClInclude Include="Honey\Math\Vectors.h" />
     <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsInput.h" />
     <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h" />

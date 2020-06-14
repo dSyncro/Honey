@@ -139,6 +139,24 @@
       <Project>{E8A3540D-54B8-7CBE-1D3A-201E890D79EF}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Honeypot\Core.h" />
+    <ClInclude Include="Honeypot.h" />
+    <ClInclude Include="Libraries\AnsiStyle.h" />
+    <ClInclude Include="Libraries\Console.h" />
+    <ClInclude Include="Honeypot\TestCase.h" />
+    <ClInclude Include="Honeypot\TestCategory.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Honeypot.cpp" />
+    <ClCompile Include="Libraries\AnsiStyle.cpp" />
+    <ClCompile Include="Libraries\Console.cpp" />
+    <ClCompile Include="Honeypot\TestCase.cpp" />
+    <ClCompile Include="Honeypot\TestCategory.cpp" />
+    <ClCompile Include="Tests\OnePlusOne.cpp" />
+    <ClCompile Include="Tests\TwoPlusTwo.cpp" />
+    <ClCompile Include="Tests\Vector2.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

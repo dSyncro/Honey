@@ -22,6 +22,9 @@
 #include "Honey/Layers/Layer.h"
 #include "Honey/Layers/ImGui/ImGuiLayer.h"
 
+// Math
+#include <Honey/Math/Math.h>
+
 // Rendering
 #include <Honey/Renderer/Renderer.h>
 #include <Honey/Renderer/2D/Renderer2D.h>
