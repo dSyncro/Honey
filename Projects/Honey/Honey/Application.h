@@ -27,6 +27,8 @@ namespace Honey {
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 
+		void SetTitle(const std::string& title) { _window->SetTitle(title); }
+
 		Window& GetWindow() { return *_window; }
 
 		inline static Application& Get() { return *s_Instance; }

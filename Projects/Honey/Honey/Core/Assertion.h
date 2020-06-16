@@ -1,3 +1,8 @@
+/**
+ * @file Assertion.h
+ * @brief Assertion related stuff.
+ */
+
 #pragma once
 
 #include "Breakpoint.h"

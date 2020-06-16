@@ -1,11 +1,16 @@
+/**
+ * @file FunctionIdentification.h
+ * @brief Identify function name and signature.
+ */
+
 #pragma once
 
 #include "OS.h"
 
 // Function Name
-#if defined(HNY_PLATFORM_WINDOWS)   //WINDOWS
-#	define HNY_FUNCTION_NAME __FUNCTION__  
-#else          //*NIX
+#if defined(HNY_PLATFORM_WINDOWS) //WINDOWS
+#	define HNY_FUNCTION_NAME __FUNCTION__
+#else //*NIX
 #	define HNY_FUNCTION_NAME __func__ 
 #endif
 

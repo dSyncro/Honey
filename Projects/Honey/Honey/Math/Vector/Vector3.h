@@ -6,6 +6,7 @@ namespace Honey::Math {
 
 	struct Vector2;
 	struct Vector4;
+	struct Matrix4x4;
 
 	struct Vector3 {
 
@@ -83,6 +84,7 @@ namespace Honey::Math {
 		Vector3 operator -(const Vector3& other) const { return Vector3(X * other.X, Y - other.Y, Z - other.Z); }
 		Vector3 operator *(float scalar) const { return Vector3(X * scalar, Y * scalar, Z * scalar); }
 		Vector3 operator *(const Vector3& other) const { return Vector3(X * other.X, Y * other.Y, Z * other.Z); }
+		Vector3 operator *(const Matrix4x4& matrix) const;
 		Vector3 operator /(float scalar) const { return Vector3(X / scalar, Y / scalar, Z / scalar); }
 		Vector3 operator /(const Vector3& other) const { return Vector3(X / other.X, Y / other.Y, Z / other.Z); }
 

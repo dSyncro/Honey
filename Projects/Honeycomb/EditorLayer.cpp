@@ -139,9 +139,21 @@ void EditorLayer::OnImGuiRender()
 
     {
         HNY_PROFILE_SCOPE("Viewport");
+
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0.0f, 0.0f });
         ImGui::Begin("Viewport");
-        ImGui::Image((void*)_frameBuffer->GetColorAttachmentRendererID(), ImVec2{ 1280.0f, 720.0f }, ImVec2(0, 1), ImVec2(1, 0));
+        ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+
+        if (viewportPanelSize.x != _viewportSize.X || viewportPanelSize.y != _viewportSize.Y)
+        {
+            _frameBuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
+            _viewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+            _cameraController.Resize(viewportPanelSize.x, viewportPanelSize.y);
+        }
+
+        ImGui::Image((void*)_frameBuffer->GetColorAttachmentRendererID(), ImVec2{ _viewportSize.X, _viewportSize.Y }, ImVec2(0, 1), ImVec2(1, 0));
         ImGui::End();
+        ImGui::PopStyleVar();
     }
 
     ImGui::End();

@@ -1,3 +1,8 @@
+/**
+ * @file Breakpoint.h
+ * @brief Use breakpoints programmatically.
+ */
+
 #pragma once
 
 #include "OS.h"

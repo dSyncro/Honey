@@ -1,6 +1,7 @@
 #include "Vector4.h"
 
 #include <Honey/Math/MathFunctions.h>
+#include <Honey/Math/Matrix/Matrix4x4.h>
 
 #include "Vector2.h"
 #include "Vector3.h"
@@ -148,6 +149,16 @@ bool Vector4::operator ==(const Vector4& other)
 		&& Mathf::ApproximatelyEquals(Y, other.Y)
 		&& Mathf::ApproximatelyEquals(Z, other.Z)
 		&& Mathf::ApproximatelyEquals(W, other.W);
+}
+
+Vector4 Vector4::operator *(const Matrix4x4& matrix) const
+{
+	return Vector4(
+		matrix.Rows[0].X * X + matrix.Rows[0].Y * Y + matrix.Rows[0].Z * Z + matrix.Rows[0].W * W,
+		matrix.Rows[1].X * X + matrix.Rows[1].Y * Y + matrix.Rows[1].Z * Z + matrix.Rows[1].W * W,
+		matrix.Rows[2].X * X + matrix.Rows[2].Y * Y + matrix.Rows[2].Z * Z + matrix.Rows[2].W * W,
+		matrix.Rows[3].X * X + matrix.Rows[3].Y * Y + matrix.Rows[3].Z * Z + matrix.Rows[3].W * W
+	);
 }
 
 Vector4& Vector4::operator +=(const Vector4& other)

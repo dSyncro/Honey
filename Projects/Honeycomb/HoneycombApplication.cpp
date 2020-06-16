@@ -11,6 +11,7 @@ namespace Honey {
 		Honeycomb()
 		{
 			PushLayer(new EditorLayer());
+			SetTitle("Honeycomb - Editor");
 		}
 
 		~Honeycomb() = default;

@@ -26,6 +26,7 @@ namespace Honey {
 		ShaderLibrary _shaderLib;
 		OrthographicCameraController _cameraController;
 
+		Math::Vector2 _viewportSize;
 		glm::vec4 _squareColor = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
 	};
 }

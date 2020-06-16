@@ -21,6 +21,7 @@ namespace Honey {
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;
 
+		virtual void SetTitle(const std::string& title) = 0;
 		virtual void SetEventCallback(const WindowEventCallback& callback) = 0;
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSyncEnabled() const = 0;

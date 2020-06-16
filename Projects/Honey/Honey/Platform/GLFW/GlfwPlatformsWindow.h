@@ -22,7 +22,9 @@ namespace Honey {
 		unsigned int GetWidth() const override { return _data.Width; }
 		unsigned int GetHeight() const override { return _data.Height; }
 
-		void SetEventCallback(const WindowEventCallback& callback) override { _data.Callback = callback; }
+		virtual void SetEventCallback(const WindowEventCallback& callback) override { _data.Callback = callback; }
+
+		virtual void SetTitle(const std::string& title) override;
 
 		virtual void SetVSync(bool enabled) override;
 		virtual bool IsVSyncEnabled() const override;

@@ -16,6 +16,8 @@ namespace Honey {
 		void OnUpdate();
 		void OnEvent(Event& e);
 
+		void Resize(uint32_t width, uint32_t height);
+
 		OrthographicCamera& GetCamera() { return _camera; }
 		const OrthographicCamera& GetCamera() const { return _camera; }
 
@@ -30,7 +32,9 @@ namespace Honey {
 		glm::vec3 _position = glm::vec3(0, 0, 0);
 
 		float _moveSpeed = 1.0f;
-		float _rotationSpeed = 1.0f;
+		float _rotationSpeed = 25.0f;
+
+		bool _doRotate = true;
 
 		bool OnMouseScrolled(MouseScrolledEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);

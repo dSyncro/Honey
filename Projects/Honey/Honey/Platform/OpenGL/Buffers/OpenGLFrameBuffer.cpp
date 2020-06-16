@@ -13,11 +13,13 @@ OpenGLFrameBuffer::OpenGLFrameBuffer(const FrameBufferSpecification& specificati
 
 OpenGLFrameBuffer::~OpenGLFrameBuffer()
 {
-	glDeleteFramebuffers(1, &_rendererID);
+	Free();
 }
 
 void OpenGLFrameBuffer::Invalidate()
 {
+	if (_rendererID) Free();
+
 	glCreateFramebuffers(1, &_rendererID);
 	glBindFramebuffer(GL_FRAMEBUFFER, _rendererID);
 
@@ -38,12 +40,27 @@ void OpenGLFrameBuffer::Invalidate()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+void OpenGLFrameBuffer::Free()
+{
+	glDeleteFramebuffers(1, &_rendererID);
+	glDeleteTextures(1, &_colorAttachment);
+	glDeleteTextures(1, &_depthAttachment);
+}
+
 void OpenGLFrameBuffer::Bind() const
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, _rendererID);
+	glViewport(0, 0, _specification.Width, _specification.Height);
 }
 
 void OpenGLFrameBuffer::Unbind() const
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void OpenGLFrameBuffer::Resize(uint32_t width, uint32_t height)
+{
+	_specification.Width = width;
+	_specification.Height = height;
+	Invalidate();
 }

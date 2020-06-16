@@ -95,6 +95,12 @@ void GlfwPlatformsWindow::OnUpdate()
 	EngineTime::SetTime(time);
 }
 
+void GlfwPlatformsWindow::SetTitle(const std::string& title) 
+{ 
+	_data.Title = title; 
+	glfwSetWindowTitle(_window, title.c_str()); 
+}
+
 void GlfwPlatformsWindow::SetVSync(bool enabled)
 {
 	HNY_PROFILE_FUNCTION();
