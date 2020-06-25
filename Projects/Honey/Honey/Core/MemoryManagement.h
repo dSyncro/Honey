@@ -1,3 +1,8 @@
+/**
+ * @file MemoryManagement.h
+ * @brief Manage memory easily.
+ */
+
 #pragma once
 
 #include <memory>

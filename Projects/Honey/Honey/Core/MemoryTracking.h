@@ -1,3 +1,8 @@
+/**
+ * @file MemoryTracking.h
+ * @brief Track memory allocations.
+ */
+
 #pragma once
 
 #include <cstddef>
@@ -24,7 +29,9 @@ namespace Honey {
 
 	public:
 
+		AllocationTracker(AllocationTracker&&) = delete;
 		AllocationTracker(const AllocationTracker&) = delete;
+		AllocationTracker& operator =(AllocationTracker&&) = delete;
 		AllocationTracker& operator =(const AllocationTracker&) = delete;
 
 		static AllocationTracker& Get() 

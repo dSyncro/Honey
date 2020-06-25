@@ -5,9 +5,27 @@
 #	include <Windows.h>
 #endif
 
+#include <iomanip>
+
 #include "AnsiStyle.h"
 
 namespace Console {
+
+	enum class Alignment {
+		Left = 0,
+		Right = 1
+	};
+
+	struct AlignmentInfo {
+
+		AlignmentInfo(long long width = 0, char fill = ' ', Alignment method = Alignment::Left) 
+			: Width(width), Fill(fill), Method(method) {}
+
+		long long Width;
+		char Fill;
+		Alignment Method;
+
+	};
 
 	inline void NewLine() noexcept { std::cout << '\n'; }
 
@@ -17,15 +35,33 @@ namespace Console {
 	void Reset() noexcept;
 	void Clear() noexcept;
 
-	template <class... Args>
+	template  <typename... Args>
+	void Align(const AlignmentInfo& info, Args... args) noexcept
+	{
+		std::ios state = std::ios(nullptr);
+		state.copyfmt(std::cout);
+
+		switch (info.Method)
+		{
+			case Alignment::Left: std::cout << std::left; break;
+			case Alignment::Right: std::cout << std::right; break;
+		}
+
+		std::cout << std::setw(info.Width) << std::setfill(info.Fill);
+		Write(args...);
+
+		std::cout.copyfmt(state);
+	}
+
+	template <typename... Args>
 	void Alert(Args... args) noexcept
 	{
 		SetForegroundColor(AnsiStyle::Forecolors::Yellow);
-		(std::cout << ... << args) << '\n';
+		WriteLine(args...);
 		Reset();
 	}
 
-	template <class... Args>
+	template <typename... Args>
 	void Error(Args... args) noexcept
 	{
 		SetForegroundColor(AnsiStyle::Forecolors::Red);
@@ -33,31 +69,31 @@ namespace Console {
 		Reset();
 	}
 
-	template <class... Args>
+	template <typename... Args>
 	void Write(Args... args)
 	{
 		(std::cout << ... << args);
 	}
 
-	template <class... Args>
+	template <typename... Args>
 	void WriteColored(AnsiStyle::Forecolors color, Args... args) noexcept
 	{
 		SetForegroundColor(color);
-		(std::cout << ... << args);
+		Write(args...);
 		Reset();
 	}
 
-	template <class... Args>
+	template <typename... Args>
 	void WriteLine(Args... args) noexcept
 	{
 		(std::cout << ... << args) << '\n';
 	}
 
-	template <class... Args>
+	template <typename... Args>
 	void WriteColoredLine(AnsiStyle::Forecolors color, Args... args) noexcept
 	{
 		SetForegroundColor(color);
-		(std::cout << ... << args) << '\n';
+		WriteLine(args...);
 		Reset();
 	}
 }

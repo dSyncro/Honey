@@ -14,6 +14,8 @@ namespace Honey {
 		Input(const Input&) = delete;
 		Input& operator =(const Input&) = delete;
 
+		virtual ~Input() = default;
+
 		static bool IsKeyPressed(Keycode keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
 		static bool IsMouseButtonPressed(MouseButton button) { return s_Instance->IsMouseButtonPressedImpl(button); }
 		static float GetMouseX() { return s_Instance->GetMouseXImpl(); }

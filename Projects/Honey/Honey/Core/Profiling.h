@@ -1,3 +1,8 @@
+/**
+ * @file Profiling.h
+ * @brief Enable (or disable) profiling tools.
+ */
+
 #pragma once
 
 #include "FunctionIdentification.h"
@@ -12,7 +17,7 @@
 #if HNY_PROFILE == 1
 #	define HNY_PROFILE_BEGIN_SESSION(name, filepath) ::Honey::Instrumentor::Get().BeginSession(name, filepath)
 #	define HNY_PROFILE_END_SESSION() ::Honey::Instrumentor::Get().EndSession()
-#	define HNY_PROFILE_SCOPE_ID(name, line) ::Honey::InstrumentationTimer CONCAT(timer, line) (name)
+#	define HNY_PROFILE_SCOPE_ID(name, id) ::Honey::InstrumentationTimer CONCAT(timer, id) (name)
 #	define HNY_PROFILE_SCOPE(name) HNY_PROFILE_SCOPE_ID(name, __LINE__)
 #	define HNY_PROFILE_FUNCTION() HNY_PROFILE_SCOPE(HNY_FUNCTION_NAME)
 #else

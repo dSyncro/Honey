@@ -5,7 +5,7 @@
 
 #define HNYPT_REGISTER_FUNCTION(global_prefix, function, name)  \
     global_prefix static int HNYPT_SINGULAR(_HNYPT_ANON_VAR_) = \
-    Honeypot::RegisterTest(Honeypot::TestCase(name, function, __FILE__, __LINE__, GetTestCategory() ));
+    Honeypot::RegisterTest(Honeypot::TestCase( name, function, __FILE__, __LINE__, GetTestCategory() ));
 
 #define HNYPT_CREATE_AND_REGISTER_FUNCTION(function, name)                                        \
     static void function();                                                                       \
