@@ -3,8 +3,8 @@
 #include "Exceptions.h"
 #include "../Libraries/Console.h"
 
-ArgumentParser::ArgumentParser(int argc, char** argv) 
-	: _argc(argc), _argv(argv)
+ArgumentParser::ArgumentParser(unsigned int argumentsCount, char** arguments) 
+	: _argc(argumentsCount), _argv(arguments)
 {
 	_current = Current();
 }
@@ -66,11 +66,11 @@ std::string* ArgumentParser::GetFlagValueByAlias(const std::string& alias)
 
 void ArgumentParser::Parse()
 {
+	Reset();
+
 	while (_tokenIndex < _argc)
 	{
-		// Is flag?
-		if (IsCurrentFlag())
-			ParseFlag();
+		if (IsCurrentFlag()) ParseFlag();
 		else ParsePositional();
 	}
 
@@ -79,6 +79,17 @@ void ArgumentParser::Parse()
 
 void ArgumentParser::PrintHelp()
 {
+	Console::Write("Usage: ", _argv[0], " ");
+	
+	for (const auto& [argument, _] : _positionalArguments)
+		if (argument.IsRequired) Console::Write(argument.Name, " ");
+
+	for (const auto& [flag, _] : _flags)
+		if (flag.IsRequired) Console::Write(flag.CommandName, " ");
+
+	Console::WriteLine("[Optional]");
+	Console::WriteLine();
+
 	if (_positionalArguments.size() > 0) PrintPositionalArgumentsHelp();
 	if (_toggles.size() > 0) PrintTogglesHelp();
 	if (_flags.size() > 0) PrintFlagsHelp();
@@ -121,8 +132,7 @@ void ArgumentParser::PrintTogglesHelp()
 {
 	const unsigned int hLength = 8 + // Name
 		16 + // Alias
-		64 + // Description
-		10; // Required
+		64; // Description
 
 	std::string header = "Toggling Flags";
 	std::string padding = std::string((hLength - header.length() - 2) / 2, ' ');
@@ -131,7 +141,6 @@ void ArgumentParser::PrintTogglesHelp()
 	Console::Align(Console::AlignmentInfo(8), "Name");
 	Console::Align(Console::AlignmentInfo(16), "Alias");
 	Console::Align(Console::AlignmentInfo(64), "Description");
-	Console::Align(Console::AlignmentInfo(10), "Required?");
 	Console::WriteLine();
 
 	Console::Align(Console::AlignmentInfo(hLength), std::string(hLength, '-'));
@@ -142,8 +151,6 @@ void ArgumentParser::PrintTogglesHelp()
 		Console::Align(Console::AlignmentInfo(8), toggle.CommandName);
 		Console::Align(Console::AlignmentInfo(16), toggle.CommandAlias);
 		Console::Align(Console::AlignmentInfo(64), toggle.Description);
-		if (toggle.IsRequired)
-			Console::WriteColored(AnsiStyle::Forecolors::Yellow, "[Required]");
 		Console::WriteLine();
 	}
 
@@ -197,12 +204,30 @@ void ArgumentParser::Reset()
 {
 	Deallocate();
 
-	_positionalArguments.clear();
-	_toggles.clear();
-	_flags.clear();
+	for (auto& [_, values] : _positionalArguments)
+		values = nullptr;
+
+	for (auto& [_, value] : _toggles)
+		value = false;
+
+	for (auto& [_, values] : _flags)
+		values = nullptr;
 
 	_positionalIndex = 0;
 	_tokenIndex = 1;
+}
+
+void ArgumentParser::Clear()
+{
+	_positionalArguments.clear();
+	_toggles.clear();
+	_flags.clear();
+}
+
+void ArgumentParser::ResetAndClear()
+{
+	Reset();
+	Clear();
 }
 
 void ArgumentParser::Deallocate()
@@ -230,20 +255,29 @@ void ArgumentParser::ParsePositional()
 	if (_positionalIndex >= _positionalArguments.size())
 		throw TooManyArgumentsException("[Positional Arguments]");
 
-	const Argument& argument = _positionalArguments[_positionalIndex].first;
-	std::string* values = _positionalArguments[_positionalIndex].second;
-
-	values = new std::string[argument.NumberOfArguments];
-
-	for (int i = 0; i < argument.NumberOfArguments; i++)
+	auto& [argument, values] = _positionalArguments[_positionalIndex];
+	switch (argument.NumberOfArguments)
 	{
-		if (IsCurrentFlag() || IsCurrentNull()) 
-			throw InsufficientArgumentsProvidedException(argument.Name);
+		case Argument::ZEROORMORE: 
+		{
+			ParseZeroOrMore(values);
+			break;
+		}
 
-		values[i] = _current;
-		Step();
+		case Argument::ONEORMORE: 
+		{
+			bool succeded = ParseOneOrMore(values);
+			if (!succeded) throw InsufficientArgumentsProvidedException(argument.Name);
+			break;
+		}
+			
+		default: 
+		{
+			bool succeded = ParseArguments(values, argument.NumberOfArguments);
+			if (!succeded) throw InsufficientArgumentsProvidedException(argument.Name);
+			break;
+		}
 	}
-
 	_positionalIndex++;
 }
 
@@ -255,8 +289,6 @@ void ArgumentParser::ParseFlag()
 
 	if (IsCurrentAlias()) ParseAliasFlag();
 	else ParseCommandFlag();
-
-	Step();
 }
 
 void ArgumentParser::ParseAliasFlag()
@@ -267,6 +299,7 @@ void ArgumentParser::ParseAliasFlag()
 	{
 		if (toggle.CommandAlias != alias) continue;
 		value = true;
+		Step();
 		return;
 	}
 
@@ -274,15 +307,15 @@ void ArgumentParser::ParseAliasFlag()
 	{
 		if (flag.CommandAlias != alias) continue;
 
+		Step();
 		values = new std::string[flag.NumberOfArguments];
 		for (int i = 0; i < flag.NumberOfArguments; i++)
 		{
-			Step();
-
 			if (IsCurrentFlag() || IsCurrentNull())
 				throw InsufficientArgumentsProvidedException(flag.CommandName);
 
 			values[i] = _current;
+			Step();
 		}
 		return;
 	}
@@ -295,25 +328,92 @@ void ArgumentParser::ParseCommandFlag()
 	for (auto& [toggle, value] : _toggles)
 	{
 		if (toggle.CommandName != name) continue;
-		value = true;
+		value = true; Step(); return;
 	}
 
 	for (auto& [flag, values] : _flags)
 	{
 		if (flag.CommandName != name) continue;
 
-		values = new std::string[flag.NumberOfArguments];
-		for (int i = 0; i < flag.NumberOfArguments; i++)
+		Step();
+		switch (flag.NumberOfArguments)
 		{
-			Step();
+			case Flag::ZEROORMORE:
+			{
+				ParseZeroOrMore(values);
+				return;
+			}
 
-			if (IsCurrentFlag() || IsCurrentNull())
-				throw InsufficientArgumentsProvidedException(flag.CommandName);
+			case Flag::ONEORMORE:
+			{
+				bool succeded = ParseOneOrMore(values);
+				if (!succeded) throw InsufficientArgumentsProvidedException(name);
+				return;
+			}
 
-			values[i] = _current;
+			default:
+			{
+				bool succeded = ParseArguments(values, flag.NumberOfArguments);
+				if (!succeded) throw InsufficientArgumentsProvidedException(name);
+				return;
+			}
+
 		}
-		return;
+
 	}
+}
+
+void ArgumentParser::ParseZeroOrMore(std::string*& values)
+{
+	std::vector<std::string> valuesVector;
+
+	while (!(IsCurrentFlag() || IsCurrentNull()))
+	{
+		valuesVector.push_back(_current);
+		Step();
+	}
+
+	unsigned int length = valuesVector.size();
+
+	values = new std::string[length];
+	for (int i = 0; i < length; i++)
+		values[i] = valuesVector[i];
+}
+
+bool ArgumentParser::ParseOneOrMore(std::string*& values)
+{
+	std::vector<std::string> valuesVector;
+
+	while (IsCurrentFlag() || IsCurrentNull())
+	{
+		valuesVector.push_back(_current);
+		Step();
+	}
+
+	unsigned int length = valuesVector.size();
+
+	values = new std::string[length];
+
+	if (!length) return false;
+
+	for (int i = 0; i < length; i++)
+		values[i] = valuesVector[i];
+
+	return true;
+}
+
+bool ArgumentParser::ParseArguments(std::string*& values, unsigned int nargs)
+{
+	values = new std::string[nargs];
+	for (int i = 0; i < nargs; i++)
+	{
+		if (IsCurrentFlag() || IsCurrentNull()) return false;
+
+		values[i] = _current;
+		Step();
+	}
+
+	return true;
 }
 
 std::string ArgumentParser::Peek(unsigned int offset)

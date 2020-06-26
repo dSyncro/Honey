@@ -153,11 +153,8 @@
     <ClInclude Include="Honeypot\TestCategory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArgumentParser\Argument.cpp" />
     <ClCompile Include="ArgumentParser\ArgumentParser.cpp" />
     <ClCompile Include="ArgumentParser\Exceptions.cpp" />
-    <ClCompile Include="ArgumentParser\Flag.cpp" />
-    <ClCompile Include="ArgumentParser\Toggle.cpp" />
     <ClCompile Include="Honeypot.cpp" />
     <ClCompile Include="Libraries\AnsiStyle.cpp" />
     <ClCompile Include="Libraries\Console.cpp" />

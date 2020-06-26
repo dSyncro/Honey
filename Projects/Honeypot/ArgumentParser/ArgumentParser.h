@@ -10,7 +10,7 @@ class ArgumentParser {
 
 public:
 
-	ArgumentParser(int argc, char** argv);
+	ArgumentParser(unsigned int argumentsCount, char** arguments);
 	~ArgumentParser();
 
 	void AddPositionalArgument(const Argument& argument);
@@ -31,7 +31,13 @@ public:
 
 private:
 
+	using PositionalArgumentsList = std::vector<std::pair<Argument, std::string*>>;
+	using TogglesList = std::vector<std::pair<Toggle, bool>>;
+	using FlagsList = std::vector<std::pair<Flag, std::string*>>;
+
 	void Reset();
+	void Clear();
+	void ResetAndClear();
 	void Deallocate();
 	void Validate();
 
@@ -39,6 +45,9 @@ private:
 	void ParseAliasFlag();
 	void ParseCommandFlag();
 	void ParsePositional();
+	void ParseZeroOrMore(std::string*& values);
+	bool ParseOneOrMore(std::string*& values);
+	bool ParseArguments(std::string*& values, unsigned int nargs);
 
 	void PrintPositionalArgumentsHelp();
 	void PrintTogglesHelp();
@@ -53,10 +62,6 @@ private:
 	bool IsCurrentFlag() { return _current.length() > 0 && _current[0] == _prefixChar; }
 	bool IsCurrentAlias() { return IsCurrentFlag() && _current.length() > 1 && _current[1] == _prefixChar; }
 
-	using PositionalArgumentsList = std::vector<std::pair<Argument, std::string*>>;
-	using TogglesList = std::vector<std::pair<Toggle, bool>>;
-	using FlagsList = std::vector<std::pair<Flag, std::string*>>;
-
 	PositionalArgumentsList _positionalArguments;
 	TogglesList _toggles;
 	FlagsList _flags;
@@ -68,7 +73,7 @@ private:
 
 	std::string _current = "";
 
-	int _argc;
+	unsigned int _argc;
 	char** _argv;
 
 };

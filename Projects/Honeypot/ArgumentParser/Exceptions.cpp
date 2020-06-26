@@ -16,8 +16,3 @@ TooManyArgumentsException::TooManyArgumentsException(const std::string& name)
     _message = "Too many arguments provided for Positional Argument or Flag \"" +
         name + "\".";
 }
-
-ValueNotDefinedException::ValueNotDefinedException(const std::string& name)
-{
-    _message = "Argument or Flag \"" + name + "\" not set.";
-}

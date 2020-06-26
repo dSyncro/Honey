@@ -36,14 +36,3 @@ private:
     std::string _message;
 
 };
-
-struct ValueNotDefinedException : public std::exception {
-
-    ValueNotDefinedException(const std::string& name);
-    const char* what() const noexcept { return _message.c_str(); }
-
-private:
-
-    std::string _message;
-
-};

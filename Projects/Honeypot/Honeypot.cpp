@@ -25,7 +25,7 @@ public:
         try
         {
             ArgumentParser parser(5, args);
-            parser.AddPositionalArgument(Argument("add", "addition thing", 2));
+            parser.AddPositionalArgument(Argument("add", "addition thing", 2, true));
             parser.AddToggle(Toggle("f", "flag"));
             parser.AddToggle(Toggle("c", "cesso"));
             parser.AddFlag(Flag("k", "kristinadavena"));
