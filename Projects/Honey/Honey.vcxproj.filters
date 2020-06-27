@@ -271,9 +271,6 @@
     <ClInclude Include="Honey\Math\Vector\Vector4.h">
       <Filter>Honey\Math\Vector</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsInput.h">
-      <Filter>Honey\Platform\GLFW</Filter>
-    </ClInclude>
     <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h">
       <Filter>Honey\Platform\GLFW</Filter>
     </ClInclude>

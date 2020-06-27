@@ -25,7 +25,12 @@ public:
         try
         {
             ArgumentParser parser(5, args);
-            parser.AddPositionalArgument(Argument("add", "addition thing", 2, true));
+            parser.AddPositionalArgument(Argument("Tests", Argument::ZEROORMORE, "Tests to be performed."));
+            parser.AddFlag(Flag("c", "categories", Flag::ONEORMORE, "Used to specify entire categories to perform the testing of."));
+            parser.AddFlag(Flag("t", "tests", Flag::ONEORMORE, "Used to specify tests to be performed."));
+            parser.PrintHelp();
+            parser.Parse();
+            /*parser.AddPositionalArgument(Argument("add", "addition thing", Argument::ZEROORMORE, true));
             parser.AddToggle(Toggle("f", "flag"));
             parser.AddToggle(Toggle("c", "cesso"));
             parser.AddFlag(Flag("k", "kristinadavena"));
@@ -35,7 +40,7 @@ public:
             parser.PrintHelp();
             parser.Parse();
             parser.GetToggleValueByName("f");
-            parser.GetToggleValueByAlias("flag");
+            parser.GetToggleValueByAlias("flag");*/
         }
         catch(const TooManyArgumentsException& ex) {
             std::cout << ex.what() << "\n";

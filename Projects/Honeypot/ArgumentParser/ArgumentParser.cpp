@@ -3,6 +3,16 @@
 #include "Exceptions.h"
 #include "../Libraries/Console.h"
 
+std::string NargsToString(int nargs)
+{
+	switch (nargs)
+	{
+		case Argument::ZEROORMORE: return "*";
+		case Argument::ONEORMORE: return "+";
+		default: return std::to_string(nargs);
+	}
+}
+
 ArgumentParser::ArgumentParser(unsigned int argumentsCount, char** arguments) 
 	: _argc(argumentsCount), _argv(arguments)
 {
@@ -118,7 +128,8 @@ void ArgumentParser::PrintPositionalArgumentsHelp()
 	for (const auto& [argument, _] : _positionalArguments)
 	{
 		Console::Align(Console::AlignmentInfo(16), argument.Name);
-		Console::Align(Console::AlignmentInfo(8), argument.NumberOfArguments);
+		std::string nargs = NargsToString(argument.NumberOfArguments);
+		Console::Align(Console::AlignmentInfo(8), nargs);
 		Console::Align(Console::AlignmentInfo(64), argument.Description);
 		if (argument.IsRequired) 
 			Console::WriteColored(AnsiStyle::Forecolors::Yellow, "[Required]");
@@ -148,8 +159,8 @@ void ArgumentParser::PrintTogglesHelp()
 
 	for (const auto& [toggle, _] : _toggles)
 	{
-		Console::Align(Console::AlignmentInfo(8), toggle.CommandName);
-		Console::Align(Console::AlignmentInfo(16), toggle.CommandAlias);
+		Console::Align(Console::AlignmentInfo(8), "-" + toggle.CommandName);
+		Console::Align(Console::AlignmentInfo(16), "--" + toggle.CommandAlias);
 		Console::Align(Console::AlignmentInfo(64), toggle.Description);
 		Console::WriteLine();
 	}
@@ -181,9 +192,10 @@ void ArgumentParser::PrintFlagsHelp()
 
 	for (const auto& [flag, _] : _flags)
 	{
-		Console::Align(Console::AlignmentInfo(8), flag.CommandName);
-		Console::Align(Console::AlignmentInfo(16), flag.CommandAlias);
-		Console::Align(Console::AlignmentInfo(8), flag.NumberOfArguments);
+		Console::Align(Console::AlignmentInfo(8), "-" + flag.CommandName);
+		Console::Align(Console::AlignmentInfo(16), "--" + flag.CommandAlias);
+		std::string nargs = NargsToString(flag.NumberOfArguments);
+		Console::Align(Console::AlignmentInfo(8), nargs);
 		Console::Align(Console::AlignmentInfo(56), flag.Description);
 		if (flag.IsRequired)
 			Console::WriteColored(AnsiStyle::Forecolors::Yellow, "[Required]");
