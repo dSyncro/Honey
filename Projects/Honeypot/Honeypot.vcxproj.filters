@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Honeypot">
+      <UniqueIdentifier>{1BE6B656-07B3-1162-30CC-FF091CF846F0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{0259E1F6-6EC3-956D-B701-471323AB73C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{5865280E-C479-50BF-8DFB-F31EF9CE4CF0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Honeypot.h" />
+    <ClInclude Include="Honeypot\Core.h">
+      <Filter>Honeypot</Filter>
+    </ClInclude>
+    <ClInclude Include="Honeypot\TestCase.h">
+      <Filter>Honeypot</Filter>
+    </ClInclude>
+    <ClInclude Include="Honeypot\TestCategory.h">
+      <Filter>Honeypot</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\AnsiStyle.h">
+      <Filter>Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Console.h">
+      <Filter>Libraries</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Honeypot.cpp" />
+    <ClCompile Include="Honeypot\TestCase.cpp">
+      <Filter>Honeypot</Filter>
+    </ClCompile>
+    <ClCompile Include="Honeypot\TestCategory.cpp">
+      <Filter>Honeypot</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\AnsiStyle.cpp">
+      <Filter>Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\Console.cpp">
+      <Filter>Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\OnePlusOne.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\TwoPlusTwo.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Vector2.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

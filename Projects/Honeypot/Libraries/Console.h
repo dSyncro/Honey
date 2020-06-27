@@ -9,7 +9,9 @@
 
 #include "AnsiStyle.h"
 
-namespace Console {
+class Console {
+
+public:
 
 	enum class Alignment {
 		Left = 0,
@@ -18,7 +20,7 @@ namespace Console {
 
 	struct AlignmentInfo {
 
-		AlignmentInfo(long long width = 0, char fill = ' ', Alignment method = Alignment::Left) 
+		AlignmentInfo(long long width = 0, char fill = ' ', Alignment method = Alignment::Left)
 			: Width(width), Fill(fill), Method(method) {}
 
 		long long Width;
@@ -27,24 +29,26 @@ namespace Console {
 
 	};
 
-	inline void NewLine() noexcept { std::cout << '\n'; }
+	Console() = delete;
 
-	void SetForegroundColor(AnsiStyle::Forecolors color) noexcept;
-	void SetBackgroundColor(AnsiStyle::Backcolors color) noexcept;
+	static void NewLine() noexcept { std::cout << '\n'; }
 
-	void Reset() noexcept;
-	void Clear() noexcept;
+	static void SetForegroundColor(AnsiStyle::Forecolors color) noexcept;
+	static void SetBackgroundColor(AnsiStyle::Backcolors color) noexcept;
+
+	static void Reset() noexcept;
+	static void Clear() noexcept;
 
 	template  <typename... Args>
-	void Align(const AlignmentInfo& info, Args... args) noexcept
+	static void Align(const AlignmentInfo& info, Args... args) noexcept
 	{
 		std::ios state = std::ios(nullptr);
 		state.copyfmt(std::cout);
 
 		switch (info.Method)
 		{
-			case Alignment::Left: std::cout << std::left; break;
-			case Alignment::Right: std::cout << std::right; break;
+		case Alignment::Left: std::cout << std::left; break;
+		case Alignment::Right: std::cout << std::right; break;
 		}
 
 		std::cout << std::setw(info.Width) << std::setfill(info.Fill);
@@ -54,7 +58,7 @@ namespace Console {
 	}
 
 	template <typename... Args>
-	void Alert(Args... args) noexcept
+	static void Alert(Args... args) noexcept
 	{
 		SetForegroundColor(AnsiStyle::Forecolors::Yellow);
 		WriteLine(args...);
@@ -62,7 +66,7 @@ namespace Console {
 	}
 
 	template <typename... Args>
-	void Error(Args... args) noexcept
+	static void Error(Args... args) noexcept
 	{
 		SetForegroundColor(AnsiStyle::Forecolors::Red);
 		(std::cerr << ... << args) << '\n';
@@ -70,13 +74,13 @@ namespace Console {
 	}
 
 	template <typename... Args>
-	void Write(Args... args)
+	static void Write(Args... args)
 	{
 		(std::cout << ... << args);
 	}
 
 	template <typename... Args>
-	void WriteColored(AnsiStyle::Forecolors color, Args... args) noexcept
+	static void WriteColored(AnsiStyle::Forecolors color, Args... args) noexcept
 	{
 		SetForegroundColor(color);
 		Write(args...);
@@ -84,16 +88,17 @@ namespace Console {
 	}
 
 	template <typename... Args>
-	void WriteLine(Args... args) noexcept
+	static void WriteLine(Args... args) noexcept
 	{
 		(std::cout << ... << args) << '\n';
 	}
 
 	template <typename... Args>
-	void WriteColoredLine(AnsiStyle::Forecolors color, Args... args) noexcept
+	static void WriteColoredLine(AnsiStyle::Forecolors color, Args... args) noexcept
 	{
 		SetForegroundColor(color);
 		WriteLine(args...);
 		Reset();
 	}
-}
+
+};
