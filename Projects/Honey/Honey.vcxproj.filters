@@ -70,6 +70,9 @@
     <Filter Include="Honey\Renderer\Camera">
       <UniqueIdentifier>{46F59484-B261-507F-7B55-E8DCE78072E7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Honey\Scene">
+      <UniqueIdentifier>{055F8247-7114-FB3C-FA08-F51366BDF140}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Honey\Timing">
       <UniqueIdentifier>{9F4A943A-8BAD-23DF-3433-5C952075EF61}</UniqueIdentifier>
     </Filter>
@@ -271,6 +274,9 @@
     <ClInclude Include="Honey\Math\Vector\Vector4.h">
       <Filter>Honey\Math\Vector</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Math\Vectors.h">
+      <Filter>Honey\Math</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h">
       <Filter>Honey\Platform\GLFW</Filter>
     </ClInclude>
@@ -372,6 +378,9 @@
     </ClInclude>
     <ClInclude Include="Honey\Renderer\VertexArray.h">
       <Filter>Honey\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Scene\Scene.h">
+      <Filter>Honey\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Timing\EngineTime.h">
       <Filter>Honey\Timing</Filter>
@@ -1876,7 +1885,6 @@
     <ClInclude Include="third-party\stb_image\stb_image.h">
       <Filter>third-party\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Math\Vectors.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1995,6 +2003,9 @@
     </ClCompile>
     <ClCompile Include="Honey\Renderer\VertexArray.cpp">
       <Filter>Honey\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Scene\Scene.cpp">
+      <Filter>Honey\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Timing\EngineTime.cpp">
       <Filter>Honey\Timing</Filter>

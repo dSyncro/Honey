@@ -1,6 +1,6 @@
 #include "OpenGLContext.h"
 
-#include <Honey/Core/Log.h>
+#include <Honey/Core.h>
 
 extern "C" {
 #include <glad/glad.h>

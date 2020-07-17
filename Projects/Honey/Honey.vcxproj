@@ -76,7 +76,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING;HNY_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;third-party\spdlog\include;third-party\glfw\include;third-party\glad\include;third-party\glm;third-party\ImGui;third-party\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;third-party\spdlog\include;third-party\glfw\include;third-party\glad\include;third-party\glm;third-party\ImGui;third-party\stb_image;third-party\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -97,7 +97,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING;HNY_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;third-party\spdlog\include;third-party\glfw\include;third-party\glad\include;third-party\glm;third-party\ImGui;third-party\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;third-party\spdlog\include;third-party\glfw\include;third-party\glad\include;third-party\glm;third-party\ImGui;third-party\stb_image;third-party\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -121,7 +121,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING;HNY_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;third-party\spdlog\include;third-party\glfw\include;third-party\glad\include;third-party\glm;third-party\ImGui;third-party\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;third-party\spdlog\include;third-party\glfw\include;third-party\glad\include;third-party\glm;third-party\ImGui;third-party\stb_image;third-party\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -225,6 +225,7 @@
     <ClInclude Include="Honey\Renderer\ShaderLibrary.h" />
     <ClInclude Include="Honey\Renderer\Texture.h" />
     <ClInclude Include="Honey\Renderer\VertexArray.h" />
+    <ClInclude Include="Honey\Scene\Scene.h" />
     <ClInclude Include="Honey\Timing\EngineTime.h" />
     <ClInclude Include="Honey\Timing\Time.h" />
     <ClInclude Include="Honey\Timing\Timestamp.h" />
@@ -767,6 +768,7 @@
     <ClCompile Include="Honey\Renderer\ShaderLibrary.cpp" />
     <ClCompile Include="Honey\Renderer\Texture.cpp" />
     <ClCompile Include="Honey\Renderer\VertexArray.cpp" />
+    <ClCompile Include="Honey\Scene\Scene.cpp" />
     <ClCompile Include="Honey\Timing\EngineTime.cpp" />
     <ClCompile Include="Honey\Timing\Time.cpp" />
     <ClCompile Include="Honey\Window\Window.cpp" />

@@ -36,3 +36,14 @@ private:
     std::string _message;
 
 };
+
+struct UnknownFlagException : public std::exception {
+
+    UnknownFlagException(const std::string& name);
+    const char* what() const noexcept { return _message.c_str(); }
+
+private:
+
+    std::string _message;
+
+};

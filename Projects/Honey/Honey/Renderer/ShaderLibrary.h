@@ -12,6 +12,7 @@ namespace Honey {
 
 		void Add(const Reference<Shader>& shader);
 		void Add(const std::string& name, const Reference<Shader>& shader);
+
 		Reference<Shader> Load(const std::string& path);
 		Reference<Shader> Load(const std::string& name, const std::string& path);
 

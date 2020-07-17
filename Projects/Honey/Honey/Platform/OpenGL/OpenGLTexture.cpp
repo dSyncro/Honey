@@ -2,6 +2,8 @@
 
 using namespace Honey;
 
+#include <Honey/Core.h>
+
 #include <stb_image.h>
 
 OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)

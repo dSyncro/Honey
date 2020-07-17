@@ -16,3 +16,8 @@ TooManyArgumentsException::TooManyArgumentsException(const std::string& name)
     _message = "Too many arguments provided for Positional Argument or Flag \"" +
         name + "\".";
 }
+
+UnknownFlagException::UnknownFlagException(const std::string& name)
+{
+    _message = "Unknown Flag \"-" + name + "\".";
+}

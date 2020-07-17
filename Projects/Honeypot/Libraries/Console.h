@@ -15,15 +15,15 @@ public:
 
 	enum class Alignment {
 		Left = 0,
-		Right = 1
+		Right = 1,
 	};
 
 	struct AlignmentInfo {
 
-		AlignmentInfo(long long width = 0, char fill = ' ', Alignment method = Alignment::Left)
+		AlignmentInfo(std::size_t width = 0, char fill = ' ', Alignment method = Alignment::Left)
 			: Width(width), Fill(fill), Method(method) {}
 
-		long long Width;
+		std::size_t Width;
 		char Fill;
 		Alignment Method;
 
@@ -39,6 +39,10 @@ public:
 	static void Reset() noexcept;
 	static void Clear() noexcept;
 
+	static std::size_t GetWidth() noexcept;
+	static std::size_t GetHeight() noexcept;
+	static std::pair<std::size_t, std::size_t> GetSize() noexcept;
+
 	template  <typename... Args>
 	static void Align(const AlignmentInfo& info, Args... args) noexcept
 	{
@@ -47,8 +51,8 @@ public:
 
 		switch (info.Method)
 		{
-		case Alignment::Left: std::cout << std::left; break;
-		case Alignment::Right: std::cout << std::right; break;
+			case Alignment::Left: std::cout << std::left; break;
+			case Alignment::Right: std::cout << std::right; break;
 		}
 
 		std::cout << std::setw(info.Width) << std::setfill(info.Fill);

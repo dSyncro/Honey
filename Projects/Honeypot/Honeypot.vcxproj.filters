@@ -1,17 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="ArgumentParser">
+      <UniqueIdentifier>{75154EEA-61E3-41F0-4A77-B21636E41D55}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Honeypot">
       <UniqueIdentifier>{1BE6B656-07B3-1162-30CC-FF091CF846F0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Libraries">
       <UniqueIdentifier>{0259E1F6-6EC3-956D-B701-471323AB73C2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Libraries\GeneralConsole">
+      <UniqueIdentifier>{E24BFB3E-CE70-4ABF-F7BB-2F4FE33F49DD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\WindowConsole">
+      <UniqueIdentifier>{5C99375D-C8D0-7FF4-D1DA-E3173D91A6ED}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Tests">
       <UniqueIdentifier>{5865280E-C479-50BF-8DFB-F31EF9CE4CF0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArgumentParser\Argument.h">
+      <Filter>ArgumentParser</Filter>
+    </ClInclude>
+    <ClInclude Include="ArgumentParser\ArgumentParser.h">
+      <Filter>ArgumentParser</Filter>
+    </ClInclude>
+    <ClInclude Include="ArgumentParser\Exceptions.h">
+      <Filter>ArgumentParser</Filter>
+    </ClInclude>
+    <ClInclude Include="ArgumentParser\Flag.h">
+      <Filter>ArgumentParser</Filter>
+    </ClInclude>
+    <ClInclude Include="ArgumentParser\TablePrinter.h">
+      <Filter>ArgumentParser</Filter>
+    </ClInclude>
+    <ClInclude Include="ArgumentParser\Toggle.h">
+      <Filter>ArgumentParser</Filter>
+    </ClInclude>
     <ClInclude Include="Honeypot.h" />
     <ClInclude Include="Honeypot\Core.h">
       <Filter>Honeypot</Filter>
@@ -30,6 +57,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArgumentParser\ArgumentParser.cpp">
+      <Filter>ArgumentParser</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgumentParser\Exceptions.cpp">
+      <Filter>ArgumentParser</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgumentParser\TablePrinter.cpp">
+      <Filter>ArgumentParser</Filter>
+    </ClCompile>
     <ClCompile Include="Honeypot.cpp" />
     <ClCompile Include="Honeypot\TestCase.cpp">
       <Filter>Honeypot</Filter>
@@ -40,8 +76,11 @@
     <ClCompile Include="Libraries\AnsiStyle.cpp">
       <Filter>Libraries</Filter>
     </ClCompile>
-    <ClCompile Include="Libraries\Console.cpp">
-      <Filter>Libraries</Filter>
+    <ClCompile Include="Libraries\GeneralConsole\GeneralConsole.cpp">
+      <Filter>Libraries\GeneralConsole</Filter>
+    </ClCompile>
+    <ClCompile Include="Libraries\WindowConsole\WindowConsole.cpp">
+      <Filter>Libraries\WindowConsole</Filter>
     </ClCompile>
     <ClCompile Include="Tests\OnePlusOne.cpp">
       <Filter>Tests</Filter>

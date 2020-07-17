@@ -10,7 +10,7 @@ class ArgumentParser {
 
 public:
 
-	ArgumentParser(unsigned int argumentsCount, char** arguments);
+	ArgumentParser(std::size_t argumentsCount, char** arguments);
 	~ArgumentParser();
 
 	void AddPositionalArgument(const Argument& argument);
@@ -47,7 +47,7 @@ private:
 	void ParsePositional();
 	void ParseZeroOrMore(std::string*& values);
 	bool ParseOneOrMore(std::string*& values);
-	bool ParseArguments(std::string*& values, unsigned int nargs);
+	bool ParseArguments(std::string*& values, std::size_t nargs);
 
 	void PrintPositionalArgumentsHelp();
 	void PrintTogglesHelp();
@@ -55,7 +55,7 @@ private:
 
 	std::string Current() { return Peek(); }
 	std::string Next() { return Peek(1); }
-	std::string Peek(unsigned int offset = 0);
+	std::string Peek(std::size_t offset = 0);
 	void Step() { _tokenIndex++; _current = Current(); }
 
 	bool IsCurrentNull() { return !_current.length(); }
@@ -68,12 +68,12 @@ private:
 
 	char _prefixChar = '-';
 
-	unsigned int _positionalIndex = 0;
-	unsigned int _tokenIndex = 1;
+	std::size_t _positionalIndex = 0;
+	std::size_t _tokenIndex = 1;
 
 	std::string _current = "";
 
-	unsigned int _argc;
+	std::size_t _argc;
 	char** _argv;
 
 };

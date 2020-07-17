@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <string>
 
-#include <Honey/Core.h>
+#include <Honey/Core/MemoryManagement.h>
 
 namespace Honey {
 

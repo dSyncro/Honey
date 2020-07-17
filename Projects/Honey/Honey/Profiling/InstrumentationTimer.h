@@ -16,8 +16,7 @@ namespace Honey {
 
 		~InstrumentationTimer()
 		{
-			if (!_isStopped)
-				Stop();
+			if (!_isStopped) Stop();
 		}
 
 		void Stop()

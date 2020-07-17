@@ -1,5 +1,7 @@
 #include "OpenGLShader.h"
 
+#include <Honey/Core.h>
+
 #include <fstream>
 #include <vector>
 

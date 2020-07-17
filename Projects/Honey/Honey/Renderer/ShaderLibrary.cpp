@@ -1,5 +1,7 @@
 #include "ShaderLibrary.h"
 
+#include <Honey/Core.h>
+
 using namespace Honey;
 
 void ShaderLibrary::Add(const Reference<Shader>& shader)

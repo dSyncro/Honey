@@ -13,7 +13,7 @@ std::string NargsToString(int nargs)
 	}
 }
 
-ArgumentParser::ArgumentParser(unsigned int argumentsCount, char** arguments) 
+ArgumentParser::ArgumentParser(std::size_t argumentsCount, char** arguments)
 	: _argc(argumentsCount), _argv(arguments)
 {
 	_current = Current();
@@ -107,7 +107,7 @@ void ArgumentParser::PrintHelp()
 
 void ArgumentParser::PrintPositionalArgumentsHelp()
 {
-	const unsigned int hLength = 16 + // Name
+	const std::size_t hLength = 16 + // Name
 		8 + // Nargs
 		64 + // Description
 		10; // Required
@@ -141,7 +141,7 @@ void ArgumentParser::PrintPositionalArgumentsHelp()
 
 void ArgumentParser::PrintTogglesHelp()
 {
-	const unsigned int hLength = 8 + // Name
+	const std::size_t hLength = 8 + // Name
 		16 + // Alias
 		64; // Description
 
@@ -170,7 +170,7 @@ void ArgumentParser::PrintTogglesHelp()
 
 void ArgumentParser::PrintFlagsHelp()
 {
-	const unsigned int hLength = 8 + // Name
+	const std::size_t hLength = 8 + // Name
 		16 + // Alias
 		8 + // Nargs
 		56 + // Description
@@ -321,7 +321,7 @@ void ArgumentParser::ParseAliasFlag()
 
 		Step();
 		values = new std::string[flag.NumberOfArguments];
-		for (int i = 0; i < flag.NumberOfArguments; i++)
+		for (std::size_t i = 0; i < flag.NumberOfArguments; i++)
 		{
 			if (IsCurrentFlag() || IsCurrentNull())
 				throw InsufficientArgumentsProvidedException(flag.CommandName);
@@ -373,6 +373,8 @@ void ArgumentParser::ParseCommandFlag()
 		}
 
 	}
+
+	throw UnknownFlagException(name);
 }
 
 void ArgumentParser::ParseZeroOrMore(std::string*& values)
@@ -385,10 +387,10 @@ void ArgumentParser::ParseZeroOrMore(std::string*& values)
 		Step();
 	}
 
-	unsigned int length = valuesVector.size();
+	std::size_t length = valuesVector.size();
 
 	values = new std::string[length];
-	for (int i = 0; i < length; i++)
+	for (std::size_t i = 0; i < length; i++)
 		values[i] = valuesVector[i];
 }
 
@@ -396,28 +398,28 @@ bool ArgumentParser::ParseOneOrMore(std::string*& values)
 {
 	std::vector<std::string> valuesVector;
 
-	while (IsCurrentFlag() || IsCurrentNull())
+	while (!(IsCurrentFlag() || IsCurrentNull()))
 	{
 		valuesVector.push_back(_current);
 		Step();
 	}
 
-	unsigned int length = valuesVector.size();
+	std::size_t length = valuesVector.size();
 
 	values = new std::string[length];
 
 	if (!length) return false;
 
-	for (int i = 0; i < length; i++)
+	for (std::size_t i = 0; i < length; i++)
 		values[i] = valuesVector[i];
 
 	return true;
 }
 
-bool ArgumentParser::ParseArguments(std::string*& values, unsigned int nargs)
+bool ArgumentParser::ParseArguments(std::string*& values, std::size_t nargs)
 {
 	values = new std::string[nargs];
-	for (int i = 0; i < nargs; i++)
+	for (std::size_t i = 0; i < nargs; i++)
 	{
 		if (IsCurrentFlag() || IsCurrentNull()) return false;
 
@@ -428,9 +430,9 @@ bool ArgumentParser::ParseArguments(std::string*& values, unsigned int nargs)
 	return true;
 }
 
-std::string ArgumentParser::Peek(unsigned int offset)
+std::string ArgumentParser::Peek(std::size_t offset)
 {
-	unsigned int index = _tokenIndex + offset;
+	std::size_t index = _tokenIndex + offset;
 	if (index >= _argc) return "";
 	return _argv[index];
 }

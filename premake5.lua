@@ -24,6 +24,7 @@ IncludeDir["GLAD"] = "Projects/Honey/third-party/glad/include"
 IncludeDir["GLM"] = "Projects/Honey/third-party/glm"
 IncludeDir["ImGui"] = "Projects/Honey/third-party/ImGui"
 IncludeDir["StbImage"] = "Projects/Honey/third-party/stb_image"
+IncludeDir["EnTT"] = "Projects/Honey/third-party/entt/include"
 
 group "Dependencies"
 
@@ -59,6 +60,9 @@ project "Honey"
 
 		"Projects/%{prj.name}/third-party/stb_image/**.h",
 		"Projects/%{prj.name}/third-party/stb_image/**.cpp",
+
+		"Projects/%{prj.name}/third-party/entt/include/**.h",
+		"Projects/%{prj.name}/third-party/entt/include/**.cpp",
 	}
 
 	defines 
@@ -77,6 +81,7 @@ project "Honey"
 		"%{IncludeDir.GLM}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.StbImage}",
+		"%{IncludeDir.EnTT}"
 	}
 
 	links 
@@ -84,7 +89,6 @@ project "Honey"
 		"GLFW",
 		"GLAD",
 		"ImGui"
-		
 	}
 
 	filter "system:windows"
@@ -133,9 +137,8 @@ project "Sandbox"
 		"Projects/Honey/",
 		"Projects/Honey/third-party",
 		"%{IncludeDir.GLM}",
+		"%{IncludeDir.EnTT}"
 	}
-	
-	
 
 	links
 	{
@@ -197,6 +200,7 @@ project "Honeycomb"
 		"Projects/Honey/",
 		"Projects/Honey/third-party",
 		"%{IncludeDir.GLM}",
+		"%{IncludeDir.EnTT}"
 	}
 
 	links

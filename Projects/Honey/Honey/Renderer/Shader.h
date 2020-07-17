@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include <Honey/Core.h>
+#include <Honey/Core/MemoryManagement.h>
 
 #include <glm/glm.hpp>
 

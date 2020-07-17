@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include <Honey/Core.h>
+#include <Honey/Core/Assertion.h>
 
 namespace Honey {
 

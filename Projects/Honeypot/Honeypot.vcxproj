@@ -135,34 +135,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Honey\Honey.vcxproj">
-      <Project>{E8A3540D-54B8-7CBE-1D3A-201E890D79EF}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="ArgumentParser\Argument.h" />
     <ClInclude Include="ArgumentParser\ArgumentParser.h" />
     <ClInclude Include="ArgumentParser\Exceptions.h" />
     <ClInclude Include="ArgumentParser\Flag.h" />
+    <ClInclude Include="ArgumentParser\TablePrinter.h" />
     <ClInclude Include="ArgumentParser\Toggle.h" />
-    <ClInclude Include="Honeypot\Core.h" />
     <ClInclude Include="Honeypot.h" />
-    <ClInclude Include="Libraries\AnsiStyle.h" />
-    <ClInclude Include="Libraries\Console.h" />
+    <ClInclude Include="Honeypot\Core.h" />
     <ClInclude Include="Honeypot\TestCase.h" />
     <ClInclude Include="Honeypot\TestCategory.h" />
+    <ClInclude Include="Libraries\AnsiStyle.h" />
+    <ClInclude Include="Libraries\Console.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentParser\ArgumentParser.cpp" />
     <ClCompile Include="ArgumentParser\Exceptions.cpp" />
+    <ClCompile Include="ArgumentParser\TablePrinter.cpp" />
     <ClCompile Include="Honeypot.cpp" />
-    <ClCompile Include="Libraries\AnsiStyle.cpp" />
-    <ClCompile Include="Libraries\Console.cpp" />
     <ClCompile Include="Honeypot\TestCase.cpp" />
     <ClCompile Include="Honeypot\TestCategory.cpp" />
+    <ClCompile Include="Libraries\AnsiStyle.cpp" />
+    <ClCompile Include="Libraries\GeneralConsole\GeneralConsole.cpp" />
+    <ClCompile Include="Libraries\WindowConsole\WindowConsole.cpp" />
     <ClCompile Include="Tests\OnePlusOne.cpp" />
     <ClCompile Include="Tests\TwoPlusTwo.cpp" />
     <ClCompile Include="Tests\Vector2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Honey\Honey.vcxproj">
+      <Project>{E8A3540D-54B8-7CBE-1D3A-201E890D79EF}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
