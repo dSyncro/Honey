@@ -143,6 +143,9 @@
   <ItemGroup>
     <ClInclude Include="Honey.h" />
     <ClInclude Include="Honey\Application.h" />
+    <ClInclude Include="Honey\Components\Components.h" />
+    <ClInclude Include="Honey\Components\SpriteRendererComponent.h" />
+    <ClInclude Include="Honey\Components\TransformComponent.h" />
     <ClInclude Include="Honey\Core.h" />
     <ClInclude Include="Honey\Core\Assertion.h" />
     <ClInclude Include="Honey\Core\Breakpoint.h" />

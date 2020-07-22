@@ -11,6 +11,12 @@ void EditorLayer::OnAttach()
 {
 	HNY_PROFILE_FUNCTION();
 
+    _activeScene = CreateReference<Scene>();
+
+    entt::entity entity = _activeScene->CreateEntity();
+    _activeScene->GetRegistry().emplace<TransformComponent>(entity, glm::mat4(1.0f));
+    _activeScene->GetRegistry().emplace<SpriteRendererComponent>(entity, glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
+
 	_texture = Texture2D::Create("assets/textures/logo.png");
 
     FrameBufferSpecification specification = { 1280, 720 };
@@ -43,12 +49,14 @@ void EditorLayer::OnUpdate()
 
 	Renderer2D::BeginScene(_cameraController.GetCamera());
 
-	for (int y = 0; y < 3; y++) 
+	/*for (int y = 0; y < 3; y++) 
 		for (int x = 0; x < 3; x++)
 			Renderer2D::DrawQuad({ x + 5.0f, y + 5.0f }, { 0.9f, 0.9f }, { x / 3.0f, y / 3.0f, 0.8f, 1.0f });
 
 	Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, _squareColor);
-	Renderer2D::DrawQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, _texture);
+	Renderer2D::DrawQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, _texture);*/
+
+    _activeScene->OnUpdate();
 
 	Renderer2D::EndScene();
 

@@ -19,6 +19,8 @@ namespace Honey {
 
 	private:
 
+		Reference<Scene> _activeScene;
+
 		Reference<VertexArray> _vertexArray;
 		Reference<Texture2D> _texture;
 		Reference<FrameBuffer> _frameBuffer;

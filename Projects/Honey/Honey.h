@@ -1,7 +1,10 @@
 #pragma once
 
 // Application
-#include "Honey/Application.h"
+#include <Honey/Application.h>
+
+// Components
+#include <Honey/Components/Components.h>
 
 // Time
 #include <Honey/Timing/Time.h>
@@ -14,13 +17,13 @@
 #include <Honey/Events/WindowEvents.h>
 
 // Input
-#include "Honey/Input/Input.h"
+#include <Honey/Input/Input.h>
 #include <Honey/Input/Keycode.h>
 #include <Honey/Input/MouseButtons.h>
 
 // Layers
-#include "Honey/Layers/Layer.h"
-#include "Honey/Layers/ImGui/ImGuiLayer.h"
+#include <Honey/Layers/Layer.h>
+#include <Honey/Layers/ImGui/ImGuiLayer.h>
 
 // Math
 #include <Honey/Math/Math.h>
@@ -32,3 +35,6 @@
 #include <Honey/Renderer/Texture.h>
 #include <Honey/Renderer/ShaderLibrary.h>
 #include <Honey/Renderer/Camera/OrthographicCameraController.h>
+
+// Scene
+#include <Honey/Scene/Scene.h>

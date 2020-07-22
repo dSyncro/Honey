@@ -154,18 +154,11 @@ void Renderer2D::Shutdown()
 	delete[] s_Data.QuadBufferBase;
 }
 
-void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
-{
-	DrawQuad({ position.x, position.y, 0.0f }, size, color);
-}
-
-void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
+void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
 {
 	HNY_PROFILE_FUNCTION();
 
 	if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices) FlushAndReset();
-
-	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
 	for (uint32_t i = 0; i < Quad::VertexCount; i++)
 	{
@@ -178,12 +171,7 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, cons
 	s_Data.Stats.QuadCount++;
 }
 
-void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling)
-{
-	DrawQuad({ position.x, position.y, 0.0f }, size, texture, tiling);
-}
-
-void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling)
+void Renderer2D::DrawQuad(const glm::mat4& transform, const Reference<Texture2D>& texture, glm::vec2 tiling)
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -208,8 +196,6 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, cons
 		s_Data.TextureSlotIndex++;
 	}
 
-	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-
 	for (uint32_t i = 0; i < Quad::VertexCount; i++)
 	{
 		Quad::Vertex& vertex = s_Data.QuadBufferPtr->Vertices[i];
@@ -219,6 +205,32 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, cons
 
 	s_Data.QuadIndexCount += 6;
 	s_Data.Stats.QuadCount++;
+}
+
+void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
+{
+	DrawQuad({ position.x, position.y, 0.0f }, size, color);
+}
+
+void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
+{
+	HNY_PROFILE_FUNCTION();
+
+	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+	DrawQuad(transform, color);
+}
+
+void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling)
+{
+	DrawQuad({ position.x, position.y, 0.0f }, size, texture, tiling);
+}
+
+void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling)
+{
+	HNY_PROFILE_FUNCTION();
+
+	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+	DrawQuad(transform, texture, tiling);
 }
 
 void Renderer2D::DrawRotatedQuad(const glm::vec2& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling)

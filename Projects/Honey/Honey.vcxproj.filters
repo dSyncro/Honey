@@ -1885,6 +1885,9 @@
     <ClInclude Include="third-party\stb_image\stb_image.h">
       <Filter>third-party\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Components\TransformComponent.h" />
+    <ClInclude Include="Honey\Components\SpriteRendererComponent.h" />
+    <ClInclude Include="Honey\Components\Components.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">

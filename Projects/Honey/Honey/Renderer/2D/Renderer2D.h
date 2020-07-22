@@ -31,6 +31,9 @@ namespace Honey {
 
 		static void Shutdown();
 
+		static void DrawQuad(const glm::mat4& transform, const glm::vec4& color);
+		static void DrawQuad(const glm::mat4& transform, const Reference<Texture2D>& texture, glm::vec2 tiling = glm::vec2(1.0f, 1.0f));
+
 		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color);
 		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color);
 		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling = glm::vec2(1.0f, 1.0f));
