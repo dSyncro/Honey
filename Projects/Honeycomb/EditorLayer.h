@@ -19,6 +19,8 @@ namespace Honey {
 
 	private:
 
+		Entity _entity;
+
 		Reference<Scene> _activeScene;
 
 		Reference<VertexArray> _vertexArray;
@@ -29,6 +31,5 @@ namespace Honey {
 		OrthographicCameraController _cameraController;
 
 		Math::Vector2 _viewportSize;
-		glm::vec4 _squareColor = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
 	};
 }

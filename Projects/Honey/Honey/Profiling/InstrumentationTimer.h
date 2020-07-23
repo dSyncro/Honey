@@ -21,9 +21,9 @@ namespace Honey {
 
 		void Stop()
 		{
-			std::chrono::time_point endTimepoint = std::chrono::steady_clock::now();
-			std::chrono::duration<double, std::micro> highResStart = _startTimepoint.time_since_epoch();
-			std::chrono::microseconds elapsedTime = std::chrono::duration_cast<std::chrono::microseconds>(endTimepoint - _startTimepoint);
+			auto endTimepoint = std::chrono::steady_clock::now();
+			auto highResStart = FloatingPointMicroseconds{ _startTimepoint.time_since_epoch() };
+			auto elapsedTime = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch() - std::chrono::time_point_cast<std::chrono::microseconds>(_startTimepoint).time_since_epoch();
 
 			Instrumentor::Get().WriteProfile({ _name, highResStart, elapsedTime, std::this_thread::get_id() });
 
@@ -36,5 +36,4 @@ namespace Honey {
 		std::chrono::time_point<std::chrono::steady_clock> _startTimepoint;
 		bool _isStopped;
 	};
-
 }

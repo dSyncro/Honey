@@ -143,9 +143,10 @@
   <ItemGroup>
     <ClInclude Include="Honey.h" />
     <ClInclude Include="Honey\Application.h" />
-    <ClInclude Include="Honey\Components\Components.h" />
-    <ClInclude Include="Honey\Components\SpriteRendererComponent.h" />
-    <ClInclude Include="Honey\Components\TransformComponent.h" />
+    <ClInclude Include="Honey\ECS\Components.h" />
+    <ClInclude Include="Honey\ECS\Components\SpriteRendererComponent.h" />
+    <ClInclude Include="Honey\ECS\Components\TagComponent.h" />
+    <ClInclude Include="Honey\ECS\Components\TransformComponent.h" />
     <ClInclude Include="Honey\Core.h" />
     <ClInclude Include="Honey\Core\Assertion.h" />
     <ClInclude Include="Honey\Core\Breakpoint.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Honey\Core\OS.h" />
     <ClInclude Include="Honey\Core\Profiling.h" />
     <ClInclude Include="Honey\Core\SIMDInfo.h" />
+    <ClInclude Include="Honey\ECS\Entity.h" />
     <ClInclude Include="Honey\Entrypoint.h" />
     <ClInclude Include="Honey\Events\App\AppRenderEvent.h" />
     <ClInclude Include="Honey\Events\App\AppTickEvent.h" />

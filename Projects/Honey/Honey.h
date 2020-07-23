@@ -3,8 +3,9 @@
 // Application
 #include <Honey/Application.h>
 
-// Components
-#include <Honey/Components/Components.h>
+// ECS
+#include <Honey/ECS/Entity.h>
+#include <Honey/ECS/Components.h>
 
 // Time
 #include <Honey/Timing/Time.h>

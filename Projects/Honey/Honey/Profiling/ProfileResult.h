@@ -6,10 +6,13 @@
 
 namespace Honey {
 
+	using FloatingPointMicroseconds = std::chrono::duration<double, std::micro>;
+
 	struct ProfileResult
 	{
 		std::string Name;
-		std::chrono::duration<double, std::micro> Start;
+
+		FloatingPointMicroseconds Start;
 		std::chrono::microseconds ElapsedTime;
 		std::thread::id ThreadID;
 	};

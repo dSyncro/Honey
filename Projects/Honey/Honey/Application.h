@@ -3,11 +3,6 @@
 #include <Honey/Events/WindowEvents.h>
 #include <Honey/Layers/LayerStack.h>
 #include <Honey/Layers/ImGui/ImGuiLayer.h>
-#include <Honey/Renderer/VertexArray.h>
-#include <Honey/Renderer/Buffers/VertexBuffer.h>
-#include <Honey/Renderer/Buffers/IndexBuffer.h>
-#include <Honey/Renderer/Camera/OrthographicCamera.h>
-#include <Honey/Renderer/Shader.h>
 #include <Honey/Window/Window.h>
 
 namespace Honey {

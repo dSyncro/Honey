@@ -13,9 +13,8 @@ void EditorLayer::OnAttach()
 
     _activeScene = CreateReference<Scene>();
 
-    entt::entity entity = _activeScene->CreateEntity();
-    _activeScene->GetRegistry().emplace<TransformComponent>(entity, glm::mat4(1.0f));
-    _activeScene->GetRegistry().emplace<SpriteRendererComponent>(entity, glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
+    _entity = _activeScene->CreateEntity();
+    _entity.AddComponent<SpriteRendererComponent>();
 
 	_texture = Texture2D::Create("assets/textures/logo.png");
 
@@ -141,7 +140,7 @@ void EditorLayer::OnImGuiRender()
         ImGui::Text("Quad Count: %d", stats.QuadCount);
         ImGui::Text("Vertex Count: %d", stats.GetVertexCount());
         ImGui::Text("Index Count: %d", stats.GetIndexCount());
-        ImGui::ColorEdit4("Square Color", glm::value_ptr(_squareColor));
+        ImGui::ColorEdit4("Square Color", glm::value_ptr(_entity.GetComponent<SpriteRendererComponent>().Color));
         ImGui::End();
     }
 

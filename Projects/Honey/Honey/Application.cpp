@@ -1,9 +1,6 @@
 #include "Application.h"
 
-#include <Honey/Core.h>
 #include <Honey/Events/EventDispatcher.h>
-#include <Honey/Events/Window/WindowResizeEvent.h>
-#include <Honey/Renderer/Buffers/BufferLayout.h>
 #include <Honey/Renderer/Renderer.h>
 
 using namespace Honey;

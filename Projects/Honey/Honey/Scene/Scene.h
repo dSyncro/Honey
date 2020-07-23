@@ -4,6 +4,8 @@
 
 namespace Honey {
 
+	class Entity;
+
 	class Scene {
 
 	public:
@@ -11,14 +13,16 @@ namespace Honey {
 		Scene() = default;
 		~Scene() = default;
 
-		entt::entity CreateEntity() { return _registry.create(); }
-		entt::registry& GetRegistry() { return _registry; }
+		Entity CreateEntity(const std::string& tag = "");
+		void DeleteEntity(const Entity& entity);
 
 		void OnUpdate();
 
 	private:
 
 		entt::registry _registry;
+
+		friend class Entity;
 	};
 
 }
