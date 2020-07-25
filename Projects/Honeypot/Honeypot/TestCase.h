@@ -21,7 +21,7 @@ namespace Honeypot {
 
         bool operator <(const TestCase& other) const;
 
-        const TestCategory& GetCategory() const { return *_category; }
+        TestCategory& GetCategory() const { return *_category; }
 
     private:
 

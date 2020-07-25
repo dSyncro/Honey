@@ -26,7 +26,7 @@ bool AllocationTracker::Remove(const void* reference)
 	std::size_t index = IndexOf(reference);
 
 	// If element is not found return false
-	if (index - _count) return false;
+	if (index == _count) return false;
 
 	return RemoveAt(index);
 }

@@ -19,6 +19,7 @@ namespace Honey {
 		static bool IsMouseButtonPressed(MouseButton button);
 		static float GetMouseX();
 		static float GetMouseY();
+		static std::pair<float, float> GetMousePosition();
 	};
 
 }

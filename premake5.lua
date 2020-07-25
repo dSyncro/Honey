@@ -261,6 +261,7 @@ project "Honeypot"
 		"Projects/Honey/",
 		"Projects/Honey/third-party",
 		"%{IncludeDir.GLM}",
+		"%{IncludeDir.EnTT}"
 	}
 
 	links

@@ -7,6 +7,12 @@
     <Filter Include="Honey\Core">
       <UniqueIdentifier>{407958DB-2C31-9A28-9538-7384810F3519}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Honey\ECS">
+      <UniqueIdentifier>{324C6F2D-9EB6-23A4-E7F4-D449539E01F9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\ECS\Components">
+      <UniqueIdentifier>{07EE7CB6-F37C-0680-9C9B-1A7B88091726}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Honey\Events">
       <UniqueIdentifier>{CCDA7D18-B83D-0DBD-61C3-45734D05D93F}</UniqueIdentifier>
     </Filter>
@@ -168,6 +174,21 @@
     </ClInclude>
     <ClInclude Include="Honey\Core\SIMDInfo.h">
       <Filter>Honey\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\ECS\Components.h">
+      <Filter>Honey\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\ECS\Components\SpriteRendererComponent.h">
+      <Filter>Honey\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\ECS\Components\TagComponent.h">
+      <Filter>Honey\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\ECS\Components\TransformComponent.h">
+      <Filter>Honey\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\ECS\Entity.h">
+      <Filter>Honey\ECS</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Entrypoint.h">
       <Filter>Honey</Filter>
@@ -1885,11 +1906,6 @@
     <ClInclude Include="third-party\stb_image\stb_image.h">
       <Filter>third-party\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\ECS\Components\SpriteRendererComponent.h" />
-    <ClInclude Include="Honey\ECS\Components\TransformComponent.h" />
-    <ClInclude Include="Honey\ECS\Entity.h" />
-    <ClInclude Include="Honey\ECS\Components\TagComponent.h" />
-    <ClInclude Include="Honey\ECS\Components.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">

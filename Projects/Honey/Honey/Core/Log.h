@@ -13,8 +13,8 @@ namespace Honey {
 
 		static void Init();
 
-		inline static Reference<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
-		inline static Reference<spdlog::logger>& GetAppLogger() { return s_AppLogger; }
+		static Reference<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
+		static Reference<spdlog::logger>& GetAppLogger() { return s_AppLogger; }
 
 	private:
 

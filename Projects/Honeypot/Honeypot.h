@@ -3,6 +3,14 @@
 #include "Honeypot/Core.h"
 #include "Honeypot/TestCase.h"
 
+struct TestReportData
+{
+    std::size_t Total;
+    std::size_t Performed;
+    std::size_t Failed;
+    std::size_t GetSucceded() const { return Performed - Failed; }
+};
+
 #define HNYPT_REGISTER_FUNCTION(global_prefix, function, name)  \
     global_prefix static int HNYPT_SINGULAR(_HNYPT_ANON_VAR_) = \
     Honeypot::RegisterTest(Honeypot::TestCase( name, function, __FILE__, __LINE__, GetTestCategory() ));
@@ -17,7 +25,7 @@
 
 #define HNYPT_CHECK_EXCEPTION(code, exception) do {                              \
         try { code; }                                                            \
-        catch (exception& e) {}                                                  \
+        catch (exception&) {}                                                    \
         catch (...) {                                                            \
             HNYPT_ASSERT(false, std::string("Not thrown <") +                    \
             HNYPT_TOSTRING(exception) + "> as expected");                        \

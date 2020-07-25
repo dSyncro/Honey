@@ -33,9 +33,6 @@
     <ClInclude Include="ArgumentParser\Flag.h">
       <Filter>ArgumentParser</Filter>
     </ClInclude>
-    <ClInclude Include="ArgumentParser\TablePrinter.h">
-      <Filter>ArgumentParser</Filter>
-    </ClInclude>
     <ClInclude Include="ArgumentParser\Toggle.h">
       <Filter>ArgumentParser</Filter>
     </ClInclude>
@@ -61,9 +58,6 @@
       <Filter>ArgumentParser</Filter>
     </ClCompile>
     <ClCompile Include="ArgumentParser\Exceptions.cpp">
-      <Filter>ArgumentParser</Filter>
-    </ClCompile>
-    <ClCompile Include="ArgumentParser\TablePrinter.cpp">
       <Filter>ArgumentParser</Filter>
     </ClCompile>
     <ClCompile Include="Honeypot.cpp" />

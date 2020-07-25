@@ -43,6 +43,17 @@ public:
 	static std::size_t GetHeight() noexcept;
 	static std::pair<std::size_t, std::size_t> GetSize() noexcept;
 
+	static void Fill(std::size_t count = 0, char c = ' ') noexcept
+	{
+		std::string s = std::string(count ? count : GetWidth() * GetHeight(), c);
+		std::cout << s;
+	}
+
+	static void FillLine(char c = ' ') noexcept
+	{
+		Fill(GetWidth(), c);
+	}
+
 	template  <typename... Args>
 	static void Align(const AlignmentInfo& info, Args... args) noexcept
 	{

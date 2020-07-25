@@ -14,7 +14,6 @@ void TestCase::MarkFailure()
 {
     HasFailed = true;
     _category->FailedTests++;
-    _category->HasFailed = true;
 }
 
 bool TestCase::operator <(const TestCase& other) const

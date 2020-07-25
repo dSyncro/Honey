@@ -36,3 +36,11 @@ float Input::GetMouseY()
 	glfwGetCursorPos(window, &xPos, &yPos);
 	return (float)yPos;
 }
+
+std::pair<float, float> Input::GetMousePosition()
+{
+	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+	double xPos, yPos;
+	glfwGetCursorPos(window, &xPos, &yPos);
+	return { xPos, yPos };
+}

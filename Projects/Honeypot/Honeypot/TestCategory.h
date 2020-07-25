@@ -9,8 +9,8 @@ namespace Honeypot {
         const char* Name;
         const char* Description;
         unsigned int Tests = 0;
+        unsigned int PerformedTests = 0;
         unsigned int FailedTests = 0;
-        bool HasFailed = false;
 
         TestCategory(const char* name = "", const char* description = "");
     };
