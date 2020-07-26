@@ -5,8 +5,6 @@
 
 #include <iostream>
 
-using namespace Honeypot;
-
 class Context {
 
 public:
@@ -26,9 +24,32 @@ public:
         _categories = parser.GetFlagValueByName("c");
     }
 
+    void WalkSubcategory(const std::shared_ptr<TestCategory>& category, std::size_t depth = 0)
+    {
+        Console::WriteColoredLine(AnsiStyle::Forecolors::Cyan, std::string(depth, '\t'), depth ? "Subcategory #" + std::to_string(depth) + ": " : "Category: ", category->Name);
+        for (const std::shared_ptr<TestCategory>& subcategory : category->GetRegisteredTestCategories())
+            WalkSubcategory(subcategory, depth + 1);
+        for (const std::shared_ptr<TestCase>& test : category->GetRegisteredTestCases())
+        {
+            Console::Write(std::string(depth + 1, '\t'), "Test \"", test->Name, "\" (", test->File, "): ");
+            if (test->Passed)
+                Console::WriteColoredLine(AnsiStyle::Forecolors::Green, "Passed!");
+            else
+                Console::WriteColoredLine(AnsiStyle::Forecolors::Red, "Failed!");
+        }
+    }
+
     void Run()
     {
-        TestReportData data = TestReportData();
+        Console::WriteLine("--- Test Results ---");
+        
+        for (const std::shared_ptr<TestCategory>& category : GetRegisteredTestCategories())
+        {
+            category->Run();
+            WalkSubcategory(category);
+        }
+
+        /*TestReportData data = TestReportData();
         std::set<TestCase> tests = !(_tests.size() || _categories.size()) ? GetRegisteredTests() : GetSelectedTests();
         data.Total = tests.size();
 
@@ -70,15 +91,15 @@ public:
         Console::WriteLine("Total tests: ", data.Total);
         Console::WriteLine("Performed tests: ", data.Performed);
         Console::WriteLine("Succeded tests: ", data.GetSucceded());
-        Console::WriteLine("Failed tests: ", data.Failed);
+        Console::WriteLine("Failed tests: ", data.Failed);*/
     }
 
 private:
 
-    std::set<TestCase> GetSelectedTests()
+    std::vector<TestCase> GetSelectedTests()
     {
         // Get all tests
-        std::set<TestCase> tests = GetRegisteredTests();
+        /*std::set<TestCase> tests = GetRegisteredTests();
         std::size_t totalTests = tests.size();
         for (auto it = tests.begin(); it != tests.end(); )
         {
@@ -96,7 +117,7 @@ private:
             else it++;
         }
 
-        return tests;
+        return tests;*/
     }
 
     std::vector<std::string> _tests;

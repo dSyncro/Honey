@@ -1,7 +1,7 @@
 #include "../Honeypot.h"
 
-HNYPT_TEST_CASE("Two Plus Two")
+HNYPT_TEST_CASE2(TwoPlusTwo)
 {
 	HNYPT_CHECK(2 + 2 == 5);
-	HNYPT_CHECK_EXCEPTION(throw 20, int);
+	//HNYPT_CHECK_EXCEPTION(throw 20, int);
 }

@@ -15,6 +15,8 @@
 #	define HNYPT_SINGULAR(x) HNYPT_CONCAT(x, __LINE__)
 #endif
 
+#define HNYPT_LINE_ID(x) HNYPT_CONCAT(x, __LINE__)
+
 // OS identification
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
 #	undef min // override standard definition

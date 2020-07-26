@@ -1,43 +1,48 @@
 #pragma once
 
-#include <set>
+#include "TestCase.h"
 
-namespace Honeypot {
+#include <string>
+#include <memory>
+#include <vector>
 
-    struct TestCategory
-    {
-        const char* Name;
-        const char* Description;
-        unsigned int Tests = 0;
-        unsigned int PerformedTests = 0;
-        unsigned int FailedTests = 0;
-
-        TestCategory(const char* name = "", const char* description = "");
-    };
-
-    inline std::set<TestCategory*>& GetRegisteredTestCategories()
-    {
-        static std::set<TestCategory*> data;
-        return data;
-    }
-
-    inline void RegisterTestCategory(TestCategory& category)
-    {
-        GetRegisteredTestCategories().insert(&category);
-    }
-
-}
-
-inline Honeypot::TestCategory& GetTestCategory()
+struct TestCategory
 {
-    static Honeypot::TestCategory category;
-    static bool init = false;
-    if (!init)
+    std::string Name;
+    std::string Description;
+    std::size_t PassedTests = 0;
+    std::size_t FailedTests = 0;
+
+    TestCategory(const std::string& name = "", const std::string& description = "");
+
+    std::vector<std::shared_ptr<TestCategory>>& GetRegisteredTestCategories() noexcept { return _subcategories; }
+    std::vector<std::shared_ptr<TestCase>>& GetRegisteredTestCases() noexcept { return _cases; }
+    int RegisterTestCase(const std::shared_ptr<TestCase>& test) noexcept { _cases.push_back(test); return 0; }
+    int RegisterTestCategory(const std::shared_ptr<TestCategory>& category) noexcept { _subcategories.push_back(category); return 0; }
+
+    void Run()
     {
-        category.Name = "No Category";
-        category.Description = "Tests not belonging to a particular category.";
-        init = true;
-        Honeypot::RegisterTestCategory(category);
+        PassedTests = 0;
+        FailedTests = 0;
+
+        for (auto& category : _subcategories)
+        {
+            category->Run();
+            PassedTests += category->PassedTests;
+            FailedTests += category->FailedTests;
+        }
+
+        for (auto& test : _cases)
+        {
+
+            test->Run();
+            if (test->Passed) PassedTests++;
+            else FailedTests++;
+        }
     }
-    return category;
-}
+
+private:
+
+    std::vector<std::shared_ptr<TestCategory>> _subcategories;
+    std::vector<std::shared_ptr<TestCase>> _cases;
+};

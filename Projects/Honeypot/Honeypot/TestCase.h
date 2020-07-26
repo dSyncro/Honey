@@ -1,54 +1,68 @@
 #pragma once
 
-#include "TestCategory.h"
+#include <string>
+#include <memory>
 
-namespace Honeypot {
+using CallbackType = void (*)();
 
-    using CallbackType = void (*)();
+struct TestCase
+{
+    std::string Name;
+    std::string Description;
+    std::string File;
+    std::string ErrorLog;
+    bool Passed;
 
-    struct TestCase
+    TestCase();
+    TestCase(const std::string& name, const std::string& description, const std::string& file);
+
+    void Run()
     {
-        const char* Name;
-        CallbackType Callback; // a function pointer to the test case
-        const char* File;
-        unsigned int Line;
-        bool HasFailed = false;
-
-        TestCase();
-        TestCase(const char* name, CallbackType callback, const char* file, unsigned line, TestCategory& category);
-
-        void MarkFailure();
-
-        bool operator <(const TestCase& other) const;
-
-        TestCategory& GetCategory() const { return *_category; }
-
-    private:
-
-        TestCategory* _category;
-    };
-
-    inline TestCase& GetCurrentTestCase()
-    {
-        static TestCase data;
-        return data;
+        Passed = true;
+        Callback();
     }
 
-    inline void SetCurrentTestCase(const TestCase& test)
+    void CheckTrue(bool actual, std::size_t line)
     {
-        GetCurrentTestCase() = test;
+        if (actual) return;
+
+        Passed = false;
+        ErrorLog += "Bool check failed at line " + std::to_string(line) + ".\n"
+            "Expected: true\n";
     }
 
-    inline std::set<TestCase>& GetRegisteredTests()
+    void CheckFalse(bool actual, std::size_t line)
     {
-        static std::set<TestCase> data;
-        return data;
+        if (!actual) return;
+
+        Passed = false;
+        ErrorLog += "Bool check failed at line " + std::to_string(line) + ".\n"
+            "Expected: false\n";
     }
 
-    inline int RegisterTest(const TestCase& test)
+    template <typename T>
+    void CheckEqual(const T& actual, const T& expected, std::size_t line)
     {
-        GetRegisteredTests().insert(test);
-        return 0;
+        if (actual == expected) return;
+
+        Passed = false;
+        ErrorLog += "Equal check failed at line " + std::to_string(line) + ".\n" +
+            "Address of actual: " + std::to_string(&actual) + "\n" +
+            "Address of expected: " + std::to_string(&expected) + "\n";
     }
 
-}
+    template <typename T>
+    void CheckEqual(const T* actual, const T* expected, std::size_t line)
+    {
+        if (*actual == *expected) return;
+
+        Passed = false;
+        ErrorLog += "Equal check failed at line " + std::to_string(line) + ".\n" +
+            "Address of actual: " + std::to_string(actual) + "\n" +
+            "Address of expected: " + std::to_string(expected) + "\n";
+    }
+
+    bool operator <(const TestCase& other) const;
+
+    virtual void Callback() = 0;
+};
