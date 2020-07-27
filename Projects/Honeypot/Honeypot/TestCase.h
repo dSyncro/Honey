@@ -62,7 +62,5 @@ struct TestCase
             "Address of expected: " + std::to_string(expected) + "\n";
     }
 
-    bool operator <(const TestCase& other) const;
-
     virtual void Callback() = 0;
 };

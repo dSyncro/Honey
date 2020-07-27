@@ -42,12 +42,12 @@ namespace Honey {
 		operator entt::entity&() { return _entityID; }
 		operator const entt::entity&() const { return _entityID; }
 
-		operator bool() const { return _entityID != (entt::entity)0; }
+		operator bool() const { return _entityID != entt::null; }
 
 	private:
 
 		Scene* _scene = nullptr;
-		entt::entity _entityID {0};
+		entt::entity _entityID { entt::null };
 
 	};
 
