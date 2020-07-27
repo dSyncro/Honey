@@ -24,106 +24,111 @@ public:
 		_categories = parser.GetFlagValueByName("c");
 	}
 
-	void WalkSubcategory(const std::shared_ptr<TestCategory>& category, std::size_t depth = 0)
-	{
-		Console::WriteColoredLine(AnsiStyle::Forecolors::Cyan, std::string(depth, '\t'), depth ? "Subcategory #" + std::to_string(depth) + ": " : "Category: ", category->Name);
-		for (const std::shared_ptr<TestCategory>& subcategory : category->GetRegisteredTestCategories())
-			WalkSubcategory(subcategory, depth + 1);
-		for (const std::shared_ptr<TestCase>& test : category->GetRegisteredTestCases())
-		{
-			Console::Write(std::string(depth + 1, '\t'), "Test \"", test->Name, "\" (", test->File, "): ");
-			if (test->Passed)
-			{
-				Console::WriteColoredLine(AnsiStyle::Forecolors::Green, "Passed!");
-				continue;
-			}
-			Console::WriteColoredLine(AnsiStyle::Forecolors::Red, "Failed!");
-		}
-	}
-
 	void Run()
 	{
-		Console::WriteLine("--- Test Results ---");
-		
-		for (const std::shared_ptr<TestCategory>& category : GetRegisteredTestCategories())
-		{
-			category->Run();
-			WalkSubcategory(category);
-		}
+		_reportData.Reset();
 
-		/*TestReportData data = TestReportData();
-		std::set<TestCase> tests = !(_tests.size() || _categories.size()) ? GetRegisteredTests() : GetSelectedTests();
-		data.Total = tests.size();
+		Console::WriteLine("---- Test Results ----");
 
-		// Perform tests
-		Console::WriteLine("Performing Tests...");
-		for (const TestCase& test : tests)
-		{
-			SetCurrentTestCase(test);
-
-			Console::WriteColored(AnsiStyle::Forecolors::Yellow, '"', test.Name, '"',
-				'[', test.Line, "] (", test.File, "): ");
-
-			test.Callback();
-
-			if (GetCurrentTestCase().HasFailed) 
-			{ 
-				Console::WriteColoredLine(AnsiStyle::Forecolors::Red, "Failed!");
-				data.Failed++;
-			}
-			else Console::WriteColoredLine(AnsiStyle::Forecolors::Green, "Succeded!");
-
-			GetCurrentTestCase().GetCategory().PerformedTests++;
-			data.Performed++;
-		}
+		if (_tests.size() || _categories.size())
+			RunSelected();
+		else RunAll();
 
 		Console::NewLine();
-		for (const TestCategory* category : GetRegisteredTestCategories())
-		{
-			Console::WriteLine("From \"", category->Name, "\": ");
-			Console::WriteColoredLine(AnsiStyle::Forecolors::Green, "    Total Tests ", category->Tests);
-			AnsiStyle::Forecolors color = category->Tests == category->PerformedTests ?
-				AnsiStyle::Forecolors::Green : AnsiStyle::Forecolors::Yellow;
-			Console::WriteColoredLine(color, "    Performed ", category->PerformedTests);
-			Console::WriteColoredLine(AnsiStyle::Forecolors::Red, "    Failed ", category->FailedTests);
-		}
-
-		Console::NewLine();
-
-		Console::WriteLine("Total tests: ", data.Total);
-		Console::WriteLine("Performed tests: ", data.Performed);
-		Console::WriteLine("Succeded tests: ", data.GetSucceded());
-		Console::WriteLine("Failed tests: ", data.Failed);*/
+		Console::WriteLine("Passed: ", _reportData.Passed, " ---- Failed: ", _reportData.Failed, " ---- Performed: ", _reportData.GetPerformed());
 	}
 
 private:
 
-	std::vector<TestCase> GetSelectedTests()
+	void ReportTest(const std::shared_ptr<TestCase>& test)
 	{
-		// Get all tests
-		/*std::set<TestCase> tests = GetRegisteredTests();
-		std::size_t totalTests = tests.size();
-		for (auto it = tests.begin(); it != tests.end(); )
+		Console::Write("Test \"", test->Name, "\" (", test->File, "): ");
+
+		if (test->Passed)
 		{
-			bool found = false;
-
-			for (std::size_t i = 0; i < _tests.size(); i++)
-				if (_tests[i] == it->Name) { found = true; break; }
-
-			if (found) continue;
-
-			for (std::size_t i = 0; i < _categories.size(); i++)
-				if (_categories[i] == it->GetCategory().Name) { found = true; break; }
-
-			if (!found) it = tests.erase(it);
-			else it++;
+			Console::WriteColoredLine(AnsiStyle::Forecolors::Green, "Passed!");
+			_reportData.Passed++;
+			return;
 		}
 
-		return tests;*/
+		Console::WriteColoredLine(AnsiStyle::Forecolors::Red, "Failed!");
+		Console::WriteColoredLine(AnsiStyle::Forecolors::Red, test->ErrorLog);
+		_reportData.Failed++;
+	}
+
+	void RecursiveWalkSubcategory(const std::shared_ptr<TestCategory>& category, std::string parentCategoryName = "", std::size_t depth = 0)
+	{
+		Console::NewLine();
+		std::string categoryName = parentCategoryName;
+		if (parentCategoryName.length()) categoryName += " > ";
+		categoryName += category->Name;
+
+		Console::WriteColoredLine(AnsiStyle::Forecolors::Cyan, categoryName);
+
+		for (const std::shared_ptr<TestCase>& test : category->GetRegisteredTestCases())
+		{
+			ReportTest(test);
+		}
+
+		for (const std::shared_ptr<TestCategory>& subcategory : category->GetRegisteredTestCategories())
+			RecursiveWalkSubcategory(subcategory, categoryName, depth + 1);
+	}
+
+	void RecursiveSelectAllTests(const std::shared_ptr<TestCategory>& category, std::vector<std::shared_ptr<TestCase>>& selected)
+	{
+		for (const std::shared_ptr<TestCase>& test : category->GetRegisteredTestCases())
+			selected.push_back(test);
+
+		for (const std::shared_ptr<TestCategory>& subcategory : category->GetRegisteredTestCategories())
+			RecursiveSelectAllTests(subcategory, selected);
+	}
+
+	void RecursiveSelectTests(const std::shared_ptr<TestCategory>& category, std::vector<std::shared_ptr<TestCase>>& selected)
+	{
+		for (const std::shared_ptr<TestCase>& test : category->GetRegisteredTestCases())
+		{
+			for (std::size_t i = 0; i < _tests.size(); i++)
+				if (_tests[i] == test->Name) { selected.push_back(test); break; }
+		}
+
+		for (const std::shared_ptr<TestCategory>& subcategory : category->GetRegisteredTestCategories())
+		{
+			bool found = false;
+			for (std::size_t i = 0; i < _categories.size(); i++)
+				if (_categories[i] == subcategory->Name) { found = true; break; }
+
+			if (found) { RecursiveSelectAllTests(subcategory, selected); }
+			else { RecursiveSelectTests(subcategory, selected); }
+		}
+	}
+
+	void RunSelected()
+	{
+		std::vector<std::shared_ptr<TestCase>> selectedTests;
+
+		for (const std::shared_ptr<TestCategory>& category : GetRegisteredTestCategories())
+			RecursiveSelectTests(category, selectedTests);
+
+		for (const std::shared_ptr<TestCase>& test : selectedTests)
+		{
+			test->Run();
+			ReportTest(test);
+		}
+	}
+
+	void RunAll()
+	{
+		for (const std::shared_ptr<TestCategory>& category : GetRegisteredTestCategories())
+		{
+			category->Run();
+			RecursiveWalkSubcategory(category);
+		}
 	}
 
 	std::vector<std::string> _tests;
 	std::vector<std::string> _categories;
+
+	TestReportData _reportData;
 
 };
 

@@ -28,7 +28,7 @@ struct TestCase
 
         Passed = false;
         ErrorLog += "Bool check failed at line " + std::to_string(line) + ".\n"
-            "Expected: true\n";
+            "Expected: true";
     }
 
     void CheckFalse(bool actual, std::size_t line)
@@ -37,7 +37,7 @@ struct TestCase
 
         Passed = false;
         ErrorLog += "Bool check failed at line " + std::to_string(line) + ".\n"
-            "Expected: false\n";
+            "Expected: false";
     }
 
     template <typename T>
@@ -48,7 +48,7 @@ struct TestCase
         Passed = false;
         ErrorLog += "Equal check failed at line " + std::to_string(line) + ".\n" +
             "Address of actual: " + std::to_string(&actual) + "\n" +
-            "Address of expected: " + std::to_string(&expected) + "\n";
+            "Address of expected: " + std::to_string(&expected);
     }
 
     template <typename T>
@@ -59,7 +59,7 @@ struct TestCase
         Passed = false;
         ErrorLog += "Equal check failed at line " + std::to_string(line) + ".\n" +
             "Address of actual: " + std::to_string(actual) + "\n" +
-            "Address of expected: " + std::to_string(expected) + "\n";
+            "Address of expected: " + std::to_string(expected);
     }
 
     virtual void Callback() = 0;

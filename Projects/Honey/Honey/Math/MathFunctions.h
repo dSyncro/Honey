@@ -183,7 +183,7 @@ namespace Honey {
 		// Min - max - difference
 		static HNY_ALWAYS_INLINE float Min(float x, float y) noexcept { return std::fmin(x, y); }
 		static HNY_ALWAYS_INLINE float Max(float x, float y) noexcept { return std::fmax(x, y); }
-		static HNY_ALWAYS_INLINE float PositiveDifference(float x, float y) noexcept { return std::fdim(x, y); }
+		static HNY_ALWAYS_INLINE float PositiveDifference(float x, float y) noexcept { return Abs(x - y); }
 
 		static HNY_ALWAYS_INLINE float Clamp(float x, float min, float max) noexcept { return Min(max, Max(min, x)); }
 		static HNY_ALWAYS_INLINE float Clamp01(float x) noexcept { return Clamp(x, 0.0f, 1.0f); }
