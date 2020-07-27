@@ -52,6 +52,7 @@
     <ClInclude Include="Libraries\Console.h">
       <Filter>Libraries</Filter>
     </ClInclude>
+    <ClInclude Include="Honeypot\Context.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentParser\ArgumentParser.cpp">
@@ -85,5 +86,6 @@
     <ClCompile Include="Tests\Vector2.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Honeypot\Context.cpp" />
   </ItemGroup>
 </Project>

@@ -13,6 +13,8 @@ struct TestCategory
 	std::size_t PassedTests = 0;
 	std::size_t FailedTests = 0;
 
+	std::size_t GetPerformedTests() const noexcept { return PassedTests + FailedTests; }
+
 	TestCategory(const std::string& name = "", const std::string& description = "");
 
 	std::vector<std::shared_ptr<TestCategory>>& GetRegisteredTestCategories() noexcept { return _subcategories; }
@@ -20,26 +22,7 @@ struct TestCategory
 	int RegisterTestCase(const std::shared_ptr<TestCase>& test) noexcept { _cases.push_back(test); return 0; }
 	int RegisterTestCategory(const std::shared_ptr<TestCategory>& category) noexcept { _subcategories.push_back(category); return 0; }
 
-	void Run()
-	{
-		PassedTests = 0;
-		FailedTests = 0;
-
-		for (auto& category : _subcategories)
-		{
-			category->Run();
-			PassedTests += category->PassedTests;
-			FailedTests += category->FailedTests;
-		}
-
-		for (auto& test : _cases)
-		{
-
-			test->Run();
-			if (test->Passed) PassedTests++;
-			else FailedTests++;
-		}
-	}
+	void Run();
 
 private:
 

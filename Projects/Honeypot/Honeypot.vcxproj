@@ -141,6 +141,7 @@
     <ClInclude Include="ArgumentParser\Flag.h" />
     <ClInclude Include="ArgumentParser\Toggle.h" />
     <ClInclude Include="Honeypot.h" />
+    <ClInclude Include="Honeypot\Context.h" />
     <ClInclude Include="Honeypot\Core.h" />
     <ClInclude Include="Honeypot\TestCase.h" />
     <ClInclude Include="Honeypot\TestCategory.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="ArgumentParser\ArgumentParser.cpp" />
     <ClCompile Include="ArgumentParser\Exceptions.cpp" />
     <ClCompile Include="Honeypot.cpp" />
+    <ClCompile Include="Honeypot\Context.cpp" />
     <ClCompile Include="Honeypot\TestCase.cpp" />
     <ClCompile Include="Honeypot\TestCategory.cpp" />
     <ClCompile Include="Libraries\AnsiStyle.cpp" />

@@ -3,21 +3,6 @@
 #include "Honeypot/Core.h"
 #include "Honeypot/TestCategory.h"
 
-struct TestReportData
-{
-	std::size_t Total = 0;
-	std::size_t Passed = 0;
-	std::size_t Failed = 0;
-	std::size_t GetPerformed() const { return Passed + Failed; }
-
-	void Reset() noexcept
-	{
-		Total = 0;
-		Passed = 0;
-		Failed = 0;
-	}
-};
-
 inline std::vector<std::shared_ptr<TestCategory>>& GetRegisteredTestCategories()
 {
 	static std::vector<std::shared_ptr<TestCategory>> categories;
@@ -80,10 +65,10 @@ void HNYPT_CASE_CLASS(testName)::Callback()
 #define HNYPT_TEST_CASE_NODESCR(testName) HNYPT_TEST_CASE(testName, "")
 #define HNYPT_TEST_CATEGORY_NODESCR(catName) HNYPT_TEST_CATEGORY(catName, "")
 
-#define HNYPT_CHECK(code) CheckTrue(code, __LINE__);
-#define HNYPT_CHECK_TRUE(code) CheckTrue(code, __LINE__);
-#define HNYPT_CHECK_FALSE(code) CheckFalse(code, __LINE__);
-#define HNYPT_CHECK_EQUAL(actual, expected) CheckEqual(actual, expected, __LINE__);
+#define HNYPT_CHECK(code) CheckTrue(code, __LINE__, HNYPT_TOSTRING(code));
+#define HNYPT_CHECK_TRUE(code) CheckTrue(code, __LINE__, HNYPT_TOSTRING(code));
+#define HNYPT_CHECK_FALSE(code) CheckFalse(code, __LINE__, HNYPT_TOSTRING(code));
+#define HNYPT_CHECK_EQUAL(actual, expected) CheckEqual(actual, expected, __LINE__, HNYPT_TOSTRING(actual), HNYPT_TOSTRING(expected));
 
 //Alias
 #define TEST_CASE(name, description) HNYPT_TEST_CASE(name, description)
