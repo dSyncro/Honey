@@ -1,11 +1,11 @@
 #pragma once
 
+#include <Honey/Renderer/GraphicsContext.h>
+#include <Honey/Window/Window.h>
+
 extern "C" {
 #include <GLFW/glfw3.h>
 }
-
-#include <Honey/Renderer/GraphicsContext.h>
-#include <Honey/Window/Window.h>
 
 
 namespace Honey {

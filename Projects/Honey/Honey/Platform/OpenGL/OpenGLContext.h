@@ -2,9 +2,7 @@
 
 #include <Honey/Renderer/GraphicsContext.h>
 
-extern "C" {
-#include <GLFW/glfw3.h>
-}
+struct GLFWwindow;
 
 namespace Honey {
 

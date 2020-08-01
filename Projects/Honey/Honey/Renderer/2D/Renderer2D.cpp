@@ -46,14 +46,14 @@ void Renderer2D::Init()
 	s_Data.QuadVertexBuffer = VertexBuffer::Create(s_Data.MaxVertices * sizeof(Quad::Vertex));
 
 	// Set Vertex Buffer Layout
-	BufferLayout layout = {
+	s_Data.QuadVertexBuffer->SetLayout({
 		{ ShaderDataType::Float3, "a_Position" },
 		{ ShaderDataType::Float4, "a_Color" },
 		{ ShaderDataType::Float2, "a_TexCoord" },
 		{ ShaderDataType::Float, "a_TexIndex" },
 		{ ShaderDataType::Float, "a_TilingFactor" },
-	};
-	s_Data.QuadVertexBuffer->SetLayout(layout);
+		}
+	);
 
 	// Add Vertex Buffer to Vertex Array
 	s_Data.QuadVertexArray->AddVertexBuffer(s_Data.QuadVertexBuffer);
@@ -99,6 +99,16 @@ void Renderer2D::Init()
 
 	// Initialize First Texture to be Standard Texture
 	s_Data.TextureSlots[0] = s_Data.StandardTexture;
+}
+
+void Renderer2D::BeginScene(const Camera& camera, const glm::mat4& transform)
+{
+	HNY_PROFILE_FUNCTION();
+
+	s_Data.StandardShader->Bind();
+	s_Data.StandardShader->SetMat4("u_ViewProjection", camera.GetProjection() * glm::inverse(transform));
+
+	NewBatch();
 }
 
 void Renderer2D::BeginScene(const OrthographicCamera& camera)
@@ -171,11 +181,9 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
 	s_Data.Stats.QuadCount++;
 }
 
-void Renderer2D::DrawQuad(const glm::mat4& transform, const Reference<Texture2D>& texture, glm::vec2 tiling)
+void Renderer2D::DrawQuad(const glm::mat4& transform, const Reference<Texture2D>& texture, const glm::vec2& tiling, const glm::vec4& tint)
 {
 	HNY_PROFILE_FUNCTION();
-
-	constexpr glm::vec4 white = glm::vec4(1.0f);
 
 	if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices) FlushAndReset();
 
@@ -199,7 +207,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const Reference<Texture2D>
 	for (uint32_t i = 0; i < Quad::VertexCount; i++)
 	{
 		Quad::Vertex& vertex = s_Data.QuadBufferPtr->Vertices[i];
-		vertex.Set(transform * Quad::VertexPositions[i], white, Quad::TextureCoords[i], slot);
+		vertex.Set(transform * Quad::VertexPositions[i], tint, Quad::TextureCoords[i], slot);
 	}
 	s_Data.QuadBufferPtr++;
 
@@ -220,61 +228,33 @@ void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, cons
 	DrawQuad(transform, color);
 }
 
-void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling)
+void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling, const glm::vec4& tint)
 {
-	DrawQuad({ position.x, position.y, 0.0f }, size, texture, tiling);
+	DrawQuad({ position.x, position.y, 0.0f }, size, texture, tiling, tint);
 }
 
-void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling)
+void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling, const glm::vec4& tint)
 {
 	HNY_PROFILE_FUNCTION();
 
 	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-	DrawQuad(transform, texture, tiling);
+	DrawQuad(transform, texture, tiling, tint);
 }
 
-void Renderer2D::DrawRotatedQuad(const glm::vec2& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling)
+void Renderer2D::DrawRotatedQuad(const glm::vec2& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling, const glm::vec4& tint)
 {
-	DrawRotatedQuad({ position.x, position.y, 0.0f }, rotation, size, texture, tiling);
+	DrawRotatedQuad({ position.x, position.y, 0.0f }, rotation, size, texture, tiling, tint);
 }
 
-void Renderer2D::DrawRotatedQuad(const glm::vec3& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling)
+void Renderer2D::DrawRotatedQuad(const glm::vec3& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling, const glm::vec4& tint)
 {
 	HNY_PROFILE_FUNCTION();
-
-	constexpr glm::vec4 white = glm::vec4(1.0f);
-
-	if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices) FlushAndReset();
-
-	uint32_t slot = 0;
-	for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
-	{
-		if (*texture.get() != *s_Data.TextureSlots[i].get()) continue;
-
-		slot = i;
-		break;
-	}
-
-	if (!slot)
-	{
-		slot = s_Data.TextureSlotIndex;
-		s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
-		s_Data.TextureSlotIndex++;
-	}
 
 	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 		* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
 		* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
-	for (uint32_t i = 0; i < Quad::VertexCount; i++)
-	{
-		Quad::Vertex& vertex = s_Data.QuadBufferPtr->Vertices[i];
-		vertex.Set(transform * Quad::VertexPositions[i], white, Quad::TextureCoords[i], (float)slot);
-	}
-	s_Data.QuadBufferPtr++;
-
-	s_Data.QuadIndexCount += 6;
-	s_Data.Stats.QuadCount++;
+	DrawQuad(transform, texture, tiling, tint);
 }
 
 void Renderer2D::ResetStatistics()

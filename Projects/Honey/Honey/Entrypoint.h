@@ -24,6 +24,8 @@ int main(int argc, char** argv)
 	HNY_PROFILE_END_SESSION();
 }
 
+#elif defined(HNY_PLATFORM_WINDOWS)
+
 #else
 #	error "Unknown platform!"
 #endif

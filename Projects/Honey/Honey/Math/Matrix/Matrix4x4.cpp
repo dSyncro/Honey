@@ -200,7 +200,7 @@ Matrix4x4 Matrix4x4::Orthographic(float left, float right, float bottom, float t
 
 Matrix4x4 Matrix4x4::Perspective(float fov, float aspectRatio, float near, float far)
 {
-	Matrix4x4 result = Identity;
+	Matrix4x4 result = Zero;
 
 	float q = 1.0f / Mathf::Tan(Mathf::Degrees2Radians * 0.5f * fov);
 

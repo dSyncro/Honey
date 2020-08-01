@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Honey/Renderer/Texture.h>
+#include <Honey/Renderer/Camera/Camera.h>
 #include <Honey/Renderer/Camera/OrthographicCamera.h>
 
 namespace Honey {
@@ -24,6 +25,7 @@ namespace Honey {
 
 		static void Init();
 
+		static void BeginScene(const Camera& camera, const glm::mat4& transform);
 		static void BeginScene(const OrthographicCamera& camera);
 		static void EndScene();
 		static void NewBatch();
@@ -32,15 +34,15 @@ namespace Honey {
 		static void Shutdown();
 
 		static void DrawQuad(const glm::mat4& transform, const glm::vec4& color);
-		static void DrawQuad(const glm::mat4& transform, const Reference<Texture2D>& texture, glm::vec2 tiling = glm::vec2(1.0f, 1.0f));
+		static void DrawQuad(const glm::mat4& transform, const Reference<Texture2D>& texture, const glm::vec2& tiling = glm::vec2(1.0f), const glm::vec4& tint = glm::vec4(1.0f));
 
 		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color);
 		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color);
-		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling = glm::vec2(1.0f, 1.0f));
-		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling = glm::vec2(1.0f, 1.0f));
+		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling = glm::vec2(1.0f), const glm::vec4& tint = glm::vec4(1.0f));
+		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling = glm::vec2(1.0f), const glm::vec4& tint = glm::vec4(1.0f));
 
-		static void DrawRotatedQuad(const glm::vec2& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling = glm::vec2(1.0f, 1.0f));
-		static void DrawRotatedQuad(const glm::vec3& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, glm::vec2 tiling = glm::vec2(1.0f, 1.0f));
+		static void DrawRotatedQuad(const glm::vec2& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling = glm::vec2(1.0f), const glm::vec4& tint = glm::vec4(1.0f));
+		static void DrawRotatedQuad(const glm::vec3& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling = glm::vec2(1.0f), const glm::vec4& tint = glm::vec4(1.0f));
 
 		static void ResetStatistics();
 		static const Statistics& GetStatistics();

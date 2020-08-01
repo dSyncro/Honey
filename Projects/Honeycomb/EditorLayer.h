@@ -19,7 +19,7 @@ namespace Honey {
 
 	private:
 
-		Entity _entity;
+		Entity _entity, _camera;
 
 		Reference<Scene> _activeScene;
 

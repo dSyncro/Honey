@@ -19,4 +19,4 @@
 #define BIT(x) 1 << x
 
 // Event Callback Binding
-#define HNY_BIND_EVENT_CALLBACK(callback) std::bind(&callback, this, std::placeholders::_1)
+#define HNY_BIND_EVENT_CALLBACK(callback) [this](auto&&... args) -> decltype(auto) { return this->callback(std::forward<decltype(args)>(args)...); }

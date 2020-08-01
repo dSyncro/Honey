@@ -172,9 +172,6 @@
     <ClInclude Include="Honey\Core\Profiling.h">
       <Filter>Honey\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Core\SIMDInfo.h">
-      <Filter>Honey\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Honey\ECS\Components.h">
       <Filter>Honey\ECS</Filter>
     </ClInclude>
@@ -1906,6 +1903,9 @@
     <ClInclude Include="third-party\stb_image\stb_image.h">
       <Filter>third-party\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\ECS\Components\CameraComponent.h" />
+    <ClInclude Include="Honey\Renderer\Camera\Camera.h" />
+    <ClInclude Include="Honey\ECS\Components\NameComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">

@@ -6,6 +6,10 @@ using namespace Honey;
 
 #include <stb_image.h>
 
+extern "C" {
+#include <glad/glad.h>
+}
+
 OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
 	: _width(width), _height(height)
 {

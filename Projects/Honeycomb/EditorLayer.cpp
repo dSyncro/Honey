@@ -13,7 +13,10 @@ void EditorLayer::OnAttach()
 
     _activeScene = CreateReference<Scene>();
 
-    _entity = _activeScene->CreateEntity();
+    _camera = _activeScene->CreateEntity("Main Camera", "Main");
+    _camera.AddComponent<CameraComponent>(glm::ortho(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
+	
+	_entity = _activeScene->CreateEntity();
     _entity.AddComponent<SpriteRendererComponent>();
 
 	_texture = Texture2D::Create("assets/textures/logo.png");
@@ -46,18 +49,7 @@ void EditorLayer::OnUpdate()
 	RenderCommand::SetClearColor({ .1f, .1f, .1f, 1 });
 	RenderCommand::Clear();
 
-	Renderer2D::BeginScene(_cameraController.GetCamera());
-
-	/*for (int y = 0; y < 3; y++) 
-		for (int x = 0; x < 3; x++)
-			Renderer2D::DrawQuad({ x + 5.0f, y + 5.0f }, { 0.9f, 0.9f }, { x / 3.0f, y / 3.0f, 0.8f, 1.0f });
-
-	Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, _squareColor);
-	Renderer2D::DrawQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, _texture);*/
-
     _activeScene->OnUpdate();
-
-	Renderer2D::EndScene();
 
     _frameBuffer->Unbind();
 }

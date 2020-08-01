@@ -20,15 +20,10 @@ namespace Honey {
 	class Instrumentor
 	{
 
-	private:
-
-		std::mutex _mutex;
-		InstrumentationSession* _currentSession;
-		std::ofstream _outputStream;
-
 	public:
 
-		Instrumentor() : _currentSession(nullptr) {}
+		Instrumentor(const Instrumentor&) = delete;
+		Instrumentor(Instrumentor&&) = delete;
 
 		void BeginSession(const std::string& name, const std::string& filepath = "results.json")
 		{
@@ -94,6 +89,13 @@ namespace Honey {
 
 	private:
 
+		Instrumentor() : _currentSession(nullptr) { }
+
+		~Instrumentor()
+		{
+			EndSession();
+		}
+
 		void WriteHeader()
 		{
 			_outputStream << "{\"otherData\": {},\"traceEvents\":[{}";
@@ -117,6 +119,10 @@ namespace Honey {
 			delete _currentSession;
 			_currentSession = nullptr;
 		}
+
+		std::mutex _mutex;
+		InstrumentationSession* _currentSession;
+		std::ofstream _outputStream;
 
 	};
 

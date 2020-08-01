@@ -2,10 +2,6 @@
 
 #include <Honey/Renderer/Texture.h>
 
-extern "C" {
-#include <glad/glad.h>
-}
-
 namespace Honey {
 
 	class OpenGLTexture2D final : public Texture2D {
@@ -31,7 +27,7 @@ namespace Honey {
 		std::string _path;
 		uint32_t _width, _height;
 		uint32_t _rendererID;
-		GLenum _internalFormat, _dataFormat;
+		unsigned int _internalFormat, _dataFormat;
 	};
 
 }

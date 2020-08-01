@@ -1,6 +1,6 @@
 #pragma once
 
-#include <glm/glm.hpp>
+#include <string>
 
 namespace Honey {
 
@@ -9,8 +9,7 @@ namespace Honey {
 		TagComponent() = default;
 		~TagComponent() = default;
 		TagComponent(const TagComponent&) = default;
-		TagComponent(const std::string& tag)
-			: Tag(tag) { }
+		TagComponent(const std::string& tag) : Tag(tag) { }
 
 		std::string Tag;
 	};

@@ -8,20 +8,38 @@ using namespace Honey;
 
 void Scene::OnUpdate()
 {
-	auto renderableGroup = _registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-	for (entt::entity entity : renderableGroup)
+	_mainCamera.Reset();
+
+	auto rendererGroup = _registry.view<TransformComponent, TagComponent, CameraComponent>();
+	for (entt::entity entity : rendererGroup)
 	{
-		auto& [transform, sprite] = renderableGroup.get<TransformComponent, SpriteRendererComponent>(entity);
-		Renderer2D::DrawQuad(transform, sprite.Color);
+		auto& [transform, tag, camera] = rendererGroup.get<TransformComponent, TagComponent, CameraComponent>(entity);
+		if (tag.Tag == "Main")
+		{
+			_mainCamera.Camera = &camera.Camera;
+			_mainCamera.Transform = &transform.Transform;
+		}
+	}
+
+	if (_mainCamera)
+	{
+		auto renderableGroup = _registry.view<TransformComponent, SpriteRendererComponent>();
+		Renderer2D::BeginScene(*_mainCamera.Camera, *_mainCamera.Transform);
+		for (entt::entity entity : renderableGroup)
+		{
+			auto& [transform, sprite] = renderableGroup.get<TransformComponent, SpriteRendererComponent>(entity);
+			Renderer2D::DrawQuad(transform, sprite.Color);
+		}
+		Renderer2D::EndScene();
 	}
 }
 
-Entity Scene::CreateEntity(const std::string& tag)
+Entity Scene::CreateEntity(const std::string& name, const std::string& tag)
 {
 	Entity entity = Entity(_registry.create(), this);
 	entity.AddComponent<TransformComponent>();
-	TagComponent& tagComponent = entity.AddComponent<TagComponent>();
-	tagComponent.Tag = tag.empty() ? "Entity" : tag;
+	entity.AddComponent<NameComponent>().Name = name;
+	entity.AddComponent<TagComponent>().Tag = tag;
 	return entity;
 }
 
