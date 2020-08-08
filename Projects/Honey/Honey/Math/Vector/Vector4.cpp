@@ -10,6 +10,7 @@ using namespace Honey::Math;
 
 Vector4::Vector4(const Vector2& vector) : X(vector.X), Y(vector.Y), Z(0.0f), W(0.0f) {}
 Vector4::Vector4(const Vector3& vector) : X(vector.X), Y(vector.Y), Z(vector.Z), W(0.0f) {}
+Vector4::Vector4(const Vector3& vector, float w) : X(vector.X), Y(vector.Y), Z(vector.Z), W(w) {}
 
 const Vector4 Vector4::Zero = Vector4(0.0f);
 const Vector4 Vector4::One  = Vector4(1.0f);

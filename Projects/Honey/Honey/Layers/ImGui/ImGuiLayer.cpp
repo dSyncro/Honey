@@ -8,7 +8,13 @@
 #include <Honey/Events/MouseEvents.h>
 #include <Honey/Events/WindowEvents.h>
 
-#include <Honey/Platform/ImGui/ImGuiGlfwImplementation.h>
+
+
+#if defined(HNY_PLATFORM_WINDOWS)
+#	include <Honey/Platform/ImGui/ImGuiWin32Implementation.h>
+#elif defined(HNY_PLATFORM_GLFW)
+#	include <Honey/Platform/ImGui/ImGuiGlfwImplementation.h>
+#endif
 #include <Honey/Platform/ImGui/ImGuiOpenGLRender.h>
 
 extern "C" {
@@ -52,7 +58,11 @@ void ImGuiLayer::OnAttach()
     GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
 
     // Setup Platform/Renderer bindings
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
+#if defined(HNY_PLATFORM_WINDOWS)
+	ImGui_ImplWin32_Init(app.GetWindow().GetNativeWindow());
+#elif defined(HNY_PLATFORM_GLFW)
+	ImGui_ImplGlfw_InitForOpenGL(window, true);
+#endif
     ImGui_ImplOpenGL3_Init("#version 410");
 }
 
@@ -61,7 +71,11 @@ void ImGuiLayer::OnDetach()
     HNY_PROFILE_FUNCTION();
 
     ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
+#if defined(HNY_PLATFORM_WINDOWS)
+	ImGui_ImplWin32_Shutdown();
+#elif defined(HNY_PLATFORM_GLFW)
+	ImGui_ImplGlfw_Shutdown();
+#endif
     ImGui::DestroyContext();
 }
 
@@ -70,7 +84,11 @@ void ImGuiLayer::Begin()
     HNY_PROFILE_FUNCTION();
 
     ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
+#if defined(HNY_PLATFORM_WINDOWS)
+	ImGui_ImplWin32_NewFrame();
+#elif defined(HNY_PLATFORM_GLFW)
+	ImGui_ImplGlfw_NewFrame();
+#endif
     ImGui::NewFrame();
 }
 
@@ -88,9 +106,18 @@ void ImGuiLayer::End()
 
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
     {
-        GLFWwindow* backup_current_context = glfwGetCurrentContext();
+	#if defined(HNY_PLATFORM_WINDOWS)
+		HWND win = (HWND)app.GetWindow().GetNativeWindow();
+		HDC hdc = GetDC(win);
+		HGLRC backup_current_context = wglGetCurrentContext();
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault();
+		wglMakeCurrent(hdc, backup_current_context);
+	#elif defined(HNY_PLATFORM_GLFW)
+		GLFWwindow* backup_current_context = glfwGetCurrentContext();
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();
         glfwMakeContextCurrent(backup_current_context);
+	#endif
     }
 }

@@ -49,9 +49,6 @@
     <Filter Include="Honey\Platform">
       <UniqueIdentifier>{3CC57D4B-2893-7151-1127-E277FD934DB6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Honey\Platform\GLFW">
-      <UniqueIdentifier>{FB255119-6787-2E27-F0F4-74D95C5565E6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Honey\Platform\ImGui">
       <UniqueIdentifier>{6637AC43-52C6-350D-FBE4-4908E75246B3}</UniqueIdentifier>
     </Filter>
@@ -60,6 +57,12 @@
     </Filter>
     <Filter Include="Honey\Platform\OpenGL\Buffers">
       <UniqueIdentifier>{6C62A9CB-D87A-90F5-A127-208F0DFF248F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Platform\Windows">
+      <UniqueIdentifier>{76EBAA0E-62E5-D360-4B52-6A7137EB39CD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Honey\Platform\Windows\Input">
+      <UniqueIdentifier>{F5DB508A-E196-4036-8A4E-B98076E88AC6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Honey\Profiling">
       <UniqueIdentifier>{6102FD59-CD8D-6A1E-D69E-ED1242A9C61E}</UniqueIdentifier>
@@ -175,6 +178,12 @@
     <ClInclude Include="Honey\ECS\Components.h">
       <Filter>Honey\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\ECS\Components\CameraComponent.h">
+      <Filter>Honey\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\ECS\Components\NameComponent.h">
+      <Filter>Honey\ECS\Components</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\ECS\Components\SpriteRendererComponent.h">
       <Filter>Honey\ECS\Components</Filter>
     </ClInclude>
@@ -253,6 +262,12 @@
     <ClInclude Include="Honey\Input\Input.h">
       <Filter>Honey\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Input\KeyMods.h">
+      <Filter>Honey\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Input\KeyState.h">
+      <Filter>Honey\Input</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Input\Keycode.h">
       <Filter>Honey\Input</Filter>
     </ClInclude>
@@ -295,13 +310,13 @@
     <ClInclude Include="Honey\Math\Vectors.h">
       <Filter>Honey\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h">
-      <Filter>Honey\Platform\GLFW</Filter>
-    </ClInclude>
     <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h">
       <Filter>Honey\Platform\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Platform\ImGui\ImGuiOpenGLRender.h">
+      <Filter>Honey\Platform\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\ImGui\ImGuiWin32Implementation.h">
       <Filter>Honey\Platform\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Platform\OpenGL\Buffers.h">
@@ -330,6 +345,18 @@
     </ClInclude>
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>Honey\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\Windows\Input\WindowKeycode.h">
+      <Filter>Honey\Platform\Windows\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\Windows\Input\WindowsKeyTable.h">
+      <Filter>Honey\Platform\Windows\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\Windows\WindowsHeader.h">
+      <Filter>Honey\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Platform\Windows\WindowsWindow.h">
+      <Filter>Honey\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Profiling\InstrumentationTimer.h">
       <Filter>Honey\Profiling</Filter>
@@ -363,6 +390,9 @@
     </ClInclude>
     <ClInclude Include="Honey\Renderer\Buffers\VertexBuffer.h">
       <Filter>Honey\Renderer\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Renderer\Camera\Camera.h">
+      <Filter>Honey\Renderer\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Renderer\Camera\OrthographicCamera.h">
       <Filter>Honey\Renderer\Camera</Filter>
@@ -1903,9 +1933,7 @@
     <ClInclude Include="third-party\stb_image\stb_image.h">
       <Filter>third-party\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\ECS\Components\CameraComponent.h" />
-    <ClInclude Include="Honey\Renderer\Camera\Camera.h" />
-    <ClInclude Include="Honey\ECS\Components\NameComponent.h" />
+    <ClInclude Include="Honey\Platform\Windows\TidyException.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1944,16 +1972,13 @@
     <ClCompile Include="Honey\Math\Vector\Vector4.cpp">
       <Filter>Honey\Math\Vector</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsInput.cpp">
-      <Filter>Honey\Platform\GLFW</Filter>
-    </ClCompile>
-    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsWindow.cpp">
-      <Filter>Honey\Platform\GLFW</Filter>
-    </ClCompile>
     <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp">
       <Filter>Honey\Platform\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp">
+      <Filter>Honey\Platform\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\ImGui\ImGuiWin32Implementation.cpp">
       <Filter>Honey\Platform\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLFrameBuffer.cpp">
@@ -1979,6 +2004,18 @@
     </ClCompile>
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>Honey\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\Windows\Input\WindowsInput.cpp">
+      <Filter>Honey\Platform\Windows\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\Windows\Input\WindowsKeyTable.cpp">
+      <Filter>Honey\Platform\Windows\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\Windows\WindowOpenGLContext.cpp">
+      <Filter>Honey\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Honey\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Renderer\2D\Quad.cpp">
       <Filter>Honey\Renderer\2D</Filter>
@@ -2040,5 +2077,6 @@
     <ClCompile Include="third-party\stb_image\stb_image.cpp">
       <Filter>third-party\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Platform\Windows\TidyException.cpp" />
   </ItemGroup>
 </Project>

@@ -44,3 +44,22 @@ std::pair<float, float> Input::GetMousePosition()
 	glfwGetCursorPos(window, &xPos, &yPos);
 	return std::make_pair<float, float>((float)xPos, (float)yPos);
 }
+
+uint16_t Input::GetKeyMods()
+{
+	return 0;
+}
+
+KeyState Input::GetKeyState(Keycode keycode)
+{
+	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+	int state = glfwGetKey(window, (int)keycode);
+	return state == GLFW_RELEASE ? KeyState::Pressed : KeyState::Released;
+}
+
+KeyState Input::GetMouseButtonState(MouseButton button)
+{
+	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+	int state = glfwGetMouseButton(window, (int)button);
+	return state == GLFW_RELEASE ? KeyState::Pressed : KeyState::Released;
+}

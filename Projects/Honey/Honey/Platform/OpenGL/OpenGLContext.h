@@ -2,22 +2,20 @@
 
 #include <Honey/Renderer/GraphicsContext.h>
 
-struct GLFWwindow;
-
 namespace Honey {
 
 	class OpenGLContext final : public GraphicsContext {
 
 	public:
 
-		OpenGLContext(GLFWwindow* handle);
+		OpenGLContext(void* handle);
 
 		virtual void Init() override;
 		virtual void SwapBuffers() override;
 
 	private:
 
-		GLFWwindow* _handle;
+		void* _handle;
 
 	};
 

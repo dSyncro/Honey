@@ -183,30 +183,30 @@ Vector4 Matrix4x4::GetColumn(int index) const
 	return Vector4(Elements[index + 0 * 4], Elements[index + 1 * 4], Elements[index + 2 * 4], Elements[index + 3 * 4]);
 }
 
-Matrix4x4 Matrix4x4::Orthographic(float left, float right, float bottom, float top, float near, float far)
+Matrix4x4 Matrix4x4::Orthographic(float left, float right, float bottom, float top, float zNear, float zFar)
 {
 	Matrix4x4 result(1.0f);
 
 	result.Elements[0 + 0 * 4] = 2.0f / (right - left);
 	result.Elements[1 + 1 * 4] = 2.0f / (top - bottom);
-	result.Elements[2 + 2 * 4] = 2.0f / (near - far);
+	result.Elements[2 + 2 * 4] = 2.0f / (zNear - zFar);
 
 	result.Elements[3 + 0 * 4] = (left + right) / (left - right);
 	result.Elements[3 + 1 * 4] = (bottom + top) / (bottom - top);
-	result.Elements[3 + 2 * 4] = (far + near) / (far - near);
+	result.Elements[3 + 2 * 4] = (zFar + zNear) / (zFar - zNear);
 
 	return result;
 }
 
-Matrix4x4 Matrix4x4::Perspective(float fov, float aspectRatio, float near, float far)
+Matrix4x4 Matrix4x4::Perspective(float fov, float aspectRatio, float zNear, float zFar)
 {
 	Matrix4x4 result = Zero;
 
 	float q = 1.0f / Mathf::Tan(Mathf::Degrees2Radians * 0.5f * fov);
 
 	float a = q / aspectRatio;
-	float b = (near + far) / (near - far);
-	float c = (2.0f * near * far) / (near - far);
+	float b = (zNear + zFar) / (zNear - zFar);
+	float c = (2.0f * zNear * zFar) / (zNear - zFar);
 
 	result.Elements[0 + 0 * 4] = a;
 	result.Elements[1 + 1 * 4] = q;

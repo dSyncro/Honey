@@ -82,7 +82,7 @@ void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 			ShaderToOpenGLDataType(e.Type),
 			e.IsNormalized ? GL_TRUE : GL_FALSE,
 			layout.GetStride(),
-			(const void*)e.Offset
+			(const void*)(uintptr_t)e.Offset
 		);
 
 		index++;

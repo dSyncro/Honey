@@ -37,6 +37,9 @@
       <Filter>ArgumentParser</Filter>
     </ClInclude>
     <ClInclude Include="Honeypot.h" />
+    <ClInclude Include="Honeypot\Context.h">
+      <Filter>Honeypot</Filter>
+    </ClInclude>
     <ClInclude Include="Honeypot\Core.h">
       <Filter>Honeypot</Filter>
     </ClInclude>
@@ -52,7 +55,6 @@
     <ClInclude Include="Libraries\Console.h">
       <Filter>Libraries</Filter>
     </ClInclude>
-    <ClInclude Include="Honeypot\Context.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentParser\ArgumentParser.cpp">
@@ -62,6 +64,9 @@
       <Filter>ArgumentParser</Filter>
     </ClCompile>
     <ClCompile Include="Honeypot.cpp" />
+    <ClCompile Include="Honeypot\Context.cpp">
+      <Filter>Honeypot</Filter>
+    </ClCompile>
     <ClCompile Include="Honeypot\TestCase.cpp">
       <Filter>Honeypot</Filter>
     </ClCompile>
@@ -86,6 +91,5 @@
     <ClCompile Include="Tests\Vector2.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-    <ClCompile Include="Honeypot\Context.cpp" />
   </ItemGroup>
 </Project>

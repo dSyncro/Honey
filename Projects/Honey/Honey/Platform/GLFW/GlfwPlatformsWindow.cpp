@@ -9,7 +9,7 @@
 
 using namespace Honey;
 
-static uint8_t s_GLFWWindowCount = 0;
+static uint8_t s_WindowCount = 0;
 
 static void GLFWErrorCallback(int error, const char* description)
 {
@@ -42,7 +42,7 @@ void GlfwPlatformsWindow::Init(const WindowProperties& properties)
 	HNY_CORE_INFO("Creating window {0} ({1}; {2})", properties.Title, properties.Width, properties.Height);
 
 	// Init GLFW if needed
-	if (!s_GLFWWindowCount)
+	if (!s_WindowCount)
 	{
 		int success = glfwInit();
 		HNY_CORE_ASSERT(success, "Could not init GLFW!");
@@ -55,7 +55,7 @@ void GlfwPlatformsWindow::Init(const WindowProperties& properties)
 #endif
 
 	_window = glfwCreateWindow((int)_data.Width, (int)_data.Height, _data.Title.c_str(), nullptr, nullptr);
-	s_GLFWWindowCount++;
+	s_WindowCount++;
 
 	// Init the context
 	_context = GraphicsContext::Create(_window);
@@ -77,8 +77,8 @@ void GlfwPlatformsWindow::Shutdown()
 	HNY_PROFILE_FUNCTION();
 
 	glfwDestroyWindow(_window);
-	s_GLFWWindowCount--;
-	if (!s_GLFWWindowCount) glfwTerminate();
+	s_WindowCount--;
+	if (!s_WindowCount) glfwTerminate();
 }
 
 void GlfwPlatformsWindow::OnUpdate()

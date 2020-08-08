@@ -2,7 +2,7 @@
 // File di inclusione generato con Microsoft Visual C++.
 // Utilizzato da Honeycomb.rc
 //
-#define IDI_ICON1                       102
+#define IDI_APPICON                       102
 
 // Next default values for new objects
 // 

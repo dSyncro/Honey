@@ -121,10 +121,25 @@ project "Honey"
 
 	filter "system:windows"
 		systemversion "latest"
+
+		excludes
+		{
+			"Projects/%{prj.name}/Honey/Platform/GLFW/**.h",
+			"Projects/%{prj.name}/Honey/Platform/GLFW/**.cpp",
+		}
 		
 		links 
 		{
-			"opengl32.lib",
+			"OpenGL32",
+		}
+
+	filter "system:linux"
+		systemversion "latest"
+
+		excludes 
+		{
+			"Projects/%{prj.name}/Honey/Platform/Windows/**.h",
+			"Projects/%{prj.name}/Honey/Platform/Windows/**.cpp",
 		}
 		
 	filter "configurations:Debug"

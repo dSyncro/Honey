@@ -207,7 +207,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const Reference<Texture2D>
 	for (uint32_t i = 0; i < Quad::VertexCount; i++)
 	{
 		Quad::Vertex& vertex = s_Data.QuadBufferPtr->Vertices[i];
-		vertex.Set(transform * Quad::VertexPositions[i], tint, Quad::TextureCoords[i], slot);
+		vertex.Set(transform * Quad::VertexPositions[i], tint, Quad::TextureCoords[i], (float)slot);
 	}
 	s_Data.QuadBufferPtr++;
 

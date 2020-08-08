@@ -1,7 +1,5 @@
 #pragma once
 
-#include <glm/glm.hpp>
-
 namespace Honey::Math {
 
 	struct Vector2;
@@ -32,7 +30,6 @@ namespace Honey::Math {
 		static const Vector4 NegativeInfinity;
 
 		// Conversion operators
-		operator glm::vec4() const { return glm::vec4(X, Y, Z, W); }
 		explicit operator Vector2() const;
 		explicit operator Vector3() const;
 
