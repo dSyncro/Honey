@@ -1,6 +1,9 @@
 #pragma once
 
 #include <cstddef>
+#include <chrono>
+
+#include <Honey/Core/Engine.h>
 
 #include "Timestamp.h"
 
@@ -10,10 +13,10 @@ namespace Honey {
 
 	public:
 
-		static Timestamp GetTime();
-		static Timestamp GetDeltaTime();
-		static float GetFrameRate();
-		static std::size_t GetFrameCount();
+		static Timestamp GetTime() { return Engine::GetTimer().GetTime(); }
+		static Timestamp GetDeltaTime() { return Engine::GetTimer().GetDeltaTime(); }
+		static float GetFrameRate() { return 1 / Engine::GetTimer().GetDeltaTime(); }
+		static std::size_t GetFrameCount() { return Engine::GetTimer().GetFrameCount(); }
 
 	};
 }

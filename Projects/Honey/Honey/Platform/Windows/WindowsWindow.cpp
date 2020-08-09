@@ -6,16 +6,12 @@
 #include <Honey/Renderer/Renderer.h>
 #include <Honey/Platform/OpenGL/OpenGLContext.h>
 #include <Honey/Platform/Windows/Input/WindowsKeyTable.h>
-#include <Honey/Timing/EngineTime.h>
+#include <Honey/Platform/ImGui/ImGuiWin32Implementation.h>
+#include <Honey/Timing/Time.h>
 
 using namespace Honey;
 
 static uint8_t s_WindowCount = 0;
-
-static void GLFWErrorCallback(int error, const char* description)
-{
-	HNY_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
-}
 
 WindowsWindow::WindowsWindow(const WindowProperties& properties)
 {
@@ -65,7 +61,6 @@ void WindowsWindow::PollEvents()
 	try
 	{
 		MSG message;
-		BOOL result;
 		while (PeekMessageW(&message, _window, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&message);
@@ -85,20 +80,7 @@ void WindowsWindow::PollEvents()
 		MessageBoxA(nullptr, "No Details Available.", "Unknown Exception", MB_OK | MB_ICONEXCLAMATION);
 	}
 
-	EngineTime::SetFrameCount(EngineTime::GetFrameCount() + 1);
-
-	static std::chrono::system_clock::duration startSeconds;
-	if (startSeconds == std::chrono::system_clock::duration::zero())
-	{
-		startSeconds = std::chrono::system_clock::now().time_since_epoch();
-	}
-
-	auto now = std::chrono::system_clock::now().time_since_epoch();
-	auto seconds = std::chrono::duration_cast<std::chrono::duration<float>>(now - startSeconds).count();
-
-	Timestamp time = seconds;
-	EngineTime::SetDeltaTime(time - EngineTime::GetTime());
-	EngineTime::SetTime(time);
+	Engine::_timer.MarkFrame();
 }
 
 void WindowsWindow::OnUpdate()
@@ -140,8 +122,11 @@ LRESULT WindowsWindow::WindowsEventCallbackSetup(HWND window, UINT msg, WPARAM w
 	return DefWindowProc(window, msg, wParam, lParam);
 }
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 LRESULT WindowsWindow::WindowsEventCallbackThrunk(HWND window, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	ImGui_ImplWin32_WndProcHandler(window, msg, wParam, lParam);
 	WindowData& data = *reinterpret_cast<WindowData*>(GetWindowLongPtr(window, GWLP_USERDATA));
 	switch (msg)
 	{

@@ -39,7 +39,7 @@ void EditorLayer::OnUpdate()
 	HNY_APP_INFO("DeltaTime: {0}", deltaTime);
 	HNY_APP_INFO("FPS: {0}", Time::GetFrameRate());
 	HNY_APP_INFO("Frame: {0}", Time::GetFrameCount());
-
+	
 	_cameraController.OnUpdate();
 
 	Renderer2D::ResetStatistics();

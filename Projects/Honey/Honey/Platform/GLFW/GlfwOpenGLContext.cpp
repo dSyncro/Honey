@@ -1,8 +1,6 @@
-#include "OpenGLContext.h"
-
 #include <Honey/Core.h>
+#include <Honey/Platform/OpenGL/OpenGLContext.h>
 
-#if 0
 extern "C" {
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -10,7 +8,7 @@ extern "C" {
 
 using namespace Honey;
 
-OpenGLContext::OpenGLContext(void* handle) : _handle(handle) 
+OpenGLContext::OpenGLContext(void* handle) : _handle(handle)
 {
 	HNY_CORE_ASSERT(_handle, "Window handle is null!");
 }
@@ -19,7 +17,7 @@ void OpenGLContext::Init()
 {
 	HNY_PROFILE_FUNCTION();
 
-	glfwMakeContextCurrent(_handle);
+	glfwMakeContextCurrent(reinterpret_cast<GLFWwindow*>(_handle));
 	int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	HNY_CORE_ASSERT(status, "Failed to init GLAD!");
 
@@ -34,6 +32,5 @@ void OpenGLContext::SwapBuffers()
 {
 	HNY_PROFILE_FUNCTION();
 
-	glfwSwapBuffers((GLFWwindow*)_handle);
+	glfwSwapBuffers(reinterpret_cast<GLFWwindow*>(_handle));
 }
-#endif

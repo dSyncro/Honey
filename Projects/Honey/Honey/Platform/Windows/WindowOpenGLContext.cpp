@@ -13,7 +13,7 @@ OpenGLContext::OpenGLContext(void* handle) : _handle(handle)
 	HNY_CORE_ASSERT(_handle, "Window handle is null!");
 }
 
-void* GetAnyGLFuncAddress(const char* name)
+static void* GetAnyGLFuncAddress(const char* name)
 {
 	void* p = (void*)wglGetProcAddress(name);
 	if (p == 0 ||
@@ -84,5 +84,7 @@ void OpenGLContext::SwapBuffers()
 {
 	HNY_PROFILE_FUNCTION();
 
+	HDC hdc = GetDC((HWND)_handle);
+	::SwapBuffers(hdc);
 	//glfwSwapBuffers((GLFWwindow*)_handle);
 }

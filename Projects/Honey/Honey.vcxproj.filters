@@ -430,9 +430,6 @@
     <ClInclude Include="Honey\Scene\Scene.h">
       <Filter>Honey\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Timing\EngineTime.h">
-      <Filter>Honey\Timing</Filter>
-    </ClInclude>
     <ClInclude Include="Honey\Timing\Time.h">
       <Filter>Honey\Timing</Filter>
     </ClInclude>
@@ -1934,6 +1931,8 @@
       <Filter>third-party\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Platform\Windows\TidyException.h" />
+    <ClInclude Include="Honey\Core\Platform.h" />
+    <ClInclude Include="Honey\Core\Engine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1944,9 +1943,6 @@
     </ClCompile>
     <ClCompile Include="Honey\Core\MemoryTracking.cpp">
       <Filter>Honey\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Honey\Layers\ImGui\ImGuiLayer.cpp">
-      <Filter>Honey\Layers\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Layers\Layer.cpp">
       <Filter>Honey\Layers</Filter>
@@ -1989,9 +1985,6 @@
     </ClCompile>
     <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLVertexBuffer.cpp">
       <Filter>Honey\Platform\OpenGL\Buffers</Filter>
-    </ClCompile>
-    <ClCompile Include="Honey\Platform\OpenGL\OpenGLContext.cpp">
-      <Filter>Honey\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLRendererAPI.cpp">
       <Filter>Honey\Platform\OpenGL</Filter>
@@ -2065,12 +2058,6 @@
     <ClCompile Include="Honey\Scene\Scene.cpp">
       <Filter>Honey\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Timing\EngineTime.cpp">
-      <Filter>Honey\Timing</Filter>
-    </ClCompile>
-    <ClCompile Include="Honey\Timing\Time.cpp">
-      <Filter>Honey\Timing</Filter>
-    </ClCompile>
     <ClCompile Include="Honey\Window\Window.cpp">
       <Filter>Honey\Window</Filter>
     </ClCompile>
@@ -2078,5 +2065,8 @@
       <Filter>third-party\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Platform\Windows\TidyException.cpp" />
+    <ClCompile Include="Honey\Platform\Windows\WindowsPlatform.cpp" />
+    <ClCompile Include="Honey\Core\Engine.cpp" />
+    <ClCompile Include="Honey\Platform\Windows\WindowsImGuiLayer.cpp" />
   </ItemGroup>
 </Project>
