@@ -130,7 +130,10 @@ project "Honey"
 		
 		links 
 		{
-			"OpenGL32",
+			"opengl32",
+			"d3d12.lib",
+			"dxgi.lib",
+			"d3dcompiler.lib"
 		}
 
 	filter "system:linux"

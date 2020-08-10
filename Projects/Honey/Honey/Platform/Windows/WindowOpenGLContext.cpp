@@ -86,5 +86,4 @@ void OpenGLContext::SwapBuffers()
 
 	HDC hdc = GetDC((HWND)_handle);
 	::SwapBuffers(hdc);
-	//glfwSwapBuffers((GLFWwindow*)_handle);
 }

@@ -13,6 +13,8 @@ using namespace Honey;
 
 static uint8_t s_WindowCount = 0;
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 WindowsWindow::WindowsWindow(const WindowProperties& properties)
 {
 	HNY_PROFILE_FUNCTION();
@@ -121,8 +123,6 @@ LRESULT WindowsWindow::WindowsEventCallbackSetup(HWND window, UINT msg, WPARAM w
 
 	return DefWindowProc(window, msg, wParam, lParam);
 }
-
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 LRESULT WindowsWindow::WindowsEventCallbackThrunk(HWND window, UINT msg, WPARAM wParam, LPARAM lParam)
 {

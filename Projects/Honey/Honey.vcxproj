@@ -89,7 +89,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;d3d12.lib;dxgi.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -113,7 +113,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;d3d12.lib;dxgi.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -137,7 +137,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;d3d12.lib;dxgi.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -654,93 +654,44 @@
     <ClInclude Include="third-party\glm\glm\vec3.hpp" />
     <ClInclude Include="third-party\glm\glm\vec4.hpp" />
     <ClInclude Include="third-party\glm\glm\vector_relational.hpp" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\async.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\async_logger-inl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\async_logger.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\cfg\argv.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\cfg\env.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\cfg\helpers-inl.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\cfg\helpers.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\cfg\log_levels.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\common-inl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\common.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\backtracer-inl.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\backtracer.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\circular_q.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\console_globals.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\file_helper-inl.h" />
+    <ClInclude Include="third-party\spdlog\include\spdlog\contrib\sinks\step_file_sink.h" />
+    <ClInclude Include="third-party\spdlog\include\spdlog\details\async_log_helper.h" />
+    <ClInclude Include="third-party\spdlog\include\spdlog\details\async_logger_impl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\details\file_helper.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\fmt_helper.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\log_msg-inl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\details\log_msg.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\log_msg_buffer-inl.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\log_msg_buffer.h" />
+    <ClInclude Include="third-party\spdlog\include\spdlog\details\logger_impl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\details\mpmc_blocking_q.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\details\null_mutex.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\os-inl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\details\os.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\periodic_worker-inl.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\periodic_worker.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\registry-inl.h" />
+    <ClInclude Include="third-party\spdlog\include\spdlog\details\pattern_formatter_impl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\details\registry.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\synchronous_factory.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\tcp_client-windows.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\tcp_client.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\thread_pool-inl.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\thread_pool.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\details\windows_include.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bin_to_hex.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\chrono.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\color.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\compile.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\core.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\format-inl.h" />
+    <ClInclude Include="third-party\spdlog\include\spdlog\details\spdlog_impl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\format.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\locale.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\ostream.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\posix.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\printf.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\ranges.h" />
+    <ClInclude Include="third-party\spdlog\include\spdlog\fmt\bundled\time.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\fmt\fmt.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\fmt\ostr.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\formatter.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\fwd.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\logger-inl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\logger.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\pattern_formatter-inl.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\pattern_formatter.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\sinks\android_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\ansicolor_sink-inl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\sinks\ansicolor_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\base_sink-inl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\sinks\base_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\basic_file_sink-inl.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\basic_file_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\daily_file_sink.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\sinks\dist_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\dup_filter_sink.h" />
+    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\file_sinks.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\sinks\msvc_sink.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\sinks\null_sink.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\sinks\ostream_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\ringbuffer_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\rotating_file_sink-inl.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\rotating_file_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\sink-inl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\sinks\sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\stdout_color_sinks-inl.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\stdout_color_sinks.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\stdout_sinks-inl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\sinks\stdout_sinks.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\sinks\syslog_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\systemd_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\tcp_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\win_eventlog_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\wincolor_sink-inl.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\sinks\wincolor_sink.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\spdlog-inl.h" />
+    <ClInclude Include="third-party\spdlog\include\spdlog\sinks\windebug_sink.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\spdlog.h" />
     <ClInclude Include="third-party\spdlog\include\spdlog\tweakme.h" />
-    <ClInclude Include="third-party\spdlog\include\spdlog\version.h" />
     <ClInclude Include="third-party\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
@@ -748,7 +699,6 @@
     <ClCompile Include="Honey\Core\Engine.cpp" />
     <ClCompile Include="Honey\Core\Log.cpp" />
     <ClCompile Include="Honey\Core\MemoryTracking.cpp" />
-    <ClCompile Include="Honey\Platform\Windows\WindowsImGuiLayer.cpp" />
     <ClCompile Include="Honey\Layers\Layer.cpp" />
     <ClCompile Include="Honey\Layers\LayerStack.cpp" />
     <ClCompile Include="Honey\Math\Matrix\Matrix4x4.cpp" />
@@ -769,8 +719,9 @@
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="Honey\Platform\Windows\Input\WindowsInput.cpp" />
     <ClCompile Include="Honey\Platform\Windows\Input\WindowsKeyTable.cpp" />
-    <ClCompile Include="Honey\Platform\Windows\WindowOpenGLContext.cpp" />
     <ClCompile Include="Honey\Platform\Windows\TidyException.cpp" />
+    <ClCompile Include="Honey\Platform\Windows\WindowOpenGLContext.cpp" />
+    <ClCompile Include="Honey\Platform\Windows\WindowsImGuiLayer.cpp" />
     <ClCompile Include="Honey\Platform\Windows\WindowsPlatform.cpp" />
     <ClCompile Include="Honey\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Honey\Renderer\2D\Quad.cpp" />

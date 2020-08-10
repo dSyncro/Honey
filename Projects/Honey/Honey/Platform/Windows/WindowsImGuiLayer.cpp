@@ -47,7 +47,7 @@ void ImGuiLayer::OnAttach()
 	Application& app = Application::Get();
 
 	// Setup Platform/Renderer bindings
-	ImGui_ImplWin32_Init(app.GetWindow().GetNativeWindow());
+	ImGui_ImplWin32_Init(app.GetWindow().GetNativeWindow(), wglGetCurrentContext());
 	ImGui_ImplOpenGL3_Init("#version 410");
 }
 
@@ -83,13 +83,12 @@ void ImGuiLayer::End()
 
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	SwapBuffers(hdc);
+
 	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 	{
 		HGLRC backup_current_context = wglGetCurrentContext();
 		ImGui::UpdatePlatformWindows();
 		ImGui::RenderPlatformWindowsDefault();
 		wglMakeCurrent(hdc, backup_current_context);
-		SwapBuffers(hdc);
 	}
 }

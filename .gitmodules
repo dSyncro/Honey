@@ -9,7 +9,7 @@
 	url = https://github.com/dSyncro/HoneyGlad
 [submodule "Projects/Honey/third-party/ImGui"]
 	path = Projects/Honey/third-party/ImGui
-	url = https://github.com/dSyncro/HoneyImGui
+	url = https://github.com/ocornut/imgui
 [submodule "Projects/Honey/third-party/glm"]
 	path = Projects/Honey/third-party/glm
 	url = https://github.com/g-truc/glm

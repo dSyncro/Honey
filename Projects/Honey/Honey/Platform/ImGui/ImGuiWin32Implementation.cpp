@@ -62,6 +62,7 @@ static ImGuiMouseCursor     g_LastMouseCursor = ImGuiMouseCursor_COUNT;
 static bool                 g_HasGamepad = false;
 static bool                 g_WantUpdateHasGamepad = true;
 static bool                 g_WantUpdateMonitors = true;
+static HGLRC                g_glcontext = 0;
 
 // Forward Declarations
 static void ImGui_ImplWin32_InitPlatformInterface();
@@ -69,7 +70,7 @@ static void ImGui_ImplWin32_ShutdownPlatformInterface();
 static void ImGui_ImplWin32_UpdateMonitors();
 
 // Functions
-bool    ImGui_ImplWin32_Init(void* hwnd)
+bool    ImGui_ImplWin32_Init(void* hwnd, void* glcontext)
 {
     if (!::QueryPerformanceFrequency((LARGE_INTEGER *)&g_TicksPerSecond))
         return false;
@@ -88,6 +89,8 @@ bool    ImGui_ImplWin32_Init(void* hwnd)
     g_hWnd = (HWND)hwnd;
     ImGuiViewport* main_viewport = ImGui::GetMainViewport();
     main_viewport->PlatformHandle = main_viewport->PlatformHandleRaw = (void*)g_hWnd;
+	g_glcontext = (HGLRC)glcontext;
+
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         ImGui_ImplWin32_InitPlatformInterface();
 
@@ -445,7 +448,7 @@ IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARA
 #if !defined(_versionhelpers_H_INCLUDED_) && !defined(_INC_VERSIONHELPERS)
 static BOOL IsWindowsVersionOrGreater(WORD major, WORD minor, WORD sp)
 {
-    OSVERSIONINFOEXW osvi = { sizeof(osvi), major, minor, 0, 0, { 0 }, sp };
+	OSVERSIONINFOEXW osvi = { sizeof(osvi), major, minor, 0, 0, { 0 }, sp, 0, 0, 0, 0 };
     DWORD mask = VER_MAJORVERSION | VER_MINORVERSION | VER_SERVICEPACKMAJOR;
     ULONGLONG cond = ::VerSetConditionMask(0, VER_MAJORVERSION, VER_GREATER_EQUAL);
     cond = ::VerSetConditionMask(cond, VER_MINORVERSION, VER_GREATER_EQUAL);
@@ -473,6 +476,7 @@ typedef DPI_AWARENESS_CONTEXT(WINAPI* PFN_SetThreadDpiAwarenessContext)(DPI_AWAR
 // Helper function to enable DPI awareness without setting up a manifest
 void ImGui_ImplWin32_EnableDpiAwareness()
 {
+	g_WantUpdateMonitors = true;
     // if (IsWindows10OrGreater()) // This needs a manifest to succeed. Instead we try to grab the function pointer!
     {
         static HINSTANCE user32_dll = ::LoadLibraryA("user32.dll"); // Reference counted per-process
@@ -491,10 +495,12 @@ void ImGui_ImplWin32_EnableDpiAwareness()
             return;
         }
     }
-    SetProcessDPIAware();
+#if _WIN32_WINNT >= 0x0600
+	::SetProcessDPIAware();
+#endif
 }
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && !defined(NOGDI)
 #pragma comment(lib, "gdi32")   // Link with gdi32.lib for GetDeviceCaps()
 #endif
 
@@ -507,13 +513,15 @@ float ImGui_ImplWin32_GetDpiScaleForMonitor(void* monitor)
         if (PFN_GetDpiForMonitor GetDpiForMonitorFn = (PFN_GetDpiForMonitor)::GetProcAddress(shcore_dll, "GetDpiForMonitor"))
             GetDpiForMonitorFn((HMONITOR)monitor, MDT_EFFECTIVE_DPI, &xdpi, &ydpi);
     }
-    else
-    {
-        const HDC dc = ::GetDC(NULL);
-        xdpi = ::GetDeviceCaps(dc, LOGPIXELSX);
-        ydpi = ::GetDeviceCaps(dc, LOGPIXELSY);
-        ::ReleaseDC(NULL, dc);
-    }
+#ifndef NOGDI
+	else
+	{
+		const HDC dc = ::GetDC(NULL);
+		xdpi = ::GetDeviceCaps(dc, LOGPIXELSX);
+		ydpi = ::GetDeviceCaps(dc, LOGPIXELSY);
+		::ReleaseDC(NULL, dc);
+	}
+#endif
     IM_ASSERT(xdpi == ydpi); // Please contact me if you hit this assert!
     return xdpi / 96.0f;
 }
@@ -566,8 +574,11 @@ struct ImGuiViewportDataWin32
     bool    HwndOwned;
     DWORD   DwStyle;
     DWORD   DwExStyle;
+	HDC     Hdc;
+	HGLRC   Hglrc;
 
-    ImGuiViewportDataWin32() { Hwnd = NULL; HwndOwned = false;  DwStyle = DwExStyle = 0; }
+	ImGuiViewportDataWin32() { Hwnd = NULL; HwndOwned = false;  DwStyle = DwExStyle = 0; Hdc = NULL; Hglrc = NULL; }
+
     ~ImGuiViewportDataWin32() { IM_ASSERT(Hwnd == NULL); }
 };
 
@@ -609,6 +620,36 @@ static void ImGui_ImplWin32_CreateWindow(ImGuiViewport* viewport)
     data->HwndOwned = true;
     viewport->PlatformRequestResize = false;
     viewport->PlatformHandle = viewport->PlatformHandleRaw = data->Hwnd;
+
+	//Set this window to the current context.
+	data->Hdc = GetDC(data->Hwnd);
+
+	PIXELFORMATDESCRIPTOR pfd =
+	{
+		sizeof(PIXELFORMATDESCRIPTOR),
+		1,
+		PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    // Flags
+		PFD_TYPE_RGBA,        // The kind of framebuffer. RGBA or palette.
+		32,                   // Colordepth of the framebuffer.
+		0, 0, 0, 0, 0, 0,
+		0,
+		0,
+		0,
+		0, 0, 0, 0,
+		24,                   // Number of bits for the depthbuffer
+		8,                    // Number of bits for the stencilbuffer
+		0,                    // Number of Aux buffers in the framebuffer.
+		PFD_MAIN_PLANE,
+		0,
+		0, 0, 0
+	};
+
+	int pixelFormat = ChoosePixelFormat(data->Hdc, &pfd);
+	SetPixelFormat(data->Hdc, pixelFormat, &pfd);
+	data->Hglrc = wglCreateContext(data->Hdc);
+	wglMakeCurrent(data->Hdc, data->Hglrc);
+	SwapBuffers(data->Hdc);
+	wglShareLists(g_glcontext, data->Hglrc);
 }
 
 static void ImGui_ImplWin32_DestroyWindow(ImGuiViewport* viewport)
@@ -760,6 +801,51 @@ static float ImGui_ImplWin32_GetWindowDpiScale(ImGuiViewport* viewport)
     return ImGui_ImplWin32_GetDpiScaleForHwnd(data->Hwnd);
 }
 
+static void ImGui_ImplWin32_RenderWindow(ImGuiViewport* viewport, void*)
+{
+	ImGuiViewportDataWin32* data = (ImGuiViewportDataWin32*)viewport->PlatformUserData;
+	if (data->Hdc == NULL)
+	{
+		data->Hdc = GetDC(data->Hwnd);
+		PIXELFORMATDESCRIPTOR pfd =
+		{
+			sizeof(PIXELFORMATDESCRIPTOR),
+			1,
+			PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    // Flags
+			PFD_TYPE_RGBA,        // The kind of framebuffer. RGBA or palette.
+			32,                   // Colordepth of the framebuffer.
+			0, 0, 0, 0, 0, 0,
+			0,
+			0,
+			0,
+			0, 0, 0, 0,
+			24,                   // Number of bits for the depthbuffer
+			8,                    // Number of bits for the stencilbuffer
+			0,                    // Number of Aux buffers in the framebuffer.
+			PFD_MAIN_PLANE,
+			0,
+			0, 0, 0
+		};
+		int iPixelFormat = ChoosePixelFormat(data->Hdc, &pfd);
+		SetPixelFormat(data->Hdc, iPixelFormat, &pfd);
+	}
+	if (data->Hglrc == NULL)
+		data->Hglrc = wglCreateContext(data->Hdc);
+
+	ImDrawList* list = ImGui::GetBackgroundDrawList(viewport);
+
+	bool isMadeCurrent = wglMakeCurrent(data->Hdc, data->Hglrc);
+
+	return;
+}
+
+static void ImGui_ImplWin32_SwapBuffers(ImGuiViewport* viewport, void*)
+{
+	ImGuiViewportDataWin32* data = (ImGuiViewportDataWin32*)viewport->PlatformUserData;
+	wglMakeCurrent(data->Hdc, data->Hglrc);
+	SwapBuffers(data->Hdc);
+}
+
 // FIXME-DPI: Testing DPI related ideas
 static void ImGui_ImplWin32_OnChangedViewport(ImGuiViewport* viewport)
 {
@@ -785,6 +871,8 @@ static LRESULT CALLBACK ImGui_ImplWin32_WndProcHandler_PlatformWindow(HWND hWnd,
     {
         switch (msg)
         {
+		case WM_ERASEBKGND:
+			return 0;
         case WM_CLOSE:
             viewport->PlatformRequestClose = true;
             return 0;
@@ -848,6 +936,8 @@ static void ImGui_ImplWin32_InitPlatformInterface()
     platform_io.Platform_UpdateWindow = ImGui_ImplWin32_UpdateWindow;
     platform_io.Platform_GetWindowDpiScale = ImGui_ImplWin32_GetWindowDpiScale; // FIXME-DPI
     platform_io.Platform_OnChangedViewport = ImGui_ImplWin32_OnChangedViewport; // FIXME-DPI
+	platform_io.Platform_RenderWindow = ImGui_ImplWin32_RenderWindow;
+	platform_io.Platform_SwapBuffers = ImGui_ImplWin32_SwapBuffers;
 #if HAS_WIN32_IME
     platform_io.Platform_SetImeInputPos = ImGui_ImplWin32_SetImeInputPos;
 #endif
