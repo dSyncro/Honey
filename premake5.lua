@@ -36,7 +36,6 @@ workspace "Honey"
 		".editorconfig",
 		"premake5.lua"
 	}
-
 	
 	flags
 	{
@@ -56,8 +55,8 @@ IncludeDir["EnTT"] = "Projects/Honey/third-party/entt/include"
 
 group "Dependencies"
 
-	include "Projects/Honey/third-party/glfw"
 	include "Projects/Honey/third-party/glad"
+	include "Projects/Honey/third-party/glfw"
 	include "Projects/Honey/third-party/ImGui"
 
 group ""

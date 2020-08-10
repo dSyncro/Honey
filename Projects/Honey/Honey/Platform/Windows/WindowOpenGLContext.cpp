@@ -8,6 +8,8 @@ extern "C" {
 
 using namespace Honey;
 
+static HDC s_Hdc;
+
 OpenGLContext::OpenGLContext(void* handle) : _handle(handle)
 {
 	HNY_CORE_ASSERT(_handle, "Window handle is null!");
@@ -32,9 +34,6 @@ void OpenGLContext::Init()
 {
 	HNY_PROFILE_FUNCTION();
 
-	HDC      hdc;
-	HGLRC    hglrc;
-
 	PIXELFORMATDESCRIPTOR pfd =
 	{
 		sizeof(PIXELFORMATDESCRIPTOR),
@@ -56,21 +55,24 @@ void OpenGLContext::Init()
 	};
 
 	// obtain a device context for the window  
-	hdc = GetDC((HWND)_handle);
+	s_Hdc = GetDC((HWND)_handle);
 
 	int  letWindowsChooseThisPixelFormat;
-	letWindowsChooseThisPixelFormat = ChoosePixelFormat(hdc, &pfd);
-	BOOL setpformat = SetPixelFormat(hdc, letWindowsChooseThisPixelFormat, &pfd);
+	letWindowsChooseThisPixelFormat = ChoosePixelFormat(s_Hdc, &pfd);
+	BOOL setpformat = SetPixelFormat(s_Hdc, letWindowsChooseThisPixelFormat, &pfd);
 
-	if (hglrc = wglCreateContext(hdc))
+	HGLRC hglrc = wglCreateContext(s_Hdc);
+	if (hglrc)
 	{
-		if (wglMakeCurrent(hdc, hglrc))
+		if (wglMakeCurrent(s_Hdc, hglrc))
 		{
 			const GLADloadproc proc = (GLADloadproc)GetAnyGLFuncAddress;
 			int status = gladLoadGLLoader(proc);
 			HNY_CORE_ASSERT(status, "Failed to init GLAD!");
 		}
+		else HNY_CORE_ASSERT(false, "Failed to set OpenGL Context!");
 	}
+	else HNY_CORE_ASSERT(false, "Failed to init OpenGL Context!");
 	
 
 	HNY_CORE_INFO("## OpenGL Info ##");
@@ -84,6 +86,5 @@ void OpenGLContext::SwapBuffers()
 {
 	HNY_PROFILE_FUNCTION();
 
-	HDC hdc = GetDC((HWND)_handle);
-	::SwapBuffers(hdc);
+	::SwapBuffers(s_Hdc);
 }
