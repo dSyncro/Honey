@@ -201,6 +201,7 @@
     <ClInclude Include="Honey\Math\Vector\Vector3.h" />
     <ClInclude Include="Honey\Math\Vector\Vector4.h" />
     <ClInclude Include="Honey\Math\Vectors.h" />
+    <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiOpenGLRender.h" />
     <ClInclude Include="Honey\Platform\ImGui\ImGuiWin32Implementation.h" />
@@ -213,11 +214,6 @@
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="Honey\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="Honey\Platform\Windows\Input\WindowKeycode.h" />
-    <ClInclude Include="Honey\Platform\Windows\Input\WindowsKeyTable.h" />
-    <ClInclude Include="Honey\Platform\Windows\TidyException.h" />
-    <ClInclude Include="Honey\Platform\Windows\WindowsHeader.h" />
-    <ClInclude Include="Honey\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="Honey\Profiling\InstrumentationTimer.h" />
     <ClInclude Include="Honey\Profiling\Instrumentor.h" />
     <ClInclude Include="Honey\Profiling\ProfileResult.h" />
@@ -242,6 +238,7 @@
     <ClInclude Include="Honey\Renderer\Texture.h" />
     <ClInclude Include="Honey\Renderer\VertexArray.h" />
     <ClInclude Include="Honey\Scene\Scene.h" />
+    <ClInclude Include="Honey\Scene\SceneCamera.h" />
     <ClInclude Include="Honey\Timing\Time.h" />
     <ClInclude Include="Honey\Timing\Timestamp.h" />
     <ClInclude Include="Honey\Window\Window.h" />
@@ -707,6 +704,11 @@
     <ClCompile Include="Honey\Math\Vector\Vector2.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector3.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector4.cpp" />
+    <ClCompile Include="Honey\Platform\GLFW\GlfwImGuiLayer.cpp" />
+    <ClCompile Include="Honey\Platform\GLFW\GlfwOpenGLContext.cpp" />
+    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatform.cpp" />
+    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsInput.cpp" />
+    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsWindow.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="Honey\Platform\ImGui\ImGuiWin32Implementation.cpp" />
@@ -717,13 +719,6 @@
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="Honey\Platform\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="Honey\Platform\Windows\Input\WindowsInput.cpp" />
-    <ClCompile Include="Honey\Platform\Windows\Input\WindowsKeyTable.cpp" />
-    <ClCompile Include="Honey\Platform\Windows\TidyException.cpp" />
-    <ClCompile Include="Honey\Platform\Windows\WindowOpenGLContext.cpp" />
-    <ClCompile Include="Honey\Platform\Windows\WindowsImGuiLayer.cpp" />
-    <ClCompile Include="Honey\Platform\Windows\WindowsPlatform.cpp" />
-    <ClCompile Include="Honey\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Honey\Renderer\2D\Quad.cpp" />
     <ClCompile Include="Honey\Renderer\2D\Renderer2D.cpp" />
     <ClCompile Include="Honey\Renderer\Buffers\FrameBuffer.cpp" />
@@ -740,6 +735,7 @@
     <ClCompile Include="Honey\Renderer\Texture.cpp" />
     <ClCompile Include="Honey\Renderer\VertexArray.cpp" />
     <ClCompile Include="Honey\Scene\Scene.cpp" />
+    <ClCompile Include="Honey\Scene\SceneCamera.cpp" />
     <ClCompile Include="Honey\Window\Window.cpp" />
     <ClCompile Include="third-party\stb_image\stb_image.cpp" />
   </ItemGroup>

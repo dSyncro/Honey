@@ -47,3 +47,14 @@ void Scene::DeleteEntity(const Entity& entity)
 {
 	_registry.destroy(entity);
 }
+
+void Scene::OnViewportResize(uint32_t width, uint32_t height)
+{
+	auto camerasView = _registry.view<CameraComponent>();
+	for (entt::entity entity : camerasView)
+	{
+		auto& camComponent = _registry.get<CameraComponent>(entity);
+		if (camComponent.HasFixedAspectRatio) continue;
+		camComponent.Camera.SetViewportSize(width, height);
+	}
+}

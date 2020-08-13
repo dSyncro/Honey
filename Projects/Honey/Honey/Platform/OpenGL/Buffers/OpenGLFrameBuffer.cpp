@@ -20,6 +20,8 @@ void OpenGLFrameBuffer::Invalidate()
 {
 	if (_rendererID) Free();
 
+	if (_specification.Width <= 0 || _specification.Height <= 0) return;
+
 	glCreateFramebuffers(1, &_rendererID);
 	glBindFramebuffer(GL_FRAMEBUFFER, _rendererID);
 

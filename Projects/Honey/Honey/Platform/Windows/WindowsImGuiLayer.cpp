@@ -89,6 +89,6 @@ void ImGuiLayer::End()
 		HGLRC backup_current_context = wglGetCurrentContext();
 		ImGui::UpdatePlatformWindows();
 		ImGui::RenderPlatformWindowsDefault();
-		wglMakeCurrent(hdc, backup_current_context);
+		wglMakeCurrent(hdc, backup_current_context); 
 	}
 }

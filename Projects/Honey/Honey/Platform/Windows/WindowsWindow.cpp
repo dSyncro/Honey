@@ -9,6 +9,8 @@
 #include <Honey/Platform/ImGui/ImGuiWin32Implementation.h>
 #include <Honey/Timing/Time.h>
 
+#include "WindowsMessageMap.h"
+
 using namespace Honey;
 
 static uint8_t s_WindowCount = 0;
@@ -126,7 +128,7 @@ LRESULT WindowsWindow::WindowsEventCallbackSetup(HWND window, UINT msg, WPARAM w
 
 LRESULT WindowsWindow::WindowsEventCallbackThrunk(HWND window, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	ImGui_ImplWin32_WndProcHandler(window, msg, wParam, lParam);
+	if(ImGui_ImplWin32_WndProcHandler(window, msg, wParam, lParam)) return true;
 	WindowData& data = *reinterpret_cast<WindowData*>(GetWindowLongPtr(window, GWLP_USERDATA));
 	switch (msg)
 	{

@@ -1,20 +1,20 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 
 namespace Honey {
 
 	struct Camera {
 
+		Camera() = default;
 		Camera(const glm::mat4& projectionMatrix) : _projection(projectionMatrix) {}
+		virtual ~Camera() = default;
+
 		const glm::mat4& GetProjection() const { return _projection; }
 
-		void SetOrthographic(float left, float right, float bottom, float top) { _projection = glm::ortho(left, right, bottom, top, -1.0f, 1.0f); }
+	protected:
 
-	private:
-
-		glm::mat4 _projection;
+		glm::mat4 _projection = glm::mat4(1.0f);
 	};
 
 }

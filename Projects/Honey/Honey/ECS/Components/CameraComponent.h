@@ -1,18 +1,17 @@
 #pragma once
 
-#include <Honey/Renderer/Camera/Camera.h>
+#include <Honey/Scene/SceneCamera.h>
 
 namespace Honey {
 
 	struct CameraComponent {
 
-		CameraComponent() : Camera(glm::mat4(1.0f)) {}
+		CameraComponent() = default;
 		~CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
-		CameraComponent(const glm::mat4& projectionMatrix)
-			: Camera(projectionMatrix) { }
 
-		Honey::Camera Camera;
+		SceneCamera Camera;
+		bool HasFixedAspectRatio = false;
 	};
 
 }

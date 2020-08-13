@@ -22,6 +22,7 @@
 #else
 #define IMGUI_IMPL_WIN32_DISABLE_LINKING_XINPUT
 #endif
+#include <Honey\Core\Assertion.h>
 #if defined(_MSC_VER) && !defined(IMGUI_IMPL_WIN32_DISABLE_LINKING_XINPUT)
 #pragma comment(lib, "xinput")
 //#pragma comment(lib, "Xinput9_1_0")
@@ -183,7 +184,8 @@ static void ImGui_ImplWin32_UpdateMousePos()
     POINT mouse_screen_pos;
     if (!::GetCursorPos(&mouse_screen_pos))
         return;
-    if (HWND focused_hwnd = ::GetForegroundWindow())
+	HWND focused_hwnd = ::GetForegroundWindow();
+    if (focused_hwnd)
     {
         if (::IsChild(focused_hwnd, g_hWnd))
             focused_hwnd = g_hWnd;
@@ -835,8 +837,6 @@ static void ImGui_ImplWin32_RenderWindow(ImGuiViewport* viewport, void*)
 	ImDrawList* list = ImGui::GetBackgroundDrawList(viewport);
 
 	bool isMadeCurrent = wglMakeCurrent(data->Hdc, data->Hglrc);
-
-	return;
 }
 
 static void ImGui_ImplWin32_SwapBuffers(ImGuiViewport* viewport, void*)

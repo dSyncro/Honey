@@ -1,11 +1,11 @@
 #include "GlfwPlatformsWindow.h"
 
+#include <Honey/Core/Engine.h>
 #include <Honey/Events/KeyEvents.h>
 #include <Honey/Events/MouseEvents.h>
 #include <Honey/Events/WindowEvents.h>
 #include <Honey/Renderer/Renderer.h>
 #include <Honey/Platform/OpenGL/OpenGLContext.h>
-#include <Honey/Timing/EngineTime.h>
 
 using namespace Honey;
 
@@ -88,11 +88,7 @@ void GlfwPlatformsWindow::OnUpdate()
 	glfwPollEvents();
 	_context->SwapBuffers();
 
-	EngineTime::SetFrameCount(EngineTime::GetFrameCount() + 1);
-
-	float time = (float)glfwGetTime();
-	EngineTime::SetDeltaTime(time - EngineTime::GetTime());
-	EngineTime::SetTime(time);
+	Engine::_timer.MarkFrame();
 }
 
 void GlfwPlatformsWindow::SetTitle(const std::string& title) 

@@ -14,7 +14,7 @@ void EditorLayer::OnAttach()
     _activeScene = CreateReference<Scene>();
 
     _camera = _activeScene->CreateEntity("Main Camera", "Main");
-    _camera.AddComponent<CameraComponent>(glm::ortho(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
+    _camera.AddComponent<CameraComponent>();
 	
 	_entity = _activeScene->CreateEntity();
     _entity.AddComponent<SpriteRendererComponent>();
@@ -35,10 +35,7 @@ void EditorLayer::OnUpdate()
 	HNY_PROFILE_FUNCTION();
 
 	float deltaTime = Time::GetDeltaTime();
-
-	HNY_APP_INFO("DeltaTime: {0}", deltaTime);
-	HNY_APP_INFO("FPS: {0}", Time::GetFrameRate());
-	HNY_APP_INFO("Frame: {0}", Time::GetFrameCount());
+	HNY_CORE_INFO("Delta Time: {0}", deltaTime);
 	
 	_cameraController.OnUpdate();
 
@@ -66,7 +63,7 @@ void EditorLayer::OnImGuiRender()
 
     static bool isDockspaceEnabled = true;
     static bool opt_fullscreen_persistant = true;
-    bool opt_fullscreen = opt_fullscreen_persistant;
+	bool opt_fullscreen = opt_fullscreen_persistant;
     static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
 
     // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
@@ -132,6 +129,9 @@ void EditorLayer::OnImGuiRender()
         ImGui::Text("Quad Count: %d", stats.QuadCount);
         ImGui::Text("Vertex Count: %d", stats.GetVertexCount());
         ImGui::Text("Index Count: %d", stats.GetIndexCount());
+		ImGui::Text("Delta Time: %f", Time::GetDeltaTime());
+		ImGui::Text("Frame Rate: %f", Time::GetFrameRate());
+		ImGui::Text("Frame Count: %d", Time::GetFrameCount());
         ImGui::ColorEdit4("Square Color", glm::value_ptr(_entity.GetComponent<SpriteRendererComponent>().Color));
         ImGui::End();
     }
@@ -147,7 +147,8 @@ void EditorLayer::OnImGuiRender()
         {
             _frameBuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
             _viewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-            _cameraController.Resize(viewportPanelSize.x, viewportPanelSize.y);
+            _cameraController.Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
+			_activeScene->OnViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
         }
 
         ImGui::Image((void*)_frameBuffer->GetColorAttachmentRendererID(), ImVec2{ _viewportSize.X, _viewportSize.Y }, ImVec2(0, 1), ImVec2(1, 0));

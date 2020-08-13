@@ -44,8 +44,8 @@ namespace Honey {
 
 		static Timer _timer;
 
-		friend class GlfwWindow;
 		friend class WindowsWindow;
+		friend class GlfwPlatformsWindow;
 	};
 
 }
