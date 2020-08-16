@@ -3,11 +3,25 @@
 #include <Honey/ECS/Entity.h>
 #include <Honey/ECS/Components.h>
 #include <Honey/Renderer/2D/Renderer2D.h>
+#include <Honey/Math/Matrix/Matrix4x4.h>
 
 using namespace Honey;
 
 void Scene::OnUpdate()
 {
+	_registry.view<NativeScriptComponent>().each([=](entt::entity entity, NativeScriptComponent& nsc) 
+		{
+			if (!nsc.Instance)
+			{
+				nsc.InstantiateFunction();
+				nsc.Instance->_entity = Entity(entity, this);
+				nsc.OnCreateFunction(nsc.Instance);
+			}
+
+			nsc.OnUpdateFunction(nsc.Instance);
+		}
+	);
+
 	_mainCamera.Reset();
 
 	auto rendererGroup = _registry.view<TransformComponent, TagComponent, CameraComponent>();
@@ -17,7 +31,7 @@ void Scene::OnUpdate()
 		if (tag.Tag == "Main")
 		{
 			_mainCamera.Camera = &camera.Camera;
-			_mainCamera.Transform = &transform.Transform;
+			_mainCamera.Transform = &transform.Transform.GetMatrix();
 		}
 	}
 
@@ -28,7 +42,7 @@ void Scene::OnUpdate()
 		for (entt::entity entity : renderableGroup)
 		{
 			auto& [transform, sprite] = renderableGroup.get<TransformComponent, SpriteRendererComponent>(entity);
-			Renderer2D::DrawQuad(transform, sprite.Color);
+			Renderer2D::DrawQuad(transform.Transform.Position, (Math::Vector2)transform.Transform.Scale, sprite.Color);
 		}
 		Renderer2D::EndScene();
 	}

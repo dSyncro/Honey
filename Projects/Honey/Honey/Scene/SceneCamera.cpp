@@ -1,8 +1,7 @@
 #include "SceneCamera.h"
 
-#include <glm/gtc/matrix_transform.hpp>
-
 using namespace Honey;
+using namespace Honey::Math;
 
 SceneCamera::SceneCamera()
 {
@@ -31,5 +30,5 @@ void SceneCamera::RecalculateProjection()
 	float orthoBottom = -0.5f * _orthoSize; 
 	float orthoTop = 0.5f * _orthoSize;
 
-	_projection = glm::ortho(orthoLeft, orthoRight, orthoBottom, orthoTop, _orthoNear, _orthoFar);
+	_projection = Matrix4x4::Orthographic(orthoLeft, orthoRight, orthoBottom, orthoTop, _orthoNear, _orthoFar);
 }

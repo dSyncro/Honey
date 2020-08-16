@@ -26,11 +26,11 @@ namespace Honey {
 		void RemoveComponent() 
 		{ 
 			HNY_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
-			return _scene->_registry.remove<T>(_entityID, std::forward<Args>(args));
+			return _scene->_registry.remove<T>(_entityID);
 		}
 
 		template <typename T>
-		T& GetComponent() 
+		T& GetComponent()
 		{ 
 			HNY_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
 			return _scene->_registry.get<T>(_entityID);

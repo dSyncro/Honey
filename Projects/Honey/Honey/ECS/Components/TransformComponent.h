@@ -1,21 +1,21 @@
 #pragma once
 
-#include <glm/glm.hpp>
+#include <Honey/Math/Transform.h>
 
 namespace Honey {
 
 	struct TransformComponent {
 
-		TransformComponent() : Transform(glm::mat4(1.0f)) {}
+		TransformComponent() = default;
 		~TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
-		TransformComponent(const glm::mat4& trasform)
+		TransformComponent(const Honey::Transform& trasform)
 			: Transform(trasform) { }
 
-		glm::mat4 Transform;
+		Honey::Transform Transform;
 
-		operator glm::mat4&() { return Transform; }
-		operator const glm::mat4&() const { return Transform; }
+		operator Honey::Transform&() { return Transform; }
+		operator const Honey::Transform&() const { return Transform; }
 	};
 
 }

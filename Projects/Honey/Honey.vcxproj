@@ -159,10 +159,13 @@
     <ClInclude Include="Honey\ECS\Components.h" />
     <ClInclude Include="Honey\ECS\Components\CameraComponent.h" />
     <ClInclude Include="Honey\ECS\Components\NameComponent.h" />
+    <ClInclude Include="Honey\ECS\Components\NativeScriptComponent.h" />
     <ClInclude Include="Honey\ECS\Components\SpriteRendererComponent.h" />
     <ClInclude Include="Honey\ECS\Components\TagComponent.h" />
     <ClInclude Include="Honey\ECS\Components\TransformComponent.h" />
     <ClInclude Include="Honey\ECS\Entity.h" />
+    <ClInclude Include="Honey\ECS\ScriptableEntity.h" />
+    <ClInclude Include="Honey\Math\Transform.h" />
     <ClInclude Include="Honey\Entrypoint.h" />
     <ClInclude Include="Honey\Events\App\AppRenderEvent.h" />
     <ClInclude Include="Honey\Events\App\AppTickEvent.h" />

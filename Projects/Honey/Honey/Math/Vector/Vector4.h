@@ -16,8 +16,9 @@ namespace Honey::Math {
 		};
 
 		// Constructors
-		Vector4(float value = 0.0f) : X(value), Y(value), Z(value), W(value) {}
-		Vector4(float x, float y, float z, float w) : X(x), Y(y), Z(z), W(w) {}
+		constexpr Vector4(float value = 0.0f) : X(value), Y(value), Z(value), W(value) {}
+		constexpr Vector4(float x, float y, float z, float w) : X(x), Y(y), Z(z), W(w) {}
+
 		explicit Vector4(const Vector2& vector);
 		explicit Vector4(const Vector3& vector);
 		explicit Vector4(const Vector3& vector, float w);

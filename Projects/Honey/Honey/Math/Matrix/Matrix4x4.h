@@ -14,7 +14,7 @@ namespace Honey::Math {
 		{
 			// [row + col * 4]
 			float Elements[4 * 4];
-			Vector4 Rows[4];
+			Vector4 Columns[4];
 		};
 
 		// Constructors
@@ -97,7 +97,7 @@ namespace Honey::Math {
 		 * @param far -> Far clipping plane depth.
 		 * @return Orthograpic projection matrix.
 		 */
-		static Matrix4x4 Orthographic(float left, float right, float bottom, float top, float near, float far);
+		static Matrix4x4 Orthographic(float left, float right, float bottom, float top, float zNear, float zFar);
 
 		/**
 		 * @brief Generate perspective projection matrix.
@@ -107,7 +107,7 @@ namespace Honey::Math {
 		 * @param far -> Far clipping plane depth.
 		 * @return Perspective projection matrix.
 		*/
-		static Matrix4x4 Perspective(float fov, float aspectRatio, float near, float far);
+		static Matrix4x4 Perspective(float fov, float aspectRatio, float zNear, float zFar);
 
 		/**
 		 * @brief Create a "look at" matrix.
@@ -172,6 +172,16 @@ namespace Honey::Math {
 		 * @param other -> Matrix to multiply this one by.
 		 */
 		Matrix4x4& operator *=(const Matrix4x4& other);
+
+		std::string ToString() const 
+		{
+			std::stringstream stream;
+			stream << "Row 1: " << Elements[0] << ", " << Elements[1] << ", " << Elements[2] << ", " << Elements[3] << '\n';
+			stream << "Row 2: " << Elements[4] << ", " << Elements[5] << ", " << Elements[6] << ", " << Elements[7] << '\n';
+			stream << "Row 3: " << Elements[8] << ", " << Elements[9] << ", " << Elements[10] << ", " << Elements[11] << '\n';
+			stream << "Row 4: " << Elements[12] << ", " << Elements[13] << ", " << Elements[14] << ", " << Elements[15] << '\n';
+			return stream.str();
+		}
 	};
 
 }

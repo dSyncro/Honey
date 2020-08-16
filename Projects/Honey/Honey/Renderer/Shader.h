@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include <Honey/Math/Matrix/Matrix4x4.h>
 #include <Honey/Core/MemoryManagement.h>
 
 #include <glm/glm.hpp>
@@ -28,6 +29,7 @@ namespace Honey {
 		virtual void SetMat2(const std::string& name, const glm::mat2& matrix) = 0;
 		virtual void SetMat3(const std::string& name, const glm::mat3& matrix) = 0;
 		virtual void SetMat4(const std::string& name, const glm::mat4& matrix) = 0;
+		virtual void SetMat4(const std::string& name, const Math::Matrix4x4& matrix) = 0;
 
 		virtual const std::string& GetName() const = 0;
 

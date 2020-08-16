@@ -21,6 +21,7 @@ namespace Honey {
 		static bool IsMouseButtonPressed(MouseButton button);
 		static float GetMouseX();
 		static float GetMouseY();
+		static float GetMouseScroll();
 		static std::pair<float, float> GetMousePosition();
 		static uint16_t GetKeyMods();
 		static KeyState GetKeyState(Keycode keycode);

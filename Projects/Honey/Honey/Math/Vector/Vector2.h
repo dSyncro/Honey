@@ -27,7 +27,7 @@ namespace Honey::Math {
 		 * @brief Construct Vector2 from a single value.
 		 * @param value -> The value used to initialize all components of the vector. (optional)
 		 */
-		Vector2(float value = 0.0f) : X(value), Y(value) {}
+		constexpr Vector2(float value = 0.0f) : X(value), Y(value) {}
 
 		/**
 		 * @brief Construct Vector2 from two values.
@@ -35,7 +35,7 @@ namespace Honey::Math {
 		 * @param y -> Y component of the vector.
 		 * @overload
 		 */
-		Vector2(float x, float y) : X(x), Y(y) {}
+		constexpr Vector2(float x, float y) : X(x), Y(y) {}
 
 		/**
 		 * @brief Construct Vector2 from a Vector3.

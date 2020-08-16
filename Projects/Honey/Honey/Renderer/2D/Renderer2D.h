@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Honey/Math/Vectors.h>
+#include <Honey/Math/Matrix/Matrix4x4.h>
 #include <Honey/Renderer/Texture.h>
 #include <Honey/Renderer/Camera/Camera.h>
 #include <Honey/Renderer/Camera/OrthographicCamera.h>
@@ -25,7 +27,7 @@ namespace Honey {
 
 		static void Init();
 
-		static void BeginScene(const Camera& camera, const glm::mat4& transform);
+		static void BeginScene(const Camera& camera, const Math::Matrix4x4& transform);
 		static void BeginScene(const OrthographicCamera& camera);
 		static void EndScene();
 		static void NewBatch();
@@ -33,16 +35,16 @@ namespace Honey {
 
 		static void Shutdown();
 
-		static void DrawQuad(const glm::mat4& transform, const glm::vec4& color);
-		static void DrawQuad(const glm::mat4& transform, const Reference<Texture2D>& texture, const glm::vec2& tiling = glm::vec2(1.0f), const glm::vec4& tint = glm::vec4(1.0f));
+		static void DrawQuad(const Math::Matrix4x4& transform, const Math::Vector4& color);
+		static void DrawQuad(const Math::Matrix4x4& transform, const Reference<Texture2D>& texture, const Math::Vector2& tiling = Math::Vector2::One, const Math::Vector4& tint = Math::Vector4::One);
 
-		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color);
-		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color);
-		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling = glm::vec2(1.0f), const glm::vec4& tint = glm::vec4(1.0f));
-		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling = glm::vec2(1.0f), const glm::vec4& tint = glm::vec4(1.0f));
+		static void DrawQuad(const Math::Vector2& position, const Math::Vector2& size, const Math::Vector4& color);
+		static void DrawQuad(const Math::Vector3& position, const Math::Vector2& size, const Math::Vector4& color);
+		static void DrawQuad(const Math::Vector2& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector2& tiling = Math::Vector2::One, const Math::Vector4& tint = Math::Vector4::One);
+		static void DrawQuad(const Math::Vector3& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector2& tiling = Math::Vector2::One, const Math::Vector4& tint = Math::Vector4::One);
 
-		static void DrawRotatedQuad(const glm::vec2& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling = glm::vec2(1.0f), const glm::vec4& tint = glm::vec4(1.0f));
-		static void DrawRotatedQuad(const glm::vec3& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling = glm::vec2(1.0f), const glm::vec4& tint = glm::vec4(1.0f));
+		static void DrawRotatedQuad(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector2& tiling = Math::Vector2::One, const Math::Vector4& tint = Math::Vector4::One);
+		static void DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector2& tiling = Math::Vector2::One, const Math::Vector4& tint = Math::Vector4::One);
 
 		static void ResetStatistics();
 		static const Statistics& GetStatistics();

@@ -9,6 +9,7 @@
 using namespace Honey::Math;
 
 Vector3::Vector3(const Vector2& vector) : X(vector.X), Y(vector.Y), Z(0.0f) {}
+Vector3::Vector3(const Vector2& vector, float z) : X(vector.X), Y(vector.Y), Z(z) {}
 Vector3::Vector3(const Vector4& vector) : X(vector.X), Y(vector.Y), Z(vector.Z) {}
 
 const Vector3 Vector3::Left    = Vector3(-1.0f,  0.0f,  0.0f);
@@ -184,9 +185,9 @@ bool Vector3::operator ==(const Vector3& other)
 Vector3 Vector3::operator *(const Matrix4x4& matrix) const
 {
 	return Vector3(
-		matrix.Rows[0].X * X + matrix.Rows[0].Y * Y + matrix.Rows[0].Z * Z + matrix.Rows[0].W,
-		matrix.Rows[1].X * X + matrix.Rows[1].Y * Y + matrix.Rows[1].Z * Z + matrix.Rows[1].W,
-		matrix.Rows[2].X * X + matrix.Rows[2].Y * Y + matrix.Rows[2].Z * Z + matrix.Rows[2].W
+		matrix.Columns[0].X * X + matrix.Columns[0].Y * Y + matrix.Columns[0].Z * Z + matrix.Columns[0].W,
+		matrix.Columns[1].X * X + matrix.Columns[1].Y * Y + matrix.Columns[1].Z * Z + matrix.Columns[1].W,
+		matrix.Columns[2].X * X + matrix.Columns[2].Y * Y + matrix.Columns[2].Z * Z + matrix.Columns[2].W
 	);
 }
 

@@ -24,12 +24,12 @@ Matrix4x4::Matrix4x4(float* elements)
 }
 */
 
-Matrix4x4::Matrix4x4(const Vector4& row0, const Vector4& row1, const Vector4& row2, const Vector4& row3)
+Matrix4x4::Matrix4x4(const Vector4& col0, const Vector4& col1, const Vector4& col2, const Vector4& col3)
 {
-	Rows[0] = row0;
-	Rows[1] = row1;
-	Rows[2] = row2;
-	Rows[3] = row3;
+	Columns[0] = col0;
+	Columns[1] = col1;
+	Columns[2] = col2;
+	Columns[3] = col3;
 }
 
 const Matrix4x4 Matrix4x4::Zero     = Matrix4x4();
@@ -305,9 +305,9 @@ Matrix4x4 Matrix4x4::Rotate(const Quaternion& quaternion)
 	qzqz2 = (qz * qz2);
 	qzqw2 = (qw * qz2);
 
-	result.Rows[0] = Vector4(((1.0f - qyqy2) - qzqz2), (qxqy2 - qzqw2), (qxqz2 + qyqw2), 0.0f);
-	result.Rows[1] = Vector4((qxqy2 + qzqw2), ((1.0f - qxqx2) - qzqz2), (qyqz2 - qxqw2), 0.0f);
-	result.Rows[2] = Vector4((qxqz2 - qyqw2), (qyqz2 + qxqw2), ((1.0f - qxqx2) - qyqy2), 0.0f);
+	result.Columns[0] = Vector4(((1.0f - qyqy2) - qzqz2), (qxqy2 - qzqw2), (qxqz2 + qyqw2), 0.0f);
+	result.Columns[1] = Vector4((qxqy2 + qzqw2), ((1.0f - qxqx2) - qzqz2), (qyqz2 - qxqw2), 0.0f);
+	result.Columns[2] = Vector4((qxqz2 - qyqw2), (qyqz2 + qxqw2), ((1.0f - qxqx2) - qyqy2), 0.0f);
 
 	return result;
 }
@@ -326,10 +326,10 @@ Matrix4x4 Matrix4x4::Scale(const Vector3& scale)
 Matrix4x4 Matrix4x4::Transpose(const Matrix4x4& matrix)
 {
 	return Matrix4x4(
-		Vector4(matrix.Rows[0].X, matrix.Rows[1].X, matrix.Rows[2].X, matrix.Rows[3].X),
-		Vector4(matrix.Rows[0].Y, matrix.Rows[1].Y, matrix.Rows[2].Y, matrix.Rows[3].Y),
-		Vector4(matrix.Rows[0].Z, matrix.Rows[1].Z, matrix.Rows[2].Z, matrix.Rows[3].Z),
-		Vector4(matrix.Rows[0].W, matrix.Rows[1].W, matrix.Rows[2].W, matrix.Rows[3].W)
+		Vector4(matrix.Columns[0].X, matrix.Columns[1].X, matrix.Columns[2].X, matrix.Columns[3].X),
+		Vector4(matrix.Columns[0].Y, matrix.Columns[1].Y, matrix.Columns[2].Y, matrix.Columns[3].Y),
+		Vector4(matrix.Columns[0].Z, matrix.Columns[1].Z, matrix.Columns[2].Z, matrix.Columns[3].Z),
+		Vector4(matrix.Columns[0].W, matrix.Columns[1].W, matrix.Columns[2].W, matrix.Columns[3].W)
 	);
 }
 

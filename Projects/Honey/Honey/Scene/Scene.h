@@ -2,6 +2,7 @@
 
 #include <entt.hpp>
 
+#include <Honey/Math/Math.h>
 #include <Honey/Renderer/Camera/Camera.h>
 
 namespace Honey {
@@ -11,7 +12,7 @@ namespace Honey {
 	struct RenderCameraData {
 
 		Honey::Camera* Camera = nullptr;
-		glm::mat4* Transform = nullptr;
+		Math::Matrix4x4* Transform = nullptr;
 
 		void Reset() noexcept { Camera = nullptr; Transform = nullptr; }
 

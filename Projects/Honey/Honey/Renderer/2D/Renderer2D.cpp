@@ -5,11 +5,10 @@
 #include <Honey/Renderer/RenderCommand.h>
 #include <Honey/Renderer/VertexArray.h>
 
-#include <glm/gtc/matrix_transform.hpp>
-
 #include "Quad.h"
 
 using namespace Honey;
+using namespace Honey::Math;
 
 struct Renderer2DData {
 
@@ -101,12 +100,12 @@ void Renderer2D::Init()
 	s_Data.TextureSlots[0] = s_Data.StandardTexture;
 }
 
-void Renderer2D::BeginScene(const Camera& camera, const glm::mat4& transform)
+void Renderer2D::BeginScene(const Camera& camera, const Matrix4x4& transform)
 {
 	HNY_PROFILE_FUNCTION();
 
 	s_Data.StandardShader->Bind();
-	s_Data.StandardShader->SetMat4("u_ViewProjection", camera.GetProjection() * glm::inverse(transform));
+	s_Data.StandardShader->SetMat4("u_ViewProjection", camera.GetProjection() * transform.Inverse());
 
 	NewBatch();
 }
@@ -164,7 +163,7 @@ void Renderer2D::Shutdown()
 	delete[] s_Data.QuadBufferBase;
 }
 
-void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
+void Renderer2D::DrawQuad(const Matrix4x4& transform, const Vector4& color)
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -181,7 +180,7 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
 	s_Data.Stats.QuadCount++;
 }
 
-void Renderer2D::DrawQuad(const glm::mat4& transform, const Reference<Texture2D>& texture, const glm::vec2& tiling, const glm::vec4& tint)
+void Renderer2D::DrawQuad(const Matrix4x4& transform, const Reference<Texture2D>& texture, const Vector2& tiling, const Vector4& tint)
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -215,44 +214,44 @@ void Renderer2D::DrawQuad(const glm::mat4& transform, const Reference<Texture2D>
 	s_Data.Stats.QuadCount++;
 }
 
-void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
+void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Vector4& color)
 {
-	DrawQuad({ position.x, position.y, 0.0f }, size, color);
+	DrawQuad({ position.X, position.Y, 0.0f }, size, color);
 }
 
-void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
+void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Vector4& color)
 {
 	HNY_PROFILE_FUNCTION();
 
-	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+	Matrix4x4 transform = Matrix4x4::Translate(position) * Matrix4x4::Scale({ size.X, size.Y, 1.0f });
 	DrawQuad(transform, color);
 }
 
-void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling, const glm::vec4& tint)
+void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Reference<Texture2D>& texture, const Vector2& tiling, const Vector4& tint)
 {
-	DrawQuad({ position.x, position.y, 0.0f }, size, texture, tiling, tint);
+	DrawQuad({ position.X, position.Y, 0.0f }, size, texture, tiling, tint);
 }
 
-void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling, const glm::vec4& tint)
+void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Reference<Texture2D>& texture, const Vector2& tiling, const Vector4& tint)
 {
 	HNY_PROFILE_FUNCTION();
 
-	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+	Matrix4x4 transform = Matrix4x4::Translate(position) * Matrix4x4::Scale({ size.X, size.Y, 1.0f });
 	DrawQuad(transform, texture, tiling, tint);
 }
 
-void Renderer2D::DrawRotatedQuad(const glm::vec2& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling, const glm::vec4& tint)
+void Renderer2D::DrawRotatedQuad(const Vector2& position, float rotation, const Vector2& size, const Reference<Texture2D>& texture, const Vector2& tiling, const Vector4& tint)
 {
-	DrawRotatedQuad({ position.x, position.y, 0.0f }, rotation, size, texture, tiling, tint);
+	DrawRotatedQuad({ position.X, position.Y, 0.0f }, rotation, size, texture, tiling, tint);
 }
 
-void Renderer2D::DrawRotatedQuad(const glm::vec3& position, float rotation, const glm::vec2& size, const Reference<Texture2D>& texture, const glm::vec2& tiling, const glm::vec4& tint)
+void Renderer2D::DrawRotatedQuad(const Vector3& position, float rotation, const Vector2& size, const Reference<Texture2D>& texture, const Vector2& tiling, const Vector4& tint)
 {
 	HNY_PROFILE_FUNCTION();
 
-	glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-		* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-		* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+	Matrix4x4 transform = Matrix4x4::Translate(position)
+		* Matrix4x4::Rotate(rotation * Mathf::Degrees2Radians, { 0.0f, 0.0f, 1.0f })
+		* Matrix4x4::Scale({ size.X, size.Y, 1.0f });
 
 	DrawQuad(transform, texture, tiling, tint);
 }

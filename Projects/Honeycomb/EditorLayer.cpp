@@ -7,6 +7,50 @@
 
 using namespace Honey;
 
+class CameraController : public ScriptableEntity {
+
+public:
+
+	float Speed = 5.0f;
+	float ZoomSpeed = 8.0f;
+
+	float Size = 10.0f;
+
+	void OnCreate()
+	{
+
+	}
+
+	void OnUpdate()
+	{
+		float deltaTime = Time::GetDeltaTime();
+
+		SceneCamera& camera = GetComponent<CameraComponent>().Camera;
+		if (Input::IsKeyPressed(Keycode::Up))
+			Size -= ZoomSpeed * deltaTime;
+		if (Input::IsKeyPressed(Keycode::Down))
+			Size += ZoomSpeed * deltaTime;
+		camera.SetOrthographic(Size, -1.0f, 1.0f);
+
+		Transform& transform = GetComponent<TransformComponent>().Transform;
+		Math::Vector3 pos = transform.Position;
+		if (Input::IsKeyPressed(Keycode::A))
+			pos.X -= Speed * deltaTime; 
+		if (Input::IsKeyPressed(Keycode::D))
+			pos.X += Speed * deltaTime; 
+		if (Input::IsKeyPressed(Keycode::S))
+			pos.Y -= Speed * deltaTime;
+		if (Input::IsKeyPressed(Keycode::W))
+			pos.Y += Speed * deltaTime; 
+		transform.Position = pos;
+	}
+
+	void OnDestroy()
+	{
+
+	}
+};
+
 void EditorLayer::OnAttach()
 {
 	HNY_PROFILE_FUNCTION();
@@ -15,6 +59,7 @@ void EditorLayer::OnAttach()
 
     _camera = _activeScene->CreateEntity("Main Camera", "Main");
     _camera.AddComponent<CameraComponent>();
+	_camera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 	
 	_entity = _activeScene->CreateEntity();
     _entity.AddComponent<SpriteRendererComponent>();
@@ -34,7 +79,7 @@ void EditorLayer::OnUpdate()
 {
 	HNY_PROFILE_FUNCTION();
 
-	float deltaTime = Time::GetDeltaTime();
+	Timestamp deltaTime = Time::GetDeltaTime();
 	HNY_CORE_INFO("Delta Time: {0}", deltaTime);
 	
 	_cameraController.OnUpdate();
@@ -129,10 +174,9 @@ void EditorLayer::OnImGuiRender()
         ImGui::Text("Quad Count: %d", stats.QuadCount);
         ImGui::Text("Vertex Count: %d", stats.GetVertexCount());
         ImGui::Text("Index Count: %d", stats.GetIndexCount());
-		ImGui::Text("Delta Time: %f", Time::GetDeltaTime());
 		ImGui::Text("Frame Rate: %f", Time::GetFrameRate());
 		ImGui::Text("Frame Count: %d", Time::GetFrameCount());
-        ImGui::ColorEdit4("Square Color", glm::value_ptr(_entity.GetComponent<SpriteRendererComponent>().Color));
+        ImGui::ColorEdit4("Square Color", (float*)&_entity.GetComponent<SpriteRendererComponent>().Color);
         ImGui::End();
     }
 

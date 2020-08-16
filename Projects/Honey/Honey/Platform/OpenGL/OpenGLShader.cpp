@@ -12,6 +12,7 @@ extern "C" {
 #include <glm/gtc/type_ptr.hpp>
 
 using namespace Honey;
+using namespace Honey::Math;
 
 static GLenum ShaderTypeFromString(const std::string& type)
 {
@@ -267,4 +268,10 @@ void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)
 {
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
+void OpenGLShader::SetMat4(const std::string& name, const Matrix4x4& matrix)
+{
+	int id = glGetUniformLocation(_rendererID, name.c_str());
+	glUniformMatrix4fv(id, 1, GL_TRUE, &matrix.Elements[0]);
 }

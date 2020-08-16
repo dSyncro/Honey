@@ -155,10 +155,10 @@ bool Vector4::operator ==(const Vector4& other)
 Vector4 Vector4::operator *(const Matrix4x4& matrix) const
 {
 	return Vector4(
-		matrix.Rows[0].X * X + matrix.Rows[0].Y * Y + matrix.Rows[0].Z * Z + matrix.Rows[0].W * W,
-		matrix.Rows[1].X * X + matrix.Rows[1].Y * Y + matrix.Rows[1].Z * Z + matrix.Rows[1].W * W,
-		matrix.Rows[2].X * X + matrix.Rows[2].Y * Y + matrix.Rows[2].Z * Z + matrix.Rows[2].W * W,
-		matrix.Rows[3].X * X + matrix.Rows[3].Y * Y + matrix.Rows[3].Z * Z + matrix.Rows[3].W * W
+		matrix.Columns[0].X * X + matrix.Columns[0].Y * Y + matrix.Columns[0].Z * Z + matrix.Columns[0].W * W,
+		matrix.Columns[1].X * X + matrix.Columns[1].Y * Y + matrix.Columns[1].Z * Z + matrix.Columns[1].W * W,
+		matrix.Columns[2].X * X + matrix.Columns[2].Y * Y + matrix.Columns[2].Z * Z + matrix.Columns[2].W * W,
+		matrix.Columns[3].X * X + matrix.Columns[3].Y * Y + matrix.Columns[3].Z * Z + matrix.Columns[3].W * W
 	);
 }
 

@@ -1,18 +1,18 @@
 #pragma once
 
-#include <glm/glm.hpp>
+#include <Honey/Math/Vector/Vector4.h>
 
 namespace Honey {
 
 	struct SpriteRendererComponent {
 
-		SpriteRendererComponent() : Color(glm::vec4(1.0f)) {}
+		SpriteRendererComponent() : Color(Math::Vector4::One) {}
 		~SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
-		SpriteRendererComponent(const glm::vec4& color) 
+		SpriteRendererComponent(const Math::Vector4& color) 
 			: Color(color) {}
 
-		glm::vec4 Color;
+		Math::Vector4 Color;
 	};
 
 }

@@ -38,6 +38,7 @@ namespace Honey {
 		virtual void SetMat2(const std::string& name, const glm::mat2& matrix) override;
 		virtual void SetMat3(const std::string& name, const glm::mat3& matrix) override;
 		virtual void SetMat4(const std::string& name, const glm::mat4& matrix) override;
+		virtual void SetMat4(const std::string& name, const Math::Matrix4x4& matrix) override;
 
 	private:
 

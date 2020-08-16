@@ -23,5 +23,5 @@ private:
 	Honey::ShaderLibrary _shaderLib;
 	Honey::OrthographicCameraController _cameraController;
 
-	glm::vec4 _squareColor = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	Honey::Math::Vector4 _squareColor = Honey::Math::Vector4(0.0f, 0.0f, 0.0f, 1.0f);
 };

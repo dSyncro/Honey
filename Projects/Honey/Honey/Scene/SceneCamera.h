@@ -18,11 +18,8 @@ namespace Honey {
 
 		void RecalculateProjection();
 
-	private:
-
-		float _aspectRatio = 1.0f;
-
 		float _orthoSize = 10.0f;
+		float _aspectRatio = 1.0f;
 		float _orthoNear = -1.0f; float _orthoFar = 1.0f;
 	};
 

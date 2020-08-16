@@ -87,7 +87,7 @@ void Application::OnEvent(Event& e)
 	dispatcher.Dispatch<WindowCloseEvent>(HNY_BIND_EVENT_CALLBACK(Application::OnWindowClose));
 	dispatcher.Dispatch<WindowResizeEvent>(HNY_BIND_EVENT_CALLBACK(Application::OnWindowResize));
 
-	HNY_CORE_INFO("{0}", e);
+	//HNY_CORE_INFO("{0}", e);
 
 	for (std::vector<Layer*>::reverse_iterator it = _layerStack.rbegin(); it != _layerStack.rend(); it++)
 	{
