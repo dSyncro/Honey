@@ -1,11 +1,12 @@
 #pragma once
 
-#include <Honey/Core/MemoryManagement.h>
-
 #include "Keycode.h"
 #include "MouseButtons.h"
 #include "KeyMods.h"
 #include "KeyState.h"
+
+#include <Honey/Core/MemoryManagement.h>
+#include <Honey/Math/Vector/Vector2.h>
 
 namespace Honey {
 
@@ -21,11 +22,18 @@ namespace Honey {
 		static bool IsMouseButtonPressed(MouseButton button);
 		static float GetMouseX();
 		static float GetMouseY();
+		static Math::Vector2 GetMousePosition();
 		static float GetMouseScroll();
-		static std::pair<float, float> GetMousePosition();
+		static float GetHorizontalMouseScroll();
 		static uint16_t GetKeyMods();
 		static KeyState GetKeyState(Keycode keycode);
 		static KeyState GetMouseButtonState(MouseButton button);
+
+	private:
+
+		static Math::Vector2& MouseScrollAmount() { static Math::Vector2 scroll; return scroll; }
+
+		friend class GlfwPlatformsWindow;
 	};
 
 }

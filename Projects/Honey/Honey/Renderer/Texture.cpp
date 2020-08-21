@@ -12,6 +12,7 @@ Reference<Texture2D> Texture2D::Create(uint32_t width, uint32_t height)
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL: return CreateReference<OpenGLTexture2D>(width, height);
+		case RendererAPI::API::DirectX: HNY_CORE_ASSERT(false, "RendererAPI::DirectX is currently not supported!"); return nullptr;
 	}
 
 	HNY_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -24,6 +25,7 @@ Reference<Texture2D> Texture2D::Create(const std::string& path)
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL: return CreateReference<OpenGLTexture2D>(path);
+		case RendererAPI::API::DirectX: HNY_CORE_ASSERT(false, "RendererAPI::DirectX is currently not supported!"); return nullptr;
 	}
 
 	HNY_CORE_ASSERT(false, "Unknown RendererAPI!");

@@ -14,9 +14,10 @@ namespace Honey::Math {
 
 		/**
 		 * Generate a random bool value.
-		 * @return Either true or false.
+		 * @param probability -> Probability of retrieving True.
+		 * @return Either true or false depending on given probability.
 		 */
-		static bool Bool();
+		static bool Bool(float probability = 0.5f);
 
 		/**
 		 * Generate a random double.

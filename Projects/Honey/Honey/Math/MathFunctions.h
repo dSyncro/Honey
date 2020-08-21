@@ -191,5 +191,7 @@ namespace Honey {
 		static HNY_ALWAYS_INLINE bool ApproximatelyEquals(float x, float y) noexcept { return PositiveDifference(x, y) < Epsilon; }
 	}
 
+#if !defined(HNY_STRICT_MATH_NAMESPACE)
 	namespace Mathf = Math::Functions;
+#endif
 }

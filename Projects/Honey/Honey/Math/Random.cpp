@@ -5,9 +5,10 @@
 using namespace Honey;
 using namespace Honey::Math;
 
-bool Random::Bool()
+bool Random::Bool(float probability)
 {
-	std::bernoulli_distribution dist = std::bernoulli_distribution();
+	HNY_CORE_ASSERT(probability <= 1.0f, "Probability is greater than 1.0");
+	std::bernoulli_distribution dist = std::bernoulli_distribution(probability);
 	std::mt19937& mt = GetEngine();
 	return dist(mt);
 }

@@ -3,11 +3,6 @@
 using namespace Honey;
 using namespace Honey::Math;
 
-SceneCamera::SceneCamera()
-{
-
-}
-
 void SceneCamera::SetOrthographic(float size, float nearClip, float farClip)
 {
 	_orthoSize = size;

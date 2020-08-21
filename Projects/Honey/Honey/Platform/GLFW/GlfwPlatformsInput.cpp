@@ -6,6 +6,7 @@ extern "C"{
 }
 
 using namespace Honey;
+using namespace Honey::Math;
 
 bool Input::IsKeyPressed(Keycode keycode)
 {
@@ -37,13 +38,16 @@ float Input::GetMouseY()
 	return (float)yPos;
 }
 
-std::pair<float, float> Input::GetMousePosition()
+Vector2 Input::GetMousePosition()
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	double xPos, yPos;
 	glfwGetCursorPos(window, &xPos, &yPos);
-	return std::make_pair<float, float>((float)xPos, (float)yPos);
+	return Vector2((float)xPos, (float)yPos);
 }
+
+float Input::GetMouseScroll() { return MouseScrollAmount().Y; }
+float Input::GetHorizontalMouseScroll() { return MouseScrollAmount().X; }
 
 uint16_t Input::GetKeyMods()
 {

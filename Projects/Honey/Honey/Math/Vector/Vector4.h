@@ -91,7 +91,22 @@ namespace Honey::Math {
 		float operator [](Axis axis);
 		float operator [](Axis axis) const;
 
-		float X, Y, Z, W;
+		union {
+			float X;
+			float R;
+		};
+		union {
+			float Y;
+			float G;
+		};
+		union {
+			float Z;
+			float B;
+		};
+		union {
+			float W;
+			float A;
+		};
 	};
 
 	static Vector4 operator *(float scalar, const Vector4& vector) { return vector * scalar; }

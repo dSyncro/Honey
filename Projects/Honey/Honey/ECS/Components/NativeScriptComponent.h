@@ -1,33 +1,49 @@
 #pragma once
 
-#include <Honey/ECS/ScriptableEntity.h>
+#include <Honey/ECS/Behaviour.h>
 
 namespace Honey {
 
-	struct NativeScriptComponent {
+	class NativeScriptComponent {
 
-		NativeScriptComponent() = default;
-		~NativeScriptComponent() = default;
+	public:
+
+		NativeScriptComponent(const Entity& entity) : TargetEntity(entity) {};
 		NativeScriptComponent(const NativeScriptComponent&) = default;
+		~NativeScriptComponent() = default;
 
-		ScriptableEntity* Instance = nullptr;
+		Entity TargetEntity;
+		std::vector<Behaviour*> Behaviours;
 
-		template <typename T>
-		void Bind()
+		void OnCreate()
 		{
-			InstantiateFunction = [&]() { Instance = new T(); };
-			DeleteInstanceFunction = [&]() { delete (T*)Instance; Instance = nullptr; };
-
-			OnCreateFunction = [](ScriptableEntity* instance) { reinterpret_cast<T*>(instance)->OnCreate(); };
-			OnDestroyFunction = [](ScriptableEntity* instance) { reinterpret_cast<T*>(instance)->OnDestroy(); };
-			OnUpdateFunction = [](ScriptableEntity* instance) { reinterpret_cast<T*>(instance)->OnUpdate(); };
+			for (Behaviour* behaviour : Behaviours)
+				behaviour->OnCreate();
 		}
 
-		std::function<void()> InstantiateFunction;
-		std::function<void()> DeleteInstanceFunction;
-		std::function<void(ScriptableEntity*)> OnCreateFunction;
-		std::function<void(ScriptableEntity*)> OnDestroyFunction;
-		std::function<void(ScriptableEntity*)> OnUpdateFunction;
+		void OnUpdate()
+		{
+			for (Behaviour* behaviour : Behaviours)
+				behaviour->OnUpdate();
+		}
+
+		void OnDestroy()
+		{
+			for (Behaviour* behaviour : Behaviours)
+				behaviour->OnDestroy();
+		}
+
+		template <typename T>
+		void AddBehaviour() 
+		{
+			T& component = TargetEntity.AddComponent<T>();
+			Behaviours.push_back(&component);
+		}
+
+		static NativeScriptComponent& Attach(Honey::Entity& entity)
+		{
+			return entity.AddComponent<NativeScriptComponent>(entity);
+		}
 
 		friend class Scene;
 	};

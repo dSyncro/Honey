@@ -1783,8 +1783,7 @@
     <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h" />
     <ClInclude Include="Honey\Scene\SceneCamera.h" />
     <ClInclude Include="Honey\ECS\Components\NativeScriptComponent.h" />
-    <ClInclude Include="Honey\ECS\ScriptableEntity.h" />
-    <ClInclude Include="Honey\Math\Transform.h" />
+    <ClInclude Include="Honey\ECS\Behaviour.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">

@@ -29,7 +29,9 @@ namespace Honey {
 		Entity CreateEntity(const std::string& name = "Entity", const std::string& tag = "Untagged");
 		void DeleteEntity(const Entity& entity);
 
+		void OnPlay();
 		void OnUpdate();
+		void OnStop();
 		void OnViewportResize(uint32_t width, uint32_t height);
 
 	private:

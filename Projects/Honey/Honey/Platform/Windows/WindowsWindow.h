@@ -37,10 +37,11 @@ namespace Honey {
 
 		virtual void OnUpdate() override;
 
-		unsigned int GetWidth() const override { return _data.Width; }
-		unsigned int GetHeight() const override { return _data.Height; }
+		uint32_t GetWidth() const override { return _data.Width; }
+		uint32_t GetHeight() const override { return _data.Height; }
+		Math::Vector2 GetSize() const override { return { (float)_data.Width, (float)_data.Height }; }
 
-		virtual void SetEventCallback(const WindowEventCallback& callback) override { _data.Callback = callback; }
+		virtual void SetEventCallback(const EventCallback& callback) override { _data.Callback = callback; }
 
 		virtual void SetTitle(const std::string& title) override;
 
@@ -64,7 +65,7 @@ namespace Honey {
 			unsigned int Width = 0, Height = 0;
 			bool VSync = false;
 
-			WindowEventCallback Callback = nullptr;
+			EventCallback Callback = nullptr;
 		};
 
 		class WindowClass {

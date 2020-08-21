@@ -3,6 +3,7 @@
 #include <functional>
 
 #include <Honey/Events/Event.h>
+#include <Honey/Math/Vector/Vector2.h>
 
 #include "WindowProperties.h"
 
@@ -12,17 +13,18 @@ namespace Honey {
 
 	public:
 
-		using WindowEventCallback = std::function<void(Event&)>;
+		using EventCallback = std::function<void(Event&)>;
 
 		virtual ~Window() = default;
 
 		virtual void OnUpdate() = 0;
 
-		virtual unsigned int GetWidth() const = 0;
-		virtual unsigned int GetHeight() const = 0;
+		virtual uint32_t GetWidth() const = 0;
+		virtual uint32_t GetHeight() const = 0;
+		virtual Math::Vector2 GetSize() const = 0;
 
 		virtual void SetTitle(const std::string& title) = 0;
-		virtual void SetEventCallback(const WindowEventCallback& callback) = 0;
+		virtual void SetEventCallback(const EventCallback& callback) = 0;
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSyncEnabled() const = 0;
 

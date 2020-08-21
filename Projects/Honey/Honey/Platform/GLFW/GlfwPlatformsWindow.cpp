@@ -7,14 +7,11 @@
 #include <Honey/Renderer/Renderer.h>
 #include <Honey/Platform/OpenGL/OpenGLContext.h>
 
+#include <Honey/Input/Input.h>
+
 using namespace Honey;
 
 static uint8_t s_WindowCount = 0;
-
-static void GLFWErrorCallback(int error, const char* description)
-{
-	HNY_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
-}
 
 GlfwPlatformsWindow::GlfwPlatformsWindow(const WindowProperties& properties)
 {
@@ -40,14 +37,6 @@ void GlfwPlatformsWindow::Init(const WindowProperties& properties)
 	_data.Height = properties.Height;
 
 	HNY_CORE_INFO("Creating window {0} ({1}; {2})", properties.Title, properties.Width, properties.Height);
-
-	// Init GLFW if needed
-	if (!s_WindowCount)
-	{
-		int success = glfwInit();
-		HNY_CORE_ASSERT(success, "Could not init GLFW!");
-		glfwSetErrorCallback(GLFWErrorCallback);
-	}
 
 #if defined(HNY_DEBUG)
 	if (Renderer::GetAPI() == RendererAPI::API::OpenGL)
@@ -78,13 +67,13 @@ void GlfwPlatformsWindow::Shutdown()
 
 	glfwDestroyWindow(_window);
 	s_WindowCount--;
-	if (!s_WindowCount) glfwTerminate();
 }
 
 void GlfwPlatformsWindow::OnUpdate()
 {
 	HNY_PROFILE_FUNCTION();
 
+	Input::MouseScrollAmount() = Math::Vector2(0.0f, 0.0f);
 	glfwPollEvents();
 	_context->SwapBuffers();
 
@@ -184,6 +173,7 @@ void GlfwPlatformsWindow::WindowMouseCallback(GLFWwindow* window, int button, in
 
 void GlfwPlatformsWindow::WindowScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 {
+	Input::MouseScrollAmount() = Math::Vector2((float)xOffset, (float)yOffset);
 	WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 	MouseScrolledEvent e((float)xOffset, (float)yOffset);
 	data.Callback(e);

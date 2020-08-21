@@ -7,13 +7,12 @@ namespace Honey {
 	struct WindowProperties {
 
 		std::string Title;
-		unsigned int Width;
-		unsigned int Height;
 
-		WindowProperties(const std::string& title = "Honey Engine - Window", unsigned int width = 1280, unsigned int height = 720)
-			: Title(title), Width(width), Height(height)
-		{
-		}
+		uint32_t Width;
+		uint32_t Height;
+
+		WindowProperties(const std::string& title = std::string("Honey Engine - Window"), uint32_t width = 1280, uint32_t height = 720)
+			: Title(title), Width(width), Height(height) { }
 	};
 
 }

@@ -10,18 +10,12 @@ namespace Honey {
 
 		static void Init();
 
-		static void SetClearColor(const glm::vec4& color) { s_RendererAPI->SetClearColor(color); }
+		static void SetClearColor(const Math::Vector4& color) { s_RendererAPI->SetClearColor(color); }
 		static void Clear() { s_RendererAPI->Clear(); }
 
-		static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
-		{
-			s_RendererAPI->SetViewport(x, y, width, height);
-		}
-
-		static void DrawIndexed(const Reference<VertexArray>& vertexArray, uint32_t indexCount = 0)
-		{
-			s_RendererAPI->DrawIndexed(vertexArray);
-		}
+		static void SetViewport(Math::Vector2 location, Math::Vector2 size);
+		static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
+		static void DrawIndexed(const Reference<VertexArray>& vertexArray, uint32_t indexCount = 0);
 
 	private:
 

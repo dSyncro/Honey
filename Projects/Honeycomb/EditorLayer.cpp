@@ -7,47 +7,83 @@
 
 using namespace Honey;
 
-class CameraController : public ScriptableEntity {
+class CameraController : public Behaviour {
 
 public:
 
-	float Speed = 5.0f;
-	float ZoomSpeed = 8.0f;
+	float Speed = 1.0f;
+	float ZoomSpeed = 5.0f;
 
 	float Size = 10.0f;
-
-	void OnCreate()
-	{
-
-	}
 
 	void OnUpdate()
 	{
 		float deltaTime = Time::GetDeltaTime();
 
 		SceneCamera& camera = GetComponent<CameraComponent>().Camera;
-		if (Input::IsKeyPressed(Keycode::Up))
-			Size -= ZoomSpeed * deltaTime;
-		if (Input::IsKeyPressed(Keycode::Down))
-			Size += ZoomSpeed * deltaTime;
+		float scroll = Input::GetMouseScroll();
+		Size -= scroll * ZoomSpeed;
+		Size = Mathf::Clamp(Size, 0.1f, Mathf::Infinity);
 		camera.SetOrthographic(Size, -1.0f, 1.0f);
 
-		Transform& transform = GetComponent<TransformComponent>().Transform;
+		TransformComponent& transform = GetComponent<TransformComponent>();
 		Math::Vector3 pos = transform.Position;
 		if (Input::IsKeyPressed(Keycode::A))
-			pos.X -= Speed * deltaTime; 
+			pos.X -= Size * Speed * deltaTime; 
 		if (Input::IsKeyPressed(Keycode::D))
-			pos.X += Speed * deltaTime; 
+			pos.X += Size * Speed * deltaTime; 
 		if (Input::IsKeyPressed(Keycode::S))
-			pos.Y -= Speed * deltaTime;
+			pos.Y -= Size * Speed * deltaTime;
 		if (Input::IsKeyPressed(Keycode::W))
-			pos.Y += Speed * deltaTime; 
+			pos.Y += Size * Speed * deltaTime; 
 		transform.Position = pos;
 	}
+};
 
-	void OnDestroy()
+class CameraScrollController : public Behaviour {
+
+public:
+
+	float ZoomSpeed = 5.0f;
+
+	float Size = 10.0f;
+
+	void OnUpdate()
 	{
+		float deltaTime = Time::GetDeltaTime();
 
+		SceneCamera& camera = GetComponent<CameraComponent>().Camera;
+		float scroll = Input::GetMouseScroll();
+		Size -= scroll * ZoomSpeed;
+		Size = Mathf::Clamp(Size, 0.1f, Mathf::Infinity);
+		camera.SetOrthographic(Size, -1.0f, 1.0f);
+	}
+};
+
+class CameraWASDController : public Behaviour {
+
+public:
+
+	float Speed = 1.0f;
+
+	void OnUpdate()
+	{
+		float deltaTime = Time::GetDeltaTime();
+
+		SceneCamera& camera = GetComponent<CameraComponent>().Camera;
+
+		TransformComponent& transform = GetComponent<TransformComponent>();
+		CameraScrollController& other = GetComponent<CameraScrollController>();
+		Math::Vector3 pos = transform.Position;
+		if (Input::IsKeyPressed(Keycode::A))
+			pos.X -= other.Size * Speed * deltaTime;
+		if (Input::IsKeyPressed(Keycode::D))
+			pos.X += other.Size * Speed * deltaTime;
+		if (Input::IsKeyPressed(Keycode::S))
+			pos.Y -= other.Size * Speed * deltaTime;
+		if (Input::IsKeyPressed(Keycode::W))
+			pos.Y += other.Size * Speed * deltaTime;
+		transform.Position = pos;
 	}
 };
 
@@ -59,7 +95,10 @@ void EditorLayer::OnAttach()
 
     _camera = _activeScene->CreateEntity("Main Camera", "Main");
     _camera.AddComponent<CameraComponent>();
-	_camera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+
+	NativeScriptComponent& scriptComponent = NativeScriptComponent::Attach(_camera);
+	scriptComponent.AddBehaviour<CameraScrollController>();
+	scriptComponent.AddBehaviour<CameraWASDController>();
 	
 	_entity = _activeScene->CreateEntity();
     _entity.AddComponent<SpriteRendererComponent>();
@@ -68,6 +107,8 @@ void EditorLayer::OnAttach()
 
     FrameBufferSpecification specification = { 1280, 720 };
     _frameBuffer = FrameBuffer::Create(specification);
+
+	_activeScene->OnPlay();
 }
 
 void EditorLayer::OnDetach()
@@ -174,7 +215,7 @@ void EditorLayer::OnImGuiRender()
         ImGui::Text("Quad Count: %d", stats.QuadCount);
         ImGui::Text("Vertex Count: %d", stats.GetVertexCount());
         ImGui::Text("Index Count: %d", stats.GetIndexCount());
-		ImGui::Text("Frame Rate: %f", Time::GetFrameRate());
+		ImGui::Text("Frame Rate: %f", (float)Time::GetFrameRate());
 		ImGui::Text("Frame Count: %d", Time::GetFrameCount());
         ImGui::ColorEdit4("Square Color", (float*)&_entity.GetComponent<SpriteRendererComponent>().Color);
         ImGui::End();

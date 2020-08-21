@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Honey/Math/Transform.h>
+#include <Honey/Math/Math.h>
 
 namespace Honey {
 
@@ -9,13 +9,22 @@ namespace Honey {
 		TransformComponent() = default;
 		~TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
-		TransformComponent(const Honey::Transform& trasform)
-			: Transform(trasform) { }
+		TransformComponent(
+			const Math::Vector3& position, 
+			const Math::Quaternion& rotation = Math::Quaternion::Identity,
+			const Math::Vector3& scale = Math::Vector3::One
+		) : Position(position), Rotation(rotation), Scale(scale) { }
 
-		Honey::Transform Transform;
+		Math::Vector3 Position = Math::Vector3::Zero;
+		Math::Quaternion Rotation = Math::Quaternion::Identity;
+		Math::Vector3 Scale = Math::Vector3::One;
 
-		operator Honey::Transform&() { return Transform; }
-		operator const Honey::Transform&() const { return Transform; }
+		Math::Matrix4x4 GetTRSMatrix() const
+		{
+			return Math::Matrix4x4::Translate(Position) *
+				Math::Matrix4x4::Rotate(Rotation) *
+				Math::Matrix4x4::Scale(Scale);
+		}
 	};
 
 }

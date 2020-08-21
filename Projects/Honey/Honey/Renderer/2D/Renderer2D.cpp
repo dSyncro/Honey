@@ -250,7 +250,7 @@ void Renderer2D::DrawRotatedQuad(const Vector3& position, float rotation, const 
 	HNY_PROFILE_FUNCTION();
 
 	Matrix4x4 transform = Matrix4x4::Translate(position)
-		* Matrix4x4::Rotate(rotation * Mathf::Degrees2Radians, { 0.0f, 0.0f, 1.0f })
+		* Matrix4x4::Rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
 		* Matrix4x4::Scale({ size.X, size.Y, 1.0f });
 
 	DrawQuad(transform, texture, tiling, tint);

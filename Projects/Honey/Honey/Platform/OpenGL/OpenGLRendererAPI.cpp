@@ -42,14 +42,19 @@ void OpenGLRendererAPI::Init()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
+void OpenGLRendererAPI::SetClearColor(const Math::Vector4& color)
 {
-	glClearColor(color.r, color.g, color.b, color.a);
+	glClearColor(color.R, color.G, color.B, color.A);
 }
 
 void OpenGLRendererAPI::Clear() const
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void OpenGLRendererAPI::SetViewport(Math::Vector2 location, Math::Vector2 size)
+{
+	glViewport((uint32_t)location.X, (uint32_t)location.Y, (uint32_t)size.X, (uint32_t)size.Y);
 }
 
 void OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)

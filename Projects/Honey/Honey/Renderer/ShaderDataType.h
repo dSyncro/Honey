@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cstdint>
-
 #include <Honey/Core/Assertion.h>
 
 namespace Honey {

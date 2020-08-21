@@ -8,7 +8,7 @@ namespace Honey {
 
 	public:
 
-		SceneCamera();
+		SceneCamera() = default;
 		virtual ~SceneCamera() = default;
 
 		void SetOrthographic(float size, float nearClip, float farClip);

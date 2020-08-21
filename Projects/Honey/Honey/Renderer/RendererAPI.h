@@ -1,8 +1,8 @@
 #pragma once
 
-#include <glm/glm.hpp>
-
 #include "VertexArray.h"
+
+#include <Honey/Math/Vectors.h>
 
 namespace Honey {
 
@@ -13,15 +13,17 @@ namespace Honey {
 		enum class API {
 			None,
 			OpenGL,
+			DirectX
 		};
 
 		virtual ~RendererAPI() = default;
 
 		virtual void Init() = 0;
 
-		virtual void SetClearColor(const glm::vec4& color) = 0;
+		virtual void SetClearColor(const Math::Vector4& color) = 0;
 		virtual void Clear() const = 0;
 
+		virtual void SetViewport(Math::Vector2 location, Math::Vector2 size) = 0;
 		virtual void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) = 0;
 
 		virtual void DrawIndexed(const Reference<VertexArray>& vertexArray, uint32_t indexCount = 0) = 0;

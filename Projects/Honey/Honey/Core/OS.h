@@ -3,6 +3,7 @@
 // OS Detection
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
 #	define HNY_PLATFORM_WINDOWS
+#	define HNY_PREFER_GLFW 1
 #	include <Honey/Platform/Windows/WindowsHeader.h>
 #	if defined(_WIN64)
 #		define HNY_PLATFORM_WINDOWS64
@@ -31,6 +32,6 @@
 #	error "Unknown platform!"
 #endif
 
-#if defined(HNY_PLATFORM_WINDOWS) || defined(HNY_PLATFORM_LINUX)
+#if (defined(HNY_PLATFORM_WINDOWS) && HNY_PREFER_GLFW) || defined(HNY_PLATFORM_LINUX)
 #	define HNY_PLATFORM_GLFW
 #endif

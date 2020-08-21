@@ -38,6 +38,8 @@ void Application::Run()
 	while (_isRunning)
 	{
 		HNY_PROFILE_SCOPE("Run Loop");
+		
+		_window->OnUpdate();
 
 		if (!_isMinimized)
 		{
@@ -53,8 +55,6 @@ void Application::Run()
 				layer->OnImGuiRender();
 		}
 		_imGuiLayer->End();
-
-		_window->OnUpdate();
 	}
 }
 
@@ -98,7 +98,7 @@ void Application::OnEvent(Event& e)
 
 bool Application::OnWindowClose(WindowCloseEvent& e)
 {
-	_isRunning = false;
+	Application::Close();
 	return true;
 }
 

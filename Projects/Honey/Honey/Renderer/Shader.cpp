@@ -13,6 +13,7 @@ Reference<Shader> Shader::CreateFromFile(const std::string& path)
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL: return OpenGLShader::FromFile(path);
+		case RendererAPI::API::DirectX: HNY_CORE_ASSERT(false, "RendererAPI::DirectX is currently not supported!"); return nullptr;
 	}
 
 	HNY_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -26,6 +27,7 @@ Reference<Shader> Shader::CreateFromSource(const std::string& name, const std::s
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL: return OpenGLShader::FromSource(name, vertexSource, fragmentSource);
+		case RendererAPI::API::DirectX: HNY_CORE_ASSERT(false, "RendererAPI::DirectX is currently not supported!"); return nullptr;
 	}
 
 	HNY_CORE_ASSERT(false, "Unknown RendererAPI!");

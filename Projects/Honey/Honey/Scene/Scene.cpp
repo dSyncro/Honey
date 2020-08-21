@@ -7,18 +7,24 @@
 
 using namespace Honey;
 
+void Scene::OnPlay()
+{
+	_registry.view<NativeScriptComponent>().each([=](entt::entity entity, NativeScriptComponent& nsc)
+		{
+			for (Behaviour* behaviour : nsc.Behaviours)
+			{
+				behaviour->_entity = &nsc.TargetEntity;
+			}
+			nsc.OnCreate();
+		}
+	);
+}
+
 void Scene::OnUpdate()
 {
 	_registry.view<NativeScriptComponent>().each([=](entt::entity entity, NativeScriptComponent& nsc) 
 		{
-			if (!nsc.Instance)
-			{
-				nsc.InstantiateFunction();
-				nsc.Instance->_entity = Entity(entity, this);
-				nsc.OnCreateFunction(nsc.Instance);
-			}
-
-			nsc.OnUpdateFunction(nsc.Instance);
+			nsc.OnUpdate();
 		}
 	);
 
@@ -31,7 +37,7 @@ void Scene::OnUpdate()
 		if (tag.Tag == "Main")
 		{
 			_mainCamera.Camera = &camera.Camera;
-			_mainCamera.Transform = &transform.Transform.GetMatrix();
+			_mainCamera.Transform = &transform.GetTRSMatrix();
 		}
 	}
 
@@ -42,10 +48,15 @@ void Scene::OnUpdate()
 		for (entt::entity entity : renderableGroup)
 		{
 			auto& [transform, sprite] = renderableGroup.get<TransformComponent, SpriteRendererComponent>(entity);
-			Renderer2D::DrawQuad(transform.Transform.Position, (Math::Vector2)transform.Transform.Scale, sprite.Color);
+			Renderer2D::DrawQuad(transform.Position, (Math::Vector2)transform.Scale, sprite.Color);
 		}
 		Renderer2D::EndScene();
 	}
+}
+
+void Scene::OnStop()
+{
+
 }
 
 Entity Scene::CreateEntity(const std::string& name, const std::string& tag)
