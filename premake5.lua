@@ -22,7 +22,7 @@ end)
 workspace "Honey"
 
 	architecture "x86_64"
-	startproject "Sandbox"
+	startproject "Honeycomb"
 
 	configurations
 	{

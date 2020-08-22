@@ -1,8 +1,10 @@
 #pragma once
 
+#include "Quad.h"
+
 #include <Honey/Math/Vectors.h>
 #include <Honey/Math/Matrix/Matrix4x4.h>
-#include <Honey/Renderer/Texture.h>
+#include <Honey/Renderer/SubTexture.h>
 #include <Honey/Renderer/Camera/Camera.h>
 #include <Honey/Renderer/Camera/OrthographicCamera.h>
 
@@ -36,15 +38,23 @@ namespace Honey {
 		static void Shutdown();
 
 		static void DrawQuad(const Math::Matrix4x4& transform, const Math::Vector4& color);
-		static void DrawQuad(const Math::Matrix4x4& transform, const Reference<Texture2D>& texture, const Math::Vector2& tiling = Math::Vector2::One, const Math::Vector4& tint = Math::Vector4::One);
+		static void DrawQuad(const Math::Matrix4x4& transform, const Reference<Texture2D>& texture, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2& tiling = Math::Vector2::One, const std::array<Math::Vector2, 4>& texCoords = Quad::TextureCoords);
 
 		static void DrawQuad(const Math::Vector2& position, const Math::Vector2& size, const Math::Vector4& color);
 		static void DrawQuad(const Math::Vector3& position, const Math::Vector2& size, const Math::Vector4& color);
-		static void DrawQuad(const Math::Vector2& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector2& tiling = Math::Vector2::One, const Math::Vector4& tint = Math::Vector4::One);
-		static void DrawQuad(const Math::Vector3& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector2& tiling = Math::Vector2::One, const Math::Vector4& tint = Math::Vector4::One);
+		static void DrawQuad(const Math::Vector2& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2& tiling = Math::Vector2::One);
+		static void DrawQuad(const Math::Vector3& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2& tiling = Math::Vector2::One);
+		static void DrawQuad(const Math::Vector2& position, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2& tiling = Math::Vector2::One);
+		static void DrawQuad(const Math::Vector3& position, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2& tiling = Math::Vector2::One);
 
-		static void DrawRotatedQuad(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector2& tiling = Math::Vector2::One, const Math::Vector4& tint = Math::Vector4::One);
-		static void DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector2& tiling = Math::Vector2::One, const Math::Vector4& tint = Math::Vector4::One);
+		static void DrawRotatedQuad(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Math::Vector4& color);
+		static void DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Math::Vector4& color);
+		static void DrawRotatedQuad(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2& tiling = Math::Vector2::One);
+		static void DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<Texture2D>& texture, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2& tiling = Math::Vector2::One);
+		static void DrawRotatedQuad(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2 & tiling = Math::Vector2::One);
+		static void DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2& tiling = Math::Vector2::One);
+
+		static void DrawSprite(const Math::Vector3& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const std::array<Math::Vector2, 4> texCoords, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2& tiling = Math::Vector2::One);
 
 		static void ResetStatistics();
 		static const Statistics& GetStatistics();

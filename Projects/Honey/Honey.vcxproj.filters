@@ -1784,6 +1784,7 @@
     <ClInclude Include="Honey\Scene\SceneCamera.h" />
     <ClInclude Include="Honey\ECS\Components\NativeScriptComponent.h" />
     <ClInclude Include="Honey\ECS\Behaviour.h" />
+    <ClInclude Include="Honey\Renderer\SubTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1910,5 +1911,6 @@
     <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsInput.cpp" />
     <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsWindow.cpp" />
     <ClCompile Include="Honey\Scene\SceneCamera.cpp" />
+    <ClCompile Include="Honey\Renderer\SubTexture.cpp" />
   </ItemGroup>
 </Project>

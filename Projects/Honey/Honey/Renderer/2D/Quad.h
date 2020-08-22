@@ -31,22 +31,24 @@ namespace Honey {
 
 		static constexpr uint32_t VertexCount = 4;
 
-		static constexpr Math::Vector3 VertexPositions[VertexCount] = {
-			{ -0.5f, -0.5f, 0.0f },
-			{  0.5f, -0.5f, 0.0f },
-			{  0.5f,  0.5f, 0.0f },
-			{ -0.5f,  0.5f, 0.0f }
+		static constexpr std::array<Math::Vector3, VertexCount> VertexPositions = {
+			Math::Vector3(-0.5f, -0.5f, 0.0f),
+			Math::Vector3( 0.5f, -0.5f, 0.0f),
+			Math::Vector3( 0.5f,  0.5f, 0.0f),
+			Math::Vector3(-0.5f,  0.5f, 0.0f)
 		};
 
-		static constexpr Math::Vector2 TextureCoords[VertexCount] = {
-			{ 0.0f, 0.0f }, { 1.0f, 0.0f },
-			{ 1.0f, 1.0f }, { 0.0f, 1.0f }
+		static constexpr std::array<Math::Vector2, VertexCount> TextureCoords = {
+			Math::Vector2(0.0f, 0.0f), 
+			Math::Vector2(1.0f, 0.0f),
+			Math::Vector2(1.0f, 1.0f), 
+			Math::Vector2(0.0f, 1.0f)
 		};
 
 		Vertex& operator [](int index);
 		const Vertex& operator [](int index) const;
 
-		Vertex Vertices[4];
+		std::array<Vertex, 4> Vertices;
 	};
 
 }

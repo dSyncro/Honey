@@ -33,7 +33,7 @@
 #include <Honey/Renderer/Renderer.h>
 #include <Honey/Renderer/2D/Renderer2D.h>
 #include <Honey/Renderer/RenderCommand.h>
-#include <Honey/Renderer/Texture.h>
+#include <Honey/Renderer/SubTexture.h>
 #include <Honey/Renderer/ShaderLibrary.h>
 #include <Honey/Renderer/Camera/OrthographicCameraController.h>
 

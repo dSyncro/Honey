@@ -104,6 +104,15 @@ void EditorLayer::OnAttach()
     _entity.AddComponent<SpriteRendererComponent>();
 
 	_texture = Texture2D::Create("assets/textures/logo.png");
+	//Reference<Texture2D> spritesheet = Texture2D::Create("assets/texture/spritesheet.png");
+	Reference<SubTexture2D> a = SubTexture2D::CreateFromCoordinates(_texture, { 0, 0 }, { 1024, 1024 });
+	Reference<SubTexture2D> b = SubTexture2D::CreateFromCoordinates(_texture, { 1, 1 }, { 1024, 1024 });
+	_spriteA = _activeScene->CreateEntity("Sprite A");
+	_spriteB = _activeScene->CreateEntity("Sprite B");
+	_spriteA.GetComponent<TransformComponent>().Position = Math::Vector3(1.0f, 1.0f, 0.0f);
+	_spriteB.GetComponent<TransformComponent>().Position = Math::Vector3(2.0f, 2.0f, 0.0f);
+	_spriteA.AddComponent<SpriteRendererComponent>(a);
+	_spriteB.AddComponent<SpriteRendererComponent>(b);
 
     FrameBufferSpecification specification = { 1280, 720 };
     _frameBuffer = FrameBuffer::Create(specification);
@@ -217,7 +226,7 @@ void EditorLayer::OnImGuiRender()
         ImGui::Text("Index Count: %d", stats.GetIndexCount());
 		ImGui::Text("Frame Rate: %f", (float)Time::GetFrameRate());
 		ImGui::Text("Frame Count: %d", Time::GetFrameCount());
-        ImGui::ColorEdit4("Square Color", (float*)&_entity.GetComponent<SpriteRendererComponent>().Color);
+        ImGui::ColorEdit4("Square Color", (float*)&_entity.GetComponent<SpriteRendererComponent>().Tint);
         ImGui::End();
     }
 

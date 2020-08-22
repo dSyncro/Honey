@@ -5,8 +5,6 @@
 #include <Honey/Renderer/RenderCommand.h>
 #include <Honey/Renderer/VertexArray.h>
 
-#include "Quad.h"
-
 using namespace Honey;
 using namespace Honey::Math;
 
@@ -180,7 +178,7 @@ void Renderer2D::DrawQuad(const Matrix4x4& transform, const Vector4& color)
 	s_Data.Stats.QuadCount++;
 }
 
-void Renderer2D::DrawQuad(const Matrix4x4& transform, const Reference<Texture2D>& texture, const Vector2& tiling, const Vector4& tint)
+void Renderer2D::DrawQuad(const Matrix4x4& transform, const Reference<Texture2D>& texture, const Vector4& tint, const Vector2& tiling, const std::array<Vector2, 4>& texCoords)
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -206,7 +204,7 @@ void Renderer2D::DrawQuad(const Matrix4x4& transform, const Reference<Texture2D>
 	for (uint32_t i = 0; i < Quad::VertexCount; i++)
 	{
 		Quad::Vertex& vertex = s_Data.QuadBufferPtr->Vertices[i];
-		vertex.Set(transform * Quad::VertexPositions[i], tint, Quad::TextureCoords[i], (float)slot);
+		vertex.Set(transform * Quad::VertexPositions[i], tint, texCoords[i], (float)slot);
 	}
 	s_Data.QuadBufferPtr++;
 
@@ -227,25 +225,41 @@ void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Ve
 	DrawQuad(transform, color);
 }
 
-void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Reference<Texture2D>& texture, const Vector2& tiling, const Vector4& tint)
+void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Reference<Texture2D>& texture, const Vector4& tint, const Vector2& tiling)
 {
-	DrawQuad({ position.X, position.Y, 0.0f }, size, texture, tiling, tint);
+	DrawQuad({ position.X, position.Y, 0.0f }, size, texture, tint, tiling);
 }
 
-void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Reference<Texture2D>& texture, const Vector2& tiling, const Vector4& tint)
+void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Reference<Texture2D>& texture, const Vector4& tint, const Vector2& tiling)
 {
 	HNY_PROFILE_FUNCTION();
 
 	Matrix4x4 transform = Matrix4x4::Translate(position) * Matrix4x4::Scale({ size.X, size.Y, 1.0f });
-	DrawQuad(transform, texture, tiling, tint);
+	DrawQuad(transform, texture, tint, tiling);
 }
 
-void Renderer2D::DrawRotatedQuad(const Vector2& position, float rotation, const Vector2& size, const Reference<Texture2D>& texture, const Vector2& tiling, const Vector4& tint)
+void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Reference<SubTexture2D>& subtexture, const Vector4& tint, const Vector2& tiling)
 {
-	DrawRotatedQuad({ position.X, position.Y, 0.0f }, rotation, size, texture, tiling, tint);
+	DrawQuad({ position.X, position.Y, 0.0f }, size, subtexture, tint, tiling);
 }
 
-void Renderer2D::DrawRotatedQuad(const Vector3& position, float rotation, const Vector2& size, const Reference<Texture2D>& texture, const Vector2& tiling, const Vector4& tint)
+void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Reference<SubTexture2D>& subtexture, const Vector4& tint, const Vector2& tiling)
+{
+	HNY_PROFILE_FUNCTION();
+
+	const Reference<Texture2D>& texture = subtexture->GetTexture();
+	const std::array<Vector2, 4>& texCoords = subtexture->GetTextureCoords();
+
+	Matrix4x4 transform = Matrix4x4::Translate(position) * Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+	DrawQuad(transform, texture, tint, tiling, texCoords);
+}
+
+void Renderer2D::DrawRotatedQuad(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Math::Vector4& color)
+{
+	DrawRotatedQuad({ position.X, position.Y, 0.0f }, rotation, size, color);
+}
+
+void Renderer2D::DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Math::Vector4& color)
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -253,7 +267,53 @@ void Renderer2D::DrawRotatedQuad(const Vector3& position, float rotation, const 
 		* Matrix4x4::Rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
 		* Matrix4x4::Scale({ size.X, size.Y, 1.0f });
 
-	DrawQuad(transform, texture, tiling, tint);
+	DrawQuad(transform, color);
+}
+
+void Renderer2D::DrawRotatedQuad(const Vector2& position, float rotation, const Vector2& size, const Reference<Texture2D>& texture, const Vector4& tint, const Vector2& tiling)
+{
+	DrawRotatedQuad({ position.X, position.Y, 0.0f }, rotation, size, texture, tint, tiling);
+}
+
+void Renderer2D::DrawRotatedQuad(const Vector3& position, float rotation, const Vector2& size, const Reference<Texture2D>& texture, const Vector4& tint, const Vector2& tiling)
+{
+	HNY_PROFILE_FUNCTION();
+
+	Matrix4x4 transform = Matrix4x4::Translate(position)
+		* Matrix4x4::Rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
+		* Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+
+	DrawQuad(transform, texture, tint, tiling);
+}
+
+void Renderer2D::DrawRotatedQuad(const Vector2& position, float rotation, const Vector2& size, const Reference<SubTexture2D>& subtexture, const Vector4& tint, const Vector2& tiling)
+{
+	DrawRotatedQuad({ position.X, position.Y, 1.0f }, rotation, size, subtexture, tint, tiling);
+}
+
+void Renderer2D::DrawRotatedQuad(const Vector3& position, float rotation, const Vector2& size, const Reference<SubTexture2D>& subtexture, const Vector4& tint, const Vector2& tiling)
+{
+	HNY_PROFILE_FUNCTION();
+
+	const Reference<Texture2D>& texture = subtexture->GetTexture();
+	const std::array<Math::Vector2, 4>& texCoords = subtexture->GetTextureCoords();
+
+	Matrix4x4 transform = Matrix4x4::Translate(position)
+		* Matrix4x4::Rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
+		* Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+
+	DrawQuad(transform, texture, tint, tiling, texCoords);
+}
+
+void Renderer2D::DrawSprite(const Math::Vector3& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const std::array<Math::Vector2, 4> texCoords, const Math::Vector4& tint, const Math::Vector2& tiling)
+{
+	HNY_PROFILE_FUNCTION();
+
+	Matrix4x4 transform = Matrix4x4::Translate(position)
+		//* Matrix4x4::Rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
+		* Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+
+	DrawQuad(transform, texture, tint, tiling, texCoords);
 }
 
 void Renderer2D::ResetStatistics()

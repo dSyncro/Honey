@@ -237,6 +237,7 @@
     <ClInclude Include="Honey\Renderer\Shader.h" />
     <ClInclude Include="Honey\Renderer\ShaderDataType.h" />
     <ClInclude Include="Honey\Renderer\ShaderLibrary.h" />
+    <ClInclude Include="Honey\Renderer\SubTexture.h" />
     <ClInclude Include="Honey\Renderer\Texture.h" />
     <ClInclude Include="Honey\Renderer\VertexArray.h" />
     <ClInclude Include="Honey\Scene\Scene.h" />
@@ -734,6 +735,7 @@
     <ClCompile Include="Honey\Renderer\RendererAPI.cpp" />
     <ClCompile Include="Honey\Renderer\Shader.cpp" />
     <ClCompile Include="Honey\Renderer\ShaderLibrary.cpp" />
+    <ClCompile Include="Honey\Renderer\SubTexture.cpp" />
     <ClCompile Include="Honey\Renderer\Texture.cpp" />
     <ClCompile Include="Honey\Renderer\VertexArray.cpp" />
     <ClCompile Include="Honey\Scene\Scene.cpp" />
