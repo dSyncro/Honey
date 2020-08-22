@@ -104,15 +104,16 @@ void EditorLayer::OnAttach()
     _entity.AddComponent<SpriteRendererComponent>();
 
 	_texture = Texture2D::Create("assets/textures/logo.png");
-	//Reference<Texture2D> spritesheet = Texture2D::Create("assets/texture/spritesheet.png");
 	Reference<SubTexture2D> a = SubTexture2D::CreateFromCoordinates(_texture, { 0, 0 }, { 1024, 1024 });
 	Reference<SubTexture2D> b = SubTexture2D::CreateFromCoordinates(_texture, { 1, 1 }, { 1024, 1024 });
 	_spriteA = _activeScene->CreateEntity("Sprite A");
 	_spriteB = _activeScene->CreateEntity("Sprite B");
 	_spriteA.GetComponent<TransformComponent>().Position = Math::Vector3(1.0f, 1.0f, 0.0f);
 	_spriteB.GetComponent<TransformComponent>().Position = Math::Vector3(2.0f, 2.0f, 0.0f);
-	_spriteA.AddComponent<SpriteRendererComponent>(a);
-	_spriteB.AddComponent<SpriteRendererComponent>(b);
+	Reference<Sprite> spriteA = Sprite::Create(a);
+	Reference<Sprite> spriteB = Sprite::Create(b);
+	_spriteA.AddComponent<SpriteRendererComponent>(spriteA);
+	_spriteB.AddComponent<SpriteRendererComponent>(spriteB);
 
     FrameBufferSpecification specification = { 1280, 720 };
     _frameBuffer = FrameBuffer::Create(specification);

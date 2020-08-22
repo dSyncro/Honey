@@ -1785,6 +1785,7 @@
     <ClInclude Include="Honey\ECS\Components\NativeScriptComponent.h" />
     <ClInclude Include="Honey\ECS\Behaviour.h" />
     <ClInclude Include="Honey\Renderer\SubTexture.h" />
+    <ClInclude Include="Honey\Renderer\2D\Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">

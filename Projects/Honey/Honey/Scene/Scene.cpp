@@ -47,11 +47,9 @@ void Scene::OnUpdate()
 		Renderer2D::BeginScene(*_mainCamera.Camera, *_mainCamera.Transform);
 		for (entt::entity entity : renderableGroup)
 		{
-			auto& [transform, sprite] = renderableGroup.get<TransformComponent, SpriteRendererComponent>(entity);
-
-			if (!sprite.Texture)
-				Renderer2D::DrawQuad(transform.Position, (Math::Vector2)transform.Scale, sprite.Tint);
-			else Renderer2D::DrawSprite(transform.Position, (Math::Vector2)transform.Scale, sprite.Texture, sprite.UV, sprite.Tint);
+			auto& [transform, spriteRenderer] = renderableGroup.get<TransformComponent, SpriteRendererComponent>(entity);
+			if (!spriteRenderer.Sprite) Renderer2D::DrawQuad(transform.Position, (Math::Vector2)transform.Scale, spriteRenderer.Tint);
+			else Renderer2D::DrawSprite(transform.Position, (Math::Vector2)transform.Scale, spriteRenderer.Sprite);
 		}
 		Renderer2D::EndScene();
 	}

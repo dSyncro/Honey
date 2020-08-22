@@ -221,6 +221,7 @@
     <ClInclude Include="Honey\Profiling\ProfileResult.h" />
     <ClInclude Include="Honey\Renderer\2D\Quad.h" />
     <ClInclude Include="Honey\Renderer\2D\Renderer2D.h" />
+    <ClInclude Include="Honey\Renderer\2D\Sprite.h" />
     <ClInclude Include="Honey\Renderer\Buffers.h" />
     <ClInclude Include="Honey\Renderer\Buffers\BufferElement.h" />
     <ClInclude Include="Honey\Renderer\Buffers\BufferLayout.h" />
