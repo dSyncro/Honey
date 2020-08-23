@@ -42,7 +42,7 @@ void OpenGLRendererAPI::Init()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void OpenGLRendererAPI::SetClearColor(const Math::Vector4& color)
+void OpenGLRendererAPI::SetClearColor(const Color& color)
 {
 	glClearColor(color.R, color.G, color.B, color.A);
 }

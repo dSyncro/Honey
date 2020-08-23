@@ -194,6 +194,7 @@
     <ClInclude Include="Honey\Layers\ImGui\ImGuiLayer.h" />
     <ClInclude Include="Honey\Layers\Layer.h" />
     <ClInclude Include="Honey\Layers\LayerStack.h" />
+    <ClInclude Include="Honey\Core\Color.h" />
     <ClInclude Include="Honey\Math\Math.h" />
     <ClInclude Include="Honey\Math\MathFunctions.h" />
     <ClInclude Include="Honey\Math\Matrix\Matrix4x4.h" />
@@ -702,6 +703,7 @@
     <ClCompile Include="Honey\Core\MemoryTracking.cpp" />
     <ClCompile Include="Honey\Layers\Layer.cpp" />
     <ClCompile Include="Honey\Layers\LayerStack.cpp" />
+    <ClCompile Include="Honey\Core\Color.cpp" />
     <ClCompile Include="Honey\Math\Matrix\Matrix4x4.cpp" />
     <ClCompile Include="Honey\Math\Quaternion.cpp" />
     <ClCompile Include="Honey\Math\Random.cpp" />

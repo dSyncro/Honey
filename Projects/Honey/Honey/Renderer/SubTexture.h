@@ -3,6 +3,7 @@
 #include "Texture.h"
 
 #include <Honey/Math/Vector/Vector2.h>
+#include <Honey/Renderer/2D/Quad.h>
 
 namespace Honey {
 
@@ -13,7 +14,7 @@ namespace Honey {
 		SubTexture2D(const Reference<Texture2D>& texture, const Math::Vector2& bottomLeft, const Math::Vector2& topRight);
 
 		const Reference<Texture2D> GetTexture() const { return _texture; }
-		const std::array<Math::Vector2, 4> GetTextureCoords() const { return _texCoords; }
+		const Quad::TextureCoordinates GetTextureCoords() const { return _texCoords; }
 
 		static Reference<SubTexture2D> CreateFromCoordinates(const Reference<Texture2D>& texture, 
 			const Math::Vector2& coords, 
@@ -23,7 +24,7 @@ namespace Honey {
 	private:
 
 		Reference<Texture2D> _texture;
-		std::array<Math::Vector2, 4> _texCoords;
+		Quad::TextureCoordinates _texCoords;
 
 	};
 

@@ -48,8 +48,7 @@ void Scene::OnUpdate()
 		for (entt::entity entity : renderableGroup)
 		{
 			auto& [transform, spriteRenderer] = renderableGroup.get<TransformComponent, SpriteRendererComponent>(entity);
-			if (!spriteRenderer.Sprite) Renderer2D::DrawQuad(transform.Position, (Math::Vector2)transform.Scale, spriteRenderer.Tint);
-			else Renderer2D::DrawSprite(transform.Position, (Math::Vector2)transform.Scale, spriteRenderer.Sprite);
+			Renderer2D::DrawSprite(transform.Position, (Math::Vector2)transform.Scale, spriteRenderer.Sprite, spriteRenderer.Tint);
 		}
 		Renderer2D::EndScene();
 	}

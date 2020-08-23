@@ -10,7 +10,7 @@ namespace Honey {
 
 		virtual void Init() override;
 
-		virtual void SetClearColor(const Math::Vector4& color) override;
+		virtual void SetClearColor(const Color& color) override;
 		virtual void Clear() const override;
 
 		virtual void SetViewport(Math::Vector2 location, Math::Vector2 size) override;

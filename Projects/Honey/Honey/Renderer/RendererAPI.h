@@ -2,6 +2,7 @@
 
 #include "VertexArray.h"
 
+#include <Honey/Core/Color.h>
 #include <Honey/Math/Vectors.h>
 
 namespace Honey {
@@ -20,7 +21,7 @@ namespace Honey {
 
 		virtual void Init() = 0;
 
-		virtual void SetClearColor(const Math::Vector4& color) = 0;
+		virtual void SetClearColor(const Color& color) = 0;
 		virtual void Clear() const = 0;
 
 		virtual void SetViewport(Math::Vector2 location, Math::Vector2 size) = 0;

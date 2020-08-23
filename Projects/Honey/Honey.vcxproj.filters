@@ -1786,6 +1786,7 @@
     <ClInclude Include="Honey\ECS\Behaviour.h" />
     <ClInclude Include="Honey\Renderer\SubTexture.h" />
     <ClInclude Include="Honey\Renderer\2D\Sprite.h" />
+    <ClInclude Include="Honey\Core\Color.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
@@ -1913,5 +1914,6 @@
     <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsWindow.cpp" />
     <ClCompile Include="Honey\Scene\SceneCamera.cpp" />
     <ClCompile Include="Honey\Renderer\SubTexture.cpp" />
+    <ClCompile Include="Honey\Core\Color.cpp" />
   </ItemGroup>
 </Project>

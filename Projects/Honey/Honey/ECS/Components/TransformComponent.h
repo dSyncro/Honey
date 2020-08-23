@@ -6,7 +6,9 @@ namespace Honey {
 
 	struct TransformComponent {
 
-		TransformComponent() = default;
+		TransformComponent() 
+			: Position(Math::Vector3::Zero), Rotation(Math::Quaternion::Identity), Scale(Math::Vector3::One) {}
+
 		~TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
 		TransformComponent(
@@ -15,9 +17,9 @@ namespace Honey {
 			const Math::Vector3& scale = Math::Vector3::One
 		) : Position(position), Rotation(rotation), Scale(scale) { }
 
-		Math::Vector3 Position = Math::Vector3::Zero;
-		Math::Quaternion Rotation = Math::Quaternion::Identity;
-		Math::Vector3 Scale = Math::Vector3::One;
+		Math::Vector3 Position;
+		Math::Quaternion Rotation;
+		Math::Vector3 Scale;
 
 		Math::Matrix4x4 GetTRSMatrix() const
 		{

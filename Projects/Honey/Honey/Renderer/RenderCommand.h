@@ -10,7 +10,7 @@ namespace Honey {
 
 		static void Init();
 
-		static void SetClearColor(const Math::Vector4& color) { s_RendererAPI->SetClearColor(color); }
+		static void SetClearColor(const Color& color) { s_RendererAPI->SetClearColor(color); }
 		static void Clear() { s_RendererAPI->Clear(); }
 
 		static void SetViewport(Math::Vector2 location, Math::Vector2 size);

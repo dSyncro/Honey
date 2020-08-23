@@ -4,6 +4,7 @@
 #include <Honey/Renderer/2D/Renderer2D.h>
 
 using namespace Honey;
+using namespace Honey::Math;
 
 Unique<Renderer::SceneData> Renderer::s_SceneData = CreateUnique<Renderer::SceneData>();
 
@@ -32,7 +33,7 @@ void Renderer::EndScene()
 
 }
 
-void Renderer::Submit(const Reference<Shader>& shader, const Reference<VertexArray>& vertexArray, const Math::Matrix4x4& transform)
+void Renderer::Submit(const Reference<Shader>& shader, const Reference<VertexArray>& vertexArray, const Matrix4x4& transform)
 {
 	shader->Bind();
 	shader->SetMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);

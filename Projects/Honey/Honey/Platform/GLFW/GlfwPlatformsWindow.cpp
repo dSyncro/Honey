@@ -11,8 +11,6 @@
 
 using namespace Honey;
 
-static uint8_t s_WindowCount = 0;
-
 GlfwPlatformsWindow::GlfwPlatformsWindow(const WindowProperties& properties)
 {
 	HNY_PROFILE_FUNCTION();
@@ -44,7 +42,6 @@ void GlfwPlatformsWindow::Init(const WindowProperties& properties)
 #endif
 
 	_window = glfwCreateWindow((int)_data.Width, (int)_data.Height, _data.Title.c_str(), nullptr, nullptr);
-	s_WindowCount++;
 
 	// Init the context
 	_context = GraphicsContext::Create(_window);
@@ -66,7 +63,6 @@ void GlfwPlatformsWindow::Shutdown()
 	HNY_PROFILE_FUNCTION();
 
 	glfwDestroyWindow(_window);
-	s_WindowCount--;
 }
 
 void GlfwPlatformsWindow::OnUpdate()

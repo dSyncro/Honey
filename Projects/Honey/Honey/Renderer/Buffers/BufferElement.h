@@ -17,36 +17,33 @@ namespace Honey {
 		BufferElement() = default;
 
 		BufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
-			: Name(name), Type(type), IsNormalized(normalized), Size(ShaderDataTypeSize(type)), Offset(0)
-		{
-
-		}
+			: Name(name), Type(type), IsNormalized(normalized), Size(ShaderDataTypeSize(type)), Offset(0) { }
 
 		uint32_t GetComponentCount() const
 		{
 			switch (Type)
 			{
-				case Honey::ShaderDataType::Bool:
-				case Honey::ShaderDataType::Float:
-				case Honey::ShaderDataType::Int:
+				case ShaderDataType::Bool:
+				case ShaderDataType::Float:
+				case ShaderDataType::Int:
 					return 1;
 
-				case Honey::ShaderDataType::Float2:
-				case Honey::ShaderDataType::Int2:
+				case ShaderDataType::Float2:
+				case ShaderDataType::Int2:
 					return 2;
 
-				case Honey::ShaderDataType::Float3:
-				case Honey::ShaderDataType::Int3:
+				case ShaderDataType::Float3:
+				case ShaderDataType::Int3:
 					return 3;
 
-				case Honey::ShaderDataType::Float4:
-				case Honey::ShaderDataType::Int4:
+				case ShaderDataType::Float4:
+				case ShaderDataType::Int4:
 					return 4;
 
-				case Honey::ShaderDataType::Mat3:
+				case ShaderDataType::Mat3:
 					return 9;
 
-				case Honey::ShaderDataType::Mat4:
+				case ShaderDataType::Mat4:
 					return 16;
 			}
 

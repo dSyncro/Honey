@@ -5,7 +5,7 @@
 using namespace Honey;
 using namespace Honey::Math;
 
-void Quad::Vertex::Set(const Vector3& position, const Vector4& color, const Vector2& texCoord, float textureIndex, float tilingFactor)
+void Quad::Vertex::Set(const Vector3& position, const Honey::Color& color, const Vector2& texCoord, float textureIndex, float tilingFactor)
 {
 	Position = position;
 	Color = color;

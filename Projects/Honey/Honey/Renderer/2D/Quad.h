@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Honey/Core/Color.h>
 #include <Honey/Math/Math.h>
 
 namespace Honey {
@@ -11,14 +12,14 @@ namespace Honey {
 		struct Vertex {
 
 			Math::Vector3 Position;
-			Math::Vector4 Color;
+			Honey::Color Color;
 			Math::Vector2 TexCoord;
 			float TextureIndex;
 			float TilingFactor;
 
 			void Set(
 				const Math::Vector3& position = Math::Vector3::Zero, 
-				const Math::Vector4& color = Math::Vector4::One, 
+				const Honey::Color& color = Color::White, 
 				const Math::Vector2& texCoord = Math::Vector2::Zero, 
 				float textureIndex = 0.0f,
 				float tilingFactor = 1.0f

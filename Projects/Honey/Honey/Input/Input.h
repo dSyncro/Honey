@@ -31,6 +31,8 @@ namespace Honey {
 
 	private:
 
+		// TODO: Improve Input Polling situation
+
 		static Math::Vector2& MouseScrollAmount() { static Math::Vector2 scroll; return scroll; }
 
 		friend class GlfwPlatformsWindow;

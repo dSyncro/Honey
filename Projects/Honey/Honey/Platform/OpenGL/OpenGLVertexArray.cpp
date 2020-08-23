@@ -10,21 +10,21 @@ static GLenum ShaderToOpenGLDataType(ShaderDataType type)
 {
 	switch (type)
 	{
-		case Honey::ShaderDataType::Float:
-		case Honey::ShaderDataType::Float2:
-		case Honey::ShaderDataType::Float3:
-		case Honey::ShaderDataType::Float4:
-		case Honey::ShaderDataType::Mat3:
-		case Honey::ShaderDataType::Mat4:
+		case ShaderDataType::Float:
+		case ShaderDataType::Float2:
+		case ShaderDataType::Float3:
+		case ShaderDataType::Float4:
+		case ShaderDataType::Mat3:
+		case ShaderDataType::Mat4:
 			return GL_FLOAT;
 
-		case Honey::ShaderDataType::Int:
-		case Honey::ShaderDataType::Int2:
-		case Honey::ShaderDataType::Int3:
-		case Honey::ShaderDataType::Int4:
+		case ShaderDataType::Int:
+		case ShaderDataType::Int2:
+		case ShaderDataType::Int3:
+		case ShaderDataType::Int4:
 			return GL_INT;
 
-		case Honey::ShaderDataType::Bool:
+		case ShaderDataType::Bool:
 			return GL_BOOL;
 	}
 
