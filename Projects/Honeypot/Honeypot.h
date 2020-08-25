@@ -49,7 +49,7 @@ inline std::shared_ptr<TestCategory> GetTestCategory()
 	static int HNYPT_SINGULAR(_HNYPT_ANON_VAR_) = GetTestCategory()->RegisterTestCategory(HNYPT_NAMESPACE_NAME(catName)::GetTestCategory()); \
 	namespace HNYPT_NAMESPACE_NAME(catName)
 
-#define HNYPT_TEST_CASE(testName, testDescription, id) class HNYPT_CLASS_NAME(testName) : public TestCase \
+#define HNYPT_TEST_CASE(testName, testDescription) class HNYPT_CLASS_NAME(testName) : public TestCase \
 {                                                                                           \
 public:                                                                                     \
 	HNYPT_CLASS_NAME(testName) (const std::string& name, const std::string& description)    \

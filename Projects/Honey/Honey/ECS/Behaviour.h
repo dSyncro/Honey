@@ -21,7 +21,7 @@ namespace Honey {
 		}
 
 		template <typename T>
-		void RemoveComponent() { return _entity->RemoveComponent<T>(_entityID); }
+		void RemoveComponent() { return _entity->RemoveComponent<T>(); }
 
 		template <typename T>
 		T& GetComponent() 
@@ -30,7 +30,7 @@ namespace Honey {
 		}
 
 		template <typename T>
-		bool HasComponent() { return _entity->HasComponent<T>(_entityID); }
+		bool HasComponent() { return _entity->HasComponent<T>(); }
 
 		Entity& GetEntity() { return *_entity; }
 

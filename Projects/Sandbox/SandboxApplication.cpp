@@ -8,7 +8,7 @@
 
 #include "Sandbox2D.h"
 
-class BaseLayer : public Honey::Layer {
+/*class BaseLayer : public Honey::Layer {
 
 public:
 
@@ -117,7 +117,7 @@ private:
 	glm::vec3 _squareColor = glm::vec3(0, 0, 0);
 
 	Honey::OrthographicCameraController _cameraController;
-};
+};*/
 
 class Sandbox : public Honey::Application {
 

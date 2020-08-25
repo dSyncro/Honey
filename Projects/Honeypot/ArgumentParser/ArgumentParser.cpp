@@ -1,5 +1,6 @@
 #include "ArgumentParser.h"
 
+#include <cstring>
 #include<filesystem>
 
 #include "Exceptions.h"

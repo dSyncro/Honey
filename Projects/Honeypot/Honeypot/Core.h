@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Libraries/Console.h"
+#include "../Libraries/Console.h"
 
 #define HNYPT_NOTHING
 

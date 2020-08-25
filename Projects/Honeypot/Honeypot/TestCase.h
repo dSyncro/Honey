@@ -43,7 +43,7 @@ struct TestCase
 		Passed = false;
 		ErrorLog += "Equal check failed at line " + std::to_string(line) + ".\n"
 			"Address of actual: " + std::to_string(&actual) + "\n"
-			"Address of expected: " + std::to_string(&expected)
+			"Address of expected: " + std::to_string(&expected) +
 			"Actual code: " + actualCode +
 			"Expected code: " + expectedCode;
 	}
@@ -67,7 +67,7 @@ struct TestCase
 		Passed = false;
 		ErrorLog += "Equal check failed at line " + std::to_string(line) + ".\n"
 			"Address of actual: " + std::to_string(actual) + "\n"
-			"Address of expected: " + std::to_string(expected)
+			"Address of expected: " + std::to_string(expected) +
 			"Actual code: " + actualCode +
 			"Expected code: " + expectedCode;
 	}

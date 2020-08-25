@@ -35,10 +35,10 @@ namespace Honey {
 		Color operator *(const Color& other) { return Color(R * other.R, G * other.G, B * other.B, A * other.A); }
 		Color operator /(const Color& other) { return Color(R / other.R, G / other.G, B / other.B, A / other.A); }
 
-		Color& operator +=(const Color& other) { *this = *this + other; }
-		Color& operator -=(const Color& other) { *this = *this - other; }
-		Color& operator *=(const Color& other) { *this = *this * other; }
-		Color& operator /=(const Color& other) { *this = *this / other; }
+		Color& operator +=(const Color& other) { return *this = *this + other; }
+		Color& operator -=(const Color& other) { return *this = *this - other; }
+		Color& operator *=(const Color& other) { return *this = *this * other; }
+		Color& operator /=(const Color& other) { return *this = *this / other; }
 
 		float R, G, B, A;
 

@@ -33,21 +33,21 @@ void Scene::OnUpdate()
 	auto rendererGroup = _registry.view<TransformComponent, TagComponent, CameraComponent>();
 	for (entt::entity entity : rendererGroup)
 	{
-		auto& [transform, tag, camera] = rendererGroup.get<TransformComponent, TagComponent, CameraComponent>(entity);
+		auto [transform, tag, camera] = rendererGroup.get<TransformComponent, TagComponent, CameraComponent>(entity);
 		if (tag.Tag == "Main")
 		{
 			_mainCamera.Camera = &camera.Camera;
-			_mainCamera.Transform = &transform.GetTRSMatrix();
+			_mainCamera.Transform = transform.GetTRSMatrix();
 		}
 	}
 
 	if (_mainCamera)
 	{
 		auto renderableGroup = _registry.view<TransformComponent, SpriteRendererComponent>();
-		Renderer2D::BeginScene(*_mainCamera.Camera, *_mainCamera.Transform);
+		Renderer2D::BeginScene(*_mainCamera.Camera, _mainCamera.Transform);
 		for (entt::entity entity : renderableGroup)
 		{
-			auto& [transform, spriteRenderer] = renderableGroup.get<TransformComponent, SpriteRendererComponent>(entity);
+			auto [transform, spriteRenderer] = renderableGroup.get<TransformComponent, SpriteRendererComponent>(entity);
 			Renderer2D::DrawSprite(transform.Position, (Math::Vector2)transform.Scale, spriteRenderer.Sprite, spriteRenderer.Tint);
 		}
 		Renderer2D::EndScene();

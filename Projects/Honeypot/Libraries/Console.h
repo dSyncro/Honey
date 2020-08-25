@@ -1,10 +1,5 @@
 #pragma once
 
-#define HNYPT_WINDOWS
-#if defined(HNYPT_WINDOWS)
-#	include <Windows.h>
-#endif
-
 #include <iomanip>
 
 #include "AnsiStyle.h"

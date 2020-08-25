@@ -9,7 +9,7 @@ void Sandbox2D::OnAttach()
 {
 	HNY_PROFILE_FUNCTION();
 
-	_texture = Honey::Texture2D::Create("assets/textures/logo.png");
+	//_texture = Honey::Texture2D::Create("assets/textures/logo.png");
 }
 
 void Sandbox2D::OnDetach()
@@ -21,7 +21,7 @@ void Sandbox2D::OnUpdate()
 {
 	HNY_PROFILE_FUNCTION();
 
-	float deltaTime = Honey::Time::GetDeltaTime();
+	/*float deltaTime = Honey::Time::GetDeltaTime();
 
 	HNY_APP_INFO("DeltaTime: {0}", deltaTime);
 	HNY_APP_INFO("FPS: {0}", Honey::Time::GetFrameRate());
@@ -43,20 +43,20 @@ void Sandbox2D::OnUpdate()
 	Honey::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, _squareColor);
 	Honey::Renderer2D::DrawQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, _texture);
 
-	Honey::Renderer2D::EndScene();
+	Honey::Renderer2D::EndScene();*/
 }
 
 void Sandbox2D::OnEvent(Honey::Event& e)
 {
 	HNY_PROFILE_FUNCTION();
-	_cameraController.OnEvent(e);
+	//_cameraController.OnEvent(e);
 }
 
 void Sandbox2D::OnImGuiRender()
 {
     HNY_PROFILE_FUNCTION(); 
 
-    {
+    /*{
         HNY_PROFILE_SCOPE("Settings");
         ImGui::Begin("Settings");
         ImGui::Text("Renderer2D Stats");
@@ -67,5 +67,5 @@ void Sandbox2D::OnImGuiRender()
         ImGui::Text("Index Count: %d", stats.GetIndexCount());
         ImGui::ColorEdit4("Square Color", &_squareColor.X);
         ImGui::End();
-    }
+    }*/
 }

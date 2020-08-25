@@ -69,6 +69,7 @@ project "Honey"
 
 		excludes 
 		{
+			"Honey/Platform/ImGui/ImGuiWin32Implementation.cpp",
 			"Honey/Platform/Windows/**.h",
 			"Honey/Platform/Windows/**.cpp",
 		}

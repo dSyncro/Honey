@@ -14,7 +14,7 @@ namespace Honey {
 		~SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 
-		Reference<Sprite> Sprite;
+		Reference<Honey::Sprite> Sprite;
 		Color Tint;
 	};
 

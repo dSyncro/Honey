@@ -16,11 +16,11 @@ namespace Honey {
 	struct RenderCameraData {
 
 		Honey::Camera* Camera = nullptr;
-		Math::Matrix4x4* Transform = nullptr;
+		Math::Matrix4x4 Transform = Math::Matrix4x4::Identity;
 
-		void Reset() noexcept { Camera = nullptr; Transform = nullptr; }
+		void Reset() noexcept { Camera = nullptr; Transform = Math::Matrix4x4::Identity; }
 
-		operator bool() const { return Camera && Transform; }
+		operator bool() const { return Camera; }
 	};
 
 	class Scene {

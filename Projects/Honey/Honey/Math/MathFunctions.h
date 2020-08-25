@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <limits>
 
 #include <Honey/Core.h>
 
@@ -12,11 +13,11 @@ namespace Honey {
 		const float Degrees2Radians = Pi / 180.0f;
 		const float Radians2Degrees = 180.0f / Pi;
 
-		const float Epsilon = FLT_EPSILON;
+		const float Epsilon = std::numeric_limits<float>::epsilon();
 
-		const float NaN = NAN;
-		const float Infinity = +INFINITY;
-		const float NegativeInfinity = -INFINITY;
+		const float NaN = std::numeric_limits<float>::quiet_NaN();
+		const float Infinity = +std::numeric_limits<float>::infinity();
+		const float NegativeInfinity = -Infinity;
 
 		static HNY_ALWAYS_INLINE float  Abs(float x) noexcept { return std::abs(x); }
 

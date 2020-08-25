@@ -4,6 +4,8 @@ using namespace AnsiStyle;
 
 #ifdef HNYPT_WINDOWS
 
+#include <windows.h>
+
 const HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 inline CONSOLE_SCREEN_BUFFER_INFO GetConsoleInfo() noexcept
