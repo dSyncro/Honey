@@ -131,7 +131,7 @@ void EditorLayer::OnUpdate()
 	HNY_PROFILE_FUNCTION();
 
 	Timestamp deltaTime = Time::GetDeltaTime();
-	HNY_CORE_INFO("Delta Time: {0}", deltaTime);
+	HNY_CORE_INFO("Delta Time: {0}", (float)deltaTime);
 	
 	_cameraController.OnUpdate();
 

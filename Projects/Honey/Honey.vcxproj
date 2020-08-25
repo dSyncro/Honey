@@ -75,7 +75,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING;HNY_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;HZ_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;third-party\spdlog\include;third-party\glfw\include;third-party\glad\include;third-party\glm;third-party\ImGui;third-party\stb_image;third-party\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -96,7 +96,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING;HNY_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;HZ_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;third-party\spdlog\include;third-party\glfw\include;third-party\glad\include;third-party\glm;third-party\ImGui;third-party\stb_image;third-party\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -120,7 +120,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING;HNY_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;HZ_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;third-party\spdlog\include;third-party\glfw\include;third-party\glad\include;third-party\glm;third-party\ImGui;third-party\stb_image;third-party\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -146,6 +146,7 @@
     <ClInclude Include="Honey\Core.h" />
     <ClInclude Include="Honey\Core\Assertion.h" />
     <ClInclude Include="Honey\Core\Breakpoint.h" />
+    <ClInclude Include="Honey\Core\Color.h" />
     <ClInclude Include="Honey\Core\Compiler.h" />
     <ClInclude Include="Honey\Core\DLLAutomation.h" />
     <ClInclude Include="Honey\Core\Engine.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Honey\Core\OS.h" />
     <ClInclude Include="Honey\Core\Platform.h" />
     <ClInclude Include="Honey\Core\Profiling.h" />
+    <ClInclude Include="Honey\ECS\Behaviour.h" />
     <ClInclude Include="Honey\ECS\Components.h" />
     <ClInclude Include="Honey\ECS\Components\CameraComponent.h" />
     <ClInclude Include="Honey\ECS\Components\NameComponent.h" />
@@ -164,7 +166,6 @@
     <ClInclude Include="Honey\ECS\Components\TagComponent.h" />
     <ClInclude Include="Honey\ECS\Components\TransformComponent.h" />
     <ClInclude Include="Honey\ECS\Entity.h" />
-    <ClInclude Include="Honey\ECS\Behaviour.h" />
     <ClInclude Include="Honey\Entrypoint.h" />
     <ClInclude Include="Honey\Events\App\AppRenderEvent.h" />
     <ClInclude Include="Honey\Events\App\AppTickEvent.h" />
@@ -194,7 +195,6 @@
     <ClInclude Include="Honey\Layers\ImGui\ImGuiLayer.h" />
     <ClInclude Include="Honey\Layers\Layer.h" />
     <ClInclude Include="Honey\Layers\LayerStack.h" />
-    <ClInclude Include="Honey\Core\Color.h" />
     <ClInclude Include="Honey\Math\Math.h" />
     <ClInclude Include="Honey\Math\MathFunctions.h" />
     <ClInclude Include="Honey\Math\Matrix\Matrix4x4.h" />
@@ -698,12 +698,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp" />
+    <ClCompile Include="Honey\Core\Color.cpp" />
     <ClCompile Include="Honey\Core\Engine.cpp" />
     <ClCompile Include="Honey\Core\Log.cpp" />
     <ClCompile Include="Honey\Core\MemoryTracking.cpp" />
     <ClCompile Include="Honey\Layers\Layer.cpp" />
     <ClCompile Include="Honey\Layers\LayerStack.cpp" />
-    <ClCompile Include="Honey\Core\Color.cpp" />
     <ClCompile Include="Honey\Math\Matrix\Matrix4x4.cpp" />
     <ClCompile Include="Honey\Math\Quaternion.cpp" />
     <ClCompile Include="Honey\Math\Random.cpp" />

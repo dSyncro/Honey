@@ -25,7 +25,7 @@ namespace Honey {
 		std::vector<Reference<VertexBuffer>> _vertexBuffers;
 		Reference<IndexBuffer> _indexBuffer;
 
-		uint32_t _rendererID;
+		uint32_t _rendererID, _vertexBufferIndex = 0;
 	};
 
 }

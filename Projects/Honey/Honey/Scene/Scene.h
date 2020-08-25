@@ -8,6 +8,10 @@
 namespace Honey {
 
 	class Entity;
+	struct TransformComponent;
+	struct TagComponent;
+	struct NameComponent;
+	struct CameraComponent;
 
 	struct RenderCameraData {
 
@@ -33,7 +37,6 @@ namespace Honey {
 		void OnUpdate();
 		void OnStop();
 		void OnViewportResize(uint32_t width, uint32_t height);
-
 	private:
 
 		entt::registry _registry;

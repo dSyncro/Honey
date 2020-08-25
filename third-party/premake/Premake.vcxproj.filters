@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="..">
+      <UniqueIdentifier>{61705900-4DFC-870B-B6AA-880BA255880B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\Projects">
+      <UniqueIdentifier>{FA9A7625-6650-EF1A-EF44-E9F15BF9E51E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\Projects\Honey">
+      <UniqueIdentifier>{CC87D90D-389E-D7A3-8115-63C5ED6AA82B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\Projects\Honey\third-party">
+      <UniqueIdentifier>{53B84787-BFD0-2EB1-887D-BE4AF454C34A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\Projects\Honeycomb">
+      <UniqueIdentifier>{EDBDE8EB-592A-A4E6-221E-3C448E49C64E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\Projects\Honeypot">
+      <UniqueIdentifier>{7FEFB135-6B7E-3BFF-149D-4FFA000B4CA5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="..\Projects\Sandbox">
+      <UniqueIdentifier>{D82E7218-4490-4F26-CDFD-95D8395E86E5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Projects\Honey\premake5.lua">
+      <Filter>..\Projects\Honey</Filter>
+    </None>
+    <None Include="..\..\Projects\Honey\third-party\premake5.lua">
+      <Filter>..\Projects\Honey\third-party</Filter>
+    </None>
+    <None Include="..\..\Projects\Honeycomb\premake5.lua">
+      <Filter>..\Projects\Honeycomb</Filter>
+    </None>
+    <None Include="..\..\Projects\Honeypot\premake5.lua">
+      <Filter>..\Projects\Honeypot</Filter>
+    </None>
+    <None Include="..\..\Projects\Sandbox\premake5.lua">
+      <Filter>..\Projects\Sandbox</Filter>
+    </None>
+    <None Include="..\..\premake5.lua">
+      <Filter>..</Filter>
+    </None>
+    <None Include="premake5.lua" />
+  </ItemGroup>
+</Project>

@@ -49,6 +49,9 @@
     <Filter Include="Honey\Platform">
       <UniqueIdentifier>{3CC57D4B-2893-7151-1127-E277FD934DB6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Honey\Platform\GLFW">
+      <UniqueIdentifier>{FB255119-6787-2E27-F0F4-74D95C5565E6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Honey\Platform\ImGui">
       <UniqueIdentifier>{6637AC43-52C6-350D-FBE4-4908E75246B3}</UniqueIdentifier>
     </Filter>
@@ -57,12 +60,6 @@
     </Filter>
     <Filter Include="Honey\Platform\OpenGL\Buffers">
       <UniqueIdentifier>{6C62A9CB-D87A-90F5-A127-208F0DFF248F}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Honey\Platform\Windows">
-      <UniqueIdentifier>{76EBAA0E-62E5-D360-4B52-6A7137EB39CD}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Honey\Platform\Windows\Input">
-      <UniqueIdentifier>{F5DB508A-E196-4036-8A4E-B98076E88AC6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Honey\Profiling">
       <UniqueIdentifier>{6102FD59-CD8D-6A1E-D69E-ED1242A9C61E}</UniqueIdentifier>
@@ -154,6 +151,9 @@
     <ClInclude Include="Honey\Core\Breakpoint.h">
       <Filter>Honey\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Core\Color.h">
+      <Filter>Honey\Core</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Core\Compiler.h">
       <Filter>Honey\Core</Filter>
     </ClInclude>
@@ -184,6 +184,9 @@
     <ClInclude Include="Honey\Core\Profiling.h">
       <Filter>Honey\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\ECS\Behaviour.h">
+      <Filter>Honey\ECS</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\ECS\Components.h">
       <Filter>Honey\ECS</Filter>
     </ClInclude>
@@ -191,6 +194,9 @@
       <Filter>Honey\ECS\Components</Filter>
     </ClInclude>
     <ClInclude Include="Honey\ECS\Components\NameComponent.h">
+      <Filter>Honey\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\ECS\Components\NativeScriptComponent.h">
       <Filter>Honey\ECS\Components</Filter>
     </ClInclude>
     <ClInclude Include="Honey\ECS\Components\SpriteRendererComponent.h">
@@ -319,6 +325,9 @@
     <ClInclude Include="Honey\Math\Vectors.h">
       <Filter>Honey\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h">
+      <Filter>Honey\Platform\GLFW</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.h">
       <Filter>Honey\Platform\ImGui</Filter>
     </ClInclude>
@@ -370,6 +379,9 @@
     <ClInclude Include="Honey\Renderer\2D\Renderer2D.h">
       <Filter>Honey\Renderer\2D</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Renderer\2D\Sprite.h">
+      <Filter>Honey\Renderer\2D</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Renderer\Buffers.h">
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
@@ -418,6 +430,9 @@
     <ClInclude Include="Honey\Renderer\ShaderLibrary.h">
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Renderer\SubTexture.h">
+      <Filter>Honey\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Renderer\Texture.h">
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
@@ -425,6 +440,9 @@
       <Filter>Honey\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Scene\Scene.h">
+      <Filter>Honey\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Scene\SceneCamera.h">
       <Filter>Honey\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Timing\Time.h">
@@ -1780,17 +1798,13 @@
     <ClInclude Include="third-party\stb_image\stb_image.h">
       <Filter>third-party\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="Honey\Platform\GLFW\GlfwPlatformsWindow.h" />
-    <ClInclude Include="Honey\Scene\SceneCamera.h" />
-    <ClInclude Include="Honey\ECS\Components\NativeScriptComponent.h" />
-    <ClInclude Include="Honey\ECS\Behaviour.h" />
-    <ClInclude Include="Honey\Renderer\SubTexture.h" />
-    <ClInclude Include="Honey\Renderer\2D\Sprite.h" />
-    <ClInclude Include="Honey\Core\Color.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Honey\Application.cpp">
       <Filter>Honey</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Core\Color.cpp">
+      <Filter>Honey\Core</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Core\Engine.cpp">
       <Filter>Honey\Core</Filter>
@@ -1825,10 +1839,28 @@
     <ClCompile Include="Honey\Math\Vector\Vector4.cpp">
       <Filter>Honey\Math\Vector</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Platform\GLFW\GlfwImGuiLayer.cpp">
+      <Filter>Honey\Platform\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\GLFW\GlfwOpenGLContext.cpp">
+      <Filter>Honey\Platform\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatform.cpp">
+      <Filter>Honey\Platform\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsInput.cpp">
+      <Filter>Honey\Platform\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsWindow.cpp">
+      <Filter>Honey\Platform\GLFW</Filter>
+    </ClCompile>
     <ClCompile Include="Honey\Platform\ImGui\ImGuiGlfwImplementation.cpp">
       <Filter>Honey\Platform\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Platform\ImGui\ImGuiOpenGLRenderer.cpp">
+      <Filter>Honey\Platform\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Honey\Platform\ImGui\ImGuiWin32Implementation.cpp">
       <Filter>Honey\Platform\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Honey\Platform\OpenGL\Buffers\OpenGLFrameBuffer.cpp">
@@ -1891,6 +1923,9 @@
     <ClCompile Include="Honey\Renderer\ShaderLibrary.cpp">
       <Filter>Honey\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Renderer\SubTexture.cpp">
+      <Filter>Honey\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="Honey\Renderer\Texture.cpp">
       <Filter>Honey\Renderer</Filter>
     </ClCompile>
@@ -1900,20 +1935,14 @@
     <ClCompile Include="Honey\Scene\Scene.cpp">
       <Filter>Honey\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Scene\SceneCamera.cpp">
+      <Filter>Honey\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="Honey\Window\Window.cpp">
       <Filter>Honey\Window</Filter>
     </ClCompile>
     <ClCompile Include="third-party\stb_image\stb_image.cpp">
       <Filter>third-party\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="Honey\Platform\ImGui\ImGuiWin32Implementation.cpp" />
-    <ClCompile Include="Honey\Platform\GLFW\GlfwImGuiLayer.cpp" />
-    <ClCompile Include="Honey\Platform\GLFW\GlfwOpenGLContext.cpp" />
-    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatform.cpp" />
-    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsInput.cpp" />
-    <ClCompile Include="Honey\Platform\GLFW\GlfwPlatformsWindow.cpp" />
-    <ClCompile Include="Honey\Scene\SceneCamera.cpp" />
-    <ClCompile Include="Honey\Renderer\SubTexture.cpp" />
-    <ClCompile Include="Honey\Core\Color.cpp" />
   </ItemGroup>
 </Project>
