@@ -17,13 +17,7 @@ project "Honey"
 		"Honey/**.cpp",
 
 		-- Dependencies
-		"%{wks.location}/third-party/spdlog/include/**.h",
-		"%{wks.location}/third-party/glm/glm/**.inl",
-		"%{wks.location}/third-party/glm/glm/**.hpp",
-		"%{wks.location}/third-party/stb_image/**.h",
 		"%{wks.location}/third-party/stb_image/**.cpp",
-		"%{wks.location}/third-party/entt/include/**.h",
-		"%{wks.location}/third-party/entt/include/**.cpp",
 	}
 
 	defines

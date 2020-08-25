@@ -352,3 +352,6 @@ MigrationBackup/
 
 # Makefiles
 **/Makefile
+
+# ImGui configuration
+**/imgui.ini
