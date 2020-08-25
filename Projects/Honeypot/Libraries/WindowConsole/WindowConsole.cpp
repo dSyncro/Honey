@@ -1,10 +1,12 @@
+#include "../../Honeypot/Core.h"
+
 #include "../Console.h"
 
 using namespace AnsiStyle;
 
-#ifdef HNYPT_WINDOWS
+#ifdef HNYPT_PLATFORM_WINDOWS
 
-#include <windows.h>
+#include <Windows.h>
 
 const HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 

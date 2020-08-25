@@ -1,6 +1,8 @@
+#include "../../Honeypot/Core.h"
+
 #include "../Console.h"
 
-#ifndef HNYPT_WINDOWS
+#ifndef HNYPT_PLATFORM_WINDOWS
 
 #include <sys/ioctl.h>
 #include <unistd.h>
