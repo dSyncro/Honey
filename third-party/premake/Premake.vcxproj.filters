@@ -4,42 +4,42 @@
     <Filter Include="..">
       <UniqueIdentifier>{61705900-4DFC-870B-B6AA-880BA255880B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Projects">
-      <UniqueIdentifier>{FA9A7625-6650-EF1A-EF44-E9F15BF9E51E}</UniqueIdentifier>
+    <Filter Include="..\..">
+      <UniqueIdentifier>{CC6E590B-3883-81BC-0105-251C6DD87DED}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Projects\Honey">
-      <UniqueIdentifier>{CC87D90D-389E-D7A3-8115-63C5ED6AA82B}</UniqueIdentifier>
+    <Filter Include="..\..\Projects">
+      <UniqueIdentifier>{C501BF2B-B1CF-B231-9A63-235886D08E96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Projects\Honey\third-party">
-      <UniqueIdentifier>{53B84787-BFD0-2EB1-887D-BE4AF454C34A}</UniqueIdentifier>
+    <Filter Include="..\..\Projects\Honey">
+      <UniqueIdentifier>{D79AC468-C329-4E32-6C48-622D58B65ED8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Projects\Honeycomb">
-      <UniqueIdentifier>{EDBDE8EB-592A-A4E6-221E-3C448E49C64E}</UniqueIdentifier>
+    <Filter Include="..\..\Projects\Honeycomb">
+      <UniqueIdentifier>{785EEC1C-6483-3B9D-8DCE-202D79523ABB}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Projects\Honeypot">
-      <UniqueIdentifier>{7FEFB135-6B7E-3BFF-149D-4FFA000B4CA5}</UniqueIdentifier>
+    <Filter Include="..\..\Projects\Honeypot">
+      <UniqueIdentifier>{AA2A2E37-1662-76CE-1F6C-DAF18B229DC7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="..\Projects\Sandbox">
-      <UniqueIdentifier>{D82E7218-4490-4F26-CDFD-95D8395E86E5}</UniqueIdentifier>
+    <Filter Include="..\..\Projects\Sandbox">
+      <UniqueIdentifier>{A3306EDA-8F2A-972C-7897-2D3D6430FD98}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Projects\Honey\premake5.lua">
-      <Filter>..\Projects\Honey</Filter>
-    </None>
-    <None Include="..\..\Projects\Honey\third-party\premake5.lua">
-      <Filter>..\Projects\Honey\third-party</Filter>
+      <Filter>..\..\Projects\Honey</Filter>
     </None>
     <None Include="..\..\Projects\Honeycomb\premake5.lua">
-      <Filter>..\Projects\Honeycomb</Filter>
+      <Filter>..\..\Projects\Honeycomb</Filter>
     </None>
     <None Include="..\..\Projects\Honeypot\premake5.lua">
-      <Filter>..\Projects\Honeypot</Filter>
+      <Filter>..\..\Projects\Honeypot</Filter>
     </None>
     <None Include="..\..\Projects\Sandbox\premake5.lua">
-      <Filter>..\Projects\Sandbox</Filter>
+      <Filter>..\..\Projects\Sandbox</Filter>
     </None>
     <None Include="..\..\premake5.lua">
+      <Filter>..\..</Filter>
+    </None>
+    <None Include="..\premake5.lua">
       <Filter>..</Filter>
     </None>
     <None Include="premake5.lua" />

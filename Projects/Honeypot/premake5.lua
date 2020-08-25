@@ -16,8 +16,8 @@ project "Honeypot"
 
 	includedirs
 	{
-		"%{wks.location}/Projects/Honey",
-		"%{wks.location}/Projects/Honey/third-party",
+		"%{IncludeDir.Honey}",
+		"%{IncludeDir.ThirdParty}",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.GLM}",
 		"%{IncludeDir.EnTT}"

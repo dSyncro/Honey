@@ -78,11 +78,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\..\Projects\Honey\premake5.lua" />
-    <None Include="..\..\Projects\Honey\third-party\premake5.lua" />
     <None Include="..\..\Projects\Honeycomb\premake5.lua" />
     <None Include="..\..\Projects\Honeypot\premake5.lua" />
     <None Include="..\..\Projects\Sandbox\premake5.lua" />
     <None Include="..\..\premake5.lua" />
+    <None Include="..\premake5.lua" />
     <None Include="premake5.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

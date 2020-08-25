@@ -4,6 +4,7 @@ using namespace Honey;
 
 #include <Honey/Core.h>
 
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 extern "C" {
