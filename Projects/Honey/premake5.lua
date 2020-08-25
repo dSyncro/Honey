@@ -16,16 +16,14 @@ project "Honey"
 		"Honey/**.h",
 		"Honey/**.cpp",
 
-		"third-party/spdlog/include/**.h",
-
-		"third-party/glm/glm/**.inl",
-		"third-party/glm/glm/**.hpp",
-
-		"third-party/stb_image/**.h",
-		"third-party/stb_image/**.cpp",
-
-		"third-party/entt/include/**.h",
-		"third-party/entt/include/**.cpp",
+		-- Dependencies
+		"%{wks.location}/third-party/spdlog/include/**.h",
+		"%{wks.location}/third-party/glm/glm/**.inl",
+		"%{wks.location}/third-party/glm/glm/**.hpp",
+		"%{wks.location}/third-party/stb_image/**.h",
+		"%{wks.location}/third-party/stb_image/**.cpp",
+		"%{wks.location}/third-party/entt/include/**.h",
+		"%{wks.location}/third-party/entt/include/**.cpp",
 	}
 
 	defines
