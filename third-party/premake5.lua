@@ -6,6 +6,9 @@ project "ThirdParty"
 
 	kind "None"
 
+	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("%{wks.location}/bin/intermediates/" .. outputdir .. "/%{prj.name}")
+
 	files 
 	{
 		"./**.h",
