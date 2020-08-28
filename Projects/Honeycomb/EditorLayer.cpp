@@ -2,90 +2,9 @@
 
 #include <ImGui/imgui.h>
 
-#include <glm/ext/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include "Scripts.h"
 
 using namespace Honey;
-
-class CameraController : public Behaviour {
-
-public:
-
-	float Speed = 1.0f;
-	float ZoomSpeed = 5.0f;
-
-	float Size = 10.0f;
-
-	void OnUpdate()
-	{
-		float deltaTime = Time::GetDeltaTime();
-
-		SceneCamera& camera = GetComponent<CameraComponent>().Camera;
-		float scroll = Input::GetMouseScroll();
-		Size -= scroll * ZoomSpeed;
-		Size = Mathf::Clamp(Size, 0.1f, Mathf::Infinity);
-		camera.SetOrthographic(Size, -1.0f, 1.0f);
-
-		TransformComponent& transform = GetComponent<TransformComponent>();
-		Math::Vector3 pos = transform.Position;
-		if (Input::IsKeyPressed(Keycode::A))
-			pos.X -= Size * Speed * deltaTime; 
-		if (Input::IsKeyPressed(Keycode::D))
-			pos.X += Size * Speed * deltaTime; 
-		if (Input::IsKeyPressed(Keycode::S))
-			pos.Y -= Size * Speed * deltaTime;
-		if (Input::IsKeyPressed(Keycode::W))
-			pos.Y += Size * Speed * deltaTime; 
-		transform.Position = pos;
-	}
-};
-
-class CameraScrollController : public Behaviour {
-
-public:
-
-	float ZoomSpeed = 5.0f;
-
-	float Size = 10.0f;
-
-	void OnUpdate()
-	{
-		float deltaTime = Time::GetDeltaTime();
-
-		SceneCamera& camera = GetComponent<CameraComponent>().Camera;
-		float scroll = Input::GetMouseScroll();
-		Size -= scroll * ZoomSpeed;
-		Size = Mathf::Clamp(Size, 0.1f, Mathf::Infinity);
-		camera.SetOrthographic(Size, -1.0f, 1.0f);
-	}
-};
-
-class CameraWASDController : public Behaviour {
-
-public:
-
-	float Speed = 1.0f;
-
-	void OnUpdate()
-	{
-		float deltaTime = Time::GetDeltaTime();
-
-		SceneCamera& camera = GetComponent<CameraComponent>().Camera;
-
-		TransformComponent& transform = GetComponent<TransformComponent>();
-		CameraScrollController& other = GetComponent<CameraScrollController>();
-		Math::Vector3 pos = transform.Position;
-		if (Input::IsKeyPressed(Keycode::A))
-			pos.X -= other.Size * Speed * deltaTime;
-		if (Input::IsKeyPressed(Keycode::D))
-			pos.X += other.Size * Speed * deltaTime;
-		if (Input::IsKeyPressed(Keycode::S))
-			pos.Y -= other.Size * Speed * deltaTime;
-		if (Input::IsKeyPressed(Keycode::W))
-			pos.Y += other.Size * Speed * deltaTime;
-		transform.Position = pos;
-	}
-};
 
 void EditorLayer::OnAttach()
 {
@@ -119,6 +38,7 @@ void EditorLayer::OnAttach()
     _frameBuffer = FrameBuffer::Create(specification);
 
 	_activeScene->OnPlay();
+	_hierarchy.SetContext(_activeScene);
 }
 
 void EditorLayer::OnDetach()
@@ -246,10 +166,12 @@ void EditorLayer::OnImGuiRender()
 			_activeScene->OnViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
         }
 
-        ImGui::Image((void*)_frameBuffer->GetColorAttachmentRendererID(), ImVec2{ _viewportSize.X, _viewportSize.Y }, ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::Image((void*)(uintptr_t)_frameBuffer->GetColorAttachmentRendererID(), ImVec2{ _viewportSize.X, _viewportSize.Y }, ImVec2(0, 1), ImVec2(1, 0));
         ImGui::End();
         ImGui::PopStyleVar();
     }
 
     ImGui::End();
+
+	_hierarchy.OnImGuiRender();
 }

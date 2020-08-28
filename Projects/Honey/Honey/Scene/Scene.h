@@ -43,6 +43,7 @@ namespace Honey {
 		RenderCameraData _mainCamera;
 
 		friend class Entity;
+		friend class SceneHierarchyFrame;
 	};
 
 }

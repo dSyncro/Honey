@@ -198,9 +198,14 @@
     <ClInclude Include="Honey\Math\Math.h" />
     <ClInclude Include="Honey\Math\MathFunctions.h" />
     <ClInclude Include="Honey\Math\Matrix\Matrix4x4.h" />
+    <ClInclude Include="Honey\Math\Point.h" />
     <ClInclude Include="Honey\Math\Quaternion.h" />
     <ClInclude Include="Honey\Math\Random.h" />
+    <ClInclude Include="Honey\Math\Rect.h" />
+    <ClInclude Include="Honey\Math\Size.h" />
+    <ClInclude Include="Honey\Math\Vector\TVector.h" />
     <ClInclude Include="Honey\Math\Vector\Vector2.h" />
+    <ClInclude Include="Honey\Math\Vector\Vector2Int.h" />
     <ClInclude Include="Honey\Math\Vector\Vector3.h" />
     <ClInclude Include="Honey\Math\Vector\Vector4.h" />
     <ClInclude Include="Honey\Math\Vectors.h" />
@@ -262,6 +267,7 @@
     <ClCompile Include="Honey\Math\Quaternion.cpp" />
     <ClCompile Include="Honey\Math\Random.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector2.cpp" />
+    <ClCompile Include="Honey\Math\Vector\Vector2Int.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector3.cpp" />
     <ClCompile Include="Honey\Math\Vector\Vector4.cpp" />
     <ClCompile Include="Honey\Platform\GLFW\GlfwImGuiLayer.cpp" />
@@ -297,7 +303,6 @@
     <ClCompile Include="Honey\Renderer\VertexArray.cpp" />
     <ClCompile Include="Honey\Scene\Scene.cpp" />
     <ClCompile Include="Honey\Scene\SceneCamera.cpp" />
-    <ClCompile Include="Honey\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\third-party\glfw\GLFW.vcxproj">

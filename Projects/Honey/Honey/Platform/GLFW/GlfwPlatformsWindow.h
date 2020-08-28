@@ -58,5 +58,4 @@ namespace Honey {
 		static void WindowScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
 		static void WindowCursorPositionCallback(GLFWwindow* window, double xOffset, double yOffset);
 	};
-
 }

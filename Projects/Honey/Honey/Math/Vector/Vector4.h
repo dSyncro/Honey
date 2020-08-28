@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Vector3.h"
+
 namespace Honey::Math {
 
-	struct Vector2;
-	struct Vector3;
 	struct Matrix4x4;
 
 	struct Vector4 {
@@ -19,9 +19,9 @@ namespace Honey::Math {
 		constexpr Vector4(float value = 0.0f) : X(value), Y(value), Z(value), W(value) {}
 		constexpr Vector4(float x, float y, float z, float w) : X(x), Y(y), Z(z), W(w) {}
 
-		explicit Vector4(const Vector2& vector);
-		explicit Vector4(const Vector3& vector);
-		explicit Vector4(const Vector3& vector, float w);
+		constexpr explicit Vector4(const Vector2& vector) : X(vector.X), Y(vector.Y), Z(0.0f), W(0.0f) {}
+		constexpr explicit Vector4(const Vector3& vector) : X(vector.X), Y(vector.Y), Z(vector.Z), W(0.0f) {}
+		constexpr explicit Vector4(const Vector3& vector, float w) : X(vector.X), Y(vector.Y), Z(vector.Z), W(w) {}
 
 		// Shorthands
 		static const Vector4 Zero;
@@ -31,8 +31,8 @@ namespace Honey::Math {
 		static const Vector4 NegativeInfinity;
 
 		// Conversion operators
-		explicit operator Vector2() const;
-		explicit operator Vector3() const;
+		explicit operator Vector2() const { return Vector2(X, Y); }
+		explicit operator Vector3() const { return Vector3(X, Y, Z); }
 
 		// Methods
 		Vector4& Normalize();
@@ -86,9 +86,9 @@ namespace Honey::Math {
 		Vector4& operator /=(const Vector4& vector);
 
 		// Subscript operator
-		float operator [](int index);
+		float& operator [](int index);
 		float operator [](int index) const;
-		float operator [](Axis axis);
+		float& operator [](Axis axis);
 		float operator [](Axis axis) const;
 
 		float X, Y, Z, W;

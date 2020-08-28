@@ -7,9 +7,6 @@
 
 using namespace Honey::Math;
 
-Vector2::Vector2(const Vector3& vector) : X(vector.X), Y(vector.Y) {}
-Vector2::Vector2(const Vector4& vector) : X(vector.X), Y(vector.Y) {}
-
 const Vector2 Vector2::Left  = Vector2(-1.0f,  0.0f);
 const Vector2 Vector2::Right = Vector2( 1.0f,  0.0f);
 const Vector2 Vector2::Up    = Vector2( 0.0f,  1.0f);
@@ -20,9 +17,6 @@ const Vector2 Vector2::One  = Vector2(1.0f);
 
 const Vector2 Vector2::Infinity         = Vector2(Mathf::Infinity);
 const Vector2 Vector2::NegativeInfinity = Vector2(Mathf::NegativeInfinity);
-
-Vector2::operator Vector3() const { return Vector3(*this); }
-Vector2::operator Vector4() const { return Vector4(*this); }
 
 Vector2& Vector2::Normalize()
 {
@@ -44,8 +38,8 @@ Vector2& Vector2::Set(float x, float y)
 	return *this;
 }
 
-bool Vector2::ExactlyEquals(const Vector2& other) { return X == other.X && Y == other.Y; }
-bool Vector2::EssentiallyEquals(const Vector2& other) { return *this == other; }
+bool Vector2::ExactlyEquals(const Vector2& other) const { return X == other.X && Y == other.Y; }
+bool Vector2::EssentiallyEquals(const Vector2& other) const { return *this == other; }
 
 float Vector2::GetMagnitude() const { return Mathf::Sqrt(GetSquaredMagnitude()); }
 float Vector2::GetSquaredMagnitude() const { return X * X + Y * Y; }
@@ -184,9 +178,9 @@ Vector2& Vector2::operator *=(float scalar)
 	return *this;
 }
 
-Vector2& Vector2::operator *=(const Vector2& vector)
+Vector2& Vector2::operator *=(const Vector2& other)
 {
-	*this = *this * vector;
+	*this = *this * other;
 	return *this;
 }
 
@@ -196,8 +190,8 @@ Vector2& Vector2::operator /=(float scalar)
 	return *this;
 }
 
-Vector2& Vector2::operator /=(const Vector2& vector)
+Vector2& Vector2::operator /=(const Vector2& other)
 {
-	*this = *this / vector;
+	*this = *this / other;
 	return *this;
 }

@@ -11,6 +11,8 @@
 
 using namespace Honey;
 
+Unique<Window> Window::Create(const WindowProperties& properties) { return CreateUnique<GlfwPlatformsWindow>(properties); }
+
 GlfwPlatformsWindow::GlfwPlatformsWindow(const WindowProperties& properties)
 {
 	HNY_PROFILE_FUNCTION();

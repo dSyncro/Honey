@@ -1,9 +1,9 @@
 #pragma once
 
+#include "Vector2.h"
+
 namespace Honey::Math {
 
-	struct Vector2;
-	struct Vector4;
 	struct Matrix4x4;
 
 	struct Vector3 {
@@ -20,7 +20,6 @@ namespace Honey::Math {
 
 		explicit Vector3(const Vector2& vector);
 		explicit Vector3(const Vector2& vector, float z);
-		explicit Vector3(const Vector4& vector);
 
 		// Shorthands
 		static const Vector3 Left;
@@ -37,8 +36,7 @@ namespace Honey::Math {
 		static const Vector3 NegativeInfinity;
 
 		// Conversion operators
-		explicit operator Vector2() const;
-		explicit operator Vector4() const;
+		explicit operator Vector2() const { return Vector2(X, Y); }
 
 		// Methods
 		Vector3& Normalize();
@@ -96,9 +94,9 @@ namespace Honey::Math {
 		Vector3& operator /=(const Vector3& vector);
 
 		// Subscript operator
-		float operator [](int index);
+		float& operator [](int index);
 		float operator [](int index) const;
-		float operator [](Axis axis);
+		float& operator [](Axis axis);
 		float operator [](Axis axis) const;
 
 		float X, Y, Z;

@@ -39,10 +39,12 @@ namespace Honey {
 		template <typename T>
 		bool HasComponent() { return _scene->_registry.has<T>(_entityID); }
 
-		operator entt::entity&() { return _entityID; }
-		operator const entt::entity&() const { return _entityID; }
+		operator entt::entity() const { return _entityID; }
 
 		operator bool() const { return _entityID != entt::null; }
+
+		bool operator ==(const Entity& other) const { return _scene == other._scene && _entityID == other._entityID; }
+		bool operator !=(const Entity& other) const { return !(*this == other); }
 
 	private:
 

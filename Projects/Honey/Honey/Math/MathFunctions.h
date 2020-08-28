@@ -175,14 +175,20 @@ namespace Honey {
 
 		// Rounding and remainder
 		static HNY_ALWAYS_INLINE float Ceil(float x) noexcept { return std::ceil(x); }
+		static HNY_ALWAYS_INLINE int CeilToInt(float x) noexcept { return (int)Ceil(x); }
 		static HNY_ALWAYS_INLINE float Floor(float x) noexcept { return std::floor(x); }
+		static HNY_ALWAYS_INLINE int FloorToInt(float x) noexcept { return (int)Floor(x); }
 		static HNY_ALWAYS_INLINE float Truncate(float x) noexcept { return std::trunc(x); }
+		static HNY_ALWAYS_INLINE int TruncateToInt(float x) noexcept { return (int)Truncate(x); }
 		static HNY_ALWAYS_INLINE float Round(float x) noexcept { return std::round(x); }
+		static HNY_ALWAYS_INLINE int RoundToInt(float x) noexcept { return (int)Round(x); }
 		static HNY_ALWAYS_INLINE float Mod(float x, float y) noexcept { return std::fmod(x, y); }
 		static HNY_ALWAYS_INLINE float Remainder(float x, float y) noexcept { return std::remainder(x, y); }
 
 		// Min - max - difference
+		static HNY_ALWAYS_INLINE int Min(int x, int y) noexcept { return std::min(x, y); }
 		static HNY_ALWAYS_INLINE float Min(float x, float y) noexcept { return std::fmin(x, y); }
+		static HNY_ALWAYS_INLINE int Max(int x, int y) noexcept { return std::max(x, y); }
 		static HNY_ALWAYS_INLINE float Max(float x, float y) noexcept { return std::fmax(x, y); }
 		static HNY_ALWAYS_INLINE float PositiveDifference(float x, float y) noexcept { return Abs(x - y); }
 

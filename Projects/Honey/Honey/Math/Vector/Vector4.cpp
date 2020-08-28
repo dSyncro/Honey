@@ -8,18 +8,11 @@
 
 using namespace Honey::Math;
 
-Vector4::Vector4(const Vector2& vector) : X(vector.X), Y(vector.Y), Z(0.0f), W(0.0f) {}
-Vector4::Vector4(const Vector3& vector) : X(vector.X), Y(vector.Y), Z(vector.Z), W(0.0f) {}
-Vector4::Vector4(const Vector3& vector, float w) : X(vector.X), Y(vector.Y), Z(vector.Z), W(w) {}
-
 const Vector4 Vector4::Zero = Vector4(0.0f);
 const Vector4 Vector4::One  = Vector4(1.0f);
 
 const Vector4 Vector4::Infinity         = Vector4(Mathf::Infinity);
 const Vector4 Vector4::NegativeInfinity = Vector4(Mathf::NegativeInfinity);
-
-Vector4::operator Vector2() const { return Vector2(*this); }
-Vector4::operator Vector3() const { return Vector3(*this); }
 
 Vector4& Vector4::Normalize()
 {
@@ -198,7 +191,7 @@ Vector4& Vector4::operator /=(const Vector4& vector)
 	return *this;
 }
 
-float Vector4::operator [](int index)
+float& Vector4::operator [](int index)
 {
 	return operator[]((Axis)index);
 }
@@ -208,7 +201,7 @@ float Vector4::operator [](int index) const
 	return operator[]((Axis)index);
 }
 
-float Vector4::operator [](Axis axis)
+float& Vector4::operator [](Axis axis)
 {
 	switch (axis)
 	{

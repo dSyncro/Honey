@@ -136,11 +136,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="EditorLayer.h" />
+    <ClInclude Include="Frames\SceneHierarchyFrame.h" />
     <ClInclude Include="Scripts.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EditorLayer.cpp" />
+    <ClCompile Include="Frames\SceneHierarchyFrame.cpp" />
     <ClCompile Include="HoneycombApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,4 +153,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project>
+</Project> 

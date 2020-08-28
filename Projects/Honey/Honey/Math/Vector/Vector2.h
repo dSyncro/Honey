@@ -1,7 +1,5 @@
 #pragma once
 
-#include <glm/glm.hpp>
-
 #include <Honey/Math/MathFunctions.h>
 
 namespace Honey::Math {
@@ -37,20 +35,6 @@ namespace Honey::Math {
 		 */
 		constexpr Vector2(float x, float y) : X(x), Y(y) {}
 
-		/**
-		 * @brief Construct Vector2 from a Vector3.
-		 * @param vector -> The vector.
-		 * @overload
-		 */
-		explicit Vector2(const Vector3& vector);
-
-		/**
-		 * @brief Construct Vector2 from a Vector4.
-		 * @param vector -> The vector.
-		 * @overload
-		 */
-		explicit Vector2(const Vector4& vector);
-
 		// Shorthands
 		
 		static const Vector2 Left;             //!< @brief Vector2(-1.0f, 0.0f)
@@ -61,16 +45,6 @@ namespace Honey::Math {
 		static const Vector2 One;              //!< @brief Vector2(1.0f, 1.0f)
 		static const Vector2 Infinity;         //!< @brief Vector2(+Infinity, +Infinity)
 		static const Vector2 NegativeInfinity; //!< @brief Vector2(-Infinity, -Infinity)
-
-		// Cast operators
-
-		// Temporary
-		operator glm::vec2() const { return glm::vec2(X, Y); }
-
-		/** @brief Convert this vector to a Vector3. */
-		explicit operator Vector3() const;
-		/** @brief Convert this vector to a Vector4. */
-		explicit operator Vector4() const;
 
 		// Methods
 
@@ -95,13 +69,13 @@ namespace Honey::Math {
 		 * @brief Check if all the components of the vector are exactly equal to the ones of another vector.
 		 * @param other -> The vector to check equality with.
 		 */
-		bool ExactlyEquals(const Vector2& other);
+		bool ExactlyEquals(const Vector2& other) const;
 
 		/**
 		 * @brief Check if all the components of the vector are almost equal to the ones of another vector.
 		 * @param other -> The vector to check equality with.
 		 */
-		bool EssentiallyEquals(const Vector2& other);
+		bool EssentiallyEquals(const Vector2& other) const;
 
 		// Const methods
 
@@ -263,13 +237,13 @@ namespace Honey::Math {
 		 * @brief Check if two vectors are approximately equal to each other.
 		 * @param other -> The vector to perform the comparison with.
 		 */
-		bool operator ==(const Vector2& other) { return Mathf::ApproximatelyEquals(X, other.X) && Mathf::ApproximatelyEquals(Y, other.Y); }
+		bool operator ==(const Vector2& other) const { return Mathf::ApproximatelyEquals(X, other.X) && Mathf::ApproximatelyEquals(Y, other.Y); }
 
 		/**
 		 * @brief Check if two vectors are not approximately equal to each other.
 		 * @param other -> The vector to perform the comparison with.
 		 */
-		bool operator !=(const Vector2& other) { return !(*this == other); }
+		bool operator !=(const Vector2& other) const { return !(*this == other); }
 
 		// Arithmetic operators 
 		
@@ -297,7 +271,7 @@ namespace Honey::Math {
 		 * @param other -> The other vector.
 		 * @return this vector - `other`.
 		 */
-		Vector2 operator -(const Vector2& other) const { return Vector2(X * other.X, Y - other.Y); }
+		Vector2 operator -(const Vector2& other) const { return Vector2(X - other.X, Y - other.Y); }
 
 		/**
 		 * @brief Multiply operator.
@@ -357,7 +331,7 @@ namespace Honey::Math {
 		 * @return this vector *= `other`.
 		 * @overload
 		 */
-		Vector2& operator *=(const Vector2& vector);
+		Vector2& operator *=(const Vector2& other);
 
 		/**
 		 * @brief Divide-self operator.
@@ -372,7 +346,7 @@ namespace Honey::Math {
 		 * @return this vector /= `other`.
 		 * @overload
 		 */
-		Vector2& operator /=(const Vector2& vector);
+		Vector2& operator /=(const Vector2& other);
 
 		// Subscript operator
 
@@ -381,7 +355,7 @@ namespace Honey::Math {
 		 * @param index -> Index of component.
 		 * @return Component at index. (returns last component if overflown)
 		 */
-		float operator [](int index) { return (Axis)index == Axis::X ? X : Y; }
+		float& operator [](int index) { return (Axis)index == Axis::X ? X : Y; }
 
 		/**
 		 * @brief Get component by index. (const version)
@@ -395,7 +369,7 @@ namespace Honey::Math {
 		 * @param axis -> Axis of component.
 		 * @return Component at `axis`;
 		 */
-		float operator [](Axis axis) { return axis == Axis::X ? X : Y; }
+		float& operator [](Axis axis) { return axis == Axis::X ? X : Y; }
 
 		/**
 		 * @brief Get component by Axis. (const version)

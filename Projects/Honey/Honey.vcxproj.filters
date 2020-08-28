@@ -262,13 +262,28 @@
     <ClInclude Include="Honey\Math\Matrix\Matrix4x4.h">
       <Filter>Honey\Math\Matrix</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Math\Point.h">
+      <Filter>Honey\Math</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Math\Quaternion.h">
       <Filter>Honey\Math</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Math\Random.h">
       <Filter>Honey\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Honey\Math\Rect.h">
+      <Filter>Honey\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Math\Size.h">
+      <Filter>Honey\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Math\Vector\TVector.h">
+      <Filter>Honey\Math\Vector</Filter>
+    </ClInclude>
     <ClInclude Include="Honey\Math\Vector\Vector2.h">
+      <Filter>Honey\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Honey\Math\Vector\Vector2Int.h">
       <Filter>Honey\Math\Vector</Filter>
     </ClInclude>
     <ClInclude Include="Honey\Math\Vector\Vector3.h">
@@ -450,6 +465,9 @@
     <ClCompile Include="Honey\Math\Vector\Vector2.cpp">
       <Filter>Honey\Math\Vector</Filter>
     </ClCompile>
+    <ClCompile Include="Honey\Math\Vector\Vector2Int.cpp">
+      <Filter>Honey\Math\Vector</Filter>
+    </ClCompile>
     <ClCompile Include="Honey\Math\Vector\Vector3.cpp">
       <Filter>Honey\Math\Vector</Filter>
     </ClCompile>
@@ -554,9 +572,6 @@
     </ClCompile>
     <ClCompile Include="Honey\Scene\SceneCamera.cpp">
       <Filter>Honey\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Honey\Window\Window.cpp">
-      <Filter>Honey\Window</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

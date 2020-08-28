@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Honey.h>
+#include "Frames/SceneHierarchyFrame.h"
 
 namespace Honey {
 
@@ -31,5 +32,7 @@ namespace Honey {
 		OrthographicCameraController _cameraController;
 
 		Math::Vector2 _viewportSize;
+
+		SceneHierarchyFrame _hierarchy;
 	};
 }

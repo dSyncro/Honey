@@ -4,7 +4,7 @@ include "./ImGui.lua"
 
 project "ThirdParty"
 
-	kind "Utility"
+	kind "None"
 
 	files 
 	{

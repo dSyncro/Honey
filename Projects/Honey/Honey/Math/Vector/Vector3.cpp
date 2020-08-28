@@ -10,7 +10,6 @@ using namespace Honey::Math;
 
 Vector3::Vector3(const Vector2& vector) : X(vector.X), Y(vector.Y), Z(0.0f) {}
 Vector3::Vector3(const Vector2& vector, float z) : X(vector.X), Y(vector.Y), Z(z) {}
-Vector3::Vector3(const Vector4& vector) : X(vector.X), Y(vector.Y), Z(vector.Z) {}
 
 const Vector3 Vector3::Left    = Vector3(-1.0f,  0.0f,  0.0f);
 const Vector3 Vector3::Right   = Vector3( 1.0f,  0.0f,  0.0f);
@@ -24,9 +23,6 @@ const Vector3 Vector3::One  = Vector3(1.0f);
 
 const Vector3 Vector3::Infinity          = Vector3(Mathf::Infinity);
 const Vector3 Vector3::NegativeInfinity  = Vector3(Mathf::NegativeInfinity);
-
-Vector3::operator Vector2() const { return Vector2(*this); }
-Vector3::operator Vector4() const { return Vector4(*this); }
 
 Vector3& Vector3::Normalize()
 {
@@ -227,7 +223,7 @@ Vector3& Vector3::operator /=(const Vector3& vector)
 	return *this;
 }
 
-float Vector3::operator [](int index)
+float& Vector3::operator [](int index)
 {
 	return operator[]((Axis)index);
 }
@@ -237,7 +233,7 @@ float Vector3::operator [](int index) const
 	return operator[]((Axis)index);
 }
 
-float Vector3::operator [](Axis axis)
+float& Vector3::operator [](Axis axis)
 {
 	switch (axis)
 	{
