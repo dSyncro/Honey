@@ -6,12 +6,12 @@
 
 using namespace Honey;
 
-Reference<Texture2D> Texture2D::Create(uint32_t width, uint32_t height)
+Reference<Texture2D> Texture2D::Create(uint32_t width, uint32_t height, PixelFormat format)
 {
 	switch (Renderer::GetAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL: return CreateReference<OpenGLTexture2D>(width, height);
+		case RendererAPI::API::OpenGL: return CreateReference<OpenGLTexture2D>(width, height, format);
 		case RendererAPI::API::DirectX: HNY_CORE_ASSERT(false, "RendererAPI::DirectX is currently not supported!"); return nullptr;
 	}
 

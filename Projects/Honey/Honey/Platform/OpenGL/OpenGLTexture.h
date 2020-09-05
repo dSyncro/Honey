@@ -8,14 +8,15 @@ namespace Honey {
 
 	public:
 
-		OpenGLTexture2D(uint32_t width, uint32_t height);
+		OpenGLTexture2D(uint32_t width, uint32_t height, PixelFormat format);
 		OpenGLTexture2D(const std::string& path);
 		virtual ~OpenGLTexture2D();
 
 		virtual uint32_t GetWidth() const override { return _width; }
 		virtual uint32_t GetHeight() const override { return _height; }
 
-		virtual void SetData(void* data, uint32_t size) override;
+		virtual void* GetRawData() override;
+		virtual void SetData(void* data, uint32_t size, const Math::Vector2Int& offset = Math::Vector2Int::Zero) override;
 
 		virtual void Bind(uint32_t slot = 0) const override;
 

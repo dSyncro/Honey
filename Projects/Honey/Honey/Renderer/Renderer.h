@@ -34,5 +34,4 @@ namespace Honey {
 
 		static Unique<SceneData> s_SceneData;
 	};
-
 }

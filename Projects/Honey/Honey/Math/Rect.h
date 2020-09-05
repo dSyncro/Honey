@@ -10,10 +10,10 @@ namespace Honey::Math
 
 		Rect() = default;
 
-		Rect(int32_t x, int32_t y, std::size_t width, std::size_t height)
+		constexpr Rect(int32_t x, int32_t y, std::size_t width, std::size_t height)
 			: Location(x, y), Dimensions(width, height) { }
 
-		Rect(Point& point, Size& size)
+		constexpr Rect(Point& point, Size& size)
 			: Location(point), Dimensions(size) { }
 
 		static Rect FromBounds(const Point& bottomLeft, const Point& topRight)

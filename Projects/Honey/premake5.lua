@@ -17,7 +17,7 @@ project "Honey"
 		"Honey/**.cpp",
 
 		-- Dependencies
-		"%{wks.location}/third-party/stb_image/**.cpp",
+		"%{wks.location}/third-party/stb/**.cpp",
 	}
 
 	defines
@@ -36,7 +36,7 @@ project "Honey"
 		"%{IncludeDir.GLAD}",
 		"%{IncludeDir.GLM}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.StbImage}",
+		"%{IncludeDir.Stb}",
 		"%{IncludeDir.EnTT}"
 	}
 
@@ -75,16 +75,16 @@ project "Honey"
 		}
 
 	filter "configurations:Debug"
-		defines "HZ_DEBUG"
+		defines "HNY_DEBUG"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "HZ_RELEASE"
+		defines "HNY_RELEASE"
 		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "HZ_DIST"
+		defines "HNY_DIST"
 		runtime "Release"
 		optimize "on"

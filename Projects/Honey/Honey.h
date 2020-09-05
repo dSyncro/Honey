@@ -37,5 +37,10 @@
 #include <Honey/Renderer/ShaderLibrary.h>
 #include <Honey/Renderer/Camera/OrthographicCameraController.h>
 
+// UI
+#include <Honey/Renderer/2D/UI/Text/Font.h>
+#include <Honey/Renderer/2D/UI/Text/FontLibrary.h>
+#include <Honey/Renderer/2D/UI/Text/FontAtlas.h>
+
 // Scene
 #include <Honey/Scene/Scene.h>

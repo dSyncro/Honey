@@ -37,6 +37,14 @@ void EditorLayer::OnAttach()
     FrameBufferSpecification specification = { 1280, 720 };
     _frameBuffer = FrameBuffer::Create(specification);
 
+	_font = Font::CreateFromFile("assets/fonts/Lato-Regular.ttf", 32);
+	_atlas = FontAtlas::Create(_font);
+	Reference<Sprite> fontAtlas = Sprite::Create(_atlas->_texture);
+	Entity fae = _activeScene->CreateEntity("FontAtlas");
+	fae.GetComponent<TransformComponent>().Position = Math::Vector3(3.0f, 3.0f, 0.0f);
+	fae.GetComponent<TransformComponent>().Scale = Math::Vector3(5.0f, 5.0f, 5.0f);
+	fae.AddComponent<SpriteRendererComponent>(fontAtlas);
+
 	_activeScene->OnPlay();
 	_hierarchy.SetContext(_activeScene);
 }

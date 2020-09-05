@@ -19,6 +19,7 @@ project "Honeycomb"
 		"%{IncludeDir.Honey}",
 		"%{IncludeDir.ThirdParty}",
 		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.Stb}",
 		"%{IncludeDir.GLM}",
 		"%{IncludeDir.EnTT}"
 	}
@@ -44,16 +45,16 @@ project "Honeycomb"
 		}
 
 	filter "configurations:Debug"
-		defines "HZ_DEBUG"
+		defines "HNY_DEBUG"
 		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "HZ_RELEASE"
+		defines "HNY_RELEASE"
 		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "HZ_DIST"
+		defines "HNY_DIST"
 		runtime "Release"
 		optimize "on"

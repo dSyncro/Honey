@@ -14,6 +14,10 @@ namespace Honey {
 
 	public:
 
+		Renderer2D() = delete;
+		Renderer2D(const Renderer2D&) = delete;
+		Renderer2D& operator =(const Renderer2D&) = delete;
+
 		struct Statistics {
 
 			uint32_t DrawCalls = 0;
@@ -65,5 +69,4 @@ namespace Honey {
 
 		static void FlushAndReset();
 	};
-
 }

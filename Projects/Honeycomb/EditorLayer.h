@@ -33,6 +33,9 @@ namespace Honey {
 
 		Math::Vector2 _viewportSize;
 
+		Reference<Font> _font;
+		Reference<FontAtlas> _atlas;
+
 		SceneHierarchyFrame _hierarchy;
 	};
 }

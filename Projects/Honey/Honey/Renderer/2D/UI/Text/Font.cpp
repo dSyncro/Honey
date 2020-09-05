@@ -1,0 +1,41 @@
+#include "Font.h"
+
+#include <filesystem>
+
+using namespace Honey;
+
+static unsigned char ttf_buffer[1 << 25];
+
+Font::Font(const std::string& path, std::size_t height)
+	: _height(height)
+{
+	// Open file
+	std::ifstream file;
+	file.open(path, std::ifstream::binary);
+
+	// Get size in bytes
+	std::size_t bytes = file.tellg();
+	file.seekg(0, std::ios::end);
+	bytes = (std::size_t)file.tellg() - bytes;
+	file.seekg(0, std::ios::beg);
+
+	// Read file
+	_ttf_buffer = new unsigned char[bytes];
+	file.read((char*)_ttf_buffer, bytes);
+
+	file.close(); // Close file
+	
+	int offset = stbtt_GetFontOffsetForIndex(_ttf_buffer, 0);
+	int success = stbtt_InitFont(&_info, _ttf_buffer, offset);
+	HNY_CORE_ASSERT(success, "Failed to Load font!");
+}
+
+Font::~Font()
+{
+	delete[] _ttf_buffer;
+}
+
+Reference<Font> Font::CreateFromFile(const std::string& path, std::size_t height)
+{
+	return CreateReference<Font>(path, height);
+}

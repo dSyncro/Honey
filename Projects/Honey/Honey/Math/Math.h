@@ -5,4 +5,5 @@
 #include "Rect.h"
 #include "Quaternion.h"
 #include "Random.h"
+#include "Span.h"
 #include "Vectors.h"

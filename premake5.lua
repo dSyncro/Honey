@@ -30,13 +30,14 @@ IncludeDir = {}
 
 IncludeDir["Honey"] = "%{wks.location}/Projects/Honey/"
 IncludeDir["ThirdParty"] = "%{wks.location}/third-party/"
-IncludeDir["spdlog"] = "%{wks.location}/third-party/spdlog/include"
-IncludeDir["GLFW"] = "%{wks.location}/third-party/glfw/include"
-IncludeDir["GLAD"] = "%{wks.location}/third-party/glad/include"
-IncludeDir["ImGui"] = "%{wks.location}/third-party/ImGui"
-IncludeDir["GLM"] = "%{wks.location}/third-party/glm"
-IncludeDir["StbImage"] = "%{wks.location}/third-party/stb_image"
-IncludeDir["EnTT"] = "%{wks.location}/third-party/entt/include"
+IncludeDir["spdlog"] = "%{wks.location}/third-party/spdlog/include/"
+IncludeDir["GLFW"] = "%{wks.location}/third-party/glfw/include/"
+IncludeDir["GLAD"] = "%{wks.location}/third-party/glad/include/"
+IncludeDir["ImGui"] = "%{wks.location}/third-party/ImGui/"
+IncludeDir["FreeType"] = "%{wks.location}/third-party/FreeType/include/"
+IncludeDir["GLM"] = "%{wks.location}/third-party/glm/"
+IncludeDir["Stb"] = "%{wks.location}/third-party/stb/"
+IncludeDir["EnTT"] = "%{wks.location}/third-party/entt/include/"
 
 group "Dependencies"
 
