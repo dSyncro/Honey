@@ -4,10 +4,7 @@
 
 using namespace Honey;
 
-static unsigned char ttf_buffer[1 << 25];
-
-Font::Font(const std::string& path, std::size_t height)
-	: _height(height)
+Font::Font(const std::string& path)
 {
 	// Open file
 	std::ifstream file;
@@ -25,6 +22,7 @@ Font::Font(const std::string& path, std::size_t height)
 
 	file.close(); // Close file
 	
+	// Init Font
 	int offset = stbtt_GetFontOffsetForIndex(_ttf_buffer, 0);
 	int success = stbtt_InitFont(&_info, _ttf_buffer, offset);
 	HNY_CORE_ASSERT(success, "Failed to Load font!");
@@ -35,7 +33,7 @@ Font::~Font()
 	delete[] _ttf_buffer;
 }
 
-Reference<Font> Font::CreateFromFile(const std::string& path, std::size_t height)
+Reference<Font> Font::CreateFromFile(const std::string& path)
 {
-	return CreateReference<Font>(path, height);
+	return CreateReference<Font>(path);
 }

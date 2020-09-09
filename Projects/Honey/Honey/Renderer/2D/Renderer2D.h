@@ -7,6 +7,7 @@
 #include <Honey/Renderer/Camera/Camera.h>
 #include <Honey/Renderer/Camera/OrthographicCamera.h>
 #include <Honey/Renderer/2D/Sprite.h>
+#include <Honey/Renderer/2D/UI/Text/FontAtlas.h>
 
 namespace Honey {
 
@@ -61,6 +62,8 @@ namespace Honey {
 		static void DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint = Color::White, const Math::Vector2& tiling = Math::Vector2::One);
 		static void DrawRotatedSprite(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint = Color::White);
 		static void DrawRotatedSprite(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint = Color::White);
+
+		static void DrawText(const Math::Vector3& position, const std::string& text, const Reference<FontAtlas>& atlas);
 
 		static void ResetStatistics();
 		static const Statistics& GetStatistics();

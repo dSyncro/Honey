@@ -13,15 +13,14 @@ namespace Honey {
 	
 	public:
 
-		Font(const std::string& path, std::size_t height);
+		Font(const std::string& path);
 		~Font();
 
-		static Reference<Font> CreateFromFile(const std::string& path, std::size_t height = 12);
+		static Reference<Font> CreateFromFile(const std::string& path);
 
 	private:
 
 		stbtt_fontinfo _info;
-		std::size_t _height;
 		unsigned char* _ttf_buffer;
 
 		friend class FontAtlas;

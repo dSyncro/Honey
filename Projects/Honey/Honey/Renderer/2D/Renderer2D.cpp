@@ -345,6 +345,18 @@ void Renderer2D::DrawRotatedSprite(const Vector3& position, float rotation, cons
 	DrawQuad(transform, sprite->Texture, sprite->UV, tint);
 }
 
+void Renderer2D::DrawText(const Vector3& position, const std::string& text, const Reference<FontAtlas>& atlas)
+{
+	const Reference<Texture2D>& texture = atlas->GetTexture();
+	Vector2 advance = Vector2::Zero;
+	for (char c : text)
+	{
+		const Glyph& glyph = atlas->GetGlyph(c);
+		DrawQuad(position + (Vector3) glyph.Bearing + (Vector3)advance, (Vector2Int)glyph.Face.Dimensions, texture, glyph.UV, Color::White);
+		advance.X += glyph.Advance;
+	}
+}
+
 void Renderer2D::ResetStatistics()
 {
 	s_Data.Stats.Reset();

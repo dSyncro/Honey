@@ -6,6 +6,7 @@
 #include <Honey/Math/Matrix/Matrix4x4.h>
 
 using namespace Honey;
+using namespace Honey::Math;
 
 void Scene::OnPlay()
 {
@@ -30,10 +31,10 @@ void Scene::OnUpdate()
 
 	_mainCamera.Reset();
 
-	auto rendererGroup = _registry.view<TransformComponent, TagComponent, CameraComponent>();
-	for (entt::entity entity : rendererGroup)
+	auto rendererView = _registry.view<TransformComponent, TagComponent, CameraComponent>();
+	for (entt::entity entity : rendererView)
 	{
-		auto [transform, tag, camera] = rendererGroup.get<TransformComponent, TagComponent, CameraComponent>(entity);
+		auto [transform, tag, camera] = rendererView.get<TransformComponent, TagComponent, CameraComponent>(entity);
 		if (tag.Tag == "Main")
 		{
 			_mainCamera.Camera = &camera.Camera;
@@ -43,13 +44,23 @@ void Scene::OnUpdate()
 
 	if (_mainCamera)
 	{
-		auto renderableGroup = _registry.view<TransformComponent, SpriteRendererComponent>();
+		auto renderableView = _registry.view<TransformComponent, SpriteRendererComponent>();
+		auto textEntityView = _registry.view<TransformComponent, TextComponent>();
+
 		Renderer2D::BeginScene(*_mainCamera.Camera, _mainCamera.Transform);
-		for (entt::entity entity : renderableGroup)
+
+		for (entt::entity entity : renderableView)
 		{
-			auto [transform, spriteRenderer] = renderableGroup.get<TransformComponent, SpriteRendererComponent>(entity);
-			Renderer2D::DrawSprite(transform.Position, (Math::Vector2)transform.Scale, spriteRenderer.Sprite, spriteRenderer.Tint);
+			auto [transform, spriteRenderer] = renderableView.get<TransformComponent, SpriteRendererComponent>(entity);
+			Renderer2D::DrawSprite(transform.Position, (Vector2)transform.Scale, spriteRenderer.Sprite, spriteRenderer.Tint);
 		}
+
+		for (entt::entity entity : textEntityView)
+		{
+			auto [transform, textComponent] = textEntityView.get<TransformComponent, TextComponent>(entity);
+			Renderer2D::DrawText(transform.Position, textComponent.Text, textComponent.Atlas);
+		}
+
 		Renderer2D::EndScene();
 	}
 }

@@ -8,7 +8,7 @@ namespace Honey::Math
 
 	struct Rect {
 
-		Rect() = default;
+		constexpr Rect() : Location(), Dimensions() {};
 
 		constexpr Rect(int32_t x, int32_t y, std::size_t width, std::size_t height)
 			: Location(x, y), Dimensions(width, height) { }
