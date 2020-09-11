@@ -68,6 +68,9 @@ namespace Honey {
 		static void ResetStatistics();
 		static const Statistics& GetStatistics();
 
+		static void BeginScreenSpace();
+		static void EndScreenSpace();
+
 	private:
 
 		static void FlushAndReset();

@@ -23,6 +23,8 @@ namespace Honey {
 		int GetDescent() const { return _descent; }
 		int GetLineGap() const { return _lineGap; }
 
+		int GetKerning(const char a, const char b);
+
 	private:
 
 		stbtt_fontinfo _info;

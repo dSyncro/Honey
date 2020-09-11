@@ -32,6 +32,25 @@ struct Renderer2DData {
 
 static Renderer2DData s_Data = Renderer2DData();
 
+static Math::Matrix4x4 WorldMatrix;
+static Reference<Shader> TextShader;
+
+void Renderer2D::BeginScreenSpace()
+{
+	FlushAndReset();
+
+	const Matrix4x4 screenSpace = Matrix4x4::Orthographic(0, 800, 600, 0, -1.0f, 1.0f);
+	TextShader->Bind();
+	TextShader->SetMat4("u_ViewProjection", screenSpace);
+}
+
+void Renderer2D::EndScreenSpace()
+{
+	FlushAndReset();
+	s_Data.StandardShader->Bind();
+	s_Data.StandardShader->SetMat4("u_ViewProjection", WorldMatrix);
+}
+
 void Renderer2D::Init()
 {
 	HNY_PROFILE_FUNCTION();
@@ -48,7 +67,7 @@ void Renderer2D::Init()
 		{ ShaderDataType::Float4, "a_Color" },
 		{ ShaderDataType::Float2, "a_TexCoord" },
 		{ ShaderDataType::Float, "a_TexIndex" },
-		{ ShaderDataType::Float, "a_TilingFactor" },
+		{ ShaderDataType::Float2, "a_Tiling" },
 		}
 	);
 
@@ -93,6 +112,9 @@ void Renderer2D::Init()
 	s_Data.StandardShader = Shader::CreateFromFile("assets/shaders/standard2D.glsl");
 	s_Data.StandardShader->Bind();
 	s_Data.StandardShader->SetIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
+	TextShader = Shader::CreateFromFile("assets/shaders/text.glsl");
+	TextShader->Bind();
+	TextShader->SetIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
 
 	// Initialize First Texture to be Standard Texture
 	s_Data.TextureSlots[0] = s_Data.StandardTexture;
@@ -101,6 +123,8 @@ void Renderer2D::Init()
 void Renderer2D::BeginScene(const Camera& camera, const Matrix4x4& transform)
 {
 	HNY_PROFILE_FUNCTION();
+
+	WorldMatrix = camera.GetProjection() * transform.Inverse();
 
 	s_Data.StandardShader->Bind();
 	s_Data.StandardShader->SetMat4("u_ViewProjection", camera.GetProjection() * transform.Inverse());
@@ -187,10 +211,10 @@ void Renderer2D::DrawQuad(const Matrix4x4& transform, const Reference<Texture2D>
 
 	if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices) FlushAndReset();
 
-	uint32_t slot = 0;
-	for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++)
+	int slot = 0;
+	for (int i = 1; i < s_Data.TextureSlotIndex; i++)
 	{
-		if (*texture.get() != *s_Data.TextureSlots[i].get()) continue;
+		if (*texture != *s_Data.TextureSlots[i]) continue;
 
 		slot = i;
 		break;
@@ -207,7 +231,13 @@ void Renderer2D::DrawQuad(const Matrix4x4& transform, const Reference<Texture2D>
 	for (uint32_t i = 0; i < Quad::VertexCount; i++)
 	{
 		Quad::Vertex& vertex = s_Data.QuadBufferPtr->Vertices[i];
-		vertex.Set(transform * Quad::VertexPositions[i], tint, texCoords[i], (float)slot);
+		static constexpr std::array<Vector3, 4> vpos = {
+			Vector3(0.0f, 0.0f, 0.0f),
+			Vector3(1.0f, 0.0f, 0.0f),
+			Vector3(1.0f, 1.0f, 0.0f),
+			Vector3(0.0f,  1.0f, 0.0f)
+		};
+		vertex.Set(transform * vpos[i], tint, texCoords[i], (float)slot);
 	}
 	s_Data.QuadBufferPtr++;
 
@@ -347,27 +377,24 @@ void Renderer2D::DrawRotatedSprite(const Vector3& position, float rotation, cons
 
 void Renderer2D::DrawText(const Vector3& position, const std::string& text, const Reference<FontAtlas>& atlas)
 {
-	const Matrix4x4 screenSpace = Matrix4x4::Orthographic(0, 800, 600, 0, -1.0f, 1.0f);
-	s_Data.StandardShader->SetMat4("u_ViewProjection", screenSpace);
 	const Reference<Texture2D>& texture = atlas->GetTexture();
 
 	float currentPoint = 0.0f;
 	float baseline = atlas->GetScaledAscent();
 	DrawQuad(Vector2(0, baseline), Vector2(2000, 1), Color::Yellow);
-	for (char c : text)
+	for (std::size_t i = 0; i < text.length(); i++)
 	{
-		const Glyph& glyph = atlas->GetGlyph(c);
+		int kerning = 0;
+		if (i + 1 < text.length())
+			kerning = atlas->GetFont()->GetKerning(text[i], text[i + 1]) * atlas->GetScaleFactor();
 
-		float d3d_bias = true ? 0 : -0.5f;
+		const Glyph& glyph = atlas->GetGlyph(text[i]);
 
-		float rounded_x = Mathf::Floor((currentPoint + glyph.ClassicBearing.X) + 0.5f) + d3d_bias;
-		float rounded_y = Mathf::Floor((baseline + glyph.ClassicBearing.Y) + 0.5f) + d3d_bias;
-
-		Vector2 quadPosition = Vector2(rounded_x, rounded_y);
+		Vector2 quadPosition = Vector2(currentPoint + kerning, baseline) + glyph.Offset;
 		Vector2 quadScale = (Vector2Int)glyph.BoundingBox.GetSize();
 
 		currentPoint += glyph.Advance;
-		DrawQuad(quadPosition - Vector2(0, quadScale.Y / 2), quadScale, texture, glyph.UV, Color::White);
+		DrawQuad(quadPosition, quadScale, texture, glyph.UV, Color::White);
 	}
 }
 

@@ -14,15 +14,15 @@ namespace Honey {
 			Math::Vector3 Position;
 			Honey::Color Color;
 			Math::Vector2 TexCoord;
-			float TextureIndex;
-			float TilingFactor;
+			int TextureIndex;
+			Math::Vector2 Tiling;
 
 			void Set(
 				const Math::Vector3& position = Math::Vector3::Zero, 
 				const Honey::Color& color = Color::White, 
 				const Math::Vector2& texCoord = Math::Vector2::Zero, 
-				float textureIndex = 0.0f,
-				float tilingFactor = 1.0f
+				int textureIndex = 0,
+				const Math::Vector2& tiling = Math::Vector2::One
 			);
 
 		};

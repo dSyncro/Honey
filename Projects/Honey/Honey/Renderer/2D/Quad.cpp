@@ -5,13 +5,13 @@
 using namespace Honey;
 using namespace Honey::Math;
 
-void Quad::Vertex::Set(const Vector3& position, const Honey::Color& color, const Vector2& texCoord, float textureIndex, float tilingFactor)
+void Quad::Vertex::Set(const Vector3& position, const Honey::Color& color, const Vector2& texCoord, int textureIndex, const Vector2& tiling)
 {
 	Position = position;
 	Color = color;
 	TexCoord = texCoord;
 	TextureIndex = textureIndex;
-	TilingFactor = tilingFactor;
+	Tiling = tiling;
 }
 
 Quad::Quad(const Vertex& first, const Vertex& second, const Vertex& third, const Vertex& forth)

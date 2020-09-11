@@ -59,13 +59,12 @@ void FontAtlas::Rebuild()
 		const stbtt_bakedchar* bc = bakedChars + realIndex;
 		Glyph& g = _glyphs[realIndex];
 
-		g.Bearing = Vector2(bc->xoff, bc->yoff);
-
 		char c = g.Character = (char)i;
 		float ipw = 1.0f / (float)_texture->GetWidth();
 		float iph = 1.0f / (float)_texture->GetHeight();
 
-		g.BoundingBox = Math::Rect::FromBounds(Point(bc->x0, bc->y0), Point(bc->x1, bc->y1));
+		g.Offset = Vector2(bc->xoff, bc->yoff);
+		g.BoundingBox = Rect::FromBounds(Point(bc->x0, bc->y0), Point(bc->x1, bc->y1));
 
 		float uv_x0, uv_y0, uv_x1, uv_y1;
 		uv_x0 = bc->x0 * ipw;
@@ -81,16 +80,6 @@ void FontAtlas::Rebuild()
 		};
 
 		g.Advance = bc->xadvance;
-
-		int x0, y0, x1, y1;
-		stbtt_GetGlyphBitmapBox(&_font->_info, i, _scaleFactor, _scaleFactor, &x0, &y0, &x1, &y1);
-		g.ClassicBearing.Y = x0;
-
-		int lb, adv;
-		stbtt_GetGlyphHMetrics(&_font->_info, i, &adv, &lb);
-		g.ClassicBearing.X = lb * _scaleFactor;
-
-		g.ClassicAdv = adv * _scaleFactor;
 	}
 
 	delete[] bakedChars;

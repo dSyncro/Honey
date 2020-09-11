@@ -44,3 +44,8 @@ Reference<Font> Font::CreateFromFile(const std::string& path)
 {
 	return CreateReference<Font>(path);
 }
+
+int Font::GetKerning(const char a, const char b)
+{
+	return stbtt_GetGlyphKernAdvance(&_info, a, b);
+}

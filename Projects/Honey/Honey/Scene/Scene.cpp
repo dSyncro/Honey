@@ -55,11 +55,13 @@ void Scene::OnUpdate()
 			Renderer2D::DrawSprite(transform.Position, (Vector2)transform.Scale, spriteRenderer.Sprite, spriteRenderer.Tint);
 		}
 
+		Renderer2D::BeginScreenSpace();
 		for (entt::entity entity : textEntityView)
 		{
 			auto [transform, textComponent] = textEntityView.get<TransformComponent, TextComponent>(entity);
 			Renderer2D::DrawText(transform.Position, textComponent.Text, textComponent.Atlas);
 		}
+		Renderer2D::EndScreenSpace();
 
 		Renderer2D::EndScene();
 	}

@@ -79,10 +79,6 @@ void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 			case ShaderDataType::Float2:
 			case ShaderDataType::Float3:
 			case ShaderDataType::Float4:
-			case ShaderDataType::Int:
-			case ShaderDataType::Int2:
-			case ShaderDataType::Int3:
-			case ShaderDataType::Int4:
 			case ShaderDataType::Bool:
 			{
 				glEnableVertexAttribArray(_vertexBufferIndex);
@@ -95,6 +91,23 @@ void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 				_vertexBufferIndex++;
 				break;
 			}
+
+			case ShaderDataType::Int:
+			case ShaderDataType::Int2:
+			case ShaderDataType::Int3:
+			case ShaderDataType::Int4:
+			{
+				glEnableVertexAttribArray(_vertexBufferIndex);
+				glVertexAttribIPointer(_vertexBufferIndex,
+					e.GetComponentCount(),
+					ShaderToOpenGLDataType(e.Type),
+					//e.IsNormalized ? GL_TRUE : GL_FALSE,
+					layout.GetStride(),
+					(const void*)(uintptr_t)e.Offset);
+				_vertexBufferIndex++;
+				break;
+			}
+
 			case ShaderDataType::Mat3:
 			case ShaderDataType::Mat4:
 			{
