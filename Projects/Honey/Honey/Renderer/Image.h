@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cstddef>
+#include <stb_image_write.h>
+
 #include <Honey/Math/Math.h>
 
 namespace Honey {
@@ -28,6 +30,8 @@ namespace Honey {
 		std::size_t GetStride() const { return _width * _channels; }
 
 		Math::Size GetSize() const { return Math::Size(_width, _height); }
+
+		void WriteToPNG(const std::string& filename) const;
 
 	private:
 

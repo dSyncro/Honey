@@ -41,6 +41,11 @@ Reference<Image> Image::CreateFromFile(const std::string& path)
 	return image;
 }
 
+void Image::WriteToPNG(const std::string& filename) const
+{
+	stbi_write_png(filename.c_str(), (int)_width, (int)_height, 1, _bitmap, _width * _channels);
+}
+
 void Image::Free()
 {
 	if (_bitmap) delete[] _bitmap;

@@ -8,13 +8,13 @@ namespace Honey::Math
 
 	struct Rect {
 
-		constexpr Rect() : Location(), Dimensions() {};
+		Rect() : BottomLeft(), TopRight() {};
 
-		constexpr Rect(int32_t x, int32_t y, std::size_t width, std::size_t height)
-			: Location(x, y), Dimensions(width, height) { }
+		Rect(int32_t x, int32_t y, std::size_t width, std::size_t height)
+			: BottomLeft(Point(x, y)), TopRight(Point(x + width,y + height)) { }
 
-		constexpr Rect(Point& point, Size& size)
-			: Location(point), Dimensions(size) { }
+		Rect(const Point& point, const Size& size)
+			: BottomLeft(point), TopRight(point + Point(size.Width, size.Height)) { }
 
 		static Rect FromBounds(const Point& bottomLeft, const Point& topRight)
 		{
@@ -36,25 +36,19 @@ namespace Honey::Math
 
 		static bool Intersect(const Rect& a, const Rect& b)
 		{
-			return (a.X <= (b.X + b.Width) && (a.X + a.Width) >= b.X) &&
-				(a.Y <= (b.Y + b.Height) && (a.Y + a.Height) >= b.Y);
+			return (a.BottomLeft.X <= b.TopRight.X && a.TopRight.X >= b.BottomLeft.X) &&
+				(a.BottomLeft.Y <= b.TopRight.Y && a.TopRight.Y >= b.BottomLeft.Y);
 		}
 
-		union {
-			struct {
-				int32_t X;
-				int32_t Y;
-			};
-			Point Location;
-		};
+		std::size_t GetWidth() const { return TopRight.X - BottomLeft.X; }
+		std::size_t GetHeight() const { return TopRight.Y - BottomLeft.Y; }
+		Math::Size GetSize() const { return Math::Size(GetWidth(), GetHeight()); }
 
-		union {
-			struct {
-				std::size_t Width;
-				std::size_t Height;
-			};
-			Size Dimensions;
-		};
+		Point GetBottomRight() const { return Point(TopRight.X, BottomLeft.Y); }
+		Point GetTopLeft() const { return Point(BottomLeft.X, TopRight.Y); }
+
+		Point BottomLeft;
+		Point TopRight;
 
 	};
 

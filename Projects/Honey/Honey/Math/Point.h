@@ -19,8 +19,8 @@ namespace Honey::Math {
 		int32_t X;
 		int32_t Y;
 
-		Point operator +(const Point& other) { return Point(X + other.X, Y + other.Y); }
-		Point operator -(const Point& other) { return Point(X - other.X, Y - other.Y); }
+		Point operator +(const Point& other) const { return Point(X + other.X, Y + other.Y); }
+		Point operator -(const Point& other) const { return Point(X - other.X, Y - other.Y); }
 
 		Point& operator +=(const Point& other) { return (*this = *this + other); }
 		Point& operator -=(const Point& other) { return (*this = *this - other); }
@@ -28,5 +28,4 @@ namespace Honey::Math {
 		explicit operator Vector2Int() const { return Vector2Int(X, Y); }
 
 	};
-
 }

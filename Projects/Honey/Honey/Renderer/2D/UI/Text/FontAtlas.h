@@ -3,8 +3,6 @@
 #include "Font.h"
 #include "Glyph.h"
 
-#include <stb_image_write.h>
-
 #include <Honey/Core/Assertion.h>
 #include <Honey/Renderer/Texture.h>
 #include <Honey/Renderer/Image.h>
@@ -23,11 +21,7 @@ namespace Honey {
 
 		void Rebuild();
 
-		void WriteToFile(const std::string& filename)
-		{
-			stbi_write_png(filename.c_str(), (int)_bitmapSize.Width, (int)_bitmapSize.Height, 1, _bitmap->GetRawBitmap(), (int)_bitmapSize.Width);
-		}
-
+		std::size_t GetFontHeight() const { return _fontHeight; }
 		void SetFontHeight(std::size_t height) { _fontHeight = height; _isDirty = true; }
 
 		void SetCharset(const Math::Span& range) { _charset = range; _isDirty = true; }
@@ -41,7 +35,12 @@ namespace Honey {
 
 		std::size_t GetGlyphCount() { return _charset.Length; }
 
+		float GetScaleFactor() const { return _scaleFactor; }
+		float GetScaledAscent() const { return _font->_ascent * _scaleFactor; }
+		float GetScaledDescent() const { return _font->_descent * _scaleFactor; }
+
 		const Reference<Texture2D>& GetTexture() const { return _texture; }
+		const Reference<Font>& GetFont() const { return _font; }
 
 		bool IsValid() const { return _font != nullptr; }
 
@@ -58,13 +57,8 @@ namespace Honey {
 
 		Reference<Font> _font;
 		std::size_t _fontHeight;
-
-		Math::Size _bitmapSize = Math::Size(512, 512);
+		float _scaleFactor;
 		Math::Span _charset;
-
-		int _ascent = 0;
-		int _descent = 0;
-		int _lineGap = 0;
 
 		Glyph* _glyphs = nullptr;
 

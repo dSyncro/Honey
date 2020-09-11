@@ -347,13 +347,27 @@ void Renderer2D::DrawRotatedSprite(const Vector3& position, float rotation, cons
 
 void Renderer2D::DrawText(const Vector3& position, const std::string& text, const Reference<FontAtlas>& atlas)
 {
+	const Matrix4x4 screenSpace = Matrix4x4::Orthographic(0, 800, 600, 0, -1.0f, 1.0f);
+	s_Data.StandardShader->SetMat4("u_ViewProjection", screenSpace);
 	const Reference<Texture2D>& texture = atlas->GetTexture();
-	Vector2 advance = Vector2::Zero;
+
+	float currentPoint = 0.0f;
+	float baseline = atlas->GetScaledAscent();
+	DrawQuad(Vector2(0, baseline), Vector2(2000, 1), Color::Yellow);
 	for (char c : text)
 	{
 		const Glyph& glyph = atlas->GetGlyph(c);
-		DrawQuad(position + (Vector3) glyph.Bearing + (Vector3)advance, (Vector2Int)glyph.Face.Dimensions, texture, glyph.UV, Color::White);
-		advance.X += glyph.Advance;
+
+		float d3d_bias = true ? 0 : -0.5f;
+
+		float rounded_x = Mathf::Floor((currentPoint + glyph.ClassicBearing.X) + 0.5f) + d3d_bias;
+		float rounded_y = Mathf::Floor((baseline + glyph.ClassicBearing.Y) + 0.5f) + d3d_bias;
+
+		Vector2 quadPosition = Vector2(rounded_x, rounded_y);
+		Vector2 quadScale = (Vector2Int)glyph.BoundingBox.GetSize();
+
+		currentPoint += glyph.Advance;
+		DrawQuad(quadPosition - Vector2(0, quadScale.Y / 2), quadScale, texture, glyph.UV, Color::White);
 	}
 }
 

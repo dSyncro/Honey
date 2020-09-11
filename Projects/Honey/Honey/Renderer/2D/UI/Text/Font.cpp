@@ -26,6 +26,13 @@ Font::Font(const std::string& path)
 	int offset = stbtt_GetFontOffsetForIndex(_ttf_buffer, 0);
 	int success = stbtt_InitFont(&_info, _ttf_buffer, offset);
 	HNY_CORE_ASSERT(success, "Failed to Load font!");
+
+	int ascent, descent, lineGap;
+	stbtt_GetFontVMetrics(&_info, &ascent, &descent, &lineGap);
+
+	_ascent = ascent;
+	_descent = descent;
+	_lineGap = lineGap;
 }
 
 Font::~Font()

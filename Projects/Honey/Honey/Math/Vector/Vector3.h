@@ -75,7 +75,6 @@ namespace Honey::Math {
 		bool operator !=(const Vector3& other) { return !(*this == other); }
 
 		// Arithmetic operators
-		Vector3 operator +() const { return *this; }
 		Vector3 operator -() const { return Vector3(-X, -Y, -Z); }
 		Vector3 operator +(const Vector3& other) const { return Vector3(X + other.X, Y + other.Y, Z + other.Z); }
 		Vector3 operator -(const Vector3& other) const { return Vector3(X * other.X, Y - other.Y, Z - other.Z); }
