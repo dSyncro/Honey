@@ -40,14 +40,12 @@ void Renderer2D::BeginScreenSpace()
 	FlushAndReset();
 
 	const Matrix4x4 screenSpace = Matrix4x4::Orthographic(0, 800, 600, 0, -1.0f, 1.0f);
-	TextShader->Bind();
 	TextShader->SetMat4("u_ViewProjection", screenSpace);
 }
 
 void Renderer2D::EndScreenSpace()
 {
 	FlushAndReset();
-	s_Data.StandardShader->Bind();
 	s_Data.StandardShader->SetMat4("u_ViewProjection", WorldMatrix);
 }
 
@@ -63,11 +61,11 @@ void Renderer2D::Init()
 
 	// Set Vertex Buffer Layout
 	s_Data.QuadVertexBuffer->SetLayout({
-		{ ShaderDataType::Float3, "a_Position" },
-		{ ShaderDataType::Float4, "a_Color" },
-		{ ShaderDataType::Float2, "a_TexCoord" },
+		{ ShaderDataType::Vector3, "a_Position" },
+		{ ShaderDataType::Vector4, "a_Color" },
+		{ ShaderDataType::Vector2, "a_TexCoord" },
 		{ ShaderDataType::Float, "a_TexIndex" },
-		{ ShaderDataType::Float2, "a_Tiling" },
+		{ ShaderDataType::Vector2, "a_Tiling" },
 		}
 	);
 
@@ -135,8 +133,6 @@ void Renderer2D::BeginScene(const Camera& camera, const Matrix4x4& transform)
 void Renderer2D::BeginScene(const OrthographicCamera& camera)
 {
 	HNY_PROFILE_FUNCTION();
-
-	s_Data.StandardShader->Bind();
 	s_Data.StandardShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 
 	NewBatch();
@@ -166,7 +162,7 @@ void Renderer2D::Flush()
 
 	// Bind textures
 	for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
-		s_Data.TextureSlots[i]->Bind(i);
+		s_Data.TextureSlots[i]->BindToSlot(i);
 
 	RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
 	s_Data.Stats.DrawCalls++;
@@ -212,7 +208,7 @@ void Renderer2D::DrawQuad(const Matrix4x4& transform, const Reference<Texture2D>
 	if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices) FlushAndReset();
 
 	int slot = 0;
-	for (int i = 1; i < s_Data.TextureSlotIndex; i++)
+	for (int i = 1; i < (int)s_Data.TextureSlotIndex; i++)
 	{
 		if (*texture != *s_Data.TextureSlots[i]) continue;
 
@@ -237,7 +233,7 @@ void Renderer2D::DrawQuad(const Matrix4x4& transform, const Reference<Texture2D>
 			Vector3(1.0f, 1.0f, 0.0f),
 			Vector3(0.0f,  1.0f, 0.0f)
 		};
-		vertex.Set(transform * vpos[i], tint, texCoords[i], (float)slot);
+		vertex.Set(transform * vpos[i], tint, texCoords[i], slot);
 	}
 	s_Data.QuadBufferPtr++;
 
@@ -386,7 +382,8 @@ void Renderer2D::DrawText(const Vector3& position, const std::string& text, cons
 	{
 		int kerning = 0;
 		if (i + 1 < text.length())
-			kerning = atlas->GetFont()->GetKerning(text[i], text[i + 1]) * atlas->GetScaleFactor();
+			kerning = atlas->GetFont()->GetKerning(text[i], text[i + 1]) 
+			* Mathf::RoundToInt(atlas->GetScaleFactor());
 
 		const Glyph& glyph = atlas->GetGlyph(text[i]);
 

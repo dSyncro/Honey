@@ -2,26 +2,30 @@
 
 using namespace Honey;
 
+#include <Honey/Core/Profiling.h>
+
 extern "C" {
 #include <glad/glad.h>
 }
+
+uint32_t OpenGLVertexArray::s_Bound = 0;
 
 static GLenum ShaderToOpenGLDataType(ShaderDataType type)
 {
 	switch (type)
 	{
 		case ShaderDataType::Float:
-		case ShaderDataType::Float2:
-		case ShaderDataType::Float3:
-		case ShaderDataType::Float4:
-		case ShaderDataType::Mat3:
-		case ShaderDataType::Mat4:
+		case ShaderDataType::Vector2:
+		case ShaderDataType::Vector3:
+		case ShaderDataType::Vector4:
+		case ShaderDataType::Matrix3:
+		case ShaderDataType::Matrix4:
 			return GL_FLOAT;
 
 		case ShaderDataType::Int:
-		case ShaderDataType::Int2:
-		case ShaderDataType::Int3:
-		case ShaderDataType::Int4:
+		case ShaderDataType::Vector2Int:
+		case ShaderDataType::Vector3Int:
+		case ShaderDataType::Vector4Int:
 			return GL_INT;
 
 		case ShaderDataType::Bool:
@@ -50,14 +54,25 @@ void OpenGLVertexArray::Bind() const
 {
 	HNY_PROFILE_FUNCTION();
 
+	if (s_Bound == _rendererID) return;
+
 	glBindVertexArray(_rendererID);
+	s_Bound = _rendererID;
 }
 
 void OpenGLVertexArray::Unbind() const
 {
 	HNY_PROFILE_FUNCTION();
 
+	if (s_Bound != _rendererID) return;
+
 	glBindVertexArray(0);
+	s_Bound = 0;
+}
+
+bool OpenGLVertexArray::IsBound() const
+{
+	return s_Bound == _rendererID;
 }
 
 void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
@@ -73,15 +88,15 @@ void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 	const BufferLayout& layout = buffer->GetLayout();
 	for (const BufferElement& e : layout)
 	{
+		glEnableVertexAttribArray(_vertexBufferIndex);
 		switch (e.Type)
 		{
 			case ShaderDataType::Float:
-			case ShaderDataType::Float2:
-			case ShaderDataType::Float3:
-			case ShaderDataType::Float4:
+			case ShaderDataType::Vector2:
+			case ShaderDataType::Vector3:
+			case ShaderDataType::Vector4:
 			case ShaderDataType::Bool:
 			{
-				glEnableVertexAttribArray(_vertexBufferIndex);
 				glVertexAttribPointer(_vertexBufferIndex,
 					e.GetComponentCount(),
 					ShaderToOpenGLDataType(e.Type),
@@ -93,28 +108,25 @@ void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 			}
 
 			case ShaderDataType::Int:
-			case ShaderDataType::Int2:
-			case ShaderDataType::Int3:
-			case ShaderDataType::Int4:
+			case ShaderDataType::Vector2Int:
+			case ShaderDataType::Vector3Int:
+			case ShaderDataType::Vector4Int:
 			{
-				glEnableVertexAttribArray(_vertexBufferIndex);
 				glVertexAttribIPointer(_vertexBufferIndex,
 					e.GetComponentCount(),
 					ShaderToOpenGLDataType(e.Type),
-					//e.IsNormalized ? GL_TRUE : GL_FALSE,
 					layout.GetStride(),
 					(const void*)(uintptr_t)e.Offset);
 				_vertexBufferIndex++;
 				break;
 			}
 
-			case ShaderDataType::Mat3:
-			case ShaderDataType::Mat4:
+			case ShaderDataType::Matrix3:
+			case ShaderDataType::Matrix4:
 			{
 				uint8_t count = e.GetComponentCount();
 				for (uint8_t i = 0; i < count; i++)
 				{
-					glEnableVertexAttribArray(_vertexBufferIndex);
 					glVertexAttribPointer(_vertexBufferIndex,
 						count,
 						ShaderToOpenGLDataType(e.Type),
@@ -126,6 +138,7 @@ void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 				}
 				break;
 			}
+
 			default: HNY_CORE_ASSERT(false, "Unknown ShaderDataType!");
 		}
 	}
@@ -138,7 +151,7 @@ void OpenGLVertexArray::SetIndexBuffer(const Reference<IndexBuffer>& buffer)
 	HNY_PROFILE_FUNCTION();
 
 	glBindVertexArray(_rendererID);
-	buffer->Bind();
 
+	buffer->Bind();
 	_indexBuffer = buffer;
 }

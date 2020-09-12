@@ -1,20 +1,16 @@
 #pragma once
 
-#include <cstdint>
-
-#include <Honey/Core.h>
+#include <Honey/Core/IBindable.h>
+#include <Honey/Core/MemoryManagement.h>
 #include <Honey/Renderer/Buffers/BufferLayout.h>
 
 namespace Honey {
 
-	class VertexBuffer {
+	class VertexBuffer : public IBindable {
 
 	public:
 
 		virtual ~VertexBuffer() = default;
-
-		virtual void Bind() const = 0;
-		virtual void Unbind() const = 0;
 
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 		virtual const BufferLayout& GetLayout() const = 0;

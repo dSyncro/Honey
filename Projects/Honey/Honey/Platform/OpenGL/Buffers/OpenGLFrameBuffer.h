@@ -16,6 +16,7 @@ namespace Honey {
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
+		virtual bool IsBound() const override;
 		virtual uint32_t GetColorAttachmentRendererID() const override { return _colorAttachment; }
 
 		virtual const FrameBufferSpecification& GetSpecification() const override { return _specification; }
@@ -28,6 +29,7 @@ namespace Honey {
 		uint32_t _rendererID = 0;
 		uint32_t _colorAttachment = 0, _depthAttachment = 0;
 
+		static uint32_t s_Bound;
 	};
 
 }

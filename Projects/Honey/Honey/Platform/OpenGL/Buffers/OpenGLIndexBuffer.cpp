@@ -6,6 +6,8 @@ extern "C" {
 
 using namespace Honey;
 
+uint32_t OpenGLIndexBuffer::s_Bound = 0;
+
 OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count) : _count(count)
 {
 	glGenBuffers(1, &_rendererID);
@@ -20,10 +22,21 @@ OpenGLIndexBuffer::~OpenGLIndexBuffer()
 
 void OpenGLIndexBuffer::Bind() const
 {
+	if (s_Bound == _rendererID) return;
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _rendererID);
+	s_Bound = _rendererID;
 }
 
 void OpenGLIndexBuffer::Unbind() const
 {
+	if (s_Bound != _rendererID) return;
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	s_Bound = 0;
+}
+
+bool OpenGLIndexBuffer::IsBound() const
+{
+	return s_Bound == _rendererID;
 }

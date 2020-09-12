@@ -2,21 +2,19 @@
 
 #include <string>
 
-#include <Honey/Math/Matrix/Matrix4x4.h>
+#include <Honey/Core/IBindable.h>
 #include <Honey/Core/MemoryManagement.h>
+#include <Honey/Math/Matrix/Matrix4x4.h>
 
 #include <glm/glm.hpp>
 
 namespace Honey {
 
-	class Shader {
+	class Shader : public IBindable {
 
 	public:
 
 		virtual ~Shader() = default;
-
-		virtual void Bind() const = 0;
-		virtual void Unbind() const = 0;
 
 		virtual void SetInt(const std::string& name, int value) = 0;
 		virtual void SetIntArray(const std::string& name, int* values, uint32_t count) = 0;

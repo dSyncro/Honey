@@ -13,6 +13,7 @@ namespace Honey {
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
+		virtual bool IsBound() const override;
 
 		virtual void AddVertexBuffer(const Reference<VertexBuffer>& buffer) override;
 		virtual void SetIndexBuffer(const Reference<IndexBuffer>& buffer) override;
@@ -26,6 +27,8 @@ namespace Honey {
 		Reference<IndexBuffer> _indexBuffer;
 
 		uint32_t _rendererID, _vertexBufferIndex = 0;
+		
+		static uint32_t s_Bound;
 	};
 
 }

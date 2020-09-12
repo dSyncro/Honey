@@ -14,6 +14,8 @@ extern "C" {
 using namespace Honey;
 using namespace Honey::Math;
 
+uint32_t OpenGLShader::s_Bound = 0;
+
 static GLenum ShaderTypeFromString(const std::string& type)
 {
 	if (type == "vertex")
@@ -34,7 +36,7 @@ std::string OpenGLShader::ReadFile(const std::string& path)
 	if (file)
 	{
 		file.seekg(0, std::ios::end);
-		size_t size = file.tellg();
+		std::streampos size = file.tellg();
 		if (size != -1)
 		{
 			result.resize(size);
@@ -206,72 +208,103 @@ void OpenGLShader::Bind() const
 {
 	HNY_PROFILE_FUNCTION();
 
+	if (s_Bound == _rendererID) return;
+
 	glUseProgram(_rendererID);
+	s_Bound = _rendererID;
 }
 
 void OpenGLShader::Unbind() const
 {
 	HNY_PROFILE_FUNCTION();
 
+	if (s_Bound != _rendererID) return;
+
 	glUseProgram(0);
+	s_Bound = 0;
+}
+
+bool OpenGLShader::IsBound() const
+{
+	return s_Bound == _rendererID;
 }
 
 void OpenGLShader::SetInt(const std::string& name, int value)
 {
+	this->Bind();
+
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform1i(id, value);
 }
 
 void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t count)
 {
+	this->Bind();
+
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform1iv(id, count, values);
 }
 
 void OpenGLShader::SetFloat(const std::string& name, float value)
 {
+	this->Bind();
+
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform1f(id, value);
 }
 
 void OpenGLShader::SetVec2(const std::string& name, const glm::vec2& value)
 {
+	this->Bind();
+
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform2f(id, value.x, value.y);
 }
 
 void OpenGLShader::SetVec3(const std::string& name, const glm::vec3& value)
 {
+	this->Bind();
+
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform3f(id, value.x, value.y, value.z);
 }
 
 void OpenGLShader::SetVec4(const std::string& name, const glm::vec4& value)
 {
+	this->Bind();
+
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform4f(id, value.x, value.y, value.z, value.w);
 }
 
 void OpenGLShader::SetMat2(const std::string& name, const glm::mat2& matrix)
 {
+	this->Bind();
+
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniformMatrix2fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)
 {
+	this->Bind();
+
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniformMatrix3fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)
 {
+	this->Bind();
+
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 void OpenGLShader::SetMat4(const std::string& name, const Matrix4x4& matrix)
 {
+	this->Bind();
+
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniformMatrix4fv(id, 1, GL_TRUE, &matrix.Elements[0]);
 }

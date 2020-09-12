@@ -65,12 +65,12 @@ static Texture::PixelFormat PixelFormatFromChannels(std::size_t channels, bool r
 	{
 		case 1: return Texture::PixelFormat::R;
 		case 2: return Texture::PixelFormat::RG;
-		case 3: return !reverse ? Texture::PixelFormat::RGB : Texture::PixelFormat::BGR;
-		case 4: default: return !reverse ? Texture::PixelFormat::RGBA : Texture::PixelFormat::BGRA;
+		case 3: return reverse ? Texture::PixelFormat::BGR : Texture::PixelFormat::RGB;
+		case 4: default: return reverse ? Texture::PixelFormat::BGRA : Texture::PixelFormat::RGBA;
 	}
 }
 
-OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height, PixelFormat format)
+OpenGLTexture2D::OpenGLTexture2D(std::size_t width, std::size_t height, PixelFormat format)
 	: _width(width), _height(height)
 {
 	HNY_PROFILE_FUNCTION();
@@ -140,7 +140,7 @@ void* OpenGLTexture2D::GetRawData()
 	return data;
 }
 
-void OpenGLTexture2D::SetData(void* data, uint32_t size, const Vector2Int& offset)
+void OpenGLTexture2D::SetData(void* data, std::size_t size, const Vector2Int& offset)
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -149,7 +149,7 @@ void OpenGLTexture2D::SetData(void* data, uint32_t size, const Vector2Int& offse
 	glTextureSubImage2D(_rendererID, 0, offset.X, offset.Y, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data);
 }
 
-void OpenGLTexture2D::Bind(uint32_t slot) const
+void OpenGLTexture2D::BindToSlot(uint32_t slot) const
 {
 	HNY_PROFILE_FUNCTION();
 

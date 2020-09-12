@@ -5,6 +5,7 @@ extern "C" {
 }
 
 using namespace Honey;
+using namespace Honey::Math;
 
 void OpenGLMessageCallback(
 	unsigned source,
@@ -40,11 +41,8 @@ void OpenGLRendererAPI::Init()
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-}
 
-void OpenGLRendererAPI::SetClearColor(const Color& color)
-{
-	glClearColor(color.R, color.G, color.B, color.A);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void OpenGLRendererAPI::Clear() const
@@ -52,7 +50,17 @@ void OpenGLRendererAPI::Clear() const
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void OpenGLRendererAPI::SetViewport(Math::Vector2 location, Math::Vector2 size)
+void OpenGLRendererAPI::ClearDepthBuffer() const
+{
+	glClear(GL_DEPTH_BUFFER_BIT);
+}
+
+void OpenGLRendererAPI::SetClearColor(const Color& color)
+{
+	glClearColor(color.R, color.G, color.B, color.A);
+}
+
+void OpenGLRendererAPI::SetViewport(Vector2 location, Vector2 size)
 {
 	glViewport((uint32_t)location.X, (uint32_t)location.Y, (uint32_t)size.X, (uint32_t)size.Y);
 }

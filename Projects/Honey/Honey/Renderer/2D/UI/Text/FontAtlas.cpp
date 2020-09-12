@@ -36,7 +36,7 @@ void FontAtlas::Rebuild()
 
 	stbtt_BakeFontBitmap(
 		_font->_info.data,
-		0, _fontHeight,
+		0, (float)_fontHeight,
 		(unsigned char*)bitmap->GetRawBitmap(),
 		bitmap->GetWidth(), bitmap->GetHeight(),
 		_charset.Start, _charset.Length,
@@ -50,7 +50,7 @@ void FontAtlas::Rebuild()
 	 _bitmap->WriteToPNG("Test.png");
 
 	// Get font metrics
-	_scaleFactor = stbtt_ScaleForPixelHeight(&_font->_info, _fontHeight);
+	_scaleFactor = stbtt_ScaleForPixelHeight(&_font->_info, (float)_fontHeight);
 
 	// Generate glyphs
 	for (std::size_t i = _charset.Start; i < _charset.GetEnd(); i++)

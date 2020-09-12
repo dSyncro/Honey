@@ -43,7 +43,7 @@ Reference<Image> Image::CreateFromFile(const std::string& path)
 
 void Image::WriteToPNG(const std::string& filename) const
 {
-	stbi_write_png(filename.c_str(), (int)_width, (int)_height, 1, _bitmap, _width * _channels);
+	stbi_write_png(filename.c_str(), (int)_width, (int)_height, 1, _bitmap, static_cast<int>(_width * _channels));
 }
 
 void Image::Free()

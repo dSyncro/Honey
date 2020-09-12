@@ -24,6 +24,7 @@ namespace Honey {
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
+		virtual bool IsBound() const override;
 
 		virtual const std::string& GetName() const override { return _name; }
 
@@ -49,6 +50,8 @@ namespace Honey {
 
 		static std::string ReadFile(const std::string& path);
 		static std::unordered_map<GLenum, std::string> Process(const std::string& source);
+
+		static uint32_t s_Bound;
 	};
 
 }

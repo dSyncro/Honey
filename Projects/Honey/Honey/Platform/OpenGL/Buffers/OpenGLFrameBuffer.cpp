@@ -6,6 +6,8 @@
 
 using namespace Honey;
 
+uint32_t OpenGLFrameBuffer::s_Bound = 0;
+
 OpenGLFrameBuffer::OpenGLFrameBuffer(const FrameBufferSpecification& specification) : _specification(specification)
 {
 	Invalidate();
@@ -51,13 +53,24 @@ void OpenGLFrameBuffer::Free()
 
 void OpenGLFrameBuffer::Bind() const
 {
+	if (s_Bound == _rendererID) return;
+
 	glBindFramebuffer(GL_FRAMEBUFFER, _rendererID);
 	glViewport(0, 0, _specification.Width, _specification.Height);
+	s_Bound = _rendererID;
 }
 
 void OpenGLFrameBuffer::Unbind() const
 {
+	if (s_Bound != _rendererID) return;
+
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	s_Bound = 0;
+}
+
+bool OpenGLFrameBuffer::IsBound() const
+{
+	return s_Bound == _rendererID;
 }
 
 void OpenGLFrameBuffer::Resize(uint32_t width, uint32_t height)

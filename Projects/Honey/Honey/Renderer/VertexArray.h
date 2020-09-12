@@ -12,6 +12,7 @@ namespace Honey {
 
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
+		virtual bool IsBound() const = 0;
 
 		virtual void AddVertexBuffer(const Reference<VertexBuffer>& buffer) = 0;
 		virtual void SetIndexBuffer(const Reference<IndexBuffer>& buffer) = 0;

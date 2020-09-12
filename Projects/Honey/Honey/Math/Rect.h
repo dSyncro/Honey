@@ -11,10 +11,10 @@ namespace Honey::Math
 		Rect() : BottomLeft(), TopRight() {};
 
 		Rect(int32_t x, int32_t y, std::size_t width, std::size_t height)
-			: BottomLeft(Point(x, y)), TopRight(Point(x + width,y + height)) { }
+			: BottomLeft(Point(x, y)), TopRight(Point(x + (int32_t)width, y + (int32_t)height)) { }
 
 		Rect(const Point& point, const Size& size)
-			: BottomLeft(point), TopRight(point + Point(size.Width, size.Height)) { }
+			: BottomLeft(point), TopRight(point + Point((int32_t)size.Width, (int32_t)size.Height)) { }
 
 		static Rect FromBounds(const Point& bottomLeft, const Point& topRight)
 		{

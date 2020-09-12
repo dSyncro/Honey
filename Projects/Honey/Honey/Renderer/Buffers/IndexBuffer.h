@@ -1,19 +1,15 @@
 #pragma once
 
-#include <cstdint>
-
-#include <Honey/Core.h>
+#include <Honey/Core/IBindable.h>
+#include <Honey/Core/MemoryManagement.h>
 
 namespace Honey {
 
-	class IndexBuffer {
+	class IndexBuffer : public IBindable {
 
 	public:
 
 		virtual ~IndexBuffer() = default;
-
-		virtual void Bind() const = 0;
-		virtual void Unbind() const = 0;
 
 		virtual uint32_t GetCount() const = 0;
 

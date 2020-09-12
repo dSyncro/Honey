@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Honey/Core/IBindable.h>
 #include <Honey/Core/MemoryManagement.h>
 
 namespace Honey {
@@ -10,7 +11,7 @@ namespace Honey {
 
 	};
 
-	class FrameBuffer {
+	class FrameBuffer : public IBindable {
 
 	public:
 
@@ -22,8 +23,6 @@ namespace Honey {
 		 */
 		virtual const FrameBufferSpecification& GetSpecification() const = 0;
 
-		virtual void Bind() const = 0;
-		virtual void Unbind() const = 0;
 		virtual uint32_t GetColorAttachmentRendererID() const = 0;
 
 		virtual void Resize(uint32_t width, uint32_t height) = 0;

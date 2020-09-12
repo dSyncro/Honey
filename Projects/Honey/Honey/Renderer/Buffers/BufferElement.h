@@ -28,22 +28,22 @@ namespace Honey {
 				case ShaderDataType::Int:
 					return 1;
 
-				case ShaderDataType::Float2:
-				case ShaderDataType::Int2:
+				case ShaderDataType::Vector2:
+				case ShaderDataType::Vector2Int:
 					return 2;
 
-				case ShaderDataType::Float3:
-				case ShaderDataType::Int3:
+				case ShaderDataType::Vector3:
+				case ShaderDataType::Vector3Int:
 					return 3;
 
-				case ShaderDataType::Float4:
-				case ShaderDataType::Int4:
+				case ShaderDataType::Vector4:
+				case ShaderDataType::Vector4Int:
 					return 4;
 
-				case ShaderDataType::Mat3:
+				case ShaderDataType::Matrix3:
 					return 9;
 
-				case ShaderDataType::Mat4:
+				case ShaderDataType::Matrix4:
 					return 16;
 			}
 

@@ -21,8 +21,9 @@ namespace Honey {
 
 		virtual void Init() = 0;
 
-		virtual void SetClearColor(const Color& color) = 0;
 		virtual void Clear() const = 0;
+		virtual void ClearDepthBuffer() const = 0;
+		virtual void SetClearColor(const Color& color) = 0;
 
 		virtual void SetViewport(Math::Vector2 location, Math::Vector2 size) = 0;
 		virtual void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) = 0;
