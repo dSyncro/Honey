@@ -5,7 +5,7 @@ using namespace Honey;
 Reference<spdlog::logger> Log::s_CoreLogger;
 Reference<spdlog::logger> Log::s_AppLogger;
 
-void Log::Init()
+void Log::init()
 {
 	spdlog::set_pattern("%^[%T] %n: %v%$");
 

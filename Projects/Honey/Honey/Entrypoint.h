@@ -7,7 +7,7 @@ extern Honey::Application* Honey::CreateApplication();
 
 int main(int argc, char** argv)
 {
-	Honey::Engine::Init();
+	Honey::Engine::init();
 
 	HNY_PROFILE_BEGIN_SESSION("Startup", "HoneyProfile-Startup.json");
 	Honey::Application* app = Honey::CreateApplication();
@@ -21,5 +21,5 @@ int main(int argc, char** argv)
 	delete app;
 	HNY_PROFILE_END_SESSION();
 
-	Honey::Engine::Shutdown();
+	Honey::Engine::shutdown();
 }

@@ -4,6 +4,10 @@
 
 namespace Honey {
 
+	/**
+	 * @brief App Render Event.
+	 * Usually occurs when application renders something.
+	*/
 	class AppRenderEvent final : public Event {
 
 	public:

@@ -8,6 +8,39 @@
 #include "FunctionIdentification.h"
 #include <Honey/Profiling/InstrumentationTimer.h>
 
+/**
+ * @def HNY_PROFILE
+ * @brief Enable profiling.
+*/
+
+/**
+ * @def HNY_PROFILE_BEGIN_SESSION(name, filepath)
+ * @brief Begin profiling session.
+*/
+
+/**
+ * @def HNY_PROFILE_END_SESSION()
+ * @brief End current session.
+*/
+
+/**
+ * @def HNY_PROFILE_SCOPE_ID(name, id)
+ * @brief Profile scope with name and id.
+ * @param name Scope name.
+ * @param id Scope id.
+*/
+
+/**
+ * @def HNY_PROFILE_SCOPE(name)
+ * @brief Profile scope with name.
+ * @param name Scope name.
+*/
+
+/**
+ * @def HNY_PROFILE_FUNCTION()
+ * @brief Profile function.
+*/
+
 #if defined(HNY_DEBUG)
 #	define HNY_PROFILE 0
 #endif

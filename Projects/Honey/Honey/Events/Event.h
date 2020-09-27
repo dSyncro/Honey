@@ -7,9 +7,13 @@
 
 namespace Honey {
 
+	/**
+	 * @brief All possible Event types.
+	*/
 	enum class EventType
 	{
 		None = 0,
+
 		// Window Events
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 
@@ -23,6 +27,9 @@ namespace Honey {
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
+	/**
+	 * @brief All possible Event categories.
+	*/
 	enum EventCategory
 	{
 		None = 0,
@@ -33,6 +40,9 @@ namespace Honey {
 		EventCategoryMouseButton = BIT(4)
 	};
 
+	/**
+	 * @brief Base class for events.
+	*/
 	class Event {
 
 	public:
@@ -40,25 +50,58 @@ namespace Honey {
 		Event() = default;
 		virtual ~Event() = default;
 
-		virtual EventType GetEventType() const = 0;
-		virtual const char* GetName() const = 0;
-		virtual int GetCategoryFlags() const = 0;
-		virtual std::string ToString() const { return GetName(); }
+		/**
+		 * @brief Get event type.
+		 * @return Event type.
+		*/
+		virtual EventType getEventType() const = 0;
 
-		bool IsInCategory(int category) { return GetCategoryFlags() & category; }
+		/**
+		 * @brief Get event name.
+		 * @return Event name.
+		*/
+		virtual const char* getName() const = 0;
 
-		bool HasBeenHandled = false;
+		/**
+		 * @brief Get the categories this event belongs to
+		 * in flag format.
+		 * @return Category flag.
+		*/
+		virtual int getCategoryFlags() const = 0;
+
+		/**
+		 * @brief Convert event to string.
+		 * @return Event information in a nice formatted string.
+		*/
+		virtual std::string toString() const { return getName(); }
+
+		/**
+		 * @brief Check if event belongs to a particular category.
+		 * @param category Category to perform the check with.
+		 * @return A boolean expressing if event belongs to category.
+		*/
+		bool isInCategory(int category) { return getCategoryFlags() & category; }
+
+		/**
+		 * @brief Event has already been handled?
+		*/
+		bool hasBeenHandled = false;
 	};
 }
 
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; } \
-									virtual EventType GetEventType() const override { return GetStaticType(); } \
-									virtual const char* GetName() const override { return #type; }
+#define EVENT_CLASS_TYPE(type) static EventType getStaticType() { return EventType::type; } \
+									virtual EventType getEventType() const override { return getStaticType(); } \
+									virtual const char* getName() const override { return #type; }
 
-#define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
+#define EVENT_CLASS_CATEGORY(category) virtual int getCategoryFlags() const override { return category; }
 
-
-inline std::ostream& operator<<(std::ostream& stream, const Honey::Event& e)
+/**
+ * @brief Push event to ostream.
+ * @param stream The stream.
+ * @param e The event.
+ * @return The reference to the stream.
+*/
+inline std::ostream& operator <<(std::ostream& stream, const Honey::Event& e)
 {
-	return stream << e.ToString();
+	return stream << e.toString();
 }

@@ -51,7 +51,7 @@ void OpenGLFrameBuffer::Free()
 	glDeleteTextures(1, &_depthAttachment);
 }
 
-void OpenGLFrameBuffer::Bind() const
+void OpenGLFrameBuffer::bind() const
 {
 	if (s_Bound == _rendererID) return;
 
@@ -60,7 +60,7 @@ void OpenGLFrameBuffer::Bind() const
 	s_Bound = _rendererID;
 }
 
-void OpenGLFrameBuffer::Unbind() const
+void OpenGLFrameBuffer::unbind() const
 {
 	if (s_Bound != _rendererID) return;
 
@@ -68,7 +68,7 @@ void OpenGLFrameBuffer::Unbind() const
 	s_Bound = 0;
 }
 
-bool OpenGLFrameBuffer::IsBound() const
+bool OpenGLFrameBuffer::isBound() const
 {
 	return s_Bound == _rendererID;
 }

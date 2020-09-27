@@ -31,7 +31,7 @@ namespace Honey::Math
 			Vector2Int max = Vector2Int(Mathf::Max(a.X, b.X), Mathf::Max(a.Y, b.Y));
 			Size size = (Size)(max - min);
 
-			return Rect(min.X, min.Y, size.Width, size.Height);
+			return Rect(min.x, min.y, size.Width, size.Height);
 		}
 
 		static bool Intersect(const Rect& a, const Rect& b)

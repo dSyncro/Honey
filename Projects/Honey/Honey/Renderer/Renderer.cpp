@@ -35,7 +35,7 @@ void Renderer::EndScene()
 
 void Renderer::Submit(const Reference<Shader>& shader, const Reference<VertexArray>& vertexArray, const Matrix4x4& transform)
 {
-	shader->Bind();
+	shader->bind();
 	shader->SetMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
 	shader->SetMat4("u_Transform", transform);
 

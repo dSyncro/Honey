@@ -35,20 +35,6 @@ static Renderer2DData s_Data = Renderer2DData();
 static Math::Matrix4x4 WorldMatrix;
 static Reference<Shader> TextShader;
 
-void Renderer2D::BeginScreenSpace()
-{
-	FlushAndReset();
-
-	const Matrix4x4 screenSpace = Matrix4x4::Orthographic(0, 800, 600, 0, -1.0f, 1.0f);
-	TextShader->SetMat4("u_ViewProjection", screenSpace);
-}
-
-void Renderer2D::EndScreenSpace()
-{
-	FlushAndReset();
-	s_Data.StandardShader->SetMat4("u_ViewProjection", WorldMatrix);
-}
-
 void Renderer2D::Init()
 {
 	HNY_PROFILE_FUNCTION();
@@ -108,10 +94,10 @@ void Renderer2D::Init()
 
 	// Setup Shader
 	s_Data.StandardShader = Shader::CreateFromFile("assets/shaders/standard2D.glsl");
-	s_Data.StandardShader->Bind();
+	s_Data.StandardShader->bind();
 	s_Data.StandardShader->SetIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
 	TextShader = Shader::CreateFromFile("assets/shaders/text.glsl");
-	TextShader->Bind();
+	TextShader->bind();
 	TextShader->SetIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
 
 	// Initialize First Texture to be Standard Texture
@@ -122,10 +108,10 @@ void Renderer2D::BeginScene(const Camera& camera, const Matrix4x4& transform)
 {
 	HNY_PROFILE_FUNCTION();
 
-	WorldMatrix = camera.GetProjection() * transform.Inverse();
+	WorldMatrix = camera.GetProjection() * transform.inverse();
 
-	s_Data.StandardShader->Bind();
-	s_Data.StandardShader->SetMat4("u_ViewProjection", camera.GetProjection() * transform.Inverse());
+	s_Data.StandardShader->bind();
+	s_Data.StandardShader->SetMat4("u_ViewProjection", camera.GetProjection() * transform.inverse());
 
 	NewBatch();
 }
@@ -243,33 +229,33 @@ void Renderer2D::DrawQuad(const Matrix4x4& transform, const Reference<Texture2D>
 
 void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Color& color)
 {
-	DrawQuad({ position.X, position.Y, 0.0f }, size, color);
+	DrawQuad({ position.x, position.y, 0.0f }, size, color);
 }
 
 void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Color& color)
 {
 	HNY_PROFILE_FUNCTION();
 
-	Matrix4x4 transform = Matrix4x4::Translate(position) * Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+	Matrix4x4 transform = Matrix4x4::translate(position) * Matrix4x4::scale({ size.x, size.y, 1.0f });
 	DrawQuad(transform, color);
 }
 
 void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords, const Color& tint, const Vector2& tiling)
 {
-	DrawQuad({ position.X, position.Y, 0.0f }, size, texture, texCoords, tint, tiling);
+	DrawQuad({ position.x, position.y, 0.0f }, size, texture, texCoords, tint, tiling);
 }
 
 void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords, const Color& tint, const Vector2& tiling)
 {
 	HNY_PROFILE_FUNCTION();
 
-	Matrix4x4 transform = Matrix4x4::Translate(position) * Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+	Matrix4x4 transform = Matrix4x4::translate(position) * Matrix4x4::scale({ size.x, size.y, 1.0f });
 	DrawQuad(transform, texture, texCoords, tint, tiling);
 }
 
 void Renderer2D::DrawQuad(const Vector2& position, const Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint, const Vector2& tiling)
 {
-	DrawQuad({ position.X, position.Y, 0.0f }, size, subtexture, tint, tiling);
+	DrawQuad({ position.x, position.y, 0.0f }, size, subtexture, tint, tiling);
 }
 
 void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint, const Vector2& tiling)
@@ -279,21 +265,21 @@ void Renderer2D::DrawQuad(const Vector3& position, const Vector2& size, const Re
 	const Reference<Texture2D>& texture = subtexture->GetTexture();
 	const Quad::TextureCoordinates& texCoords = subtexture->GetTextureCoords();
 
-	Matrix4x4 transform = Matrix4x4::Translate(position) * Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+	Matrix4x4 transform = Matrix4x4::translate(position) * Matrix4x4::scale({ size.x, size.y, 1.0f });
 	DrawQuad(transform, texture, texCoords, tint, tiling);
 }
 
 void Renderer2D::DrawSprite(const Math::Vector2& position, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint)
 {
-	DrawSprite({ position.X, position.Y, 0.0f }, size, sprite, tint);
+	DrawSprite({ position.x, position.y, 0.0f }, size, sprite, tint);
 }
 
 void Renderer2D::DrawSprite(const Math::Vector3& position, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint)
 {
 	HNY_PROFILE_FUNCTION();
 
-	Matrix4x4 transform = Matrix4x4::Translate(position)
-		* Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+	Matrix4x4 transform = Matrix4x4::translate(position)
+		* Matrix4x4::scale({ size.x, size.y, 1.0f });
 
 	// If no sprite fallback to color only version
 	if (!sprite) return DrawQuad(transform, tint);
@@ -303,39 +289,39 @@ void Renderer2D::DrawSprite(const Math::Vector3& position, const Math::Vector2& 
 
 void Renderer2D::DrawRotatedQuad(const Vector2& position, float rotation, const Vector2& size, const Color& color)
 {
-	DrawRotatedQuad({ position.X, position.Y, 0.0f }, rotation, size, color);
+	DrawRotatedQuad({ position.x, position.y, 0.0f }, rotation, size, color);
 }
 
 void Renderer2D::DrawRotatedQuad(const Vector3& position, float rotation, const Math::Vector2& size, const Color& color)
 {
 	HNY_PROFILE_FUNCTION();
 
-	Matrix4x4 transform = Matrix4x4::Translate(position)
-		* Matrix4x4::Rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
-		* Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+	Matrix4x4 transform = Matrix4x4::translate(position)
+		* Matrix4x4::rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
+		* Matrix4x4::scale({ size.x, size.y, 1.0f });
 
 	DrawQuad(transform, color);
 }
 
 void Renderer2D::DrawRotatedQuad(const Vector2& position, float rotation, const Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords, const Color& tint, const Vector2& tiling)
 {
-	DrawRotatedQuad({ position.X, position.Y, 0.0f }, rotation, size, texture, texCoords, tint, tiling);
+	DrawRotatedQuad({ position.x, position.y, 0.0f }, rotation, size, texture, texCoords, tint, tiling);
 }
 
 void Renderer2D::DrawRotatedQuad(const Vector3& position, float rotation, const Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords, const Color& tint, const Vector2& tiling)
 {
 	HNY_PROFILE_FUNCTION();
 
-	Matrix4x4 transform = Matrix4x4::Translate(position)
-		* Matrix4x4::Rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
-		* Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+	Matrix4x4 transform = Matrix4x4::translate(position)
+		* Matrix4x4::rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
+		* Matrix4x4::scale({ size.x, size.y, 1.0f });
 
 	DrawQuad(transform, texture, texCoords, tint, tiling);
 }
 
 void Renderer2D::DrawRotatedQuad(const Vector2& position, float rotation, const Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint, const Vector2& tiling)
 {
-	DrawRotatedQuad({ position.X, position.Y, 1.0f }, rotation, size, subtexture, tint, tiling);
+	DrawRotatedQuad({ position.x, position.y, 1.0f }, rotation, size, subtexture, tint, tiling);
 }
 
 void Renderer2D::DrawRotatedQuad(const Vector3& position, float rotation, const Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint, const Vector2& tiling)
@@ -345,25 +331,25 @@ void Renderer2D::DrawRotatedQuad(const Vector3& position, float rotation, const 
 	const Reference<Texture2D>& texture = subtexture->GetTexture();
 	const Quad::TextureCoordinates& texCoords = subtexture->GetTextureCoords();
 
-	Matrix4x4 transform = Matrix4x4::Translate(position)
-		* Matrix4x4::Rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
-		* Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+	Matrix4x4 transform = Matrix4x4::translate(position)
+		* Matrix4x4::rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
+		* Matrix4x4::scale({ size.x, size.y, 1.0f });
 
 	DrawQuad(transform, texture, texCoords, tint, tiling);
 }
 
 void Renderer2D::DrawRotatedSprite(const Vector2& position, float rotation, const Vector2& size, const Reference<Sprite>& sprite, const Color& tint)
 {
-	DrawRotatedSprite({ position.X, position.Y, 0.0f }, rotation, size, sprite, tint);
+	DrawRotatedSprite({ position.x, position.y, 0.0f }, rotation, size, sprite, tint);
 }
 
 void Renderer2D::DrawRotatedSprite(const Vector3& position, float rotation, const Vector2& size, const Reference<Sprite>& sprite, const Color& tint)
 {
 	HNY_PROFILE_FUNCTION();
 
-	Matrix4x4 transform = Matrix4x4::Translate(position)
-		* Matrix4x4::Rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
-		* Matrix4x4::Scale({ size.X, size.Y, 1.0f });
+	Matrix4x4 transform = Matrix4x4::translate(position)
+		* Matrix4x4::rotate(rotation * Mathf::Degrees2Radians, Vector3::Forward)
+		* Matrix4x4::scale({ size.x, size.y, 1.0f });
 
 	// If no sprite fallback to color only version
 	if (!sprite) return DrawQuad(transform, tint);
@@ -377,7 +363,7 @@ void Renderer2D::DrawText(const Vector3& position, const std::string& text, cons
 
 	float currentPoint = 0.0f;
 	float baseline = atlas->GetScaledAscent();
-	DrawQuad(Vector2(0, baseline), Vector2(2000, 1), Color::Yellow);
+	DrawQuad(Vector2(0, baseline), Vector2(2000, 1), Color::yellow());
 	for (std::size_t i = 0; i < text.length(); i++)
 	{
 		int kerning = 0;
@@ -387,13 +373,28 @@ void Renderer2D::DrawText(const Vector3& position, const std::string& text, cons
 
 		const Glyph& glyph = atlas->GetGlyph(text[i]);
 
-		Vector2 quadPosition = Vector2(currentPoint + kerning, baseline) + glyph.Offset;
+		Vector2 quadPosition = Vector2(currentPoint + kerning, baseline) + glyph.Offset + (Vector2)position;
 		Vector2 quadScale = (Vector2Int)glyph.BoundingBox.GetSize();
 
 		currentPoint += glyph.Advance;
-		DrawQuad(quadPosition, quadScale, texture, glyph.UV, Color::White);
+		DrawQuad(quadPosition, quadScale, texture, glyph.UV, Color::white());
 	}
 }
+
+void Renderer2D::BeginScreenSpace()
+{
+	FlushAndReset();
+
+	const Matrix4x4 screenSpace = Matrix4x4::orthographic(0, 800, 600, 0, -1.0f, 1.0f);
+	TextShader->SetMat4("u_ViewProjection", screenSpace);
+}
+
+void Renderer2D::EndScreenSpace()
+{
+	FlushAndReset();
+	s_Data.StandardShader->SetMat4("u_ViewProjection", WorldMatrix);
+}
+
 
 void Renderer2D::ResetStatistics()
 {

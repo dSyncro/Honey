@@ -11,8 +11,8 @@ using namespace Honey::Math;
 const Vector4 Vector4::Zero = Vector4(0.0f);
 const Vector4 Vector4::One  = Vector4(1.0f);
 
-const Vector4 Vector4::Infinity         = Vector4(Mathf::Infinity);
-const Vector4 Vector4::NegativeInfinity = Vector4(Mathf::NegativeInfinity);
+const Vector4 Vector4::Infinity         = Vector4(Mathf::infinity());
+const Vector4 Vector4::NegativeInfinity = Vector4(Mathf::negativeInfinity());
 
 Vector4& Vector4::Normalize()
 {
@@ -148,10 +148,10 @@ bool Vector4::operator ==(const Vector4& other)
 Vector4 Vector4::operator *(const Matrix4x4& matrix) const
 {
 	return Vector4(
-		matrix.Columns[0].X * X + matrix.Columns[0].Y * Y + matrix.Columns[0].Z * Z + matrix.Columns[0].W * W,
-		matrix.Columns[1].X * X + matrix.Columns[1].Y * Y + matrix.Columns[1].Z * Z + matrix.Columns[1].W * W,
-		matrix.Columns[2].X * X + matrix.Columns[2].Y * Y + matrix.Columns[2].Z * Z + matrix.Columns[2].W * W,
-		matrix.Columns[3].X * X + matrix.Columns[3].Y * Y + matrix.Columns[3].Z * Z + matrix.Columns[3].W * W
+		matrix.rows[0].X * X + matrix.rows[0].Y * Y + matrix.rows[0].Z * Z + matrix.rows[0].W * W,
+		matrix.rows[1].X * X + matrix.rows[1].Y * Y + matrix.rows[1].Z * Z + matrix.rows[1].W * W,
+		matrix.rows[2].X * X + matrix.rows[2].Y * Y + matrix.rows[2].Z * Z + matrix.rows[2].W * W,
+		matrix.rows[3].X * X + matrix.rows[3].Y * Y + matrix.rows[3].Z * Z + matrix.rows[3].W * W
 	);
 }
 

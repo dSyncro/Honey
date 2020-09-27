@@ -18,7 +18,7 @@ namespace Honey {
 		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();
 
-		static void Submit(const Reference<Shader>& shader, const Reference<VertexArray>& vertexArray, const Math::Matrix4x4& transform = Math::Matrix4x4::Identity);
+		static void Submit(const Reference<Shader>& shader, const Reference<VertexArray>& vertexArray, const Math::Matrix4x4& transform = Math::Matrix4x4::identity());
 
 		static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 

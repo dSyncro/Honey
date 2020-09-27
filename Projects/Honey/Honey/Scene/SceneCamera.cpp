@@ -25,5 +25,5 @@ void SceneCamera::RecalculateProjection()
 	float orthoBottom = -0.5f * _orthoSize; 
 	float orthoTop = 0.5f * _orthoSize;
 
-	_projection = Matrix4x4::Orthographic(orthoLeft, orthoRight, orthoBottom, orthoTop, _orthoNear, _orthoFar);
+	_projection = Matrix4x4::orthographic(orthoLeft, orthoRight, orthoBottom, orthoTop, _orthoNear, _orthoFar);
 }

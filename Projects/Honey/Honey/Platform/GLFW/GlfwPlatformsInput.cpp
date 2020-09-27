@@ -8,21 +8,21 @@ extern "C"{
 using namespace Honey;
 using namespace Honey::Math;
 
-bool Input::IsKeyPressed(Keycode keycode)
+bool Input::isKeyPressed(Keycode keycode)
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	int state = glfwGetKey(window, (int)keycode);
 	return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
-bool Input::IsMouseButtonPressed(MouseButton button)
+bool Input::isMousePressed(MouseButton button)
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	int state = glfwGetMouseButton(window, (int)button);
 	return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
-float Input::GetMouseX()
+float Input::getMouseX()
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	double xPos, yPos;
@@ -30,7 +30,7 @@ float Input::GetMouseX()
 	return (float)xPos;
 }
 
-float Input::GetMouseY()
+float Input::getMouseY()
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	double xPos, yPos;
@@ -38,7 +38,7 @@ float Input::GetMouseY()
 	return (float)yPos;
 }
 
-Vector2 Input::GetMousePosition()
+Vector2 Input::getMousePosition()
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	double xPos, yPos;
@@ -46,22 +46,22 @@ Vector2 Input::GetMousePosition()
 	return Vector2((float)xPos, (float)yPos);
 }
 
-float Input::GetMouseScroll() { return MouseScrollAmount().Y; }
-float Input::GetHorizontalMouseScroll() { return MouseScrollAmount().X; }
+float Input::getVMouseScroll() { return mouseScrollAmount().y; }
+float Input::getHMouseScroll() { return mouseScrollAmount().x; }
 
-uint16_t Input::GetKeyMods()
+uint16_t Input::getKeyMods()
 {
 	return 0;
 }
 
-KeyState Input::GetKeyState(Keycode keycode)
+KeyState Input::getKeyState(Keycode keycode)
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	int state = glfwGetKey(window, (int)keycode);
 	return state == GLFW_RELEASE ? KeyState::Pressed : KeyState::Released;
 }
 
-KeyState Input::GetMouseButtonState(MouseButton button)
+KeyState Input::getMouseButtonState(MouseButton button)
 {
 	GLFWwindow* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	int state = glfwGetMouseButton(window, (int)button);

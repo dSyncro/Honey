@@ -40,7 +40,7 @@ OpenGLVertexArray::OpenGLVertexArray()
 {
 	HNY_PROFILE_FUNCTION();
 
-	glGenVertexArrays(1, &_rendererID);
+	glCreateVertexArrays(1, &_rendererID);
 }
 
 OpenGLVertexArray::~OpenGLVertexArray()
@@ -81,8 +81,8 @@ void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 
 	HNY_CORE_ASSERT(buffer->GetLayout().GetElements().size(), "Layout not set on Vertex Buffer!");
 
-	glBindVertexArray(_rendererID);
-	buffer->Bind();
+	Bind();
+	buffer->bind();
 
 	uint32_t index = 0;
 	const BufferLayout& layout = buffer->GetLayout();
@@ -150,8 +150,7 @@ void OpenGLVertexArray::SetIndexBuffer(const Reference<IndexBuffer>& buffer)
 {
 	HNY_PROFILE_FUNCTION();
 
-	glBindVertexArray(_rendererID);
-
-	buffer->Bind();
+	Bind();
+	buffer->bind();
 	_indexBuffer = buffer;
 }

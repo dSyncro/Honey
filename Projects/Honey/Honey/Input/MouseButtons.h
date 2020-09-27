@@ -5,6 +5,9 @@
 
 namespace Honey
 {
+	/**
+	 * @brief All possible mouse buttons.
+	*/
 	typedef enum class MouseButton : uint16_t
 	{
 		// From glfw3.h

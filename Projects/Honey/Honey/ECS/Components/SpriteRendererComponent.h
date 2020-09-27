@@ -5,17 +5,27 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Renderer for sprites.
+	*/
 	struct SpriteRendererComponent {
 		
-		SpriteRendererComponent() : Tint(Color::White) {};
-		SpriteRendererComponent(const Reference<Sprite>& sprite, const Color& tint = Color::White)
-			: Sprite(sprite), Tint(tint) { }
+		SpriteRendererComponent() : tint(Color::white()) {};
+		SpriteRendererComponent(const Reference<Sprite>& sprite, const Color& tint = Color::white())
+			: sprite(sprite), tint(tint) { }
 
 		~SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 
-		Reference<Honey::Sprite> Sprite;
-		Color Tint;
+		/**
+		 * @brief Sprite to render.
+		*/
+		Reference<Sprite> sprite;
+
+		/**
+		 * @brief Sprite tint.
+		*/
+		Color tint;
 	};
 
 }

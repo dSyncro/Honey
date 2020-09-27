@@ -1,3 +1,8 @@
+/**
+ * @file Components.h
+ * @brief Import all component types at once.
+*/
+
 #pragma once
 
 #include "Components/CameraComponent.h"

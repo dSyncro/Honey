@@ -14,7 +14,7 @@ namespace Honey {
 
 	protected:
 
-		Math::Matrix4x4 _projection = Math::Matrix4x4::Identity;
+		Math::Matrix4x4 _projection = Math::Matrix4x4::identity();
 	};
 
 }

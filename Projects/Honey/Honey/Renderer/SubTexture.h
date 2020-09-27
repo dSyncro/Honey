@@ -19,7 +19,7 @@ namespace Honey {
 		static Reference<SubTexture2D> CreateFromCoordinates(const Reference<Texture2D>& texture, 
 			const Math::Vector2& coords, 
 			const Math::Vector2& cellSize, 
-			const Math::Vector2& spriteSize = Math::Vector2::One);
+			const Math::Vector2& spriteSize = Math::Vector2::one());
 
 	private:
 

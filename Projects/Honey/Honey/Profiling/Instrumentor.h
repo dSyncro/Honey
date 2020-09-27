@@ -35,7 +35,7 @@ namespace Honey {
 				// Subsequent profiling output meant for the original session will end up in the
 				// newly opened session instead.  That's better than having badly formatted
 				// profiling output.
-				if (Log::GetCoreLogger()) // Edge case: BeginSession() might be before Log::Init()
+				if (Log::getCoreLogger()) // Edge case: BeginSession() might be before Log::Init()
 					HNY_CORE_ERROR("Instrumentor::BeginSession('{0}') when session '{1}' already open.", name, _currentSession->Name);
 
 				InternalEndSession();
@@ -48,7 +48,7 @@ namespace Honey {
 				_currentSession = new InstrumentationSession({ name });
 				WriteHeader();
 			}
-			else if (Log::GetCoreLogger()) // Edge case: BeginSession() might be before Log::Init()
+			else if (Log::getCoreLogger()) // Edge case: BeginSession() might be before Log::Init()
 				HNY_CORE_ERROR("Instrumentor could not open results file '{0}'.", filepath);
 		}
 

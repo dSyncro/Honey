@@ -1,11 +1,17 @@
 /**
  * @file Breakpoint.h
  * @brief Use breakpoints programmatically.
- */
+*/
 
 #pragma once
 
 #include "OS.h"
+
+/* 
+ * @def HNY_DEBUGBREAK()
+ * @brief IDE-independant breakpoint.
+ * Only valid in Debug builds.
+*/
 
 // Breakpoint
 #if defined(HNY_DEBUG)

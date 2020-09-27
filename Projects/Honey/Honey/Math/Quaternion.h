@@ -9,20 +9,20 @@ namespace Honey::Math {
 	/**
 	 * @struct Quaternion
 	 * @brief Quaternions represent rotations.
-	 * They do not suffer from gimbal lock.
+	 * They do not suffer of gimbal lock.
 	 */
 	struct Quaternion
 	{
 		// Data
 
 		union {
-			struct { float X, Y, Z, W; };
-			float Components[4]; //!< @brief Components of the Quaternion.
+			struct { float x, y, z, w; };
+			float components[4]; /** @brief Components of the Quaternion. */
 		};
 
 		// Shorthands
 
-		static const Quaternion Identity; //!< @brief Quaternion(0.0f, 0.0f, 0.0f, 1.0f)
+		static const Quaternion Identity; /** @brief Quaternion(0.0f, 0.0f, 0.0f, 1.0f) */
 
 		/**
 		 * @brief Construct an Identity quaternion.
@@ -117,7 +117,7 @@ namespace Honey::Math {
 		 * @brief Get `X`, `Y` and `Z` of this quaternion.
 		 * @return A Vector3 representing `X`, `Y` and `Z` components.
 		 */
-		HNY_ALWAYS_INLINE Vector3 GetXYZ() const { return Vector3(X, Y, Z); }
+		HNY_ALWAYS_INLINE Vector3 GetXYZ() const { return Vector3(x, y, z); }
 
 		Vector3 GetAxis() const;
 
@@ -259,7 +259,7 @@ namespace Honey::Math {
 		 */
 		Quaternion& operator =(const Quaternion& quaternion)
 		{
-			Set(quaternion.X, quaternion.Y, quaternion.Z, quaternion.W);
+			Set(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
 			return *this;
 		}
 
@@ -313,7 +313,7 @@ namespace Honey::Math {
 		 * @param scalar -> Value to divide by.
 		 * @return this / `scalar`.
 		 */
-		Quaternion& operator/=(float scalar)
+		Quaternion& operator /=(float scalar)
 		{
 			*this = *this / scalar;
 			return *this;

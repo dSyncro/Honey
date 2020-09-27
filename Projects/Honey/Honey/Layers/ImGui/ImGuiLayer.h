@@ -4,6 +4,9 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Layer on which ImGui stuff happens.
+	*/
 	class ImGuiLayer final : public Layer {
 
 	public:
@@ -11,12 +14,26 @@ namespace Honey {
 		ImGuiLayer();
 		~ImGuiLayer();
 
-		virtual void OnAttach() override;
-		virtual void OnDetach() override;
+		/**
+		 * @brief Called when ImGuiLayer gets attached.
+		*/
+		virtual void onAttach() override;
+
+		/**
+		 * @brief Called when ImGuiLayer gets detached.
+		*/
+		virtual void onDetach() override;
 		// virtual void OnImGuiRender() override;
 
-		void Begin();
-		void End();
+		/**
+		 * @brief Begin context for ImGui rendering.
+		*/
+		void begin();
+
+		/**
+		 * @brief End context for ImGui rendering.
+		*/
+		void end();
 	};
 
 }

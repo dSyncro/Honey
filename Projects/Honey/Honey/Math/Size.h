@@ -14,7 +14,7 @@ namespace Honey::Math {
 			: Width(width), Height(height) { }
 
 		constexpr Size(const Vector2Int& vector)
-			: Width(vector.X), Height(vector.Y) { }
+			: Width(vector.x), Height(vector.y) { }
 
 		std::size_t Width;
 		std::size_t Height;

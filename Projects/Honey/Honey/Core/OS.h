@@ -1,4 +1,54 @@
+/**
+ * @file OS.h
+ * @brief OS related stuff.
+*/
+
 #pragma once
+
+/**
+ * @def HNY_PLATFORM_WINDOWS
+ * @brief Defined if building on a Windows Machine.
+*/
+
+/**
+ * @def HNY_PLATFORM_WINDOWS64
+ * @brief Defined if building on a 64-bit Windows Machine.
+*/
+
+/**
+ * @def HNY_PLATFORM_APPLE
+ * @brief Defined if building on an Apple Machine.
+*/
+
+/**
+ * @def HNY_PLATFORM_IPHONE_SIMULATOR
+ * @brief Defined if building on an iPhone simulator.
+*/
+
+/**
+ * @def HNY_PLATFORM_IOS
+ * @brief Defined if building on an IOS Machine.
+*/
+
+/**
+ * @def HNY_PLATFORM_MAC
+ * @brief Defined if building on a MacOS Machine.
+*/
+
+/**
+ * @def HNY_PLATFORM_ANDROID
+ * @brief Defined if building on an Android Machine.
+*/
+
+/**
+ * @def HNY_PLATFORM_LINUX
+ * @brief Defined if building on a Linux Machine.
+*/
+
+/**
+ * @def HNY_PLATFORM_GLFW
+ * @brief Defined if platform utilises GLFW.
+*/
 
 // OS Detection
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)

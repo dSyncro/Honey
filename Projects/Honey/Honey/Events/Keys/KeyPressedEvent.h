@@ -6,15 +6,27 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Key Pressed event.
+	 * Usually occurs when a keyboard keydown stroke is captured.
+	*/
 	class KeyPressedEvent final : public KeyEvent {
 
 	public:
 
 		KeyPressedEvent(Keycode keycode, int repeatCount) : KeyEvent(keycode), _repeatCount(repeatCount) {}
 
-		int GetRepeatCount() const { return _repeatCount; }
+		/**
+		 * @brief Get the number of times the keystroke is autorepeated 
+		 * as a result of the user holding down the key.
+		 * @return The repeat count.
+		*/
+		int getRepeatCount() const { return _repeatCount; }
 
-		virtual std::string ToString() const override
+		/**
+		 * @see Event::toString()
+		*/
+		virtual std::string toString() const override
 		{
 			std::stringstream stream;
 			stream << "KeyPressedEvent: " << _keycode << " (" << _repeatCount << " repeats)";

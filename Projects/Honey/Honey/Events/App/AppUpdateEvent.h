@@ -4,6 +4,10 @@
 
 namespace Honey {
 
+	/**
+	 * @brief App Update Event.
+	 * Usually occurs when Application is updated.
+	*/
 	class AppUpdateEvent final : public Event {
 
 	public:

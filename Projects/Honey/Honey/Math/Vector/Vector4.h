@@ -19,7 +19,7 @@ namespace Honey::Math {
 		constexpr Vector4(float value = 0.0f) : X(value), Y(value), Z(value), W(value) {}
 		constexpr Vector4(float x, float y, float z, float w) : X(x), Y(y), Z(z), W(w) {}
 
-		constexpr explicit Vector4(const Vector2& vector) : X(vector.X), Y(vector.Y), Z(0.0f), W(0.0f) {}
+		constexpr explicit Vector4(const Vector2& vector) : X(vector.x), Y(vector.y), Z(0.0f), W(0.0f) {}
 		constexpr explicit Vector4(const Vector3& vector) : X(vector.X), Y(vector.Y), Z(vector.Z), W(0.0f) {}
 		constexpr explicit Vector4(const Vector3& vector, float w) : X(vector.X), Y(vector.Y), Z(vector.Z), W(w) {}
 

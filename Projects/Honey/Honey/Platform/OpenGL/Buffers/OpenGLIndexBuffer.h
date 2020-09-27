@@ -12,9 +12,9 @@ namespace Honey {
 
 		virtual ~OpenGLIndexBuffer();
 
-		virtual void Bind() const override;
-		virtual void Unbind() const override;
-		virtual bool IsBound() const override;
+		virtual void bind() const override;
+		virtual void unbind() const override;
+		virtual bool isBound() const override;
 
 		inline virtual uint32_t GetCount() const override { return _count; }
 

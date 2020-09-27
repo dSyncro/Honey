@@ -1,9 +1,34 @@
 /**
  * @file Compiler.h
  * @brief Information about the compiler used.
- */
+*/
 
 #pragma once
+
+/**
+ * @def HNY_COMPILER_INTEL
+ * @brief defined when using INTEL compiler.
+*/
+
+/**
+ * @def HNY_COMPILER_MINGW
+ * @brief defined when using MINGW compiler.
+*/
+
+/**
+ * @def HNY_COMPILER_CLANG
+ * @brief defined when using CLANG compiler.
+*/
+
+/**
+ * @def HNY_COMPILER_GCC
+ * @brief defined when using GCC compiler.
+*/
+
+/**
+ * @def HNY_COMPILER_MSC
+ * @brief defined when using MSC compiler.
+*/
 
 #if defined(__INTEL_COMPILER)
 #	define HNY_COMPILER_INTEL

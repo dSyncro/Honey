@@ -8,13 +8,17 @@ namespace Honey::Math {
 
 	struct Quaternion;
 
+	/**
+	 * @brief Implementation of a Matrix4x4.
+	 * That is a matrix made up of 4 rows and 4 columns.
+	*/
 	struct Matrix4x4
 	{
 		union
 		{
 			// [row + col * 4]
-			float Elements[4 * 4];
-			Vector4 Columns[4];
+			float elements[4 * 4];
+			Vector4 rows[4];
 		};
 
 		// Constructors
@@ -41,49 +45,59 @@ namespace Honey::Math {
 		 */
 		Matrix4x4(const Vector4& row0, const Vector4& row1, const Vector4& row2, const Vector4& row3);
 
+		/**
+		 * @brief Construct Matrix4x4 using its rows.
+		 * @param rows -> The rows.
+		 */
+		Matrix4x4(const std::array<Vector4, 4>& rows);
+
 		// Shorthands
 
-		static const Matrix4x4 Zero; //!< @brief Zero 4x4 Matrix
-		static const Matrix4x4 Identity; //!< @brief Identity 4x4 Matrix
+		/** @brief Zero Matrix4x4 */
+		static const Matrix4x4& zero(); 
+
+		/** @brief Identity Matrix4x4 */
+		static const Matrix4x4& identity(); 
 
 		// Methods
 
 		/**
 		 * @brief Invert this matrix.
 		 */
-		Matrix4x4& Invert();
+		Matrix4x4& invert();
 
 		/**
 		 * @brief Set column at index.
 		 * @param index -> Index of the column to change.
 		 * @param column -> New value.
 		 */
-		void SetColumn(unsigned int index, const Vector4& column);
+		void setColumn(std::size_t index, const Vector4& column);
 
 		/**
 		 * @brief Set position in a TRS matrix.
 		 * @param position -> New position.
 		 */
-		inline void SetPosition(const Vector3& position) { SetColumn(3, Vector4(position, 1.0f)); }
+		void setPosition(const Vector3& position) { setColumn(3, Vector4(position, 1.0f)); }
 
 		// Const Methods
 
 		/**
 		 * @brief Get inverse of this matrix.
 		 */
-		Matrix4x4 Inverse() const;
+		Matrix4x4 inverse() const;
 
 		/**
 		 * @brief Get column at index.
-		 * @param index -> Index of column.
-		 */
-		Vector4 GetColumn(int index) const;
+		 * @param index -> Index of the column to get.
+		 * @return The column.
+		*/
+		Vector4 getColumn(std::size_t index) const;
 
 		/**
 		 * @brief Get position in a TRS matrix.
 		 * @return The position.
 		 */
-		inline Vector3 GetPosition() const { return Vector3(GetColumn(3)); }
+		Vector3 getPosition() const { return Vector3(getColumn(3)); }
 
 		// Static Methods
 
@@ -97,7 +111,7 @@ namespace Honey::Math {
 		 * @param far -> Far clipping plane depth.
 		 * @return Orthograpic projection matrix.
 		 */
-		static Matrix4x4 Orthographic(float left, float right, float bottom, float top, float zNear, float zFar);
+		static Matrix4x4 orthographic(float left, float right, float bottom, float top, float zNear, float zFar);
 
 		/**
 		 * @brief Generate perspective projection matrix.
@@ -107,7 +121,7 @@ namespace Honey::Math {
 		 * @param far -> Far clipping plane depth.
 		 * @return Perspective projection matrix.
 		*/
-		static Matrix4x4 Perspective(float fov, float aspectRatio, float zNear, float zFar);
+		static Matrix4x4 perspective(float fov, float aspectRatio, float zNear, float zFar);
 
 		/**
 		 * @brief Create a "look at" matrix.
@@ -119,40 +133,40 @@ namespace Honey::Math {
 		 * @param up -> Up direction.
 		 * @return 
 		 */
-		static Matrix4x4 LookAt(const Vector3& source, const Vector3& target, const Vector3& up);
+		static Matrix4x4 lookAt(const Vector3& source, const Vector3& target, const Vector3& up);
 
 		/**
 		 * @brief Create a translation matrix.
 		 * @param translation -> The translation.
 		 */
-		static Matrix4x4 Translate(const Vector3& translation);
+		static Matrix4x4 translate(const Vector3& translation);
 
 		/**
 		 * @brief Create a rotation matrix.
 		 * @param angle -> Angle of the rotation (in radians).
 		 * @param axis -> Axis of the rotation.
 		 */
-		static Matrix4x4 Rotate(float angle, const Vector3& axis);
+		static Matrix4x4 rotate(float angle, const Vector3& axis);
 
 		/**
 		 * @brief Create a rotation matrix.
 		 * @param quaternion -> Quaternion representing the rotation.
 		 * @overload
 		 */
-		static Matrix4x4 Rotate(const Quaternion& quaternion);
+		static Matrix4x4 rotate(const Quaternion& quaternion);
 
 		/**
 		 * @brief Create a scaling matrix.
 		 * @param scale -> Scale of the matrix.
 		 */
-		static Matrix4x4 Scale(const Vector3& scale);
+		static Matrix4x4 scale(const Vector3& scale);
 
 		/**
 		 * @brief Get transposed matrix (column exchanged with rows).
 		 * @param matrix -> The matrix.
 		 * @return The transpose of `matrix`.
 		 */
-		static Matrix4x4 Transpose(const Matrix4x4& matrix);
+		static Matrix4x4 transpose(const Matrix4x4& matrix);
 
 		// Arithmetic operators
 
@@ -173,13 +187,17 @@ namespace Honey::Math {
 		 */
 		Matrix4x4& operator *=(const Matrix4x4& other);
 
-		std::string ToString() const 
+		/**
+		 * @brief Get matrix information in a nicely formatted string.
+		 * @return Matrix information in string format.
+		*/
+		std::string toString() const 
 		{
 			std::stringstream stream;
-			stream << "Row 1: " << Elements[0] << ", " << Elements[1] << ", " << Elements[2] << ", " << Elements[3] << '\n';
-			stream << "Row 2: " << Elements[4] << ", " << Elements[5] << ", " << Elements[6] << ", " << Elements[7] << '\n';
-			stream << "Row 3: " << Elements[8] << ", " << Elements[9] << ", " << Elements[10] << ", " << Elements[11] << '\n';
-			stream << "Row 4: " << Elements[12] << ", " << Elements[13] << ", " << Elements[14] << ", " << Elements[15] << '\n';
+			stream << "Row 1: " << elements[0] << ", " << elements[1] << ", " << elements[2] << ", " << elements[3] << '\n';
+			stream << "Row 2: " << elements[4] << ", " << elements[5] << ", " << elements[6] << ", " << elements[7] << '\n';
+			stream << "Row 3: " << elements[8] << ", " << elements[9] << ", " << elements[10] << ", " << elements[11] << '\n';
+			stream << "Row 4: " << elements[12] << ", " << elements[13] << ", " << elements[14] << ", " << elements[15] << '\n';
 			return stream.str();
 		}
 	};

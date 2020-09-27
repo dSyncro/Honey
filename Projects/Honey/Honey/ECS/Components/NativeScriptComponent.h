@@ -1,48 +1,82 @@
+// Warning! This is absolutely unfinished and unstable.
+// TODO: Make it way more stable.
+
 #pragma once
 
 #include <Honey/ECS/Behaviour.h>
 
 namespace Honey {
 
+	/**
+	 * @brief Native Script Component.
+	 * It manages native scripts attached to entity.
+	*/
 	class NativeScriptComponent {
 
 	public:
 
-		NativeScriptComponent(const Entity& entity) : TargetEntity(entity) {};
+		NativeScriptComponent(const Entity& entity) : entity(entity) {};
 		NativeScriptComponent(const NativeScriptComponent&) = default;
 		~NativeScriptComponent() = default;
 
-		Entity TargetEntity;
-		std::vector<Behaviour*> Behaviours;
+		/**
+		 * @brief Target entity.
+		*/
+		Entity entity;
 
-		void OnCreate()
+		/**
+		 * @brief Behaviours attached to entity.
+		*/
+		std::vector<Behaviour*> behaviours;
+
+		/**
+		 * @brief Called when NSC is attached to entity.
+		*/
+		void onCreate()
 		{
-			for (Behaviour* behaviour : Behaviours)
-				behaviour->OnCreate();
+			// Instance creation for each behaviour attached.
+			for (Behaviour* behaviour : behaviours)
+				behaviour->onCreate();
 		}
 
-		void OnUpdate()
+		/**
+		 * @brief Update scripts.
+		*/
+		void onUpdate()
 		{
-			for (Behaviour* behaviour : Behaviours)
-				behaviour->OnUpdate();
+			for (Behaviour* behaviour : behaviours)
+				behaviour->onUpdate();
 		}
 
-		void OnDestroy()
+		/**
+		 * @brief Called when NSC is destroyed.
+		*/
+		void onDestroy()
 		{
-			for (Behaviour* behaviour : Behaviours)
-				behaviour->OnDestroy();
+			// Instance destruction to each behaviour.
+			for (Behaviour* behaviour : behaviours)
+				behaviour->onDestroy();
 		}
 
+		/**
+		 * @brief Add behaviour to script manager.
+		 * @tparam T Behaviour type.
+		*/
 		template <typename T>
-		void AddBehaviour() 
+		void addBehaviour() 
 		{
-			T& component = TargetEntity.AddComponent<T>();
-			Behaviours.push_back(&component);
+			T& component = entity.addComponent<T>();
+			behaviours.push_back(&component);
 		}
 
-		static NativeScriptComponent& Attach(Honey::Entity& entity)
+		/**
+		 * @brief Attach native scripting to entity.
+		 * @param entity Target entity.
+		 * @return A reference to the newly attached NSC.
+		*/
+		static NativeScriptComponent& attach(Entity& entity)
 		{
-			return entity.AddComponent<NativeScriptComponent>(entity);
+			return entity.addComponent<NativeScriptComponent>(entity);
 		}
 
 		friend class Scene;

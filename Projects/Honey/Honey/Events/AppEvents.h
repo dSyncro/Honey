@@ -1,3 +1,8 @@
+/**
+ * @file AppEvents.h
+ * @brief Import all App Events at once.
+*/
+
 #pragma once
 
 #include "App/AppRenderEvent.h"

@@ -6,20 +6,20 @@ using namespace Honey::Math;
 
 const Quaternion Quaternion::Identity = Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
 
-Quaternion::Quaternion() : X(0), Y(0), Z(0), W(1) {}
+Quaternion::Quaternion() : x(0), y(0), z(0), w(1) {}
 
-Quaternion::Quaternion(float value) : X(value), Y(value), Z(value), W(value) { }
+Quaternion::Quaternion(float value) : x(value), y(value), z(value), w(value) { }
 
 Quaternion::Quaternion(const Vector3& xyz, float w) 
-	: X(xyz.X), Y(xyz.Y), Z(xyz.Z), W(w) {}
+	: x(xyz.X), y(xyz.Y), z(xyz.Z), w(w) {}
 
 Quaternion::Quaternion(const Vector4& vector)
-	: X(vector.X), Y(vector.Y), Z(vector.Z), W(vector.W) { }
+	: x(vector.X), y(vector.Y), z(vector.Z), w(vector.W) { }
 
-Quaternion::Quaternion(float x, float y, float z, float w) : X(x), Y(y), Z(z), W(w) {}
+Quaternion::Quaternion(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
 Quaternion::Quaternion(const Quaternion& quaternion) 
-	: X(quaternion.X), Y(quaternion.Y), Z(quaternion.Z), W(quaternion.W) { }
+	: x(quaternion.x), y(quaternion.y), z(quaternion.z), w(quaternion.w) { }
 
 Quaternion& Quaternion::SetXYZ(const Vector3& vector)
 {
@@ -29,9 +29,9 @@ Quaternion& Quaternion::SetXYZ(const Vector3& vector)
 
 Quaternion& Quaternion::SetXYZ(float x, float y, float z)
 {
-	X = x;
-	Y = y;
-	Z = z;
+	this->x = x;
+	this->y = y;
+	this->z = z;
 	return *this;
 }
 
@@ -43,10 +43,10 @@ Quaternion& Quaternion::Set(const Vector4& vector)
 
 Quaternion& Quaternion::Set(float x, float y, float z, float w)
 {
-	X = x;
-	Y = y;
-	Z = z;
-	W = w;
+	this->x = x;
+	this->y = y;
+	this->z = z;
+	this->w = w;
 	return *this;
 }
 
@@ -58,12 +58,12 @@ Quaternion& Quaternion::Normalize()
 
 Quaternion Quaternion::Conjugate() const
 {
-	return Quaternion(-X, -Y, -Z, W);
+	return Quaternion(-x, -y, -z, w);
 }
 
 Vector3 Quaternion::GetAxis() const
 {
-	float X = 1.0f - W * W;
+	float X = 1.0f - w * w;
 	if (X < Mathf::Epsilon) // Divide by zero safety check
 		return Vector3::Right;
 
@@ -74,9 +74,14 @@ Vector3 Quaternion::GetAxis() const
 Vector3 Quaternion::ToEulerAngles() const
 {
 	return Vector3(
+		atan2(2 * x * w - 2 * y * z, 1 - 2 * x * x - 2 * z * z),
+		atan2(2 * y * w - 2 * x * z, 1 - 2 * y * y - 2 * z * z),
+		asin(2 * x * y + 2 * z * w));
+	/*return Vector3(
 		Mathf::Atan2(2 * X * W - 2 * Y * Z, 1 - 2 * X * X - 2 * Z * Z),
 		Mathf::Atan2(2 * Y * W - 2 * X * Z, 1 - 2 * Y * Y - 2 * Z * Z),
-		Mathf::Sin(2 * X * Y + 2 * Z * W));
+		Mathf::Asin(2 * X * Y + 2 * Z * W)
+	);*/
 }
 
 float Quaternion::GetMagnitude() const
@@ -86,7 +91,7 @@ float Quaternion::GetMagnitude() const
 
 float Quaternion::GetSquaredMagnitude() const
 {
-	return X * X + Y * Y + Z * Z + W * W;
+	return x * x + y * y + z * z + w * w;
 }
 
 Quaternion Quaternion::Normalized() const
@@ -96,46 +101,46 @@ Quaternion Quaternion::Normalized() const
 
 Quaternion Quaternion::operator -() const
 {
-	return Quaternion(-X, -Y, -Z, -W);
+	return Quaternion(-x, -y, -z, -w);
 }
 
 Quaternion Quaternion::operator +(const Quaternion& quaternion) const
 {
-	return Quaternion(X + quaternion.X, Y + quaternion.Y, Z + quaternion.Z, W + quaternion.W);
+	return Quaternion(x + quaternion.x, y + quaternion.y, z + quaternion.z, w + quaternion.w);
 }
 
 Quaternion Quaternion::operator -(const Quaternion& quaternion) const
 {
-	return Quaternion(X - quaternion.X, Y - quaternion.Y, Z - quaternion.Z, W - quaternion.W);
+	return Quaternion(x - quaternion.x, y - quaternion.y, z - quaternion.z, w - quaternion.w);
 }
 
 Quaternion Quaternion::operator *(const Quaternion& quaternion) const
 {
-	float x = W * quaternion.X + X * quaternion.W + Y * quaternion.Z - Z * quaternion.Y;
-	float y = W * quaternion.Y + Y * quaternion.W + Z * quaternion.X - X * quaternion.Z;
-	float z = W * quaternion.Z + Z * quaternion.W + X * quaternion.Y - Y * quaternion.X;
-	float w = W * quaternion.W - X * quaternion.X - Y * quaternion.Y - Z * quaternion.Z;
+	float x = this->w * quaternion.x + this->x * quaternion.w + this->y * quaternion.z - this->z * quaternion.y;
+	float y = this->w * quaternion.y + this->y * quaternion.w + this->z * quaternion.x - this->x * quaternion.z;
+	float z = this->w * quaternion.z + this->z * quaternion.w + this->x * quaternion.y - this->y * quaternion.x;
+	float w = this->w * quaternion.w - this->x * quaternion.x - this->y * quaternion.y - this->z * quaternion.z;
 
 	return Quaternion(x, y, z, w).Normalize();
 }
 
 Quaternion Quaternion::operator *(float scalar) const
 {
-	return Quaternion(X * scalar, Y * scalar, Z * scalar, W * scalar);
+	return Quaternion(x * scalar, y * scalar, z * scalar, w * scalar);
 }
 
 Quaternion Quaternion::operator /(float scalar) const
 {
-	return Quaternion(X / scalar, Y / scalar, Z / scalar, W / scalar);
+	return Quaternion(x / scalar, y / scalar, z / scalar, w / scalar);
 }
 
 bool Quaternion::operator ==(const Quaternion& other) const
 {
 	return
-		Mathf::ApproximatelyEquals(X, other.X) &&
-		Mathf::ApproximatelyEquals(Y, other.Y) &&
-		Mathf::ApproximatelyEquals(Z, other.Z) &&
-		Mathf::ApproximatelyEquals(W, other.W);
+		Mathf::ApproximatelyEquals(x, other.x) &&
+		Mathf::ApproximatelyEquals(y, other.y) &&
+		Mathf::ApproximatelyEquals(z, other.z) &&
+		Mathf::ApproximatelyEquals(w, other.w);
 }
 
 bool Quaternion::operator !=(const Quaternion& other) const
@@ -145,26 +150,26 @@ bool Quaternion::operator !=(const Quaternion& other) const
 
 float Quaternion::operator [](int index)
 {
-	if (index < 0) return Components[0];
+	if (index < 0) return components[0];
 	return Quaternion::operator[]((unsigned int)index);
 }
 
 float Quaternion::operator [](int index) const
 {
-	if (index < 0) return Components[0];
+	if (index < 0) return components[0];
 	return Quaternion::operator[]((unsigned int)index);
 }
 
 float Quaternion::operator [](unsigned int index)
 {
-	if (index > 3) return Components[3];
-	return Components[index];
+	if (index > 3) return components[3];
+	return components[index];
 }
 
 float Quaternion::operator [](unsigned int index) const
 {
-	if (index > 3) return Components[3];
-	return Components[index];
+	if (index > 3) return components[3];
+	return components[index];
 }
 
 Quaternion Quaternion::FromEulerAngles(const Vector3& angles)
@@ -194,14 +199,14 @@ Vector3 Quaternion::Rotate(const Quaternion& quaternion, const Vector3& vector)
 {
 	Vector4 temp;
 
-	temp.X = quaternion.W * vector.X + quaternion.Y * vector.Z - quaternion.Z * vector.Y;
-	temp.Y = quaternion.W * vector.Y + quaternion.Z * vector.Z - quaternion.X * vector.Z;
-	temp.Z = quaternion.W * vector.Z + quaternion.X * vector.Y - quaternion.Y * vector.X;
-	temp.W = quaternion.X * vector.X + quaternion.Y * vector.Y + quaternion.Z * vector.Z;
+	temp.X = quaternion.w * vector.X + quaternion.y * vector.Z - quaternion.z * vector.Y;
+	temp.Y = quaternion.w * vector.Y + quaternion.z * vector.Z - quaternion.x * vector.Z;
+	temp.Z = quaternion.w * vector.Z + quaternion.x * vector.Y - quaternion.y * vector.X;
+	temp.W = quaternion.x * vector.X + quaternion.y * vector.Y + quaternion.z * vector.Z;
 
-	float x = temp.W * quaternion.X + temp.X * quaternion.W - temp.Y * quaternion.Z + temp.Z * quaternion.Y;
-	float y = temp.W * quaternion.Y + temp.Y * quaternion.W - temp.Z * quaternion.X + temp.X * quaternion.Z;
-	float z = temp.W * quaternion.Z + temp.Z * quaternion.W - temp.X * quaternion.Y + temp.Y * quaternion.X;
+	float x = temp.W * quaternion.x + temp.X * quaternion.w - temp.Y * quaternion.z + temp.Z * quaternion.y;
+	float y = temp.W * quaternion.y + temp.Y * quaternion.w - temp.Z * quaternion.x + temp.X * quaternion.z;
+	float z = temp.W * quaternion.z + temp.Z * quaternion.w - temp.X * quaternion.y + temp.Y * quaternion.x;
 
 	return Vector3(x, y, z);
 }
@@ -226,6 +231,6 @@ Quaternion Quaternion::RotationZ(float radians)
 
 float Quaternion::Dot(const Quaternion& a, const Quaternion& b)
 {
-	float dot = a.X * b.X + a.Y * b.Y + a.Z * b.Z + a.W * b.W;
+	float dot = a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
 	return dot;
 }

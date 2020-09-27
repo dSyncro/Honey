@@ -45,16 +45,16 @@ void Application::Run()
 		{
 			HNY_PROFILE_SCOPE("Layer OnUpdate");
 			for (Layer* layer : _layerStack)
-				layer->OnUpdate();
+				layer->onUpdate();
 		}
 
-		_imGuiLayer->Begin();
+		_imGuiLayer->begin();
 		{
 			HNY_PROFILE_SCOPE("Layer OnImGuiRender");
 			for (Layer* layer : _layerStack)
-				layer->OnImGuiRender();
+				layer->onImGuiRender();
 		}
-		_imGuiLayer->End();
+		_imGuiLayer->end();
 	}
 }
 
@@ -67,16 +67,16 @@ void Application::PushLayer(Layer* layer)
 {
 	HNY_PROFILE_FUNCTION();
 
-	_layerStack.PushLayer(layer);
-	layer->OnAttach();
+	_layerStack.pushLayer(layer);
+	layer->onAttach();
 }
 
 void Application::PushOverlay(Layer* overlay)
 {
 	HNY_PROFILE_FUNCTION();
 
-	_layerStack.PushOverlay(overlay);
-	overlay->OnAttach();
+	_layerStack.pushOverlay(overlay);
+	overlay->onAttach();
 }
 
 void Application::OnEvent(Event& e)
@@ -91,8 +91,8 @@ void Application::OnEvent(Event& e)
 
 	for (std::vector<Layer*>::reverse_iterator it = _layerStack.rbegin(); it != _layerStack.rend(); it++)
 	{
-		(*it)->OnEvent(e);
-		if (e.HasBeenHandled) break;
+		(*it)->onEvent(e);
+		if (e.hasBeenHandled) break;
 	}
 }
 
@@ -106,8 +106,8 @@ bool Application::OnWindowResize(WindowResizeEvent& e)
 {
 	HNY_PROFILE_FUNCTION();
 
-	uint32_t width = e.GetWidth();
-	uint32_t height = e.GetHeight();
+	std::size_t width = e.getSize().Width;
+	std::size_t height = e.getSize().Height;
 
 	if (width == 0 || height == 0)
 	{

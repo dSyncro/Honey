@@ -43,25 +43,25 @@ namespace Honey {
 		static void Shutdown();
 
 		static void DrawQuad(const Math::Matrix4x4& transform, const Color& color);
-		static void DrawQuad(const Math::Matrix4x4& transform, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords = Quad::DefaultTextureCoords, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2& tiling = Math::Vector2::One);
+		static void DrawQuad(const Math::Matrix4x4& transform, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords = Quad::DefaultTextureCoords, const Math::Vector4& tint = Math::Vector4::One, const Math::Vector2& tiling = Math::Vector2::one());
 
 		static void DrawQuad(const Math::Vector2& position, const Math::Vector2& size, const Color& color);
 		static void DrawQuad(const Math::Vector3& position, const Math::Vector2& size, const Color& color);
-		static void DrawQuad(const Math::Vector2& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords = Quad::DefaultTextureCoords, const Color& tint = Color::White, const Math::Vector2& tiling = Math::Vector2::One);
-		static void DrawQuad(const Math::Vector3& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords = Quad::DefaultTextureCoords, const Color& tint = Color::White, const Math::Vector2& tiling = Math::Vector2::One);
-		static void DrawQuad(const Math::Vector2& position, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint = Color::White, const Math::Vector2& tiling = Math::Vector2::One);
-		static void DrawQuad(const Math::Vector3& position, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint = Color::White, const Math::Vector2& tiling = Math::Vector2::One);
-		static void DrawSprite(const Math::Vector2& position, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint = Color::White);
-		static void DrawSprite(const Math::Vector3& position, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint = Color::White);
+		static void DrawQuad(const Math::Vector2& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords = Quad::DefaultTextureCoords, const Color& tint = Color::white(), const Math::Vector2& tiling = Math::Vector2::one());
+		static void DrawQuad(const Math::Vector3& position, const Math::Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords = Quad::DefaultTextureCoords, const Color& tint = Color::white(), const Math::Vector2& tiling = Math::Vector2::one());
+		static void DrawQuad(const Math::Vector2& position, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint = Color::white(), const Math::Vector2& tiling = Math::Vector2::one());
+		static void DrawQuad(const Math::Vector3& position, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint = Color::white(), const Math::Vector2& tiling = Math::Vector2::one());
+		static void DrawSprite(const Math::Vector2& position, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint = Color::white());
+		static void DrawSprite(const Math::Vector3& position, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint = Color::white());
 
 		static void DrawRotatedQuad(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Color& color);
 		static void DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Color& color);
-		static void DrawRotatedQuad(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords = Quad::DefaultTextureCoords, const Color& tint = Color::White, const Math::Vector2& tiling = Math::Vector2::One);
-		static void DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords = Quad::DefaultTextureCoords, const Color& tint = Color::White, const Math::Vector2& tiling = Math::Vector2::One);
-		static void DrawRotatedQuad(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint = Color::White, const Math::Vector2 & tiling = Math::Vector2::One);
-		static void DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint = Color::White, const Math::Vector2& tiling = Math::Vector2::One);
-		static void DrawRotatedSprite(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint = Color::White);
-		static void DrawRotatedSprite(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint = Color::White);
+		static void DrawRotatedQuad(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords = Quad::DefaultTextureCoords, const Color& tint = Color::white(), const Math::Vector2& tiling = Math::Vector2::one());
+		static void DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<Texture2D>& texture, const Quad::TextureCoordinates& texCoords = Quad::DefaultTextureCoords, const Color& tint = Color::white(), const Math::Vector2& tiling = Math::Vector2::one());
+		static void DrawRotatedQuad(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint = Color::white(), const Math::Vector2 & tiling = Math::Vector2::one());
+		static void DrawRotatedQuad(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<SubTexture2D>& subtexture, const Color& tint = Color::white(), const Math::Vector2& tiling = Math::Vector2::one());
+		static void DrawRotatedSprite(const Math::Vector2& position, float rotation, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint = Color::white());
+		static void DrawRotatedSprite(const Math::Vector3& position, float rotation, const Math::Vector2& size, const Reference<Sprite>& sprite, const Color& tint = Color::white());
 
 		static void DrawText(const Math::Vector3& position, const std::string& text, const Reference<FontAtlas>& atlas);
 

@@ -71,11 +71,11 @@ void GlfwPlatformsWindow::OnUpdate()
 {
 	HNY_PROFILE_FUNCTION();
 
-	Input::MouseScrollAmount() = Math::Vector2(0.0f, 0.0f);
+	Input::mouseScrollAmount() = Math::Vector2(0.0f, 0.0f);
 	glfwPollEvents();
 	_context->SwapBuffers();
 
-	Engine::_timer.MarkFrame();
+	Engine::_timer.markFrame();
 }
 
 void GlfwPlatformsWindow::SetTitle(const std::string& title) 
@@ -171,7 +171,7 @@ void GlfwPlatformsWindow::WindowMouseCallback(GLFWwindow* window, int button, in
 
 void GlfwPlatformsWindow::WindowScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 {
-	Input::MouseScrollAmount() = Math::Vector2((float)xOffset, (float)yOffset);
+	Input::mouseScrollAmount() = Math::Vector2((float)xOffset, (float)yOffset);
 	WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 	MouseScrolledEvent e((float)xOffset, (float)yOffset);
 	data.Callback(e);

@@ -19,10 +19,10 @@ namespace Honey {
 
 			void Set(
 				const Math::Vector3& position = Math::Vector3::Zero, 
-				const Honey::Color& color = Color::White, 
-				const Math::Vector2& texCoord = Math::Vector2::Zero, 
+				const Honey::Color& color = Color::white(), 
+				const Math::Vector2& texCoord = Math::Vector2::zero(), 
 				int textureIndex = 0,
-				const Math::Vector2& tiling = Math::Vector2::One
+				const Math::Vector2& tiling = Math::Vector2::one()
 			);
 
 		};

@@ -204,7 +204,7 @@ OpenGLShader::~OpenGLShader()
 	glDeleteProgram(_rendererID);
 }
 
-void OpenGLShader::Bind() const
+void OpenGLShader::bind() const
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -214,7 +214,7 @@ void OpenGLShader::Bind() const
 	s_Bound = _rendererID;
 }
 
-void OpenGLShader::Unbind() const
+void OpenGLShader::unbind() const
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -224,14 +224,14 @@ void OpenGLShader::Unbind() const
 	s_Bound = 0;
 }
 
-bool OpenGLShader::IsBound() const
+bool OpenGLShader::isBound() const
 {
 	return s_Bound == _rendererID;
 }
 
 void OpenGLShader::SetInt(const std::string& name, int value)
 {
-	this->Bind();
+	this->bind();
 
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform1i(id, value);
@@ -239,7 +239,7 @@ void OpenGLShader::SetInt(const std::string& name, int value)
 
 void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t count)
 {
-	this->Bind();
+	this->bind();
 
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform1iv(id, count, values);
@@ -247,7 +247,7 @@ void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t co
 
 void OpenGLShader::SetFloat(const std::string& name, float value)
 {
-	this->Bind();
+	this->bind();
 
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform1f(id, value);
@@ -255,7 +255,7 @@ void OpenGLShader::SetFloat(const std::string& name, float value)
 
 void OpenGLShader::SetVec2(const std::string& name, const glm::vec2& value)
 {
-	this->Bind();
+	this->bind();
 
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform2f(id, value.x, value.y);
@@ -263,7 +263,7 @@ void OpenGLShader::SetVec2(const std::string& name, const glm::vec2& value)
 
 void OpenGLShader::SetVec3(const std::string& name, const glm::vec3& value)
 {
-	this->Bind();
+	this->bind();
 
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform3f(id, value.x, value.y, value.z);
@@ -271,7 +271,7 @@ void OpenGLShader::SetVec3(const std::string& name, const glm::vec3& value)
 
 void OpenGLShader::SetVec4(const std::string& name, const glm::vec4& value)
 {
-	this->Bind();
+	this->bind();
 
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniform4f(id, value.x, value.y, value.z, value.w);
@@ -279,7 +279,7 @@ void OpenGLShader::SetVec4(const std::string& name, const glm::vec4& value)
 
 void OpenGLShader::SetMat2(const std::string& name, const glm::mat2& matrix)
 {
-	this->Bind();
+	this->bind();
 
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniformMatrix2fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
@@ -287,7 +287,7 @@ void OpenGLShader::SetMat2(const std::string& name, const glm::mat2& matrix)
 
 void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)
 {
-	this->Bind();
+	this->bind();
 
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniformMatrix3fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
@@ -295,7 +295,7 @@ void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)
 
 void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)
 {
-	this->Bind();
+	this->bind();
 
 	int id = glGetUniformLocation(_rendererID, name.c_str());
 	glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
@@ -303,8 +303,8 @@ void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)
 
 void OpenGLShader::SetMat4(const std::string& name, const Matrix4x4& matrix)
 {
-	this->Bind();
+	this->bind();
 
 	int id = glGetUniformLocation(_rendererID, name.c_str());
-	glUniformMatrix4fv(id, 1, GL_TRUE, &matrix.Elements[0]);
+	glUniformMatrix4fv(id, 1, GL_TRUE, &matrix.elements[0]);
 }

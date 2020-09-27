@@ -11,7 +11,7 @@ namespace Honey {
 		char Character = 0;
 		Quad::TextureCoordinates UV = Quad::DefaultTextureCoords;
 		Math::Rect BoundingBox = Math::Rect();
-		Math::Vector2 Offset = Math::Vector2::Zero;
+		Math::Vector2 Offset = Math::Vector2::zero();
 		float Advance = 0.0f;
 
 	};

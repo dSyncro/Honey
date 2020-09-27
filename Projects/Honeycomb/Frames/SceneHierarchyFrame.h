@@ -17,6 +17,7 @@ namespace Honey {
 	private:
 
 		void DrawEntityNode(Entity entity);
+		void DrawComponents(Entity entity);
 
 		Reference<Scene> _context;
 		Entity _selected;

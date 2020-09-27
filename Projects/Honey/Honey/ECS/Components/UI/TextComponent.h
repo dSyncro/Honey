@@ -1,3 +1,7 @@
+/**
+ * @file TextComponent.h
+*/
+
 #pragma once
 
 #include <string>
@@ -5,15 +9,18 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Used to render text.
+	*/
 	struct TextComponent {
 
 		TextComponent() = default;
 		~TextComponent() = default;
 		TextComponent(const TextComponent&) = default;
-		TextComponent(const std::string& text) : Text(text) {}
+		TextComponent(const std::string& text) : text(text) {}
 
-		std::string Text;
-		Reference<FontAtlas> Atlas;
+		std::string text; /** @brief Text to display. */
+		Reference<FontAtlas> atlas; /** @brief Font atlas used to display text. */
 	};
 
 }

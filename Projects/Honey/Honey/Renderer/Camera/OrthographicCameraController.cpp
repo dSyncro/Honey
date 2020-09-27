@@ -19,22 +19,22 @@ void OrthographicCameraController::OnUpdate()
 
 	Timestamp deltaTime = Time::GetDeltaTime();
 
-	if (Input::IsKeyPressed(Keycode::A))
+	if (Input::isKeyPressed(Keycode::A))
 	{
 		_position.x -= Mathf::Cos(glm::radians(_rotation)) * _moveSpeed * deltaTime;
 		_position.y -= Mathf::Sin(glm::radians(_rotation)) * _moveSpeed * deltaTime;
 	}
-	if (Input::IsKeyPressed(Keycode::D))
+	if (Input::isKeyPressed(Keycode::D))
 	{
 		_position.x += Mathf::Cos(glm::radians(_rotation)) * _moveSpeed * deltaTime;
 		_position.y += Mathf::Sin(glm::radians(_rotation)) * _moveSpeed * deltaTime;
 	}
-	if (Input::IsKeyPressed(Keycode::W))
+	if (Input::isKeyPressed(Keycode::W))
 	{
 		_position.x += -Mathf::Sin(glm::radians(_rotation)) * _moveSpeed * deltaTime;
 		_position.y +=  Mathf::Cos(glm::radians(_rotation)) * _moveSpeed * deltaTime;
 	}
-	if (Input::IsKeyPressed(Keycode::S))
+	if (Input::isKeyPressed(Keycode::S))
 	{
 		_position.x -= -Mathf::Sin(glm::radians(_rotation)) * _moveSpeed * deltaTime;
 		_position.y -=  Mathf::Cos(glm::radians(_rotation)) * _moveSpeed * deltaTime;
@@ -44,9 +44,9 @@ void OrthographicCameraController::OnUpdate()
 
 	if (_doRotate)
 	{
-		if (Input::IsKeyPressed(Keycode::Q))
+		if (Input::isKeyPressed(Keycode::Q))
 			_rotation += _rotationSpeed * deltaTime;
-		if (Input::IsKeyPressed(Keycode::E))
+		if (Input::isKeyPressed(Keycode::E))
 			_rotation -= _rotationSpeed * deltaTime;
 
 		if (_rotation > 180.0f)
@@ -77,7 +77,7 @@ bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 {
 	HNY_PROFILE_FUNCTION();
 
-	_zoomLevel -= e.GetYOffset();
+	_zoomLevel -= e.getYOffset();
 	_zoomLevel = Mathf::Max(_zoomLevel, 0.1f);
 	_camera.SetProjection(-_aspectRatio * _zoomLevel, _aspectRatio * _zoomLevel, -_zoomLevel, _zoomLevel);
 	return false;
@@ -87,6 +87,6 @@ bool OrthographicCameraController::OnWindowResize(WindowResizeEvent& e)
 {
 	HNY_PROFILE_FUNCTION();
 
-	Resize(e.GetWidth(), e.GetHeight());
+	Resize(e.getSize().Width, e.getSize().Height);
 	return false;
 }

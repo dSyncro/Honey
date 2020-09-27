@@ -21,7 +21,7 @@ ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
 
 ImGuiLayer::~ImGuiLayer() = default;
 
-void ImGuiLayer::OnAttach()
+void ImGuiLayer::onAttach()
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -56,7 +56,7 @@ void ImGuiLayer::OnAttach()
 	ImGui_ImplOpenGL3_Init("#version 410");
 }
 
-void ImGuiLayer::OnDetach()
+void ImGuiLayer::onDetach()
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -65,7 +65,7 @@ void ImGuiLayer::OnDetach()
 	ImGui::DestroyContext();
 }
 
-void ImGuiLayer::Begin()
+void ImGuiLayer::begin()
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -74,7 +74,7 @@ void ImGuiLayer::Begin()
 	ImGui::NewFrame();
 }
 
-void ImGuiLayer::End()
+void ImGuiLayer::end()
 {
 	HNY_PROFILE_FUNCTION();
 

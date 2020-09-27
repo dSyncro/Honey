@@ -8,10 +8,10 @@ namespace Honey {
 
 	public:
 
-		static Timestamp GetTime() { return Engine::GetTimer().GetTime(); }
-		static Timestamp GetDeltaTime() { return Engine::GetTimer().GetDeltaTime(); }
-		static float GetFrameRate() { return 1 / Engine::GetTimer().GetDeltaTime(); }
-		static std::size_t GetFrameCount() { return Engine::GetTimer().GetFrameCount(); }
+		static Timestamp GetTime() { return Engine::getTimer().getTime(); }
+		static Timestamp GetDeltaTime() { return Engine::getTimer().getDeltaTime(); }
+		static float GetFrameRate() { return 1 / Engine::getTimer().getDeltaTime(); }
+		static std::size_t GetFrameCount() { return Engine::getTimer().getFrameCount(); }
 
 	};
 }

@@ -4,6 +4,10 @@
 
 namespace Honey {
 
+	/**
+	 * @brief App Tick Event
+	 * Usually occurs after an Application Tick.
+	*/
 	class AppTickEvent final : public Event {
 
 	public:

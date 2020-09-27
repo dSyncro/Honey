@@ -4,10 +4,15 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Entity transform.
+	 * It defines translation, rotation and scale of
+	 * a certain entity.
+	*/
 	struct TransformComponent {
 
 		TransformComponent() 
-			: Position(Math::Vector3::Zero), Rotation(Math::Quaternion::Identity), Scale(Math::Vector3::One) {}
+			: position(Math::Vector3::Zero), rotation(Math::Quaternion::Identity), scale(Math::Vector3::One) {}
 
 		~TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
@@ -15,17 +20,21 @@ namespace Honey {
 			const Math::Vector3& position, 
 			const Math::Quaternion& rotation = Math::Quaternion::Identity,
 			const Math::Vector3& scale = Math::Vector3::One
-		) : Position(position), Rotation(rotation), Scale(scale) { }
+		) : position(position), rotation(rotation), scale(scale) { }
 
-		Math::Vector3 Position;
-		Math::Quaternion Rotation;
-		Math::Vector3 Scale;
+		Math::Vector3 position;
+		Math::Quaternion rotation;
+		Math::Vector3 scale;
 
+		/**
+		 * @brief Get the translation-rotation-scale matrix relative to this transformation.
+		 * @return the TRS matrix relative to this transformation.
+		*/
 		Math::Matrix4x4 GetTRSMatrix() const
 		{
-			return Math::Matrix4x4::Translate(Position) *
-				Math::Matrix4x4::Rotate(Rotation) *
-				Math::Matrix4x4::Scale(Scale);
+			return Math::Matrix4x4::translate(position) *
+				Math::Matrix4x4::rotate(rotation) *
+				Math::Matrix4x4::scale(scale);
 		}
 	};
 

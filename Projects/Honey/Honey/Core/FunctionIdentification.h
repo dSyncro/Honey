@@ -1,11 +1,16 @@
 /**
  * @file FunctionIdentification.h
  * @brief Identify function name and signature.
- */
+*/
 
 #pragma once
 
 #include "OS.h"
+
+/**
+ * @def HNY_FUNCTION_NAME
+ * @brief Get the function name this line belongs to.
+*/
 
 // Function Name
 #if defined(HNY_PLATFORM_WINDOWS) //WINDOWS
@@ -13,6 +18,11 @@
 #else //*NIX
 #	define HNY_FUNCTION_NAME __func__ 
 #endif
+
+/**
+ * @def HNY_FUNCTION_SIGNATURE
+ * @brief Get the function signature this line belongs to.
+*/
 
 // Function Signature
 #if defined(HNY_PLATFORM_WINDOWS)

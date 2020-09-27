@@ -6,21 +6,34 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Used to dispatch event to a proper listener function.
+	*/
 	class EventDispatcher {
-
-		template <typename T>
-		using EventCallback = std::function<bool(T&)>;
 
 	public:
 
+		template <typename T>
+		using CallbackType = std::function<bool(T&)>;
+
+		/**
+		 * @brief Build a dispatcher on top of an event.
+		 * @param e The event.
+		*/
 		EventDispatcher(Event& e) : _event(e) {}
 
+		/**
+		 * @brief Dispatch to function if it is of the specified type.
+		 * @tparam T Type required to dispatch.
+		 * @param callback Callback function.
+		 * @return A boolean expressing if the event got dispatched.
+		*/
 		template <typename T>
-		bool Dispatch(EventCallback<T> callback)
+		bool Dispatch(CallbackType<T> callback)
 		{
-			if (_event.GetEventType() != T::GetStaticType()) return false;
+			if (_event.getEventType() != T::getStaticType()) return false;
 
-			_event.HasBeenHandled = callback(static_cast<T&>(_event));
+			_event.hasBeenHandled = callback(static_cast<T&>(_event));
 			return true;
 		}
 

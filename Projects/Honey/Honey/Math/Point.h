@@ -14,7 +14,7 @@ namespace Honey::Math {
 			: X(x), Y(y) { }
 
 		constexpr Point(const Vector2Int& vector)
-			: X(vector.X), Y(vector.Y) {}
+			: X(vector.x), Y(vector.y) {}
 
 		int32_t X;
 		int32_t Y;

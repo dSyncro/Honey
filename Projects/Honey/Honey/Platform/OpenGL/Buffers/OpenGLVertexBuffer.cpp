@@ -14,8 +14,8 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size)
 {
 	HNY_PROFILE_FUNCTION();
 
-	glGenBuffers(1, &_rendererID);
-	glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
+	glCreateBuffers(1, &_rendererID);
+	PerformBinding();
 	glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
 }
 
@@ -23,8 +23,8 @@ OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
 {
 	HNY_PROFILE_FUNCTION();
 
-	glGenBuffers(1, &_rendererID);
-	glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
+	glCreateBuffers(1, &_rendererID);
+	PerformBinding();
 	glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 }
 
@@ -32,36 +32,47 @@ OpenGLVertexBuffer::~OpenGLVertexBuffer()
 {
 	HNY_PROFILE_FUNCTION();
 
+	unbind();
 	glDeleteBuffers(1, &_rendererID);
 }
 
-void OpenGLVertexBuffer::Bind() const
+void OpenGLVertexBuffer::bind() const
 {
 	HNY_PROFILE_FUNCTION();
 
 	if (s_Bound == _rendererID) return;
 
-	glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
-	s_Bound = _rendererID;
+	PerformBinding();
 }
 
-void OpenGLVertexBuffer::Unbind() const
+void OpenGLVertexBuffer::unbind() const
 {
 	HNY_PROFILE_FUNCTION();
 
 	if (s_Bound != _rendererID) return;
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	s_Bound = 0;
+	PerformUnbinding();
 }
 
-bool OpenGLVertexBuffer::IsBound() const
+bool OpenGLVertexBuffer::isBound() const
 {
 	return s_Bound == _rendererID;
 }
 
 void OpenGLVertexBuffer::SetData(const void* data, uint32_t size)
 {
-	glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
+	PerformBinding();
 	glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+}
+
+void OpenGLVertexBuffer::PerformBinding() const
+{
+	glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
+	s_Bound = _rendererID;
+}
+
+void OpenGLVertexBuffer::PerformUnbinding() const
+{
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	s_Bound = 0;
 }

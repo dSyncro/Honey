@@ -16,7 +16,7 @@ namespace Honey {
 		virtual std::size_t GetHeight() const override { return _height; }
 
 		virtual void* GetRawData() override;
-		virtual void SetData(void* data, std::size_t size, const Math::Vector2Int& offset = Math::Vector2Int::Zero) override;
+		virtual void SetData(void* data, std::size_t size, const Math::Vector2Int& offset = Math::Vector2Int::zero()) override;
 
 		virtual void BindToSlot(uint32_t slot = 0) const override;
 

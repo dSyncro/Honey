@@ -15,9 +15,9 @@ namespace Honey {
 
 		const float Epsilon = std::numeric_limits<float>::epsilon();
 
-		const float NaN = std::numeric_limits<float>::quiet_NaN();
-		const float Infinity = +std::numeric_limits<float>::infinity();
-		const float NegativeInfinity = -Infinity;
+		constexpr float NaN() { return std::numeric_limits<float>::quiet_NaN(); }
+		constexpr float infinity() { return +std::numeric_limits<float>::infinity(); }
+		constexpr float negativeInfinity() { return -infinity(); }
 
 		static HNY_ALWAYS_INLINE float  Abs(float x) noexcept { return std::abs(x); }
 
@@ -198,7 +198,7 @@ namespace Honey {
 		static HNY_ALWAYS_INLINE bool ApproximatelyEquals(float x, float y) noexcept { return PositiveDifference(x, y) < Epsilon; }
 	}
 
-#if !defined(HNY_STRICT_MATH_NAMESPACE)
+//#if !defined(HNY_STRICT_MATH_NAMESPACE)
 	namespace Mathf = Math::Functions;
-#endif
+//#endif
 }

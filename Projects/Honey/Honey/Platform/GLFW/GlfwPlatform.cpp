@@ -10,7 +10,7 @@ static void GLFWErrorCallback(int error, const char* description)
 	HNY_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 }
 
-bool Platform::Init()
+bool Platform::init()
 {
 	int success = glfwInit();
 	HNY_CORE_ASSERT(success, "Could not init GLFW!");
@@ -18,9 +18,9 @@ bool Platform::Init()
 	return true;
 }
 
-void Platform::Shutdown()
+void Platform::shutdown()
 {
 	glfwTerminate();
 }
 
-Platform::API Platform::GetAPI() { return API::GLFW; }
+Platform::API Platform::getAPI() { return API::GLFW; }

@@ -57,12 +57,12 @@ void OpenGLRendererAPI::ClearDepthBuffer() const
 
 void OpenGLRendererAPI::SetClearColor(const Color& color)
 {
-	glClearColor(color.R, color.G, color.B, color.A);
+	glClearColor(color.r, color.g, color.b, color.a);
 }
 
 void OpenGLRendererAPI::SetViewport(Vector2 location, Vector2 size)
 {
-	glViewport((uint32_t)location.X, (uint32_t)location.Y, (uint32_t)size.X, (uint32_t)size.Y);
+	glViewport((uint32_t)location.x, (uint32_t)location.y, (uint32_t)size.x, (uint32_t)size.y);
 }
 
 void OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)

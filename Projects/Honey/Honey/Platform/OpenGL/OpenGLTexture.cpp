@@ -146,7 +146,7 @@ void OpenGLTexture2D::SetData(void* data, std::size_t size, const Vector2Int& of
 
 	uint32_t bpp = DataFormatToBPP(_dataFormat);
 	HNY_CORE_ASSERT(size == _width * _height * bpp, "Provided size does not equal texture size");
-	glTextureSubImage2D(_rendererID, 0, offset.X, offset.Y, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data);
+	glTextureSubImage2D(_rendererID, 0, offset.x, offset.y, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data);
 }
 
 void OpenGLTexture2D::BindToSlot(uint32_t slot) const

@@ -8,8 +8,8 @@
 
 using namespace Honey::Math;
 
-Vector3::Vector3(const Vector2& vector) : X(vector.X), Y(vector.Y), Z(0.0f) {}
-Vector3::Vector3(const Vector2& vector, float z) : X(vector.X), Y(vector.Y), Z(z) {}
+Vector3::Vector3(const Vector2& vector) : X(vector.x), Y(vector.y), Z(0.0f) {}
+Vector3::Vector3(const Vector2& vector, float z) : X(vector.x), Y(vector.y), Z(z) {}
 
 const Vector3 Vector3::Left    = Vector3(-1.0f,  0.0f,  0.0f);
 const Vector3 Vector3::Right   = Vector3( 1.0f,  0.0f,  0.0f);
@@ -21,8 +21,8 @@ const Vector3 Vector3::Back    = Vector3( 0.0f,  0.0f, -1.0f);
 const Vector3 Vector3::Zero = Vector3(0.0f);
 const Vector3 Vector3::One  = Vector3(1.0f);
 
-const Vector3 Vector3::Infinity          = Vector3(Mathf::Infinity);
-const Vector3 Vector3::NegativeInfinity  = Vector3(Mathf::NegativeInfinity);
+const Vector3 Vector3::Infinity          = Vector3(Mathf::infinity());
+const Vector3 Vector3::NegativeInfinity  = Vector3(Mathf::negativeInfinity());
 
 Vector3& Vector3::Normalize()
 {
@@ -181,9 +181,9 @@ bool Vector3::operator ==(const Vector3& other)
 Vector3 Vector3::operator *(const Matrix4x4& matrix) const
 {
 	return Vector3(
-		matrix.Columns[0].X * X + matrix.Columns[0].Y * Y + matrix.Columns[0].Z * Z + matrix.Columns[0].W,
-		matrix.Columns[1].X * X + matrix.Columns[1].Y * Y + matrix.Columns[1].Z * Z + matrix.Columns[1].W,
-		matrix.Columns[2].X * X + matrix.Columns[2].Y * Y + matrix.Columns[2].Z * Z + matrix.Columns[2].W
+		matrix.rows[0].X * X + matrix.rows[0].Y * Y + matrix.rows[0].Z * Z + matrix.rows[0].W,
+		matrix.rows[1].X * X + matrix.rows[1].Y * Y + matrix.rows[1].Z * Z + matrix.rows[1].W,
+		matrix.rows[2].X * X + matrix.rows[2].Y * Y + matrix.rows[2].Z * Z + matrix.rows[2].W
 	);
 }
 

@@ -33,7 +33,7 @@ namespace Honey {
 		virtual std::size_t GetHeight() const = 0;
 
 		virtual void* GetRawData() = 0;
-		virtual void SetData(void* data, std::size_t size, const Math::Vector2Int& offset = Math::Vector2Int::Zero) = 0;
+		virtual void SetData(void* data, std::size_t size, const Math::Vector2Int& offset = Math::Vector2Int::zero()) = 0;
 
 		virtual void BindToSlot(uint32_t slot = 0) const = 0;
 	};

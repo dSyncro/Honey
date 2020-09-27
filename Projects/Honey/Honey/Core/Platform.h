@@ -1,3 +1,8 @@
+/**
+ * @file Platform.h
+ * @brief Platform related stuff.
+*/
+
 #pragma once
 
 namespace Honey {
@@ -6,6 +11,9 @@ namespace Honey {
 
 	public:
 
+		/**
+		 * @brief Supported platform APIs
+		*/
 		enum class API {
 			Windows,
 			GLFW
@@ -15,9 +23,23 @@ namespace Honey {
 		Platform(const Platform&) = delete;
 		Platform& operator =(const Platform&) = delete;
 
-		static bool Init();
-		static void Shutdown();
-		static API GetAPI();
+		/**
+		 * @brief Initialize Platform.
+		 * @return A boolean expressing if the platform was initialized successfully.
+		*/
+		static bool init();
+
+		/**
+		 * @brief Shutdown Platform.
+		 * Used to clean up Platform data.
+		*/
+		static void shutdown();
+
+		/**
+		 * @brief Get current Platform API.
+		 * @return Current Platform API.
+		*/
+		static API getAPI();
 	};
 
 }

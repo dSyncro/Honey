@@ -6,10 +6,10 @@ using namespace Honey::Math;
 SubTexture2D::SubTexture2D(const Reference<Texture2D>& texture, const Math::Vector2& bottomLeft, const Math::Vector2& topRight)
 	: _texture(texture)
 {
-	_texCoords[0] = Math::Vector2(bottomLeft.X, bottomLeft.Y);
-	_texCoords[1] = Math::Vector2(topRight.X, bottomLeft.Y);
-	_texCoords[2] = Math::Vector2(topRight.X, topRight.Y);
-	_texCoords[3] = Math::Vector2(bottomLeft.X, topRight.Y);
+	_texCoords[0] = Math::Vector2(bottomLeft.x, bottomLeft.y);
+	_texCoords[1] = Math::Vector2(topRight.x, bottomLeft.y);
+	_texCoords[2] = Math::Vector2(topRight.x, topRight.y);
+	_texCoords[3] = Math::Vector2(bottomLeft.x, topRight.y);
 }
 
 Reference<SubTexture2D> SubTexture2D::CreateFromCoordinates(
@@ -19,13 +19,13 @@ Reference<SubTexture2D> SubTexture2D::CreateFromCoordinates(
 	const Vector2& spriteSize)
 {
 	Vector2 bottomLeft = Vector2(
-		coords.X * cellSize.X / texture->GetWidth(), 
-		coords.Y * cellSize.Y / texture->GetHeight()
+		coords.x * cellSize.x / texture->GetWidth(), 
+		coords.y * cellSize.y / texture->GetHeight()
 	);
 
 	Vector2 topRight = Vector2(
-		(coords.X + spriteSize.X) * cellSize.X / texture->GetWidth(), 
-		(coords.Y + spriteSize.Y) * cellSize.Y / texture->GetHeight()
+		(coords.x + spriteSize.x) * cellSize.x / texture->GetWidth(), 
+		(coords.y + spriteSize.y) * cellSize.y / texture->GetHeight()
 	);
 
 	return CreateReference<SubTexture2D>(texture, bottomLeft, topRight);

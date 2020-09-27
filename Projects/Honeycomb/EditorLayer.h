@@ -12,11 +12,11 @@ namespace Honey {
 		EditorLayer() : Layer("Editor Layer"), _cameraController(1.6f, 0.9f) {}
 		~EditorLayer() = default;
 
-		virtual void OnAttach() override;
-		virtual void OnDetach() override;
-		virtual void OnUpdate() override;
-		virtual void OnEvent(Event& e) override;
-		virtual void OnImGuiRender() override;
+		virtual void onAttach() override;
+		virtual void onDetach() override;
+		virtual void onUpdate() override;
+		virtual void onEvent(Event& e) override;
+		virtual void onImGuiRender() override;
 
 	private:
 

@@ -10,17 +10,18 @@ uint32_t OpenGLIndexBuffer::s_Bound = 0;
 
 OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count) : _count(count)
 {
-	glGenBuffers(1, &_rendererID);
+	glCreateBuffers(1, &_rendererID);
 	glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
 	glBufferData(GL_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
 }
 
 OpenGLIndexBuffer::~OpenGLIndexBuffer()
 {
+	unbind();
 	glDeleteBuffers(1, &_rendererID);
 }
 
-void OpenGLIndexBuffer::Bind() const
+void OpenGLIndexBuffer::bind() const
 {
 	if (s_Bound == _rendererID) return;
 
@@ -28,7 +29,7 @@ void OpenGLIndexBuffer::Bind() const
 	s_Bound = _rendererID;
 }
 
-void OpenGLIndexBuffer::Unbind() const
+void OpenGLIndexBuffer::unbind() const
 {
 	if (s_Bound != _rendererID) return;
 
@@ -36,7 +37,7 @@ void OpenGLIndexBuffer::Unbind() const
 	s_Bound = 0;
 }
 
-bool OpenGLIndexBuffer::IsBound() const
+bool OpenGLIndexBuffer::isBound() const
 {
 	return s_Bound == _rendererID;
 }

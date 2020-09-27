@@ -1,3 +1,8 @@
+/**
+ * @file MouseEvents.h
+ * @brief Import all MouseEvents at once.
+*/
+
 #pragma once
 
 #include "Mouse/MouseButtonEvent.h"

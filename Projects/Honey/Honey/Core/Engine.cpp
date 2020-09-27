@@ -8,39 +8,47 @@ using namespace Honey;
 
 Engine::Timer Engine::_timer = Timer();
 
-void Engine::Init()
+void Engine::init()
 {
-	bool platformInit = Platform::Init();
+	// Initialize platform first
+	bool platformInit = Platform::init();
 	HNY_CORE_ASSERT(platformInit, "Platform initialization failed!");
 
-	Log::Init();
+	// Initialize Logging
+	Log::init();
 }
 
-void Engine::Shutdown()
+void Engine::shutdown()
 {
-	Platform::Shutdown();
+	// Clear Platform information
+	Platform::shutdown();
 }
 
 
 Engine::Timer::Timer()
 {
-	Reset();
+	// Set timer data to default
+	reset();
 }
 
-void Engine::Timer::Reset()
+void Engine::Timer::reset()
 {
+	// Set timer data to now
 	_start = _last = system_clock::now();
 }
 
-void Engine::Timer::MarkFrame()
+void Engine::Timer::markFrame()
 {
-	_frameCount++;
+	_frameCount++; // increment frame count
+
+	// Calculate delta time
 	system_clock::time_point now = system_clock::now();
 	_deltaTime = duration_cast<duration<float>>(now - _last).count();
-	_last = now;
+
+	_last = now; // Mark
 }
 
-Timestamp Engine::Timer::GetTime() const noexcept
+Timestamp Engine::Timer::getTime() const noexcept
 {
 	system_clock::time_point now = system_clock::now();
 	return duration_cast<duration<float>>(now - _start).count();

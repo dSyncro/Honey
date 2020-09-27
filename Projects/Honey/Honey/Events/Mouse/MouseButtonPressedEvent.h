@@ -4,13 +4,20 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Mouse Button Pressed Event.
+	 * Usually occurs when a mouse button is pressed.
+	*/
 	class MouseButtonPressedEvent final : public MouseButtonEvent {
 
 	public:
 
 		MouseButtonPressedEvent(MouseButton button) : MouseButtonEvent(button) {}
 
-		virtual std::string ToString() const override
+		/**
+		 * @see Event::toString()
+		*/
+		virtual std::string toString() const override
 		{
 			std::stringstream stream;
 			stream << "MouseButtonPressedEvent: " << _mouseButton;
