@@ -13,7 +13,7 @@ OpenGLContext::OpenGLContext(void* handle) : _handle(handle)
 	HNY_CORE_ASSERT(_handle, "Window handle is null!");
 }
 
-void OpenGLContext::Init()
+void OpenGLContext::init()
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -28,7 +28,7 @@ void OpenGLContext::Init()
 	HNY_CORE_INFO("#################");
 }
 
-void OpenGLContext::SwapBuffers()
+void OpenGLContext::swapBuffers()
 {
 	HNY_PROFILE_FUNCTION();
 

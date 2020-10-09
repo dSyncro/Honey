@@ -6,32 +6,80 @@
 #include <Honey/Math/Vectors.h>
 
 namespace Honey {
-
+	
+	/**
+	 * @brief class interfacing with Rendering API indirectly.
+	*/
 	class RendererAPI {
 
 	public:
 
+		/**
+		 * @brief Supported APIs.
+		*/
 		enum class API {
-			None,
-			OpenGL,
-			DirectX
+			None, /** @brief No rendering API. */
+			OpenGL, /** @brief OpenGL. */
+			DirectX /** @brief DirectX (not implemented yet). */
 		};
 
 		virtual ~RendererAPI() = default;
 
-		virtual void Init() = 0;
+		/**
+		 * @brief Initialize rendering API.
+		*/
+		virtual void init() = 0;
 
-		virtual void Clear() const = 0;
-		virtual void ClearDepthBuffer() const = 0;
-		virtual void SetClearColor(const Color& color) = 0;
+		/**
+		 * @brief Clear screen and related buffers.
+		*/
+		virtual void clear() const = 0;
 
-		virtual void SetViewport(Math::Vector2 location, Math::Vector2 size) = 0;
-		virtual void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) = 0;
+		/**
+		 * @brief Clear depth buffer only.
+		*/
+		virtual void clearDepthBuffer() const = 0;
 
-		virtual void DrawIndexed(const Reference<VertexArray>& vertexArray, uint32_t indexCount = 0) = 0;
+		/**
+		 * @brief Set a new clear color.
+		 * @param color New color.
+		*/
+		virtual void setClearColor(const Color& color) = 0;
 
-		static API GetAPI() { return s_API; }
-		static Unique<RendererAPI> Create();
+		/**
+		 * @brief Set viewport.
+		 * @param location Viewport position.
+		 * @param size Viewport size.
+		*/
+		virtual void setViewport(Math::Vector2 location, Math::Vector2 size) = 0;
+
+		/**
+		 * @brief Set viewport.
+		 * @param x Viewport position X.
+		 * @param y Viewport position Y.
+		 * @param width Viewport width.
+		 * @param height Viewport height.
+		*/
+		virtual void setViewport(UInt x, UInt y, UInt width, UInt height) = 0;
+
+		/**
+		 * @brief Draw indexed elements.
+		 * @param vertexArray Source vertex array.
+		 * @param indexCount Index count.
+		*/
+		virtual void drawIndexed(const Reference<VertexArray>& vertexArray, UInt indexCount = 0) = 0;
+
+		/**
+		 * @brief Get current Rendering API.
+		 * @return Current rendering API.
+		*/
+		static API getAPI() { return s_API; }
+
+		/**
+		 * @brief Create RendererAPI.
+		 * @return A new memory managed RendererAPI.
+		*/
+		static Unique<RendererAPI> create();
 
 	private:
 

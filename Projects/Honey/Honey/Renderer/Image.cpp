@@ -1,33 +1,34 @@
 #include "Image.h"
 
 #include "stb_image.h"
+#include <stb_image_write.h>
 
 using namespace Honey;
 using namespace Honey::Math;
 
-Image::Image(std::size_t width, std::size_t height, std::size_t channels)
+Image::Image(UInt width, UInt height, UInt channels)
 	: _width(width), _height(height), _channels(channels)
 {
-	_bitmap = new std::byte[width * height * channels];
+	_bitmap = new Byte[width * height * channels];
 }
 
 Image::~Image()
 {
-	Free();
+	free();
 }
 
-void Image::SetData(std::byte* data, std::size_t size, std::size_t offset)
+void Image::setData(Byte* data, UInt size, UInt offset)
 {
-	HNY_CORE_ASSERT(GetSizeInBytes() >= offset + size, "Trying to draw outside image!");
+	HNY_CORE_ASSERT(getSizeInBytes() >= offset + size, "Trying to draw outside image!");
 	std::memcpy(_bitmap + offset, data, size);
 }
 
-Reference<Image> Image::Create(std::size_t width, std::size_t height, std::size_t channels)
+Reference<Image> Image::create(UInt width, UInt height, UInt channels)
 {
 	return CreateReference<Image>(width, height, channels);
 }
 
-Reference<Image> Image::CreateFromFile(const std::string& path)
+Reference<Image> Image::createFromFile(const std::string& path)
 {
 	int width, height, channels;
 	stbi_set_flip_vertically_on_load(1);
@@ -35,18 +36,18 @@ Reference<Image> Image::CreateFromFile(const std::string& path)
 	HNY_CORE_ASSERT(data, "Failed to load image!");
 
 	Reference<Image> image = CreateReference<Image>(width, height, channels);
-	image->SetData((std::byte*)data, image->GetSizeInBytes());
+	image->setData(static_cast<Byte*>(data), image->getSizeInBytes());
 	stbi_image_free(data);
 
 	return image;
 }
 
-void Image::WriteToPNG(const std::string& filename) const
+void Image::writeToPNG(const std::string& filename) const
 {
-	stbi_write_png(filename.c_str(), (int)_width, (int)_height, 1, _bitmap, static_cast<int>(_width * _channels));
+	stbi_write_png(filename.c_str(), static_cast<int>(_width), static_cast<int>(_height), 1, _bitmap, static_cast<int>(_width * _channels));
 }
 
-void Image::Free()
+void Image::free()
 {
 	if (_bitmap) delete[] _bitmap;
 	_bitmap = nullptr;

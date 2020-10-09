@@ -16,6 +16,10 @@ namespace Honey {
 
 	public:
 
+		/**
+		 * @brief Construct KeyTypedEvent.
+		 * @param keycode Typed keycode.
+		*/
 		KeyTypedEvent(Keycode keycode) : KeyEvent(keycode) {}
 
 		/**

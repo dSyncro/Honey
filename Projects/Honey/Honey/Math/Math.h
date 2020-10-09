@@ -1,5 +1,10 @@
 #pragma once
 
+/**
+ * @file Math.h
+ * @brief Import all math related stuff at once.
+*/
+
 #include "MathFunctions.h"
 #include "Matrix/Matrix4x4.h"
 #include "Rect.h"

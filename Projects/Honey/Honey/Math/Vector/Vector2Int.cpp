@@ -40,6 +40,7 @@ const Vector2Int& Vector2Int::one()
 
 Vector2Int& Vector2Int::set(int x, int y)
 {
+	// Set components
 	this->x = x;
 	this->y = y;
 	return *this;
@@ -47,71 +48,76 @@ Vector2Int& Vector2Int::set(int x, int y)
 
 Vector2Int& Vector2Int::clamp(const Vector2Int& min, const Vector2Int& max)
 {
-	int x = (int)Mathf::Clamp(x, min.x, max.x);
-	int y = (int)Mathf::Clamp(y, min.y, max.y);
-	return set(x, y);
+	// Get clamped components
+	int x = Mathf::clamp(this->x, min.x, max.x);
+	int y = Mathf::clamp(this->y, min.y, max.y);
+
+	return set(x, y); // Set clamped components
 }
 
 bool Vector2Int::equals(const Vector2Int& other) const { return *this == other; }
 
 float Vector2Int::getMagnitude() const
 {
-	return x * x + y * y;
+	return Mathf::sqrt(getSquaredMagnitude());
 }
 
-float Vector2Int::getSquaredMagnitude() const
+int Vector2Int::getSquaredMagnitude() const
 {
-	return Mathf::Sqrt(getMagnitude());
+	return x * x + y * y;
 }
 
 Vector2Int Vector2Int::abs(const Vector2Int& vector)
 {
-	return Vector2Int(Mathf::Abs(vector.x), Mathf::Abs(vector.y));
+	return Vector2Int(Mathf::abs(vector.x), Mathf::abs(vector.y));
 }
 
 Vector2Int Vector2Int::sign(const Vector2Int& vector)
 {
-	return Vector2Int(Mathf::Sign(vector.x), Mathf::Sign(vector.y));
+	return Vector2Int(Mathf::sign(vector.x), Mathf::sign(vector.y));
 }
 
 Vector2Int Vector2Int::ceilToInt(const Vector2& vector) 
 { 
-	return Vector2Int(Mathf::CeilToInt(vector.x), Mathf::CeilToInt(vector.y)); 
+	return Vector2Int(Mathf::ceilToInt(vector.x), Mathf::ceilToInt(vector.y)); 
 }
 
 Vector2Int Vector2Int::floorToInt(const Vector2& vector) 
 { 
-	return Vector2Int(Mathf::FloorToInt(vector.x), Mathf::FloorToInt(vector.y)); 
+	return Vector2Int(Mathf::floorToInt(vector.x), Mathf::floorToInt(vector.y)); 
 }
 
 Vector2Int Vector2Int::roundToInt(const Vector2& vector) 
 { 
-	return Vector2Int(Mathf::RoundToInt(vector.x), Mathf::RoundToInt(vector.y)); 
+	return Vector2Int(Mathf::roundToInt(vector.x), Mathf::roundToInt(vector.y)); 
 }
 
 Vector2Int Vector2Int::max(const Vector2Int& a, const Vector2Int& b) 
 { 
-	return Vector2Int(Mathf::Max(a.x, b.x), Mathf::Max(a.y, b.y)); 
+	return Vector2Int(Mathf::max(a.x, b.x), Mathf::max(a.y, b.y)); 
 }
 
 Vector2Int Vector2Int::min(const Vector2Int& a, const Vector2Int& b) 
 { 
-	return Vector2Int(Mathf::Min(a.x, b.x), Mathf::Max(a.y, b.y)); 
+	return Vector2Int(Mathf::min(a.x, b.x), Mathf::min(a.y, b.y)); 
 }
 
 Vector2Int Vector2Int::scale(const Vector2Int& a, const Vector2Int& b)
 {
+	// To scale two vectors we just need to multiply them together
 	return a * b;
 }
 
 float Vector2Int::distance(const Vector2Int& a, const Vector2Int& b)
 {
+	// Distance is the magnitude of the vector from a to b.
 	Vector2Int diff = Vector2Int(a.x - b.x, a.y - b.y);
 	return diff.getMagnitude();
 }
 
 float Vector2Int::squaredDistance(const Vector2Int& a, const Vector2Int& b)
 {
+	// Squared distance is the squared magnitude of the vector from a to b.
 	Vector2Int diff = Vector2Int(a.x - b.x, a.y - b.y);
 	return diff.getSquaredMagnitude();
 }

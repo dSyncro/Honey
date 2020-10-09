@@ -4,6 +4,9 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Camera extension.
+	*/
 	class SceneCamera : public Camera {
 
 	public:
@@ -11,16 +14,28 @@ namespace Honey {
 		SceneCamera() = default;
 		virtual ~SceneCamera() = default;
 
-		void SetOrthographic(float size, float nearClip, float farClip);
-		void SetViewportSize(uint32_t width, uint32_t height);
+		/**
+		 * @brief Set orthographic projection.
+		 * @param size Orthographic size.
+		 * @param nearClip Near clip distance.
+		 * @param farClip Far clip distance.
+		*/
+		void setOrthographic(Float size, Float nearClip, Float farClip);
+
+		/**
+		 * @brief Set viewport size.
+		 * @param width Viewport width.
+		 * @param height Viewport height.
+		*/
+		void setViewportSize(UInt width, UInt height);
 
 	private:
 
-		void RecalculateProjection();
+		void recalculateProjection();
 
-		float _orthoSize = 10.0f;
-		float _aspectRatio = 1.0f;
-		float _orthoNear = -1.0f; float _orthoFar = 1.0f;
+		Float _orthoSize = 10.0f;
+		Float _aspectRatio = 1.0f;
+		Float _orthoNear = -1.0f; Float _orthoFar = 1.0f;
 	};
 
 }

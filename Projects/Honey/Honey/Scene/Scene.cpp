@@ -8,7 +8,7 @@
 using namespace Honey;
 using namespace Honey::Math;
 
-void Scene::OnPlay()
+void Scene::onStart()
 {
 	_registry.view<NativeScriptComponent>().each([=](entt::entity entity, NativeScriptComponent& nsc)
 		{
@@ -21,7 +21,7 @@ void Scene::OnPlay()
 	);
 }
 
-void Scene::OnUpdate()
+void Scene::onUpdate()
 {
 	_registry.view<NativeScriptComponent>().each([=](entt::entity entity, NativeScriptComponent& nsc) 
 		{
@@ -47,12 +47,12 @@ void Scene::OnUpdate()
 		auto renderableView = _registry.view<TransformComponent, SpriteRendererComponent>();
 		//auto textEntityView = _registry.view<TransformComponent, TextComponent>();
 
-		Renderer2D::BeginScene(*_mainCamera.Camera, _mainCamera.Transform);
+		Renderer2D::beginScene(*_mainCamera.Camera, _mainCamera.Transform);
 
 		for (entt::entity entity : renderableView)
 		{
 			auto [transform, spriteRenderer] = renderableView.get<TransformComponent, SpriteRendererComponent>(entity);
-			Renderer2D::DrawSprite(transform.position, (Vector2)transform.scale, spriteRenderer.sprite, spriteRenderer.tint);
+			Renderer2D::drawSprite(transform.position, (Vector2)transform.scale, spriteRenderer.sprite, spriteRenderer.tint);
 		}
 
 		/*Renderer2D::BeginScreenSpace();
@@ -63,16 +63,16 @@ void Scene::OnUpdate()
 		}
 		Renderer2D::EndScreenSpace();*/
 
-		Renderer2D::EndScene();
+		Renderer2D::endScene();
 	}
 }
 
-void Scene::OnStop()
+void Scene::onStop()
 {
 
 }
 
-Entity Scene::CreateEntity(const std::string& name, const std::string& tag)
+Entity Scene::createEntity(const std::string& name, const std::string& tag)
 {
 	Entity entity = Entity(_registry.create(), this);
 	entity.addComponent<TransformComponent>();
@@ -81,18 +81,18 @@ Entity Scene::CreateEntity(const std::string& name, const std::string& tag)
 	return entity;
 }
 
-void Scene::DeleteEntity(const Entity& entity)
+void Scene::deleteEntity(const Entity& entity)
 {
 	_registry.destroy(entity);
 }
 
-void Scene::OnViewportResize(uint32_t width, uint32_t height)
+void Scene::onViewportResize(UInt width, UInt height)
 {
 	auto camerasView = _registry.view<CameraComponent>();
 	for (entt::entity entity : camerasView)
 	{
 		CameraComponent& camComponent = _registry.get<CameraComponent>(entity);
 		if (camComponent.hasFixedAspectRatio) continue;
-		camComponent.camera.SetViewportSize(width, height);
+		camComponent.camera.setViewportSize(width, height);
 	}
 }

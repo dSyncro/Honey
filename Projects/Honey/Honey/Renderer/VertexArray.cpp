@@ -6,9 +6,9 @@
 
 using namespace Honey;
 
-Reference<VertexArray> VertexArray::Create()
+Reference<VertexArray> VertexArray::create()
 {
-	switch (Renderer::GetAPI())
+	switch (Renderer::getAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL: return CreateReference<OpenGLVertexArray>();

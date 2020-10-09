@@ -14,13 +14,13 @@ public:
 
 	void onUpdate() override
 	{
-		float deltaTime = Time::GetDeltaTime();
+		float deltaTime = Time::getDeltaTime();
 
 		SceneCamera& camera = getComponent<CameraComponent>().camera;
 		float scroll = Input::getVMouseScroll();
 		Size -= scroll * ZoomSpeed;
-		Size = Mathf::Clamp(Size, 0.1f, Mathf::infinity());
-		camera.SetOrthographic(Size, -1.0f, 1.0f);
+		Size = Mathf::clamp(Size, 0.1f, Mathf::infinity());
+		camera.setOrthographic(Size, -1.0f, 1.0f);
 	}
 };
 
@@ -32,7 +32,7 @@ public:
 
 	void onUpdate() override
 	{
-		float deltaTime = Time::GetDeltaTime();
+		float deltaTime = Time::getDeltaTime();
 
 		SceneCamera& camera = getComponent<CameraComponent>().camera;
 
@@ -40,13 +40,13 @@ public:
 		CameraScrollController& other = getComponent<CameraScrollController>();
 		Math::Vector3 pos = transform.position;
 		if (Input::isKeyPressed(Keycode::A))
-			pos.X -= other.Size * Speed * deltaTime;
+			pos.x -= other.Size * Speed * deltaTime;
 		if (Input::isKeyPressed(Keycode::D))
-			pos.X += other.Size * Speed * deltaTime;
+			pos.x += other.Size * Speed * deltaTime;
 		if (Input::isKeyPressed(Keycode::S))
-			pos.Y -= other.Size * Speed * deltaTime;
+			pos.y -= other.Size * Speed * deltaTime;
 		if (Input::isKeyPressed(Keycode::W))
-			pos.Y += other.Size * Speed * deltaTime;
+			pos.y += other.Size * Speed * deltaTime;
 		transform.position = pos;
 	}
 };

@@ -10,54 +10,147 @@
 
 namespace Honey {
 	
+	/**
+	 * @brief Font Atlas API
+	*/
 	class FontAtlas {
 
 	public:
 
-		FontAtlas(const Reference<Font>& font, std::size_t fontHeight, const Math::Span& charset);
+		/**
+		 * @brief Construct FontAtlas.
+		 * @param font The font used by the atlas.
+		 * @param fontHeight The font height.
+		 * @param charset The font atlas charset.
+		*/
+		FontAtlas(const Reference<Font>& font, UInt fontHeight, const Math::Span& charset);
 		~FontAtlas();
 
-		static Reference<FontAtlas> Create(const Reference<Font>& font, std::size_t fontHeight = 12, const Math::Span& charset = Math::Span(32, 96));
+		/**
+		 * @brief Create a new font atlas.
+		 * @param font The font used by the atlas. 
+		 * @param fontHeight The font height.
+		 * @param charset The font atlas charset.
+		 * @return A new memory managed font atlas.
+		*/
+		static Reference<FontAtlas> create(const Reference<Font>& font, UInt fontHeight = 12, const Math::Span& charset = Math::Span(32, 96));
 
-		void Rebuild();
+		/**
+		 * @brief Rebuild font Atlas.
+		 * Operation is performed only if needed
+		 * (that is when Atlas is dirty and valid).
+		*/
+		void rebuild();
 
-		std::size_t GetFontHeight() const { return _fontHeight; }
-		void SetFontHeight(std::size_t height) { _fontHeight = height; _isDirty = true; }
+		/**
+		 * @brief Get font height.
+		 * @return The font height.
+		*/
+		UInt fontHeight() const { return _fontHeight; }
 
-		void SetCharset(const Math::Span& range) { _charset = range; _isDirty = true; }
-		Math::Span GetCharset() const { return _charset; }
+		/**
+		 * @brief Set font height.
+		 * @param height New height.
+		*/
+		void fontHeight(UInt height) { _fontHeight = height; _isDirty = true; }
 
-		const Glyph& GetGlyph(char c) { return _glyphs[c - _charset.Start]; }
-		const Glyph& GetGlyph(std::size_t index) { return _glyphs[index]; }
+		/**
+		 * @brief Get charset.
+		 * @return Get Font Atlas charset.
+		*/
+		Math::Span charset() const { return _charset; }
+
+		/**
+		 * @brief Set new charset.
+		 * @param range The new charset range.
+		*/
+		void charset(const Math::Span& range) { _charset = range; _isDirty = true; }
+
+		/**
+		 * @brief Get glyph from char.
+		 * @param c The char.
+		 * @return Glyph associated with c.
+		*/
+		const Glyph& getGlyph(char c) { return _glyphs[c - _charset.start]; }
+
+		/**
+		 * @brief Get glyph from index.
+		 * @param index The index.
+		 * @return Glyph associated with index.
+		*/
+		const Glyph& getGlyph(UInt index) { return _glyphs[index]; }
 		
-		const Glyph& GetUpdatedGlyph(char c) { Rebuild(); return GetGlyph(c); }
-		const Glyph& GetUpdatedGlyph(std::size_t index) { Rebuild(); return GetGlyph(index); }
+		/**
+		 * @brief Get glyph from char having care to update atlas if it is dirty.
+		 * @param c The char.
+		 * @return Glyph associated with c.
+		*/
+		const Glyph& getUpdatedGlyph(char c) { rebuild(); return getGlyph(c); }
 
-		std::size_t GetGlyphCount() { return _charset.Length; }
+		/**
+		 * @brief Get glyph from index having care to update atlas if it is dirty.
+		 * @param c The index.
+		 * @return Glyph associated with index.
+		*/
+		const Glyph& getUpdatedGlyph(UInt index) { rebuild(); return getGlyph(index); }
 
-		float GetScaleFactor() const { return _scaleFactor; }
-		float GetScaledAscent() const { return _font->_ascent * _scaleFactor; }
-		float GetScaledDescent() const { return _font->_descent * _scaleFactor; }
+		/**
+		 * @brief Get glyph count.
+		 * @return The glyph count.
+		*/
+		UInt getGlyphCount() { return _charset.length; }
 
-		const Reference<Texture2D>& GetTexture() const { return _texture; }
-		const Reference<Font>& GetFont() const { return _font; }
+		/**
+		 * @brief Get font scale factor to height.
+		 * @return Scale factor.
+		*/
+		Float getScaleFactor() const { return _scaleFactor; }
 
-		bool IsValid() const { return _font != nullptr; }
+		/**
+		 * @brief Get font ascent scaled to height.
+		 * @return Scaled ascent.
+		*/
+		Float getScaledAscent() const { return _font->_ascent * _scaleFactor; }
+
+		/**
+		 * @brief Get font descent scaled to height.
+		 * @return Scaled descent.
+		*/
+		Float getScaledDescent() const { return _font->_descent * _scaleFactor; }
+
+		/**
+		 * @brief Get atlas underlying texture.
+		 * @return Atlas texture.
+		*/
+		const Reference<Texture2D>& getTexture() const { return _texture; }
+
+		/**
+		 * @brief Get atlas font.
+		 * @return The font.
+		*/
+		const Reference<Font>& getFont() const { return _font; }
+
+		/**
+		 * @brief Check if this is a valid font atlas.
+		*/
+		bool isValid() const { return _font != nullptr; }
 
 		/*
-		 * @brief Atlas can become dirty if: \n
-		 * - Font changes \n
-		 * - Charset changes \n
+		 * @brief Atlas can become dirty if:
+		 * Font changes,
+		 * charset changes.
+		 * Being dirty mean that concrete changes have been made
+		 * to the atlas and therefore it needs to be updated.
 		 */
-		bool IsDirty() const { return _isDirty; }
+		bool isDirty() const { return _isDirty; }
 
 	private:
 
-		void Free();
+		void free();
 
 		Reference<Font> _font;
-		std::size_t _fontHeight;
-		float _scaleFactor;
+		UInt _fontHeight;
+		Float _scaleFactor;
 		Math::Span _charset;
 
 		Glyph* _glyphs = nullptr;

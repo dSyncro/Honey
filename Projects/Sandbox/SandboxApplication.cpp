@@ -126,13 +126,13 @@ public:
 	Sandbox()
 	{
 		// PushLayer(new BaseLayer());
-		PushLayer(new Sandbox2D());
+		pushLayer(new Sandbox2D());
 	}
 
 	~Sandbox() = default;
 };
 
-Honey::Application* Honey::CreateApplication()
+Honey::Application* Honey::createApplication()
 {
 	return new Sandbox();
 }

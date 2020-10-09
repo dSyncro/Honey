@@ -13,6 +13,10 @@ namespace Honey {
 
 	public:
 
+		/**
+		 * @brief EventDispatcher Callback function type.
+		 * @tparam T Event type.
+		*/
 		template <typename T>
 		using CallbackType = std::function<bool(T&)>;
 

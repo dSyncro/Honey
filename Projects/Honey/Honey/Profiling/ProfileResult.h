@@ -4,17 +4,31 @@
 #include <string>
 #include <thread>
 
+#include <Honey/Core/TypeTraits.h>
+
 namespace Honey {
 
-	using FloatingPointMicroseconds = std::chrono::duration<double, std::micro>;
+	/**
+	 * @brief Microseconds in floating point format.
+	*/
+	using FloatingPointMicroseconds = std::chrono::duration<Double, std::micro>;
 
+	/**
+	 * @brief Profiling result.
+	*/
 	struct ProfileResult
 	{
-		std::string Name;
+		/** @brief Profile name */
+		std::string name;
 
-		FloatingPointMicroseconds Start;
-		std::chrono::microseconds ElapsedTime;
-		std::thread::id ThreadID;
+		/** @brief Start timepoint */
+		FloatingPointMicroseconds start;
+
+		/** @brief Elapsed time. */
+		std::chrono::microseconds elapsedTime;
+
+		/** @brief Thread ID. */
+		std::thread::id threadID;
 	};
 
 }

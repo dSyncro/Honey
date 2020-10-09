@@ -17,6 +17,7 @@ extern "C" {
 
 using namespace Honey;
 
+// Construct Layer
 ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
 
 ImGuiLayer::~ImGuiLayer() = default;
@@ -48,8 +49,8 @@ void ImGuiLayer::onAttach()
 		style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 	}
 
-	Application& app = Application::Get();
-	GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+	Application& app = Application::get();
+	GLFWwindow* window = static_cast<GLFWwindow*>(app.getWindow().getNativeWindow());
 
 	// Setup Platform/Renderer bindings
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -60,6 +61,7 @@ void ImGuiLayer::onDetach()
 {
 	HNY_PROFILE_FUNCTION();
 
+	// Perform cleanup
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
@@ -69,6 +71,7 @@ void ImGuiLayer::begin()
 {
 	HNY_PROFILE_FUNCTION();
 
+	// Generate frame
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
@@ -79,8 +82,8 @@ void ImGuiLayer::end()
 	HNY_PROFILE_FUNCTION();
 
 	ImGuiIO& io = ImGui::GetIO();
-	Application& app = Application::Get();
-	io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
+	Math::Size& windowSize = Application::get().getWindow().getSize();
+	io.DisplaySize = ImVec2(windowSize.width, windowSize.height);
 
 	// Rendering
 	ImGui::Render();

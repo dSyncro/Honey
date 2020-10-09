@@ -7,6 +7,9 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Application class.
+	*/
 	class Application
 	{
 	public:
@@ -14,37 +17,74 @@ namespace Honey {
 		Application();
 		virtual ~Application();
 
-		void Run();
-		void Close();
+		/**
+		 * @brief Run application.
+		*/
+		void run();
 
-		void OnEvent(Event& e);
+		/**
+		 * @brief Close application.
+		*/
+		void close();
 
-		void PushLayer(Layer* layer);
-		void PushOverlay(Layer* overlay);
+		/**
+		 * @brief Called when events occur.
+		 * @param e The event.
+		*/
+		void onEvent(Event& e);
 
-		void SetTitle(const std::string& title) { _window->SetTitle(title); }
+		/**
+		 * @brief Push layer to application.
+		 * @param layer The layer.
+		*/
+		void pushLayer(Layer* layer);
 
-		Window& GetWindow() { return *_window; }
+		/**
+		 * @brief Push overlay layer to application.
+		 * @param overlay The overlay.
+		*/
+		void pushOverlay(Layer* overlay);
 
-		inline static Application& Get() { return *s_Instance; }
+		/**
+		 * @brief Set application title.
+		 * @param title The title.
+		*/
+		void setTitle(const std::string& title) { _window->setTitle(title); }
+
+		/**
+		 * @brief Get application window.
+		 * @return The window.
+		*/
+		Window& getWindow() { return *_window; }
+
+		/**
+		 * @brief Get application.
+		 * @return The application.
+		*/
+		static Application& get() { return *s_Instance; }
 
 	private:
 
-		bool OnWindowClose(WindowCloseEvent& e);
-		bool OnWindowResize(WindowResizeEvent& e);
+		bool onWindowClose(WindowCloseEvent& e);
+		bool onWindowResize(WindowResizeEvent& e);
 
 		Unique<Window> _window;
 		ImGuiLayer* _imGuiLayer;
 
 		bool _isRunning = false;
 		bool _isMinimized = false;
-		float _lastFrameTime = 0.0f;
+		Float _lastFrameTime = 0.0f;
 
 		LayerStack _layerStack;
 
 		static Application* s_Instance;
 	};
 
-	Application* CreateApplication();
+	/**
+	 * @brief Create application.
+	 * Defined by client.
+	 * @return Pointer to application.
+	*/
+	Application* createApplication();
 
 }

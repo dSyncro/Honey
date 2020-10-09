@@ -40,14 +40,14 @@ namespace Honey {
 		 * @param color -> RGB color.
 		*/
 		constexpr Color(const Math::Vector3& color)
-			: r(color.X), g(color.Y), b(color.Z), a(1.0f) { }
+			: r(color.x), g(color.y), b(color.z), a(1.0f) { }
 		
 		/**
 		 * @brief Create a color from a Vector4 representing a RGBA color.
 		 * @param color -> RGBA color.
 		*/
 		constexpr Color(const Math::Vector4& color)
-			: r(color.X), g(color.Y), b(color.Z), a(color.W) { }
+			: r(color.x), g(color.y), b(color.z), a(color.w) { }
 
 		/**
 		 * @brief Convert Color to a RGB vector.

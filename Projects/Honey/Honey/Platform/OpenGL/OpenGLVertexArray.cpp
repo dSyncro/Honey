@@ -8,9 +8,9 @@ extern "C" {
 #include <glad/glad.h>
 }
 
-uint32_t OpenGLVertexArray::s_Bound = 0;
+UInt OpenGLVertexArray::s_Bound = 0;
 
-static GLenum ShaderToOpenGLDataType(ShaderDataType type)
+static GLenum shaderDataTypeToOpenGL(ShaderDataType type)
 {
 	switch (type)
 	{
@@ -50,7 +50,7 @@ OpenGLVertexArray::~OpenGLVertexArray()
 	glDeleteVertexArrays(1, &_rendererID);
 }
 
-void OpenGLVertexArray::Bind() const
+void OpenGLVertexArray::bind() const
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -60,7 +60,7 @@ void OpenGLVertexArray::Bind() const
 	s_Bound = _rendererID;
 }
 
-void OpenGLVertexArray::Unbind() const
+void OpenGLVertexArray::unbind() const
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -70,26 +70,26 @@ void OpenGLVertexArray::Unbind() const
 	s_Bound = 0;
 }
 
-bool OpenGLVertexArray::IsBound() const
+bool OpenGLVertexArray::isBound() const
 {
 	return s_Bound == _rendererID;
 }
 
-void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
+void OpenGLVertexArray::addVertexBuffer(const Reference<VertexBuffer>& buffer)
 {
 	HNY_PROFILE_FUNCTION();
 
-	HNY_CORE_ASSERT(buffer->GetLayout().GetElements().size(), "Layout not set on Vertex Buffer!");
+	HNY_CORE_ASSERT(buffer->getLayout().getElements().size(), "Layout not set on Vertex Buffer!");
 
-	Bind();
+	bind();
 	buffer->bind();
 
-	uint32_t index = 0;
-	const BufferLayout& layout = buffer->GetLayout();
+	UInt index = 0;
+	const BufferLayout& layout = buffer->getLayout();
 	for (const BufferElement& e : layout)
 	{
 		glEnableVertexAttribArray(_vertexBufferIndex);
-		switch (e.Type)
+		switch (e.type)
 		{
 			case ShaderDataType::Float:
 			case ShaderDataType::Vector2:
@@ -98,11 +98,11 @@ void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 			case ShaderDataType::Bool:
 			{
 				glVertexAttribPointer(_vertexBufferIndex,
-					e.GetComponentCount(),
-					ShaderToOpenGLDataType(e.Type),
-					e.IsNormalized ? GL_TRUE : GL_FALSE,
-					layout.GetStride(),
-					(const void*)(uintptr_t)e.Offset);
+					e.getComponentCount(),
+					shaderDataTypeToOpenGL(e.type),
+					e.isNormalized ? GL_TRUE : GL_FALSE,
+					layout.getStride(),
+					(const void*)(uintptr_t)e.offset);
 				_vertexBufferIndex++;
 				break;
 			}
@@ -113,10 +113,10 @@ void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 			case ShaderDataType::Vector4Int:
 			{
 				glVertexAttribIPointer(_vertexBufferIndex,
-					e.GetComponentCount(),
-					ShaderToOpenGLDataType(e.Type),
-					layout.GetStride(),
-					(const void*)(uintptr_t)e.Offset);
+					e.getComponentCount(),
+					shaderDataTypeToOpenGL(e.type),
+					layout.getStride(),
+					(const void*)(uintptr_t)e.offset);
 				_vertexBufferIndex++;
 				break;
 			}
@@ -124,15 +124,15 @@ void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 			case ShaderDataType::Matrix3:
 			case ShaderDataType::Matrix4:
 			{
-				uint8_t count = e.GetComponentCount();
-				for (uint8_t i = 0; i < count; i++)
+				Byte count = e.getComponentCount();
+				for (Byte i = 0; i < count; i++)
 				{
 					glVertexAttribPointer(_vertexBufferIndex,
 						count,
-						ShaderToOpenGLDataType(e.Type),
-						e.IsNormalized ? GL_TRUE : GL_FALSE,
-						layout.GetStride(),
-						(const void*)(uintptr_t)(e.Offset + sizeof(float) * count * i));
+						shaderDataTypeToOpenGL(e.type),
+						e.isNormalized ? GL_TRUE : GL_FALSE,
+						layout.getStride(),
+						(const void*)(uintptr_t)(e.offset + sizeof(Float) * count * i));
 					glVertexAttribDivisor(_vertexBufferIndex, 1);
 					_vertexBufferIndex++;
 				}
@@ -146,11 +146,11 @@ void OpenGLVertexArray::AddVertexBuffer(const Reference<VertexBuffer>& buffer)
 	_vertexBuffers.push_back(buffer);
 }
 
-void OpenGLVertexArray::SetIndexBuffer(const Reference<IndexBuffer>& buffer)
+void OpenGLVertexArray::setIndexBuffer(const Reference<IndexBuffer>& buffer)
 {
 	HNY_PROFILE_FUNCTION();
 
-	Bind();
+	bind();
 	buffer->bind();
 	_indexBuffer = buffer;
 }

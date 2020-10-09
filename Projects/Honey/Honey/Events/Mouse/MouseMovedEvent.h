@@ -3,7 +3,7 @@
 #include <sstream>
 
 #include <Honey/Events/Event.h>
-#include <Honey/Math/Vector/Vector2.h>
+#include <Honey/Math/Point.h>
 
 namespace Honey {
 
@@ -15,22 +15,32 @@ namespace Honey {
 
 	public:
 
-		MouseMovedEvent(const Math::Vector2& position) : _position(position) { }
-		MouseMovedEvent(float x, float y) : _position(x, y) { }
+		/**
+		 * @brief Construct MouseMovedEvent from position.
+		 * @param position The position.
+		*/
+		MouseMovedEvent(const Math::Point& position) : _position(position) { }
+
+		/**
+		 * @brief Construct MouseMovedEvent from coordinates.
+		 * @param x X coordinate.
+		 * @param y Y coordinate.
+		*/
+		MouseMovedEvent(uint32_t x, uint32_t y) : _position(x, y) { }
 
 		/**
 		 * @brief New x-coordinate.
 		 * @return x-coordinate.
 		*/
-		float x() const { return _position.x; }
+		uint32_t x() const { return _position.x; }
 
 		/**
 		 * @brief New y-coordinate.
 		 * @return y-coordinate.
 		*/
-		float y() const { return _position.y; }
+		uint32_t y() const { return _position.y; }
 
-		const Math::Vector2& getPosition() const { return _position; }
+		const Math::Point& getPosition() const { return _position; }
 
 		/**
 		 * @see Event::toString() 
@@ -47,7 +57,7 @@ namespace Honey {
 
 	private:
 
-		Math::Vector2 _position;
+		Math::Point _position;
 	};
 
 }

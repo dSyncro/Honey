@@ -6,9 +6,9 @@
 
 using namespace Honey;
 
-Reference<Texture2D> Texture2D::Create(std::size_t width, std::size_t height, PixelFormat format)
+Reference<Texture2D> Texture2D::create(UInt width, UInt height, PixelFormat format)
 {
-	switch (Renderer::GetAPI())
+	switch (Renderer::getAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL: return CreateReference<OpenGLTexture2D>(width, height, format);
@@ -19,9 +19,9 @@ Reference<Texture2D> Texture2D::Create(std::size_t width, std::size_t height, Pi
 	return nullptr;
 }
 
-Reference<Texture2D> Texture2D::Create(const std::string& path)
+Reference<Texture2D> Texture2D::create(const std::string& path)
 {
-	switch (Renderer::GetAPI())
+	switch (Renderer::getAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL: return CreateReference<OpenGLTexture2D>(path);

@@ -12,46 +12,46 @@ void EditorLayer::onAttach()
 
 	_activeScene = CreateReference<Scene>();
 
-	_camera = _activeScene->CreateEntity("Main Camera", "Main");
+	_camera = _activeScene->createEntity("Main Camera", "Main");
 	_camera.addComponent<CameraComponent>();
 
 	NativeScriptComponent& scriptComponent = NativeScriptComponent::attach(_camera);
 	scriptComponent.addBehaviour<CameraScrollController>();
 	scriptComponent.addBehaviour<CameraWASDController>();
 
-	_entity = _activeScene->CreateEntity();
+	_entity = _activeScene->createEntity();
 	_entity.addComponent<SpriteRendererComponent>();
 
-	_texture = Texture2D::Create("assets/textures/logo.png");
+	_texture = Texture2D::create("assets/textures/logo.png");
 
-	Reference<SubTexture2D> a = SubTexture2D::CreateFromCoordinates(_texture, { 0, 0 }, { 1024, 1024 });
-	Reference<SubTexture2D> b = SubTexture2D::CreateFromCoordinates(_texture, { 1, 1 }, { 1024, 1024 });
-	_spriteA = _activeScene->CreateEntity("Sprite A");
-	_spriteB = _activeScene->CreateEntity("Sprite B");
+	Reference<SubTexture2D> a = SubTexture2D::createFromCoordinates(_texture, { 0, 0 }, { 1024, 1024 });
+	Reference<SubTexture2D> b = SubTexture2D::createFromCoordinates(_texture, { 1, 1 }, { 1024, 1024 });
+	_spriteA = _activeScene->createEntity("Sprite A");
+	_spriteB = _activeScene->createEntity("Sprite B");
 	_spriteA.getComponent<TransformComponent>().position = Math::Vector3(1.0f, 1.0f, 0.0f);
 	_spriteB.getComponent<TransformComponent>().position = Math::Vector3(2.0f, 2.0f, 0.0f);
-	Reference<Sprite> spriteA = Sprite::Create(a);
-	Reference<Sprite> spriteB = Sprite::Create(b);
+	Reference<Sprite> spriteA = Sprite::create(a);
+	Reference<Sprite> spriteB = Sprite::create(b);
 	_spriteA.addComponent<SpriteRendererComponent>(spriteA);
 	_spriteB.addComponent<SpriteRendererComponent>(spriteB);
 
     FrameBufferSpecification specification = { 1280, 720 };
-    _frameBuffer = FrameBuffer::Create(specification);
+    _frameBuffer = FrameBuffer::create(specification);
 
-	_font = Font::CreateFromFile("assets/fonts/Lato-Regular.ttf");
-	_atlas = FontAtlas::Create(_font, 32);
-	Reference<Sprite> fontAtlas = Sprite::Create(_atlas->_texture);
-	Entity fae = _activeScene->CreateEntity("FontAtlas");
+	_font = Font::createFromFile("assets/fonts/Lato-Regular.ttf");
+	_atlas = FontAtlas::create(_font, 32);
+	Reference<Sprite> fontAtlas = Sprite::create(_atlas->_texture);
+	Entity fae = _activeScene->createEntity("FontAtlas");
 	fae.getComponent<TransformComponent>().position = Math::Vector3(3.0f, 3.0f, 0.0f);
 	fae.getComponent<TransformComponent>().scale = Math::Vector3(5.0f, 5.0f, 5.0f);
 	fae.addComponent<SpriteRendererComponent>(fontAtlas);
 
-	Entity text = _activeScene->CreateEntity("Text");
+	Entity text = _activeScene->createEntity("Text");
 	text.addComponent<TextComponent>();
 	text.getComponent<TextComponent>().text = "This is a Text!";
 	text.getComponent<TextComponent>().atlas = _atlas;
 
-	_activeScene->OnPlay();
+	_activeScene->onStart();
 	_hierarchy.SetContext(_activeScene);
 }
 
@@ -64,19 +64,19 @@ void EditorLayer::onUpdate()
 {
 	HNY_PROFILE_FUNCTION();
 
-	Timestamp deltaTime = Time::GetDeltaTime();
+	Timestamp deltaTime = Time::getDeltaTime();
 	HNY_CORE_INFO("Delta Time: {0}", (float)deltaTime);
 	
-	_cameraController.OnUpdate();
+	_cameraController.onUpdate();
 
-	Renderer2D::ResetStatistics();
+	Renderer2D::resetStatistics();
 
     _frameBuffer->bind();
 
-	RenderCommand::SetClearColor({ .1f, .1f, .1f, 1 });
-	RenderCommand::Clear();
+	RenderCommand::setClearColor({ .1f, .1f, .1f, 1 });
+	RenderCommand::clear();
 
-    _activeScene->OnUpdate();
+    _activeScene->onUpdate();
 
     _frameBuffer->unbind();
 }
@@ -84,7 +84,7 @@ void EditorLayer::onUpdate()
 void EditorLayer::onEvent(Honey::Event& e)
 {
 	HNY_PROFILE_FUNCTION();
-	_cameraController.OnEvent(e);
+	_cameraController.onEvent(e);
 }
 
 void EditorLayer::onImGuiRender()
@@ -143,7 +143,7 @@ void EditorLayer::onImGuiRender()
             // which we can't undo at the moment without finer window depth/z control.
             //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
 
-            if (ImGui::MenuItem("Close")) Application::Get().Close();
+            if (ImGui::MenuItem("Close")) Application::get().close();
             ImGui::EndMenu();
         }
 
@@ -154,13 +154,13 @@ void EditorLayer::onImGuiRender()
         HNY_PROFILE_SCOPE("Settings");
         ImGui::Begin("Settings");
         ImGui::Text("Renderer2D Stats");
-        const Renderer2D::Statistics& stats = Renderer2D::GetStatistics();
-        ImGui::Text("Draw Calls: %d", stats.DrawCalls);
-        ImGui::Text("Quad Count: %d", stats.QuadCount);
-        ImGui::Text("Vertex Count: %d", stats.GetVertexCount());
-        ImGui::Text("Index Count: %d", stats.GetIndexCount());
-		ImGui::Text("Frame Rate: %f", (float)Time::GetFrameRate());
-		ImGui::Text("Frame Count: %d", Time::GetFrameCount());
+        const Renderer2D::Statistics& stats = Renderer2D::getStatistics();
+        ImGui::Text("Draw Calls: %d", stats.drawCalls);
+        ImGui::Text("Quad Count: %d", stats.quadCount);
+        ImGui::Text("Vertex Count: %d", stats.getVertexCount());
+        ImGui::Text("Index Count: %d", stats.getIndexCount());
+		ImGui::Text("Frame Rate: %f", (float)Time::getFrameRate());
+		ImGui::Text("Frame Count: %d", Time::getFrameCount());
         ImGui::ColorEdit4("Square Color", (float*)&_entity.getComponent<SpriteRendererComponent>().tint);
         ImGui::End();
     }
@@ -174,13 +174,13 @@ void EditorLayer::onImGuiRender()
 
         if (viewportPanelSize.x != _viewportSize.x || viewportPanelSize.y != _viewportSize.y)
         {
-            _frameBuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
+            _frameBuffer->resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
             _viewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-            _cameraController.Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
-			_activeScene->OnViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
+            _cameraController.resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
+			_activeScene->onViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
         }
 
-        ImGui::Image((void*)(uintptr_t)_frameBuffer->GetColorAttachmentRendererID(), ImVec2{ _viewportSize.x, _viewportSize.y }, ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::Image((void*)(uintptr_t)_frameBuffer->getColorAttachmentRendererID(), ImVec2{ _viewportSize.x, _viewportSize.y }, ImVec2(0, 1), ImVec2(1, 0));
         ImGui::End();
         ImGui::PopStyleVar();
     }

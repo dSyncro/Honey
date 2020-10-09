@@ -1,16 +1,23 @@
 #pragma once
 
+#include <Honey/Core.h>
 #include <Honey/Core/IBindable.h>
-#include <Honey/Core/MemoryManagement.h>
 
 namespace Honey {
 
+	/**
+	 * @brief Frame buffer specification.
+	 * It holds data that specifies the frame buffer working mode.
+	*/
 	struct FrameBufferSpecification {
 
-		uint32_t Width, Height;
+		UInt Width, Height;
 
 	};
 
+	/**
+	 * @brief Abstract Frame Buffer.
+	*/
 	class FrameBuffer : public IBindable {
 
 	public:
@@ -21,18 +28,27 @@ namespace Honey {
 		 * @brief Get specification of this frame buffer.
 		 * @return This frame buffer specification.
 		 */
-		virtual const FrameBufferSpecification& GetSpecification() const = 0;
+		virtual const FrameBufferSpecification& getSpecification() const = 0;
 
-		virtual uint32_t GetColorAttachmentRendererID() const = 0;
+		/**
+		 * @brief Get color attachment ID.
+		 * @return Color attachment renderer ID.
+		*/
+		virtual UInt getColorAttachmentRendererID() const = 0;
 
-		virtual void Resize(uint32_t width, uint32_t height) = 0;
+		/**
+		 * @brief Resize frame buffer.
+		 * @param width New width.
+		 * @param height New height.
+		*/
+		virtual void resize(UInt width, UInt height) = 0;
 
 		/**
 		 * @brief Create Frame Buffer.
 		 * @param specification -> Frame Buffer specification.
 		 * @return The frame buffer.
 		 */
-		static Reference<FrameBuffer> Create(const FrameBufferSpecification& specification);
+		static Reference<FrameBuffer> create(const FrameBufferSpecification& specification);
 	};
 
 }

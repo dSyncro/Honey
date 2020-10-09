@@ -1,47 +1,114 @@
 #pragma once
 
 #include <cstddef>
-#include <stb_image_write.h>
 
 #include <Honey/Math/Math.h>
 
 namespace Honey {
 
+	/**
+	 * @brief Image representation.
+	*/
 	class Image {
 
 	public:
 
-		Image(std::size_t width, std::size_t height, std::size_t channels = 3);
+		/**
+		 * @brief Construct Image from its components.
+		 * @param width Image width.
+		 * @param height Image height.
+		 * @param channels Image channels.
+		*/
+		Image(UInt width, UInt height, UInt channels = 3);
 		~Image();
 
-		void SetData(std::byte* data, std::size_t size, std::size_t offset = 0);
+		/**
+		 * @brief Set new data to image.
+		 * @param data New data.
+		 * @param size Size of data in byte.
+		 * @param offset Offset from beginning.
+		*/
+		void setData(Byte* data, UInt size, UInt offset = 0);
 
-		static Reference<Image> Create(std::size_t width, std::size_t height, std::size_t channels = 3);
-		static Reference<Image> CreateFromFile(const std::string& path);
+		/**
+		 * @brief Create a new Image.
+		 * @param width Image width.
+		 * @param height Image height.
+		 * @param channels Image channels.
+		 * @return A new memory managed Image.
+		*/
+		static Reference<Image> create(UInt width, UInt height, UInt channels = 3);
 
-		std::byte* GetRawBitmap() const { return _bitmap; }
+		/**
+		 * @brief Create a new Image from file.
+		 * @param path File path.
+		 * @return A new memory managed file loaded from disk.
+		*/
+		static Reference<Image> createFromFile(const std::string& path);
 
-		std::size_t GetWidth() const { return _width; }
-		std::size_t GetHeight() const { return _height; }
-		std::size_t GetChannels() const { return _channels; }
+		/**
+		 * @brief Get underlying bitmap.
+		 * @return Raw bitmap.
+		*/
+		Byte* getRawBitmap() const { return _bitmap; }
 
-		std::size_t GetPixelCount() const { return _width * _height; }
-		std::size_t GetSizeInBytes() const { return GetPixelCount() * _channels; }
-		std::size_t GetStride() const { return _width * _channels; }
+		/**
+		 * @brief Get image width.
+		 * @return The width.
+		*/
+		UInt getWidth() const { return _width; }
 
-		Math::Size GetSize() const { return Math::Size(_width, _height); }
+		/**
+		 * @brief Get image height.
+		 * @return The height.
+		*/
+		UInt getHeight() const { return _height; }
 
-		void WriteToPNG(const std::string& filename) const;
+		/**
+		 * @brief Get image channels.
+		 * @return The channels.
+		*/
+		UInt getChannels() const { return _channels; }
+
+		/**
+		 * @brief Get image pixel count.
+		 * @return Pixel count.
+		*/
+		UInt getPixelCount() const { return _width * _height; }
+
+		/**
+		 * @brief Get image size in byte.
+		 * @return Size in bytes.
+		*/
+		UInt getSizeInBytes() const { return getPixelCount() * _channels; }
+
+		/**
+		 * @brief Get image stride.
+		 * @return Stride.
+		*/
+		UInt getStride() const { return _width * _channels; }
+
+		/**
+		 * @brief Get image size.
+		 * @return Size.
+		*/
+		Math::Size getSize() const { return Math::Size(_width, _height); }
+
+		/**
+		 * @brief Write image to a PNG file.
+		 * @param filename Image file path.
+		*/
+		void writeToPNG(const std::string& filename) const;
 
 	private:
 
-		void Free();
+		void free();
 
-		std::byte* _bitmap;
+		Byte* _bitmap;
 
-		std::size_t _width;
-		std::size_t _height;
-		std::size_t _channels;
+		UInt _width;
+		UInt _height;
+		UInt _channels;
 
 	};
 

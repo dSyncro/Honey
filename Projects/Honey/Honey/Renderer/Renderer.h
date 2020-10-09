@@ -8,27 +8,65 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Base 3D Renderer.
+	*/
 	class Renderer {
 
 	public:
 
-		static void Init();
-		static void Shutdown();
+		/**
+		 * @brief Initialize renderer.
+		*/
+		static void init();
 
-		static void BeginScene(OrthographicCamera& camera);
-		static void EndScene();
+		/**
+		 * @brief Shutdown renderer. 
+		 * Release all related resources.
+		*/
+		static void shutdown();
 
-		static void Submit(const Reference<Shader>& shader, const Reference<VertexArray>& vertexArray, const Math::Matrix4x4& transform = Math::Matrix4x4::identity());
+		/**
+		 * @brief Begin scene rendering.
+		 * @param camera Render camera.
+		*/
+		static void beginScene(OrthographicCamera& camera);
 
-		static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
+		/**
+		 * @brief End scene rendering.
+		*/
+		static void endScene();
 
-		static void OnWindowResize(uint32_t width, uint32_t height);
+		/**
+		 * @brief Submit to renderer.
+		 * @param shader Shader.
+		 * @param vertexArray Vertex Array.
+		 * @param transform Transformation to apply.
+		*/
+		static void submit(
+			const Reference<Shader>& shader,
+			const Reference<VertexArray>& vertexArray, 
+			const Math::Matrix4x4& transform = Math::Matrix4x4::identity()
+		);
+
+		/**
+		 * @brief Get current rendering API.
+		 * @return Rendering API.
+		*/
+		static RendererAPI::API getAPI() { return RendererAPI::getAPI(); }
+
+		/**
+		 * @brief Called when window resize.
+		 * @param width New window width.
+		 * @param height New window height.
+		*/
+		static void onWindowResize(UInt width, UInt height);
 
 	private:
 
 		struct SceneData {
 
-			glm::mat4 ViewProjectionMatrix;
+			Math::Matrix4x4 viewProjectionMatrix;
 
 		};
 

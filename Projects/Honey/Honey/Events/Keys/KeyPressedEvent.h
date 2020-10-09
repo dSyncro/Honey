@@ -14,6 +14,11 @@ namespace Honey {
 
 	public:
 
+		/**
+		 * @brief Construct KeyPressedEvent.
+		 * @param keycode Pressed keycode.
+		 * @param repeatCount Repeat count.
+		*/
 		KeyPressedEvent(Keycode keycode, int repeatCount) : KeyEvent(keycode), _repeatCount(repeatCount) {}
 
 		/**

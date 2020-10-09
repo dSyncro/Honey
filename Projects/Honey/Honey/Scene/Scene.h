@@ -1,5 +1,10 @@
 #pragma once
 
+/*
+	This is an absolute mess but it is still in development.
+	Revisit this as soon as it get stabler.
+*/
+
 #include <entt.hpp>
 
 #include <Honey/Math/Math.h>
@@ -23,6 +28,9 @@ namespace Honey {
 		operator bool() const { return Camera; }
 	};
 
+	/**
+	 * @brief Game world scene.
+	*/
 	class Scene {
 
 	public:
@@ -30,13 +38,41 @@ namespace Honey {
 		Scene() = default;
 		~Scene() = default;
 
-		Entity CreateEntity(const std::string& name = "Entity", const std::string& tag = "Untagged");
-		void DeleteEntity(const Entity& entity);
+		/**
+		 * @brief Create entity.
+		 * @param name Entity name.
+		 * @param tag Entity tag.
+		 * @return The entity.
+		*/
+		Entity createEntity(const std::string& name = "Entity", const std::string& tag = "Untagged");
 
-		void OnPlay();
-		void OnUpdate();
-		void OnStop();
-		void OnViewportResize(uint32_t width, uint32_t height);
+		/**
+		 * @brief Delete entity from scene.
+		 * @param entity The entity.
+		*/
+		void deleteEntity(const Entity& entity);
+
+		/**
+		 * @brief Called when scene starts.
+		*/
+		void onStart();
+
+		/**
+		 * @brief Called when scene updates.
+		*/
+		void onUpdate();
+
+		/**
+		 * @brief Called when scene stops.
+		*/
+		void onStop();
+
+		/**
+		 * @brief Called on viewport resize.
+		 * @param width New viewport width.
+		 * @param height New viewport height.
+		*/
+		void onViewportResize(UInt width, UInt height);
 	private:
 
 		entt::registry _registry;

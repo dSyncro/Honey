@@ -3,27 +3,27 @@
 using namespace Honey;
 using namespace Honey::Math;
 
-void SceneCamera::SetOrthographic(float size, float nearClip, float farClip)
+void SceneCamera::setOrthographic(Float size, Float nearClip, Float farClip)
 {
 	_orthoSize = size;
 	_orthoNear = nearClip;
 	_orthoFar = farClip;
 
-	RecalculateProjection();
+	recalculateProjection();
 }
 
-void SceneCamera::SetViewportSize(uint32_t width, uint32_t height)
+void SceneCamera::setViewportSize(UInt width, UInt height)
 {
-	_aspectRatio = (float)width / (float)height;
-	RecalculateProjection();
+	_aspectRatio = static_cast<Float>(width) / static_cast<Float>(height);
+	recalculateProjection();
 }
 
-void SceneCamera::RecalculateProjection()
+void SceneCamera::recalculateProjection()
 {
-	float orthoLeft = -0.5f * _orthoSize * _aspectRatio;
-	float orthoRight = 0.5f * _orthoSize * _aspectRatio;
-	float orthoBottom = -0.5f * _orthoSize; 
-	float orthoTop = 0.5f * _orthoSize;
+	Float orthoLeft = -0.5f * _orthoSize * _aspectRatio;
+	Float orthoRight = 0.5f * _orthoSize * _aspectRatio;
+	Float orthoBottom = -0.5f * _orthoSize; 
+	Float orthoTop = 0.5f * _orthoSize;
 
 	_projection = Matrix4x4::orthographic(orthoLeft, orthoRight, orthoBottom, orthoTop, _orthoNear, _orthoFar);
 }

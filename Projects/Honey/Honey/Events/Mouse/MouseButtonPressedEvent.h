@@ -12,6 +12,10 @@ namespace Honey {
 
 	public:
 
+		/**
+		 * @brief Construct MouseButtonPressedEvent.
+		 * @param button Pressed mouse button.
+		*/
 		MouseButtonPressedEvent(MouseButton button) : MouseButtonEvent(button) {}
 
 		/**

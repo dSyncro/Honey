@@ -4,19 +4,56 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Render commands.
+	*/
 	class RenderCommand {
 
 	public:
 
-		static void Init();
+		/**
+		 * @brief Initialize rendering.
+		*/
+		static void init();
 
-		static void Clear() { s_RendererAPI->Clear(); }
-		static void ClearDepthBuffer() { s_RendererAPI->ClearDepthBuffer(); }
-		static void SetClearColor(const Color& color) { s_RendererAPI->SetClearColor(color); }
+		/**
+		 * @brief Clear viewport.
+		*/
+		static void clear() { s_RendererAPI->clear(); }
 
-		static void SetViewport(Math::Vector2 location, Math::Vector2 size);
-		static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
-		static void DrawIndexed(const Reference<VertexArray>& vertexArray, uint32_t indexCount = 0);
+		/**
+		 * @brief Clear depth buffer.
+		*/
+		static void clearDepthBuffer() { s_RendererAPI->clearDepthBuffer(); }
+
+		/**
+		 * @brief Set a new clear color.
+		 * @param color The new color.
+		*/
+		static void setClearColor(const Color& color) { s_RendererAPI->setClearColor(color); }
+
+		/**
+		 * @brief Set viewport.
+		 * @param location Viewport position.
+		 * @param size Viewport size.
+		*/
+		static void setViewport(Math::Vector2 location, Math::Vector2 size);
+
+		/**
+		 * @brief Set viewport.
+		 * @param x Viewport position X.
+		 * @param y Viewport position Y.
+		 * @param width Viewport width.
+		 * @param height Viewport height.
+		*/
+		static void setViewport(UInt x, UInt y, UInt width, UInt height);
+
+		/**
+		 * @brief Draw indexed elements.
+		 * @param vertexArray Source vertex array.
+		 * @param indexCount Index count.
+		*/
+		static void drawIndexed(const Reference<VertexArray>& vertexArray, UInt indexCount = 0);
 
 	private:
 

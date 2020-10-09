@@ -1,3 +1,8 @@
+/**
+ * @file Vectors.h
+ * @brief Import all vector related stuff at once.
+*/
+
 #pragma once
 
 #include "Vector/Vector2.h"

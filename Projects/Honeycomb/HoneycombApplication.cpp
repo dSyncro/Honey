@@ -10,14 +10,14 @@ namespace Honey {
 
 		Honeycomb()
 		{
-			PushLayer(new EditorLayer());
-			SetTitle("Honeycomb - Editor");
+			pushLayer(new EditorLayer());
+			setTitle("Honeycomb - Editor");
 		}
 
 		~Honeycomb() = default;
 	};
 
-	Application* CreateApplication()
+	Application* createApplication()
 	{
 		return new Honeycomb();
 	}

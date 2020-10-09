@@ -4,22 +4,30 @@
 
 namespace Honey {
 
-	enum class ShaderDataType : uint8_t {
+	/**
+	 * @brief Datatypes for shaders.
+	*/
+	enum class ShaderDataType : Byte {
 		None = 0,
-		Float,
-		Vector2,
-		Vector3,
-		Vector4,
-		Int,
-		Vector2Int,
-		Vector3Int,
-		Vector4Int,
-		Matrix3,
-		Matrix4,
-		Bool
+		Float, /** @brief Float type. */
+		Vector2, /** @brief 2 components vector type. */
+		Vector3, /** @brief 3 components vector type. */
+		Vector4, /** @brief 4 components vector type. */
+		Int, /** @brief Int type. */
+		Vector2Int, /** @brief Int 2 components vector type. */
+		Vector3Int, /** @brief Int 3 components vector type. */
+		Vector4Int, /** @brief Int 4 components vector type. */
+		Matrix3, /** @brief Matrix 3x3 type. */
+		Matrix4, /** @brief Matrix 4x4 type. */
+		Bool /** @brief Boolean type. */
 	};
 
-	static uint32_t ShaderDataTypeSize(ShaderDataType type)
+	/**
+	 * @brief Get shader datatype size in byte.
+	 * @param type The datatype.
+	 * @return Size in byte of type.
+	*/
+	static UInt getShaderDataTypeSize(ShaderDataType type)
 	{
 		switch (type)
 		{

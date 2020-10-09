@@ -15,8 +15,18 @@ namespace Honey {
 
 	public:
 
+		/**
+		 * @brief Construct WindowResizeEvent from Size.
+		 * @param size New size.
+		*/
 		WindowResizeEvent(const Math::Size& size) : _size(size) {}
-		WindowResizeEvent(std::size_t width, std::size_t height) : _size(width, height) {}
+
+		/**
+		 * @brief Construct WindowResizeEvent from width and height.
+		 * @param width New width.
+		 * @param height New height.
+		*/
+		WindowResizeEvent(UInt width, UInt height) : _size(width, height) {}
 
 		/**
 		 * @brief Get new Window size.
@@ -30,7 +40,7 @@ namespace Honey {
 		virtual std::string toString() const override
 		{
 			std::stringstream stream;
-			stream << "WindowResizeEvent: " << _size.Width << ", " << _size.Height;
+			stream << "WindowResizeEvent: " << _size.width << ", " << _size.height;
 			return stream.str();
 		}
 

@@ -1,37 +1,86 @@
 #pragma once
 
-#include <glm/glm.hpp>
+#include <Honey/Math/Math.h>
 
 namespace Honey {
 
+	/**
+	 * @brief Engine orthographic camera.
+	*/
 	class OrthographicCamera {
 
 	public:
 
-		OrthographicCamera(float left, float right, float bottom, float top);
+		/**
+		 * @brief Construct camera from projection components.
+		 * @param left Projection left.
+		 * @param right Projection right.
+		 * @param bottom Projection bottom.
+		 * @param top Projection top.
+		*/
+		OrthographicCamera(Float left, Float right, Float bottom, Float top);
 
-		void SetProjection(float left, float right, float bottom, float top);
+		/**
+		 * @brief Set new projection.
+		 * @param left Projection left.
+		 * @param right Projection right.
+		 * @param bottom Projection bottom.
+		 * @param top Projection top.
+		*/
+		void setProjection(Float left, Float right, Float bottom, Float top);
 
-		const glm::vec3& GetPosition() const { return _position; }
-		void SetPosition(const glm::vec3& position);
+		/**
+		 * @brief Get camera position.
+		 * @return Camera position.
+		*/
+		const Math::Vector3& getPosition() const { return _position; }
 
-		float GetRotation() const { return _rotation; }
-		void SetRotation(float rotation);
+		/**
+		 * @brief Set camera position.
+		 * @param position New position.
+		*/
+		void setPosition(const Math::Vector3& position);
 
-		const glm::mat4& GetViewMatrix() const { return _viewMatrix; }
-		const glm::mat4& GetProjectionMatrix() const { return _projectionMatrix; }
-		const glm::mat4& GetViewProjectionMatrix() const { return _viewProjectionMatrix; }
+		/**
+		 * @brief Get camera rotation.
+		 * @return Camera rotation.
+		*/
+		Float getRotation() const { return _rotation; }
+
+		/**
+		 * @brief Set camera rotation.
+		 * @param rotation New rotation.
+		*/
+		void setRotation(Float rotation);
+
+		/**
+		 * @brief Get camera view matrix.
+		 * @return Camera projection matrix.
+		*/
+		const Math::Matrix4x4& getViewMatrix() const { return _viewMatrix; }
+
+		/**
+		 * @brief Get camera view matrix.
+		 * @return Camera projection matrix.
+		*/
+		const Math::Matrix4x4& getProjectionMatrix() const { return _projectionMatrix; }
+
+		/**
+		 * @brief Get camera view-projection matrix.
+		 * @return Camera view-projection matrix.
+		*/
+		const Math::Matrix4x4& getViewProjectionMatrix() const { return _viewProjectionMatrix; }
 
 	private:
 
-		void RecalculateViewMatrix();
+		void recalculateViewMatrix();
 
-		glm::mat4 _viewMatrix;
-		glm::mat4 _projectionMatrix;
-		glm::mat4 _viewProjectionMatrix;
+		Math::Matrix4x4 _viewMatrix;
+		Math::Matrix4x4 _projectionMatrix;
+		Math::Matrix4x4 _viewProjectionMatrix;
 
-		glm::vec3 _position = { .0f, .0f, .0f };
-		float _rotation = 0;
+		Math::Vector3 _position = { .0f, .0f, .0f };
+		Float _rotation = 0;
 	};
 
 }

@@ -6,38 +6,73 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Engine orthographic camera controller.
+	*/
 	class OrthographicCameraController {
 
 	public:
 
-		OrthographicCameraController(float aspectRatio);
-		OrthographicCameraController(float width, float height);
+		/**
+		 * @brief Construct OrthographicCameraController from its aspect ratio.
+		 * @param aspectRatio The aspect ratio.
+		*/
+		OrthographicCameraController(Float aspectRatio);
 
-		void OnUpdate();
-		void OnEvent(Event& e);
+		/**
+		 * @brief Construct OrthographicCameraController from its width and height.
+		 * @param width The width.
+		 * @param height The height.
+		*/
+		OrthographicCameraController(Float width, Float height);
 
-		void Resize(uint32_t width, uint32_t height);
+		/**
+		 * @brief Called when controller gets updated.
+		*/
+		void onUpdate();
 
-		OrthographicCamera& GetCamera() { return _camera; }
-		const OrthographicCamera& GetCamera() const { return _camera; }
+		/**
+		 * @brief Called when controller gets an event.
+		 * @param e The event.
+		*/
+		void onEvent(Event& e);
+
+		/**
+		 * @brief Resize controller.
+		 * @param width New width.
+		 * @param height New height.
+		*/
+		void resize(UInt width, UInt height);
+
+		/**
+		 * @brief Get underlying camera.
+		 * @return The camera.
+		*/
+		OrthographicCamera& getCamera() { return _camera; }
+
+		/**
+		 * @brief Get underlying camera (const version).
+		 * @return The camera.
+		*/
+		const OrthographicCamera& getCamera() const { return _camera; }
 
 	private:
 
-		float _aspectRatio;
-		float _zoomLevel = 1.0f;
+		Float _aspectRatio;
+		Float _zoomLevel = 1.0f;
 
 		OrthographicCamera _camera;
 
-		float _rotation = 0.0f;
-		glm::vec3 _position = glm::vec3(0, 0, 0);
+		Float _rotation = 0.0f;
+		Math::Vector3 _position = Math::Vector3(0, 0, 0);
 
-		float _moveSpeed = 1.0f;
-		float _rotationSpeed = 25.0f;
+		Float _moveSpeed = 1.0f;
+		Float _rotationSpeed = 25.0f;
 
 		bool _doRotate = true;
 
-		bool OnMouseScrolled(MouseScrolledEvent& e);
-		bool OnWindowResize(WindowResizeEvent& e);
+		bool onMouseScrolled(MouseScrolledEvent& e);
+		bool onWindowResize(WindowResizeEvent& e);
 	};
 
 }

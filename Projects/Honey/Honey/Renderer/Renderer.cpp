@@ -8,42 +8,42 @@ using namespace Honey::Math;
 
 Unique<Renderer::SceneData> Renderer::s_SceneData = CreateUnique<Renderer::SceneData>();
 
-void Renderer::Init()
+void Renderer::init()
 {
 	HNY_PROFILE_FUNCTION();
 
-	RenderCommand::Init();
-	Renderer2D::Init();
+	RenderCommand::init();
+	Renderer2D::init();
 }
 
-void Renderer::Shutdown()
+void Renderer::shutdown()
 {
 	HNY_PROFILE_FUNCTION();
 
-	Renderer2D::Shutdown();
+	Renderer2D::shutdown();
 }
 
-void Renderer::BeginScene(OrthographicCamera& camera)
+void Renderer::beginScene(OrthographicCamera& camera)
 {
-	s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+	s_SceneData->viewProjectionMatrix = camera.getViewProjectionMatrix();
 }
 
-void Renderer::EndScene()
+void Renderer::endScene()
 {
 
 }
 
-void Renderer::Submit(const Reference<Shader>& shader, const Reference<VertexArray>& vertexArray, const Matrix4x4& transform)
+void Renderer::submit(const Reference<Shader>& shader, const Reference<VertexArray>& vertexArray, const Matrix4x4& transform)
 {
 	shader->bind();
-	shader->SetMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
-	shader->SetMat4("u_Transform", transform);
+	shader->setMat4("u_ViewProjection", s_SceneData->viewProjectionMatrix);
+	shader->setMat4("u_Transform", transform);
 
-	vertexArray->Bind();
-	RenderCommand::DrawIndexed(vertexArray);
+	vertexArray->bind();
+	RenderCommand::drawIndexed(vertexArray);
 }
 
-void Renderer::OnWindowResize(uint32_t width, uint32_t height)
+void Renderer::onWindowResize(UInt width, UInt height)
 {
-	RenderCommand::SetViewport(0, 0, width, height);
+	RenderCommand::setViewport(0, 0, width, height);
 }

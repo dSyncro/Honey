@@ -15,7 +15,17 @@ namespace Honey {
 
 	public:
 
+		/**
+		 * @brief Construct MouseScrolledEvent from offset.
+		 * @param offset Scroll offset.
+		*/
 		MouseScrolledEvent(const Math::Vector2& offset) : _offset(offset) {}
+
+		/**
+		 * @brief Construct MouseScrolledEvent from offset components.
+		 * @param xOffset Offset X component.
+		 * @param yOffset Offset Y component.
+		*/
 		MouseScrolledEvent(float xOffset, float yOffset) : _offset(xOffset, yOffset) {}
 
 		/**

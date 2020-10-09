@@ -6,7 +6,7 @@ using namespace Honey;
 
 RendererAPI::API RendererAPI::s_API = RendererAPI::API::OpenGL;
 
-Unique<RendererAPI> RendererAPI::Create()
+Unique<RendererAPI> RendererAPI::create()
 {
 	switch (s_API)
 	{

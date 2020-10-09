@@ -6,17 +6,36 @@
 
 namespace Honey::Math {
 
+	/**
+	 * @brief The length of something from one end to the other.
+	*/
 	struct Span {
 
-		Span() : Start(0), Length(0) {}
-		Span(std::size_t start, std::size_t length) : Start(start), Length(length) {}
+		/**
+		 * @brief Construct a default Span.
+		*/
+		Span() : start(0), length(0) {}
 
-		std::size_t Start;
-		std::size_t Length;
+		/**
+		 * @brief Construct a span.
+		 * @param start Span startpoint.
+		 * @param length Span length.
+		*/
+		Span(UInt start, UInt length) : start(start), length(length) {}
 
-		std::size_t GetEnd() const noexcept { return Start + Length; }
+		UInt start; /** @brief Span start. */
+		UInt length; /** @brief Span length. */
 
-		static Span FromBounds(std::size_t start, std::size_t end) 
+		/** @brief Span end. */
+		UInt end() const noexcept { return start + length; }
+
+		/**
+		 * @brief Create span from startpoint and endpoint.
+		 * @param start Startpoint.
+		 * @param end Endpoint.
+		 * @return A new span with specified bounds.
+		*/
+		static Span FromBounds(UInt start, UInt end) 
 		{ 
 			HNY_CORE_ASSERT(start <= end, "End cannot be less than Start!"); 
 			return Span(start, end - start); 

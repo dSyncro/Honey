@@ -4,14 +4,28 @@
 
 namespace Honey {
 
+	/**
+	 * @brief OpenGL graphics context implementation.
+	*/
 	class OpenGLContext final : public GraphicsContext {
 
 	public:
 
+		/**
+		 * @brief Construct OpenGLContext from handle.
+		 * @param handle The handle.
+		*/
 		OpenGLContext(void* handle);
 
-		virtual void Init() override;
-		virtual void SwapBuffers() override;
+		/**
+		 * @brief Initialize context.
+		*/
+		virtual void init() override;
+
+		/**
+		 * @brief Swap context buffers.
+		*/
+		virtual void swapBuffers() override;
 
 	private:
 

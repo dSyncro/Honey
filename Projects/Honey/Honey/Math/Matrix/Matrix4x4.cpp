@@ -65,10 +65,10 @@ Matrix4x4& Matrix4x4::invert()
 
 void Matrix4x4::setColumn(std::size_t index, const Vector4& column)
 {
-	elements[index + 0 * 4] = column.X;
-	elements[index + 1 * 4] = column.Y;
-	elements[index + 2 * 4] = column.Z;
-	elements[index + 3 * 4] = column.W;
+	elements[index + 0 * 4] = column.x;
+	elements[index + 1 * 4] = column.y;
+	elements[index + 2 * 4] = column.z;
+	elements[index + 3 * 4] = column.w;
 }
 
 Matrix4x4 Matrix4x4::inverse() const
@@ -229,7 +229,7 @@ Matrix4x4 Matrix4x4::perspective(float fov, float aspectRatio, float zNear, floa
 {
 	Matrix4x4 result = zero();
 
-	float q = 1.0f / Mathf::Tan(Mathf::Degrees2Radians * 0.5f * fov);
+	float q = 1.0f / Mathf::tan(Mathf::degrees2Radians() * 0.5f * fov);
 
 	float a = q / aspectRatio;
 	float b = (zNear + zFar) / (zNear - zFar);
@@ -247,21 +247,21 @@ Matrix4x4 Matrix4x4::perspective(float fov, float aspectRatio, float zNear, floa
 Matrix4x4 Matrix4x4::lookAt(const Vector3& camera, const Vector3& object, const Vector3& up)
 {
 	Matrix4x4 result = identity();
-	Vector3 f = (object - camera).Normalize();
-	Vector3 s = Vector3::Cross(f, up.Normalized());
-	Vector3 u = Vector3::Cross(s, f);
+	Vector3 f = (object - camera).normalize();
+	Vector3 s = Vector3::cross(f, up.normalized());
+	Vector3 u = Vector3::cross(s, f);
 
-	result.elements[0 + 0 * 4] = s.X;
-	result.elements[0 + 1 * 4] = s.Y;
-	result.elements[0 + 2 * 4] = s.Z;
+	result.elements[0 + 0 * 4] = s.x;
+	result.elements[0 + 1 * 4] = s.y;
+	result.elements[0 + 2 * 4] = s.z;
 
-	result.elements[1 + 0 * 4] = u.X;
-	result.elements[1 + 1 * 4] = u.Y;
-	result.elements[1 + 2 * 4] = u.Z;
+	result.elements[1 + 0 * 4] = u.x;
+	result.elements[1 + 1 * 4] = u.y;
+	result.elements[1 + 2 * 4] = u.z;
 
-	result.elements[2 + 0 * 4] = -f.X;
-	result.elements[2 + 1 * 4] = -f.Y;
-	result.elements[2 + 2 * 4] = -f.Z;
+	result.elements[2 + 0 * 4] = -f.x;
+	result.elements[2 + 1 * 4] = -f.y;
+	result.elements[2 + 2 * 4] = -f.z;
 
 	return result * translate(-camera);
 }
@@ -270,9 +270,9 @@ Matrix4x4 Matrix4x4::translate(const Vector3& translation)
 {
 	Matrix4x4 result = identity();
 
-	result.elements[3 + 0 * 4] = translation.X;
-	result.elements[3 + 1 * 4] = translation.Y;
-	result.elements[3 + 2 * 4] = translation.Z;
+	result.elements[3 + 0 * 4] = translation.x;
+	result.elements[3 + 1 * 4] = translation.y;
+	result.elements[3 + 2 * 4] = translation.z;
 
 	return result;
 }
@@ -282,13 +282,13 @@ Matrix4x4 Matrix4x4::rotate(float angle, const Vector3& axis)
 	Matrix4x4 result = identity();
 
 	float r = angle;
-	float c = Mathf::Cos(r);
-	float s = Mathf::Sin(r);
+	float c = Mathf::cos(r);
+	float s = Mathf::sin(r);
 	float omc = 1.0f - c;
 
-	float x = axis.X;
-	float y = axis.Y;
-	float z = axis.Z;
+	float x = axis.x;
+	float y = axis.y;
+	float z = axis.z;
 
 	result.elements[0 + 0 * 4] = x * x * omc + c;
 	result.elements[0 + 1 * 4] = y * x * omc + z * s;
@@ -343,9 +343,9 @@ Matrix4x4 Matrix4x4::scale(const Vector3& scale)
 {
 	Matrix4x4 result(1.0f);
 
-	result.elements[0 + 0 * 4] = scale.X;
-	result.elements[1 + 1 * 4] = scale.Y;
-	result.elements[2 + 2 * 4] = scale.Z;
+	result.elements[0 + 0 * 4] = scale.x;
+	result.elements[1 + 1 * 4] = scale.y;
+	result.elements[2 + 2 * 4] = scale.z;
 
 	return result;
 }
@@ -353,10 +353,10 @@ Matrix4x4 Matrix4x4::scale(const Vector3& scale)
 Matrix4x4 Matrix4x4::transpose(const Matrix4x4& matrix)
 {
 	return Matrix4x4(
-		Vector4(matrix.rows[0].X, matrix.rows[1].X, matrix.rows[2].X, matrix.rows[3].X),
-		Vector4(matrix.rows[0].Y, matrix.rows[1].Y, matrix.rows[2].Y, matrix.rows[3].Y),
-		Vector4(matrix.rows[0].Z, matrix.rows[1].Z, matrix.rows[2].Z, matrix.rows[3].Z),
-		Vector4(matrix.rows[0].W, matrix.rows[1].W, matrix.rows[2].W, matrix.rows[3].W)
+		Vector4(matrix.rows[0].x, matrix.rows[1].x, matrix.rows[2].x, matrix.rows[3].x),
+		Vector4(matrix.rows[0].y, matrix.rows[1].y, matrix.rows[2].y, matrix.rows[3].y),
+		Vector4(matrix.rows[0].z, matrix.rows[1].z, matrix.rows[2].z, matrix.rows[3].z),
+		Vector4(matrix.rows[0].w, matrix.rows[1].w, matrix.rows[2].w, matrix.rows[3].w)
 	);
 }
 

@@ -4,39 +4,43 @@
 
 using namespace Honey;
 
-void ShaderLibrary::Add(const Reference<Shader>& shader)
+void ShaderLibrary::add(const Reference<Shader>& shader)
 {
-	const std::string& name = shader->GetName();
-	Add(name, shader);
+	// Just use default shader name
+
+	const std::string& name = shader->getName();
+	add(name, shader);
 }
 
-void ShaderLibrary::Add(const std::string& name, const Reference<Shader>& shader)
+void ShaderLibrary::add(const std::string& name, const Reference<Shader>& shader)
 {
-	HNY_CORE_ASSERT(!Exists(name), "Shader already exists!");
+	// TODO: improve this code.
+
+	HNY_CORE_ASSERT(!exists(name), "Shader already exists!");
 	_shaders[name] = shader;
 }
 
-Reference<Shader> ShaderLibrary::Load(const std::string& path)
+Reference<Shader> ShaderLibrary::load(const std::string& path)
 {
-	Reference<Shader> shader = Shader::CreateFromFile(path);
-	Add(shader);
+	Reference<Shader> shader = Shader::createFromFile(path);
+	add(shader);
 	return shader;
 }
 
-Reference<Shader> ShaderLibrary::Load(const std::string& name, const std::string& path)
+Reference<Shader> ShaderLibrary::load(const std::string& name, const std::string& path)
 {
-	Reference<Shader> shader = Shader::CreateFromFile(path);
-	Add(name, shader);
+	Reference<Shader> shader = Shader::createFromFile(path);
+	add(name, shader);
 	return shader;
 }
 
-Reference<Shader> ShaderLibrary::Get(const std::string& name)
+Reference<Shader> ShaderLibrary::get(const std::string& name)
 {
-	HNY_CORE_ASSERT(Exists(name), "Shader does not exists!");
+	HNY_CORE_ASSERT(exists(name), "Shader does not exists!");
 	return _shaders[name];
 }
 
-bool ShaderLibrary::Exists(const std::string& name) const
+bool ShaderLibrary::exists(const std::string& name) const
 {
 	return _shaders.find(name) != _shaders.end();
 }

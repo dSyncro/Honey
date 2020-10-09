@@ -160,7 +160,7 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shader
 	}
 }
 
-Reference<OpenGLShader> OpenGLShader::FromFile(const std::string& path)
+Reference<OpenGLShader> OpenGLShader::fromFile(const std::string& path)
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -177,7 +177,7 @@ Reference<OpenGLShader> OpenGLShader::FromFile(const std::string& path)
 	return CreateReference<OpenGLShader>(name, shaderSources);
 }
 
-Reference<OpenGLShader> OpenGLShader::FromSource(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
+Reference<OpenGLShader> OpenGLShader::fromSource(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -229,7 +229,7 @@ bool OpenGLShader::isBound() const
 	return s_Bound == _rendererID;
 }
 
-void OpenGLShader::SetInt(const std::string& name, int value)
+void OpenGLShader::setInt(const std::string& name, int value)
 {
 	this->bind();
 
@@ -237,7 +237,7 @@ void OpenGLShader::SetInt(const std::string& name, int value)
 	glUniform1i(id, value);
 }
 
-void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t count)
+void OpenGLShader::setIntArray(const std::string& name, int* values, uint32_t count)
 {
 	this->bind();
 
@@ -245,7 +245,7 @@ void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t co
 	glUniform1iv(id, count, values);
 }
 
-void OpenGLShader::SetFloat(const std::string& name, float value)
+void OpenGLShader::setFloat(const std::string& name, float value)
 {
 	this->bind();
 
@@ -253,7 +253,7 @@ void OpenGLShader::SetFloat(const std::string& name, float value)
 	glUniform1f(id, value);
 }
 
-void OpenGLShader::SetVec2(const std::string& name, const glm::vec2& value)
+void OpenGLShader::setVec2(const std::string& name, const Vector2& value)
 {
 	this->bind();
 
@@ -261,7 +261,7 @@ void OpenGLShader::SetVec2(const std::string& name, const glm::vec2& value)
 	glUniform2f(id, value.x, value.y);
 }
 
-void OpenGLShader::SetVec3(const std::string& name, const glm::vec3& value)
+void OpenGLShader::setVec3(const std::string& name, const Vector3& value)
 {
 	this->bind();
 
@@ -269,7 +269,7 @@ void OpenGLShader::SetVec3(const std::string& name, const glm::vec3& value)
 	glUniform3f(id, value.x, value.y, value.z);
 }
 
-void OpenGLShader::SetVec4(const std::string& name, const glm::vec4& value)
+void OpenGLShader::setVec4(const std::string& name, const Vector4& value)
 {
 	this->bind();
 
@@ -277,7 +277,7 @@ void OpenGLShader::SetVec4(const std::string& name, const glm::vec4& value)
 	glUniform4f(id, value.x, value.y, value.z, value.w);
 }
 
-void OpenGLShader::SetMat2(const std::string& name, const glm::mat2& matrix)
+void OpenGLShader::setMat2(const std::string& name, const glm::mat2& matrix)
 {
 	this->bind();
 
@@ -285,7 +285,7 @@ void OpenGLShader::SetMat2(const std::string& name, const glm::mat2& matrix)
 	glUniformMatrix2fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
-void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)
+void OpenGLShader::setMat3(const std::string& name, const glm::mat3& matrix)
 {
 	this->bind();
 
@@ -293,15 +293,7 @@ void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix)
 	glUniformMatrix3fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
-void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)
-{
-	this->bind();
-
-	int id = glGetUniformLocation(_rendererID, name.c_str());
-	glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(matrix));
-}
-
-void OpenGLShader::SetMat4(const std::string& name, const Matrix4x4& matrix)
+void OpenGLShader::setMat4(const std::string& name, const Matrix4x4& matrix)
 {
 	this->bind();
 

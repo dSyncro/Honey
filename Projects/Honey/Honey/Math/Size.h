@@ -5,23 +5,46 @@
 
 namespace Honey::Math {
 
+	/**
+	 * @brief Structure representing a bidimensional size.
+	*/
 	struct Size {
 
-		constexpr Size(std::size_t value = 0)
-			: Width(value), Height(value) { }
+		/**
+		 * @brief Construct Size from a single value.
+		 * @param value The value.
+		*/
+		constexpr Size(UInt value = 0)
+			: width(value), height(value) { }
 
-		constexpr Size(std::size_t width, std::size_t height)
-			: Width(width), Height(height) { }
+		/**
+		 * @brief Construct Size from width and height.
+		 * @param width The width.
+		 * @param height The height.
+		*/
+		constexpr Size(UInt width, UInt height)
+			: width(width), height(height) { }
 
+		/**
+		 * @brief Construct Size from a Vector2Int.
+		 * @param vector The vector.
+		*/
 		constexpr Size(const Vector2Int& vector)
-			: Width(vector.x), Height(vector.y) { }
+			: width(vector.x), height(vector.y) { }
 
-		std::size_t Width;
-		std::size_t Height;
+		UInt width; /** @brief The width. */
+		UInt height; /** @brief The height. */
 
-		std::size_t GetArea() const { return Width * Height; }
+		/**
+		 * @brief Get area from size.
+		 * @return The area.
+		*/
+		UInt getArea() const { return width * height; }
 
-		explicit operator Vector2Int() const { return Vector2Int((int)Width, (int)Height); }
+		/**
+		 * @brief Convert Size to Vector2Int.
+		*/
+		explicit operator Vector2Int() const { return Vector2Int(static_cast<Int>(width), static_cast<Int>(height)); }
 	};
 
 }

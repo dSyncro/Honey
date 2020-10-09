@@ -5,9 +5,9 @@
 
 using namespace Honey;
 
-Reference<FrameBuffer> Honey::FrameBuffer::Create(const FrameBufferSpecification& specification)
+Reference<FrameBuffer> Honey::FrameBuffer::create(const FrameBufferSpecification& specification)
 {
-	switch (Renderer::GetAPI())
+	switch (Renderer::getAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL: return CreateReference<OpenGLFrameBuffer>(specification);

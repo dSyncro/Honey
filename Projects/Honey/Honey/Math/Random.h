@@ -1,9 +1,13 @@
 #pragma once
 
 #include <random>
+#include <Honey/Core/TypeTraits.h>
 
 namespace Honey::Math {
 
+	/**
+	 * @brief Generate random numbers easily.
+	*/
 	class Random {
 
 		Random() = delete;
@@ -17,13 +21,13 @@ namespace Honey::Math {
 		 * @param probability -> Probability of retrieving True.
 		 * @return Either true or false depending on given probability.
 		 */
-		static bool Bool(float probability = 0.5f);
+		static bool generateBool(Float probability = 0.5f);
 
 		/**
 		 * Generate a random double.
 		 * @return A random double between 0 and 1.
 		 */
-		static double Double() { return Double(0, 1); }
+		static Double generateDouble() { return generateDouble(0.0, 1.0); }
 
 		/**
 		 * Generate a random double.
@@ -31,7 +35,7 @@ namespace Honey::Math {
 		 * @return A random double between 0 (inclusive) and `max` (exclusive).
 		 * @overload
 		 */
-		static double Double(double max) { return Double(0, max); }
+		static Double generateDouble(Double max) { return generateDouble(0.0, max); }
 
 		/**
 		 * Generate a random double.
@@ -40,13 +44,13 @@ namespace Honey::Math {
 		 * @return A random double between `min` (inclusive) and `max` (exclusive).
 		 * @overload
 		 */
-		static double Double(double min, double max);
+		static Double generateDouble(Double min, Double max);
 
 		/**
 		 * Generate a random float.
 		 * @return A random float between 0 and 1.
 		 */
-		static float Float() { return Float(0, 1); }
+		static Float generateFloat() { return generateFloat(0.0f, 1.0f); }
 
 		/**
 		 * Generate a random float.
@@ -54,7 +58,7 @@ namespace Honey::Math {
 		 * @return A random float between 0 (inclusive) and `max` (exclusive).
 		 * @overload
 		 */
-		static float Float(float max) { return Float(0, max); }
+		static Float generateFloat(Float max) { return generateFloat(0.0f, max); }
 
 		/**
 		 * Generate a random float.
@@ -63,13 +67,13 @@ namespace Honey::Math {
 		 * @return A random float between `min` (inclusive) and `max` (exclusive).
 		 * @overload
 		 */
-		static float Float(float min, float max);
+		static Float generateFloat(Honey::Float min, Honey::Float max);
 
 		/**
 		 * Generate a random integer.
 		 * @return A random integer between 0 and int max value.
 		 */
-		static int Int() { return Int(0, (std::numeric_limits<int>::max)()); }
+		static Int generateInt() { return generateInt(0, maxValue<Int>()); }
 
 		/**
 		 * Generate a random integer.
@@ -77,7 +81,7 @@ namespace Honey::Math {
 		 * @return A random integer between 0 (inclusive) and `max` (inclusive).
 		 * @overload
 		 */
-		static int Int(int max) { return Int(0, max); }
+		static Int generateInt(Int max) { return generateInt(0, max); }
 
 		/**
 		 * Generate a random integer.
@@ -86,11 +90,11 @@ namespace Honey::Math {
 		 * @return A random integer between `min` (inclusive) and `max` (inclusive).
 		 * @overload
 		 */
-		static int Int(int min, int max);
+		static Int generateInt(Int min, Int max);
 
 	private:
 
-		inline static std::mt19937& GetEngine()
+		inline static std::mt19937& getEngine()
 		{
 			static std::random_device seed_gen;
 			static std::mt19937 engine(seed_gen());

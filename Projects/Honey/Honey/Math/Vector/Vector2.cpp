@@ -57,19 +57,22 @@ const Vector2& Vector2::negativeInfinity()
 
 Vector2& Vector2::normalize()
 {
+	// Just divide this by its magnitude.
 	float magnitude = getMagnitude();
 	return *this /= magnitude;
 }
 
 Vector2& Vector2::round()
 {
-	x = Mathf::Round(x);
-	y = Mathf::Round(y);
+	// Round each component
+	x = Mathf::round(x);
+	y = Mathf::round(y);
 	return *this;
 }
 
 Vector2& Vector2::set(float x, float y)
 {
+	// Set each component
 	this->x = x;
 	this->y = y;
 	return *this;
@@ -78,29 +81,49 @@ Vector2& Vector2::set(float x, float y)
 bool Vector2::exactlyEquals(const Vector2& other) const { return x == other.x && y == other.y; }
 bool Vector2::essentiallyEquals(const Vector2& other) const { return *this == other; }
 
-float Vector2::getMagnitude() const { return Mathf::Sqrt(getSquaredMagnitude()); }
+float Vector2::getMagnitude() const { return Mathf::sqrt(getSquaredMagnitude()); }
 float Vector2::getSquaredMagnitude() const { return x * x + y * y; }
 
 Vector2 Vector2::normalized() const
 {
+	// Just divide by magnitude
 	float magnitude = getMagnitude();
 	return (*this) / magnitude;
 }
 
 Vector2 Vector2::rounded() const
 {
-	return Vector2(Mathf::Round(x), Mathf::Round(y));
+	return Vector2(Mathf::round(x), Mathf::round(y));
+}
+
+std::string Vector2::toString() const 
+{ 
+	std::string out = "Vector2(" + 
+		std::to_string(x) + "; " + 
+		std::to_string(y) + ")";
+
+	return  out;
 }
 
 float Vector2::angle(const Vector2& a, const Vector2& b)
 {
+	// The angle between two vectors, deferred by a single point, 
+	// called the shortest angle at which you have to turn around one of the vectors 
+	// to the position of co-directional with another vector.
+
+	// The cosine of the angle between two vectors is equal to the dot product 
+	// of this vectors divided by the product of vector magnitude.
+
 	float dot = Vector2::dot(a, b);
-	float theta = Mathf::Acos(dot / (a.getMagnitude() * b.getMagnitude()));
+	float theta = Mathf::acos(dot / (a.getMagnitude() * b.getMagnitude()));
 	return theta;
 }
 
 float Vector2::dot(const Vector2& a, const Vector2& b)
 {
+	// the dot product is the sum of the products of the corresponding entries of the two sequences of numbers.
+	// HACK: scale a by b and just sum its components.
+
 	Vector2 scaled = a * b;
 	return scaled.x + scaled.y;
 }
@@ -119,13 +142,13 @@ float Vector2::squaredDistance(const Vector2& a, const Vector2& b)
 
 Vector2 Vector2::abs(const Vector2& vector)
 {
-	Vector2 abs = Vector2(Mathf::Abs(vector.x), Mathf::Abs(vector.y));
+	Vector2 abs = Vector2(Mathf::abs(vector.x), Mathf::abs(vector.y));
 	return abs;
 }
 
 Vector2 Vector2::sign(const Vector2& vector)
 {
-	Vector2 sign = Vector2(Mathf::Sign(vector.x), Mathf::Sign(vector.y));
+	Vector2 sign = Vector2(Mathf::sign(vector.x), Mathf::sign(vector.y));
 	return sign;
 }
 
@@ -142,27 +165,34 @@ Vector2 Vector2::perpendicularCounterClockwise(const Vector2& vector)
 Vector2 Vector2::clampMagnitude(const Vector2& vector, float magnitude)
 {
 	float oldMagnitude = vector.getMagnitude();
-	return oldMagnitude < magnitude ?
-		vector :
-		vector * (magnitude / oldMagnitude);
+
+	// if it was already small enough just return it.
+	if (oldMagnitude <= magnitude) return vector;
+
+	// scale vector accordingly
+	return vector * (magnitude / oldMagnitude);
 }
 
 Vector2 Vector2::rotate(const Vector2& vector, float angle)
 {
-	float x = vector.x * Mathf::Cos(angle) - vector.y * Mathf::Sin(angle);
-	float y = vector.x * Mathf::Sin(angle) + vector.y * Mathf::Cos(angle);
+	// The new coordinates (x1, y1) of a point (x, y) after rotation are
+	// x1 = x * cos(angle) - y * sin(angle)
+	// y1 = x * sin(angle) + y * cos(angle)
+
+	float x = vector.x * Mathf::cos(angle) - vector.y * Mathf::sin(angle);
+	float y = vector.x * Mathf::sin(angle) + vector.y * Mathf::cos(angle);
 	return Vector2(x, y);
 }
 
 Vector2 Vector2::max(const Vector2& a, const Vector2& b)
 {
-	Vector2 max = Vector2(Mathf::Max(a.x, b.x), Mathf::Max(a.y, b.y));
+	Vector2 max = Vector2(Mathf::max(a.x, b.x), Mathf::max(a.y, b.y));
 	return max;
 }
 
 Vector2 Vector2::min(const Vector2& a, const Vector2& b)
 {
-	Vector2 min = Vector2(Mathf::Min(a.x, b.x), Mathf::Min(a.y, b.y));
+	Vector2 min = Vector2(Mathf::min(a.x, b.x), Mathf::min(a.y, b.y));
 	return min;
 }
 
@@ -184,7 +214,8 @@ Vector2 Vector2::lerp(const Vector2& a, const Vector2& b, float t)
 
 Vector2 Vector2::lerpClamped(const Vector2& a, const Vector2& b, float t)
 {
-	t = Mathf::Clamp01(t);
+	// Clamp t and then lerp
+	t = Mathf::clamp01(t);
 	return lerp(a, b, t);
 }
 

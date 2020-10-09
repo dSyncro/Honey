@@ -8,23 +8,22 @@ extern "C" {
 
 using namespace Honey;
 
-uint32_t OpenGLVertexBuffer::s_Bound = 0;
+UInt OpenGLVertexBuffer::s_Bound = 0;
 
-OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size)
+OpenGLVertexBuffer::OpenGLVertexBuffer(UInt size)
 {
 	HNY_PROFILE_FUNCTION();
-
 	glCreateBuffers(1, &_rendererID);
-	PerformBinding();
+	performBinding();
 	glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
 }
 
-OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
+OpenGLVertexBuffer::OpenGLVertexBuffer(Float* vertices, UInt size)
 {
 	HNY_PROFILE_FUNCTION();
 
 	glCreateBuffers(1, &_rendererID);
-	PerformBinding();
+	performBinding();
 	glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 }
 
@@ -42,7 +41,7 @@ void OpenGLVertexBuffer::bind() const
 
 	if (s_Bound == _rendererID) return;
 
-	PerformBinding();
+	performBinding();
 }
 
 void OpenGLVertexBuffer::unbind() const
@@ -51,7 +50,7 @@ void OpenGLVertexBuffer::unbind() const
 
 	if (s_Bound != _rendererID) return;
 
-	PerformUnbinding();
+	performUnbinding();
 }
 
 bool OpenGLVertexBuffer::isBound() const
@@ -59,19 +58,19 @@ bool OpenGLVertexBuffer::isBound() const
 	return s_Bound == _rendererID;
 }
 
-void OpenGLVertexBuffer::SetData(const void* data, uint32_t size)
+void OpenGLVertexBuffer::setData(const void* data, UInt size)
 {
-	PerformBinding();
+	performBinding();
 	glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 }
 
-void OpenGLVertexBuffer::PerformBinding() const
+void OpenGLVertexBuffer::performBinding() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
 	s_Bound = _rendererID;
 }
 
-void OpenGLVertexBuffer::PerformUnbinding() const
+void OpenGLVertexBuffer::performUnbinding() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	s_Bound = 0;

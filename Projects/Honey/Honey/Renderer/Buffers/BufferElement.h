@@ -6,22 +6,35 @@
 
 namespace Honey {
 
+	/**
+	 * @brief Vertex buffer layout element.
+	*/
 	struct BufferElement {
 
-		ShaderDataType Type;
-		std::string Name;
-		bool IsNormalized;
-		uint32_t Size;
-		uint32_t Offset;
+		ShaderDataType type;
+		std::string name;
+		bool isNormalized;
+		UInt size;
+		UInt offset;
 
 		BufferElement() = default;
 
-		BufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
-			: Name(name), Type(type), IsNormalized(normalized), Size(ShaderDataTypeSize(type)), Offset(0) { }
+		/**
+		 * @brief Construct BufferElement.
+		 * @param type Datatype.
+		 * @param name Element name.
+		 * @param isNormalized Is data meant to be normalized?
+		*/
+		BufferElement(ShaderDataType type, const std::string& name, bool isNormalized = false)
+			: name(name), type(type), isNormalized(isNormalized), size(getShaderDataTypeSize(type)), offset(0) { }
 
-		uint32_t GetComponentCount() const
+		/**
+		 * @brief Get component count from data type.
+		 * @return Component count.
+		*/
+		UInt getComponentCount() const
 		{
-			switch (Type)
+			switch (type)
 			{
 				case ShaderDataType::Bool:
 				case ShaderDataType::Float:

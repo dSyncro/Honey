@@ -12,14 +12,14 @@ namespace Honey {
 	struct TransformComponent {
 
 		TransformComponent() 
-			: position(Math::Vector3::Zero), rotation(Math::Quaternion::Identity), scale(Math::Vector3::One) {}
+			: position(Math::Vector3::zero()), rotation(Math::Quaternion::Identity), scale(Math::Vector3::one()) {}
 
 		~TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
 		TransformComponent(
 			const Math::Vector3& position, 
 			const Math::Quaternion& rotation = Math::Quaternion::Identity,
-			const Math::Vector3& scale = Math::Vector3::One
+			const Math::Vector3& scale = Math::Vector3::one()
 		) : position(position), rotation(rotation), scale(scale) { }
 
 		Math::Vector3 position;

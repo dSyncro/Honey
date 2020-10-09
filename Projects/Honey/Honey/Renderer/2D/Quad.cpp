@@ -5,13 +5,13 @@
 using namespace Honey;
 using namespace Honey::Math;
 
-void Quad::Vertex::Set(const Vector3& position, const Honey::Color& color, const Vector2& texCoord, int textureIndex, const Vector2& tiling)
+void Quad::Vertex::Set(const Vector3& position, const Color& color, const Vector2& texCoord, Int textureIndex, const Vector2& tiling)
 {
-	Position = position;
-	Color = color;
-	TexCoord = texCoord;
-	TextureIndex = textureIndex;
-	Tiling = tiling;
+	this->position = position;
+	this->color = color;
+	this->texCoord = texCoord;
+	this->textureIndex = textureIndex;
+	this->tiling = tiling;
 }
 
 Quad::Quad(const Vertex& first, const Vertex& second, const Vertex& third, const Vertex& forth)
@@ -22,13 +22,13 @@ Quad::Quad(const Vertex& first, const Vertex& second, const Vertex& third, const
 	Vertices[3] = forth;
 }
 
-Quad::Vertex& Quad::operator [](int index)
+Quad::Vertex& Quad::operator [](Int index)
 {
 	HNY_CORE_ASSERT(index < 4, "Index out of bonds!");
 	return Vertices[index];
 }
 
-const Quad::Vertex& Quad::operator [](int index) const
+const Quad::Vertex& Quad::operator [](Int index) const
 {
 	HNY_CORE_ASSERT(index < 4, "Index out of bonds!");
 	return Vertices[index];

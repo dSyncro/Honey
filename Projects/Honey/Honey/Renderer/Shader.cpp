@@ -7,12 +7,12 @@
 
 using namespace Honey;
 
-Reference<Shader> Shader::CreateFromFile(const std::string& path)
+Reference<Shader> Shader::createFromFile(const std::string& path)
 {
-	switch (Renderer::GetAPI())
+	switch (Renderer::getAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL: return OpenGLShader::FromFile(path);
+		case RendererAPI::API::OpenGL: return OpenGLShader::fromFile(path);
 		case RendererAPI::API::DirectX: HNY_CORE_ASSERT(false, "RendererAPI::DirectX is currently not supported!"); return nullptr;
 	}
 
@@ -21,12 +21,12 @@ Reference<Shader> Shader::CreateFromFile(const std::string& path)
 }
 
 
-Reference<Shader> Shader::CreateFromSource(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
+Reference<Shader> Shader::createFromSource(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
 {
-	switch (Renderer::GetAPI())
+	switch (Renderer::getAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL: return OpenGLShader::FromSource(name, vertexSource, fragmentSource);
+		case RendererAPI::API::OpenGL: return OpenGLShader::fromSource(name, vertexSource, fragmentSource);
 		case RendererAPI::API::DirectX: HNY_CORE_ASSERT(false, "RendererAPI::DirectX is currently not supported!"); return nullptr;
 	}
 

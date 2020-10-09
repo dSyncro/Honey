@@ -11,7 +11,7 @@ extern "C" {
 #include <glad/glad.h>
 }
 
-static GLenum ChannelToGL(Texture::Channel channel)
+static GLenum channelToOpenGL(Texture::Channel channel)
 {
 	switch (channel)
 	{
@@ -23,21 +23,18 @@ static GLenum ChannelToGL(Texture::Channel channel)
 	}
 }
 
-static GLenum PixelToDataFormat(Texture::PixelFormat format)
+static GLenum pixelToOpenGLDataFormat(Texture::PixelFormat format)
 {
 	switch (format)
 	{
 		default:
 		case Texture::PixelFormat::R: return GL_RED;
-		case Texture::PixelFormat::RG: return GL_RG;
 		case Texture::PixelFormat::RGB: return GL_RGB;
-		case Texture::PixelFormat::BGR: return GL_BGR;
 		case Texture::PixelFormat::RGBA: return GL_RGBA;
-		case Texture::PixelFormat::BGRA: return GL_BGRA;
 	}
 }
 
-static uint32_t DataFormatToBPP(GLenum dataFormat)
+static UInt openGLDataFormatToBPP(GLenum dataFormat)
 {
 	switch (dataFormat)
 	{
@@ -48,7 +45,7 @@ static uint32_t DataFormatToBPP(GLenum dataFormat)
 	}
 }
 
-static GLenum DataFormatToInternalFormat(GLenum dataFormat)
+static GLenum dataFormatToInternalFormat(GLenum dataFormat)
 {
 	switch (dataFormat)
 	{
@@ -59,28 +56,30 @@ static GLenum DataFormatToInternalFormat(GLenum dataFormat)
 	}
 }
 
-static Texture::PixelFormat PixelFormatFromChannels(std::size_t channels, bool reverse = false)
+static Texture::PixelFormat getPixelFormatFromChannels(UInt channels)
 {
 	switch (channels)
 	{
 		case 1: return Texture::PixelFormat::R;
-		case 2: return Texture::PixelFormat::RG;
-		case 3: return reverse ? Texture::PixelFormat::BGR : Texture::PixelFormat::RGB;
-		case 4: default: return reverse ? Texture::PixelFormat::BGRA : Texture::PixelFormat::RGBA;
+		case 3: return Texture::PixelFormat::RGB;
+		case 4: default: return Texture::PixelFormat::RGBA;
 	}
 }
 
-OpenGLTexture2D::OpenGLTexture2D(std::size_t width, std::size_t height, PixelFormat format)
+OpenGLTexture2D::OpenGLTexture2D(UInt width, UInt height, PixelFormat format)
 	: _width(width), _height(height)
 {
 	HNY_PROFILE_FUNCTION();
 
-	_dataFormat = PixelToDataFormat(format);
-	_internalFormat = DataFormatToInternalFormat(_dataFormat);
+	// Retrieve OpenGL formats
+	_dataFormat = pixelToOpenGLDataFormat(format);
+	_internalFormat = dataFormatToInternalFormat(_dataFormat);
 
+	// Create texture
 	glCreateTextures(GL_TEXTURE_2D, 1, &_rendererID);
 	glTextureStorage2D(_rendererID, 1, _internalFormat, _width, _height);
 
+	// Setup texture
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 	glTextureParameteri(_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -94,35 +93,41 @@ OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : _path(path)
 {
 	HNY_PROFILE_FUNCTION();
 
+	// Load image
 	int width, height, channels;
 	stbi_set_flip_vertically_on_load(1);
 	stbi_uc* data = stbi_load(_path.c_str(), &width, &height, &channels, 0);
 	HNY_CORE_ASSERT(data, "Failed to load image!");
 
+	// Setup variables
 	_width = width;
 	_height = height;
 
 	GLenum internalFormat = 0, dataFormat = 0;
 
-	dataFormat = PixelToDataFormat(PixelFormatFromChannels(channels));
-	internalFormat = DataFormatToInternalFormat(dataFormat);
+	dataFormat = pixelToOpenGLDataFormat(getPixelFormatFromChannels(channels));
+	internalFormat = dataFormatToInternalFormat(dataFormat);
 
 	_internalFormat = internalFormat;
 	_dataFormat = dataFormat;
 
 	HNY_CORE_ASSERT(_internalFormat & _dataFormat, "Format not supported!");
 
+	// Create texture
 	glCreateTextures(GL_TEXTURE_2D, 1, &_rendererID);
 	glTextureStorage2D(_rendererID, 1, _internalFormat, _width, _height);
 
+	// Setup texture
 	glTextureParameteri(_rendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTextureParameteri(_rendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
+	// Set texture data
 	glTextureSubImage2D(_rendererID, 0, 0, 0, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data);
 
+	// Free image
 	stbi_image_free(data);
 }
 
@@ -133,23 +138,23 @@ OpenGLTexture2D::~OpenGLTexture2D()
 	glDeleteTextures(1, &_rendererID);
 }
 
-void* OpenGLTexture2D::GetRawData()
+void* OpenGLTexture2D::getRawData()
 {
 	void* data = nullptr;
 	glGetTextureImage(_rendererID, 0, _dataFormat, GL_UNSIGNED_BYTE, _width * _height, data);
 	return data;
 }
 
-void OpenGLTexture2D::SetData(void* data, std::size_t size, const Vector2Int& offset)
+void OpenGLTexture2D::setData(void* data, UInt size, const Vector2Int& offset)
 {
 	HNY_PROFILE_FUNCTION();
 
-	uint32_t bpp = DataFormatToBPP(_dataFormat);
+	UInt bpp = openGLDataFormatToBPP(_dataFormat);
 	HNY_CORE_ASSERT(size == _width * _height * bpp, "Provided size does not equal texture size");
 	glTextureSubImage2D(_rendererID, 0, offset.x, offset.y, _width, _height, _dataFormat, GL_UNSIGNED_BYTE, data);
 }
 
-void OpenGLTexture2D::BindToSlot(uint32_t slot) const
+void OpenGLTexture2D::bindToSlot(UInt slot) const
 {
 	HNY_PROFILE_FUNCTION();
 

@@ -5,9 +5,9 @@
 
 using namespace Honey;
 
-Reference<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t count)
+Reference<IndexBuffer> IndexBuffer::create(UInt* indices, UInt count)
 {
-	switch (Renderer::GetAPI())
+	switch (Renderer::getAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL: return CreateReference<OpenGLIndexBuffer>(indices, count);

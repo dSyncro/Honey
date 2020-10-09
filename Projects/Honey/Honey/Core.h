@@ -5,6 +5,7 @@
 #include "Core/Profiling.h"
 #include "Core/MemoryTracking.h"
 #include "Core/Engine.h"
+#include "Core/TypeTraits.h"
 // #include "Core/DLLAutomation.h"
 
 // Always inline

@@ -3,89 +3,94 @@
 using namespace Honey;
 using namespace Honey::Math;
 
-FontAtlas::FontAtlas(const Reference<Font>& font, std::size_t fontHeight, const Span& charset)
+FontAtlas::FontAtlas(const Reference<Font>& font, UInt fontHeight, const Span& charset)
 	: _font(font), _fontHeight(fontHeight), _charset(charset)
 {
-	Rebuild();
+	rebuild();
 }
 
 FontAtlas::~FontAtlas()
 {
-	Free();
+	free();
 }
 
-Reference<FontAtlas> FontAtlas::Create(const Reference<Font>& font, std::size_t fontHeight, const Span& charset)
+Reference<FontAtlas> FontAtlas::create(const Reference<Font>& font, UInt fontHeight, const Span& charset)
 {
 	return CreateReference<FontAtlas>(font, fontHeight, charset);
 }
 
-void FontAtlas::Rebuild()
+void FontAtlas::rebuild()
 {
 	// No need to rebuild
-	if (!IsDirty() || !IsValid()) return;
+	if (!isDirty() || !isValid()) return;
 
-	Free();
+	// Free old resources
+	free();
 
-	_glyphs = new Glyph[_charset.Length];
+	// Allocate glyphs
+	_glyphs = new Glyph[_charset.length];
 
 	// New buffer for baked chars
-	stbtt_bakedchar* bakedChars = new stbtt_bakedchar[_charset.Length];
+	stbtt_bakedchar* bakedChars = new stbtt_bakedchar[_charset.length];
 
-	Reference<Image> bitmap = Image::Create(512, 512, 1);
+	// Bake font to bitmap
+	Reference<Image> bitmap = Image::create(512, 512, 1);
 	_bitmap = bitmap;
 
 	stbtt_BakeFontBitmap(
 		_font->_info.data,
-		0, (float)_fontHeight,
-		(unsigned char*)bitmap->GetRawBitmap(),
-		bitmap->GetWidth(), bitmap->GetHeight(),
-		_charset.Start, _charset.Length,
+		0, static_cast<float>(_fontHeight),
+		(unsigned char*)bitmap->getRawBitmap(),
+		bitmap->getWidth(), bitmap->getHeight(),
+		_charset.start, _charset.length,
 		bakedChars
 	);
 
-	_texture = Texture2D::Create(bitmap->GetWidth(), bitmap->GetHeight(), Texture2D::PixelFormat::R);
-	_texture->SetData(bitmap->GetRawBitmap(), bitmap->GetSizeInBytes());
+	// Create texture
+	_texture = Texture2D::create(bitmap->getWidth(), bitmap->getHeight(), Texture2D::PixelFormat::R);
+	_texture->setData(bitmap->getRawBitmap(), bitmap->getSizeInBytes());
 
 	// Write to file
-	 _bitmap->WriteToPNG("Test.png");
+	 _bitmap->writeToPNG("Test.png");
 
 	// Get font metrics
-	_scaleFactor = stbtt_ScaleForPixelHeight(&_font->_info, (float)_fontHeight);
+	_scaleFactor = stbtt_ScaleForPixelHeight(&_font->_info, static_cast<float>(_fontHeight));
 
 	// Generate glyphs
-	for (std::size_t i = _charset.Start; i < _charset.GetEnd(); i++)
+	for (UInt i = _charset.start; i < _charset.end(); i++)
 	{
-		std::size_t realIndex = i - _charset.Start;
+		UInt realIndex = i - _charset.start;
 		const stbtt_bakedchar* bc = bakedChars + realIndex;
 		Glyph& g = _glyphs[realIndex];
 
-		char c = g.Character = (char)i;
-		float ipw = 1.0f / (float)_texture->GetWidth();
-		float iph = 1.0f / (float)_texture->GetHeight();
+		char c = g.character = static_cast<char>(i);
+		float ipw = 1.0f / static_cast<float>(_texture->getWidth());
+		float iph = 1.0f / static_cast<float>(_texture->getHeight());
 
-		g.Offset = Vector2(bc->xoff, bc->yoff);
-		g.BoundingBox = Rect::FromBounds(Point(bc->x0, bc->y0), Point(bc->x1, bc->y1));
+		g.offset = Vector2(bc->xoff, bc->yoff);
+		g.boundingBox = Rect::fromBounds(Point(bc->x0, bc->y0), Point(bc->x1, bc->y1));
 
+		// Calculate glyph UV
 		float uv_x0, uv_y0, uv_x1, uv_y1;
 		uv_x0 = bc->x0 * ipw;
 		uv_y0 = bc->y0 * iph;
 		uv_x1 = bc->x1 * ipw;
 		uv_y1 = bc->y1 * iph;
 
-		g.UV = {
+		g.uv = {
 			Vector2(uv_x0, uv_y0),
 			Vector2(uv_x1, uv_y0),
 			Vector2(uv_x1, uv_y1),
 			Vector2(uv_x0, uv_y1),
 		};
 
-		g.Advance = bc->xadvance;
+		g.advance = bc->xadvance;
 	}
 
 	delete[] bakedChars;
 }
 
-void FontAtlas::Free()
+void FontAtlas::free()
 {
 	if (_glyphs) delete[] _glyphs;
 	_glyphs = nullptr;

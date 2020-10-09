@@ -27,7 +27,7 @@ void OpenGLMessageCallback(
 	HNY_CORE_ASSERT(false, "Unknown severity level!");
 }
 
-void OpenGLRendererAPI::Init()
+void OpenGLRendererAPI::init()
 {
 	HNY_PROFILE_FUNCTION();
 
@@ -45,34 +45,39 @@ void OpenGLRendererAPI::Init()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void OpenGLRendererAPI::Clear() const
+void OpenGLRendererAPI::clear() const
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void OpenGLRendererAPI::ClearDepthBuffer() const
+void OpenGLRendererAPI::clearDepthBuffer() const
 {
 	glClear(GL_DEPTH_BUFFER_BIT);
 }
 
-void OpenGLRendererAPI::SetClearColor(const Color& color)
+void OpenGLRendererAPI::setClearColor(const Color& color)
 {
 	glClearColor(color.r, color.g, color.b, color.a);
 }
 
-void OpenGLRendererAPI::SetViewport(Vector2 location, Vector2 size)
+void OpenGLRendererAPI::setViewport(Vector2 location, Vector2 size)
 {
-	glViewport((uint32_t)location.x, (uint32_t)location.y, (uint32_t)size.x, (uint32_t)size.y);
+	glViewport(
+		static_cast<GLint>(location.x), 
+		static_cast<GLint>(location.y),
+		static_cast<GLsizei>(size.x), 
+		static_cast<GLsizei>(size.y)
+	);
 }
 
-void OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
+void OpenGLRendererAPI::setViewport(UInt x, UInt y, UInt width, UInt height)
 {
 	glViewport(x, y, width, height);
 }
 
-void OpenGLRendererAPI::DrawIndexed(const Reference<VertexArray>& vertexArray, uint32_t indexCount)
+void OpenGLRendererAPI::drawIndexed(const Reference<VertexArray>& vertexArray, UInt indexCount)
 {
-	uint32_t count = indexCount ? indexCount : vertexArray->GetIndexBuffer()->GetCount();
+	GLsizei count = indexCount ? static_cast<GLsizei>(indexCount) : static_cast<GLsizei>(vertexArray->getIndexBuffer()->getCount());
 	glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

@@ -4,23 +4,44 @@
 
 namespace Honey {
 
-	class VertexArray {
+	/**
+	 * @brief VertexArray abstraction.
+	*/
+	class VertexArray : public IBindable {
 
 	public:
 
 		virtual ~VertexArray() = default;
 
-		virtual void Bind() const = 0;
-		virtual void Unbind() const = 0;
-		virtual bool IsBound() const = 0;
+		/**
+		 * @brief Add vertex buffer to this vertex array.
+		 * @param buffer The vertex buffer.
+		*/
+		virtual void addVertexBuffer(const Reference<VertexBuffer>& buffer) = 0;
 
-		virtual void AddVertexBuffer(const Reference<VertexBuffer>& buffer) = 0;
-		virtual void SetIndexBuffer(const Reference<IndexBuffer>& buffer) = 0;
+		/**
+		 * @brief Set index buffer to this vertex array.
+		 * @param buffer The index buffer.
+		*/
+		virtual void setIndexBuffer(const Reference<IndexBuffer>& buffer) = 0;
 
-		virtual const std::vector<Reference<VertexBuffer>>& GetVertexBuffers() const = 0;
-		virtual const Reference<IndexBuffer>& GetIndexBuffer() const = 0;
+		/**
+		 * @brief Get vertex buffers attached to this vertex array.
+		 * @return The vertex buffers.
+		*/
+		virtual const std::vector<Reference<VertexBuffer>>& getVertexBuffers() const = 0;
 
-		static Reference<VertexArray> Create();
+		/**
+		 * @brief Get index buffer attached to this vertex array.
+		 * @return The index buffer.
+		*/
+		virtual const Reference<IndexBuffer>& getIndexBuffer() const = 0;
+
+		/**
+		 * @brief Create VertexArray.
+		 * @return A new memory managed VertexArray.
+		*/
+		static Reference<VertexArray> create();
 	};
 
 }

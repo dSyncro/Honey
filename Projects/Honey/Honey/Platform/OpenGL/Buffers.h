@@ -1,3 +1,8 @@
+/**
+ * @file Buffers.h
+ * @brief OpenGL buffers.
+*/
+
 #pragma once
 
 #include "Buffers/OpenGLIndexBuffer.h"

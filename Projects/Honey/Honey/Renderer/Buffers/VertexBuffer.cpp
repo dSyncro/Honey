@@ -5,9 +5,9 @@
 
 using namespace Honey;
 
-Reference<VertexBuffer> VertexBuffer::Create(uint32_t size)
+Reference<VertexBuffer> VertexBuffer::create(UInt size)
 {
-	switch (Renderer::GetAPI())
+	switch (Renderer::getAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL: return CreateReference<OpenGLVertexBuffer>(size);
@@ -18,9 +18,9 @@ Reference<VertexBuffer> VertexBuffer::Create(uint32_t size)
 }
 
 
-Reference<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
+Reference<VertexBuffer> VertexBuffer::create(Float* vertices, UInt size)
 {
-	switch (Renderer::GetAPI())
+	switch (Renderer::getAPI())
 	{
 		case RendererAPI::API::None: HNY_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
 		case RendererAPI::API::OpenGL: return CreateReference<OpenGLVertexBuffer>(vertices, size);

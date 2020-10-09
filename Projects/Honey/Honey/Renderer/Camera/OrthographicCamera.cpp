@@ -2,46 +2,45 @@
 
 #include <Honey/Core/Profiling.h>
 
-#include <glm/gtc/matrix_transform.hpp>
-
 using namespace Honey;
+using namespace Honey::Math;
 
-OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
-	: _projectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), _viewMatrix(1.0f)
+OrthographicCamera::OrthographicCamera(Float left, Float right, Float bottom, Float top)
+	: _projectionMatrix(Matrix4x4::orthographic(left, right, bottom, top, -1.0f, 1.0f)), _viewMatrix(1.0f)
 {
 	HNY_PROFILE_FUNCTION();
 
 	_viewProjectionMatrix = _projectionMatrix * _viewMatrix;
 }
 
-void OrthographicCamera::SetProjection(float left, float right, float bottom, float top)
+void OrthographicCamera::setProjection(Float left, Float right, Float bottom, Float top)
 {
 	HNY_PROFILE_FUNCTION();
 
-	_projectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+	_projectionMatrix = Matrix4x4::orthographic(left, right, bottom, top, -1.0f, 1.0f);
 	_viewProjectionMatrix = _projectionMatrix * _viewMatrix;
 }
 
-void OrthographicCamera::SetPosition(const glm::vec3& position)
+void OrthographicCamera::setPosition(const Math::Vector3& position)
 { 
 	_position = position; 
-	RecalculateViewMatrix(); 
+	recalculateViewMatrix(); 
 }
 
-void OrthographicCamera::SetRotation(float rotation) 
+void OrthographicCamera::setRotation(Float rotation)
 { 
 	_rotation = rotation; 
-	RecalculateViewMatrix(); 
+	recalculateViewMatrix(); 
 }
 
-void OrthographicCamera::RecalculateViewMatrix()
+void OrthographicCamera::recalculateViewMatrix()
 {
 	HNY_PROFILE_FUNCTION();
 
-	glm::mat4 transform = 
-		glm::translate(glm::mat4(1.0f), _position) 
-		* glm::rotate(glm::mat4(1.0f), glm::radians(_rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+	Matrix4x4 transform = 
+		Matrix4x4::translate(_position) 
+		* Matrix4x4::rotate(_rotation, Math::Vector3(0.0f, 0.0f, 1.0f));
 
-	_viewMatrix = glm::inverse(transform);
+	_viewMatrix = transform.inverse();
 	_viewProjectionMatrix = _projectionMatrix * _viewMatrix;
 }

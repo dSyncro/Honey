@@ -8,130 +8,147 @@
 
 using namespace Honey::Math;
 
-const Vector4 Vector4::Zero = Vector4(0.0f);
-const Vector4 Vector4::One  = Vector4(1.0f);
-
-const Vector4 Vector4::Infinity         = Vector4(Mathf::infinity());
-const Vector4 Vector4::NegativeInfinity = Vector4(Mathf::negativeInfinity());
-
-Vector4& Vector4::Normalize()
+const Vector4& Vector4::zero()
 {
-	float magnitude = GetMagnitude();
+	static constexpr Vector4 zero = Vector4(0.0f);
+	return zero;
+}
+
+const Vector4& Vector4::one()
+{
+	static constexpr Vector4 one = Vector4(1.0f);
+	return one;
+}
+
+const Vector4& Vector4::infinity()
+{
+	static constexpr Vector4 inf = Vector4(Mathf::infinity());
+	return inf;
+}
+
+const Vector4& Vector4::negativeInfinity()
+{
+	static constexpr Vector4 negInf = Vector4(Mathf::negativeInfinity());
+	return negInf;
+}
+
+Vector4& Vector4::normalize()
+{
+	float magnitude = getMagnitude();
 	return *this /= magnitude;
 }
 
-Vector4& Vector4::Round()
+Vector4& Vector4::round()
 {
-	X = Mathf::Round(X);
-	Y = Mathf::Round(Y);
-	Z = Mathf::Round(Z);
-	W = Mathf::Round(W);
+	x = Mathf::round(x);
+	y = Mathf::round(y);
+	z = Mathf::round(z);
+	w = Mathf::round(w);
 	return *this;
 }
 
-Vector4& Vector4::Set(float x, float y, float z, float w)
+Vector4& Vector4::set(float x, float y, float z, float w)
 {
-	X = x;
-	Y = y;
-	Z = z;
-	W = w;
+	this->x = x;
+	this->y = y;
+	this->z = z;
+	this->w = w;
 	return *this;
 }
 
-bool Vector4::ExactlyEquals(const Vector4& other) { return X == other.X && Y == other.Y && Z == other.Z && W == other.W; }
-bool Vector4::EssentiallyEquals(const Vector4& other) { return *this == other; }
+bool Vector4::exactlyEquals(const Vector4& other) { return x == other.x && y == other.y && z == other.z && w == other.w; }
+bool Vector4::essentiallyEquals(const Vector4& other) { return *this == other; }
 
-float Vector4::GetMagnitude() const { return Mathf::Sqrt(GetSquaredMagnitude()); }
-float Vector4::GetSquaredMagnitude() const { return X * X + Y * Y + Z * Z + W * W; }
+float Vector4::getMagnitude() const { return Mathf::sqrt(getSquaredMagnitude()); }
+float Vector4::getSquaredMagnitude() const { return x * x + y * y + z * z + w * w; }
 
-Vector4 Vector4::Normalized() const
+Vector4 Vector4::normalized() const
 {
-	float magnitude = GetMagnitude();
+	float magnitude = getMagnitude();
 	return (*this) / magnitude;
 }
 
-Vector4 Vector4::Rounded() const
+Vector4 Vector4::rounded() const
 {
-	return Vector4(Mathf::Round(X), Mathf::Round(Y), Mathf::Round(Z), Mathf::Round(W));
+	return Vector4(Mathf::round(x), Mathf::round(y), Mathf::round(z), Mathf::round(w));
 }
 
-float Vector4::Dot(const Vector4& a, const Vector4& b)
+float Vector4::dot(const Vector4& a, const Vector4& b)
 {
 	Vector4 scaled = a * b;
-	return scaled.X + scaled.Y + scaled.Z + scaled.W;
+	return scaled.x + scaled.y + scaled.z + scaled.w;
 }
 
-float Vector4::Distance(const Vector4& a, const Vector4& b)
+float Vector4::distance(const Vector4& a, const Vector4& b)
 {
-	Vector4 diff = Vector4(a.X - b.X, a.Y - b.Y, a.Z - b.Z, a.W - b.W);
-	return diff.GetMagnitude();
+	Vector4 diff = Vector4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+	return diff.getMagnitude();
 }
 
-float Vector4::SquaredDistance(const Vector4& a, const Vector4& b)
+float Vector4::squaredDistance(const Vector4& a, const Vector4& b)
 {
-	Vector4 diff = Vector4(a.X - b.X, a.Y - b.Y, a.Z - b.Z, a.W - b.W);
-	return diff.GetSquaredMagnitude();
+	Vector4 diff = Vector4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+	return diff.getSquaredMagnitude();
 }
 
-Vector4 Vector4::Abs(const Vector4& vector)
+Vector4 Vector4::abs(const Vector4& vector)
 {
-	Vector4 abs = Vector4(Mathf::Abs(vector.X), Mathf::Abs(vector.Y), Mathf::Abs(vector.Z), Mathf::Abs(vector.W));
+	Vector4 abs = Vector4(Mathf::abs(vector.x), Mathf::abs(vector.y), Mathf::abs(vector.z), Mathf::abs(vector.w));
 	return abs;
 }
 
-Vector4 Vector4::Sign(const Vector4& vector)
+Vector4 Vector4::sign(const Vector4& vector)
 {
-	Vector4 sign = Vector4(Mathf::Sign(vector.X), Mathf::Sign(vector.Y), Mathf::Sign(vector.Z), Mathf::Sign(vector.W));
+	Vector4 sign = Vector4(Mathf::sign(vector.x), Mathf::sign(vector.y), Mathf::sign(vector.z), Mathf::sign(vector.w));
 	return sign;
 }
 
-Vector4 Vector4::ClampMagnitude(const Vector4& vector, float magnitude)
+Vector4 Vector4::clampMagnitude(const Vector4& vector, float magnitude)
 {
-	float oldMagnitude = vector.GetMagnitude();
-	return oldMagnitude < magnitude ?
-		vector :
-		vector * (magnitude / oldMagnitude);
+	float oldMagnitude = vector.getMagnitude();
+	if (oldMagnitude <= magnitude) return vector;
+	return vector * (magnitude / oldMagnitude);	
 }
 
-Vector4 Vector4::Max(const Vector4& a, const Vector4& b)
+Vector4 Vector4::max(const Vector4& a, const Vector4& b)
 {
-	Vector4 max = Vector4(Mathf::Max(a.X, b.X), Mathf::Max(a.Y, b.Y), Mathf::Max(a.Z, b.Z), Mathf::Max(a.W, b.W));
+	Vector4 max = Vector4(Mathf::max(a.x, b.x), Mathf::max(a.y, b.y), Mathf::max(a.z, b.z), Mathf::max(a.w, b.w));
 	return max;
 }
 
-Vector4 Vector4::Min(const Vector4& a, const Vector4& b)
+Vector4 Vector4::min(const Vector4& a, const Vector4& b)
 {
-	Vector4 min = Vector4(Mathf::Min(a.X, b.X), Mathf::Min(a.Y, b.Y), Mathf::Min(a.Z, b.Z), Mathf::Min(a.W, b.W));
+	Vector4 min = Vector4(Mathf::min(a.x, b.x), Mathf::min(a.y, b.y), Mathf::min(a.z, b.z), Mathf::min(a.w, b.w));
 	return min;
 }
 
-Vector4 Vector4::Scale(const Vector4& a, const Vector4& b)
+Vector4 Vector4::scale(const Vector4& a, const Vector4& b)
 {
-	Vector4 scaled = Vector4(a.X * b.X, a.Y * b.Y, a.Z * b.Z, a.W * b.W);
+	Vector4 scaled = Vector4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
 	return scaled;
 }
 
-Vector4 Vector4::Project(const Vector4& vector, const Vector4& normal)
+Vector4 Vector4::project(const Vector4& vector, const Vector4& normal)
 {
-	float c = Vector4::Dot(vector, normal) / normal.GetSquaredMagnitude();
+	float c = Vector4::dot(vector, normal) / normal.getSquaredMagnitude();
 	return normal * c;
 }
 
-Vector4 Vector4::Lerp(const Vector4& a, const Vector4& b, float t)
+Vector4 Vector4::lerp(const Vector4& a, const Vector4& b, float t)
 {
 	return a + (b - a) * t;
 }
 
-Vector4 Vector4::LerpClamped(const Vector4& a, const Vector4& b, float t)
+Vector4 Vector4::lerpClamped(const Vector4& a, const Vector4& b, float t)
 {
-	t = Mathf::Clamp01(t);
-	return Lerp(a, b, t);
+	t = Mathf::clamp01(t);
+	return lerp(a, b, t);
 }
 
-Vector4 Vector4::MoveTowards(const Vector4& a, const Vector4& b, float distance)
+Vector4 Vector4::moveTowards(const Vector4& a, const Vector4& b, float distance)
 {
 	Vector4 dir = b - a;
-	float magnitude = dir.GetMagnitude();
+	float magnitude = dir.getMagnitude();
 
 	if (magnitude <= distance) return b;
 	return a + dir * (distance / magnitude);
@@ -139,19 +156,19 @@ Vector4 Vector4::MoveTowards(const Vector4& a, const Vector4& b, float distance)
 
 bool Vector4::operator ==(const Vector4& other)
 {
-	return Mathf::ApproximatelyEquals(X, other.X)
-		&& Mathf::ApproximatelyEquals(Y, other.Y)
-		&& Mathf::ApproximatelyEquals(Z, other.Z)
-		&& Mathf::ApproximatelyEquals(W, other.W);
+	return Mathf::approximatelyEquals(x, other.x)
+		&& Mathf::approximatelyEquals(y, other.y)
+		&& Mathf::approximatelyEquals(z, other.z)
+		&& Mathf::approximatelyEquals(w, other.w);
 }
 
 Vector4 Vector4::operator *(const Matrix4x4& matrix) const
 {
 	return Vector4(
-		matrix.rows[0].X * X + matrix.rows[0].Y * Y + matrix.rows[0].Z * Z + matrix.rows[0].W * W,
-		matrix.rows[1].X * X + matrix.rows[1].Y * Y + matrix.rows[1].Z * Z + matrix.rows[1].W * W,
-		matrix.rows[2].X * X + matrix.rows[2].Y * Y + matrix.rows[2].Z * Z + matrix.rows[2].W * W,
-		matrix.rows[3].X * X + matrix.rows[3].Y * Y + matrix.rows[3].Z * Z + matrix.rows[3].W * W
+		matrix.rows[0].x * x + matrix.rows[0].y * y + matrix.rows[0].z * z + matrix.rows[0].w * w,
+		matrix.rows[1].x * x + matrix.rows[1].y * y + matrix.rows[1].z * z + matrix.rows[1].w * w,
+		matrix.rows[2].x * x + matrix.rows[2].y * y + matrix.rows[2].z * z + matrix.rows[2].w * w,
+		matrix.rows[3].x * x + matrix.rows[3].y * y + matrix.rows[3].z * z + matrix.rows[3].w * w
 	);
 }
 
@@ -205,11 +222,11 @@ float& Vector4::operator [](Axis axis)
 {
 	switch (axis)
 	{
-		case Axis::X: return X;
-		case Axis::Y: return Y;
-		case Axis::Z: return Z;
+		case Axis::X: return x;
+		case Axis::Y: return y;
+		case Axis::Z: return z;
 		case Axis::W:
-		default: return W;
+		default: return w;
 	}
 }
 
@@ -217,10 +234,10 @@ float Vector4::operator [](Axis axis) const
 {
 	switch (axis)
 	{
-		case Axis::X: return X;
-		case Axis::Y: return Y;
-		case Axis::Z: return Z;
+		case Axis::X: return x;
+		case Axis::Y: return y;
+		case Axis::Z: return z;
 		case Axis::W:
-		default: return W;
+		default: return w;
 	}
 }
