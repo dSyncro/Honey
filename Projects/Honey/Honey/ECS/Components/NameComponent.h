@@ -16,8 +16,14 @@ namespace Honey {
 
 		NameComponent() = default;
 		~NameComponent() = default;
-		NameComponent(const NameComponent&) = default;
+
+		/**
+		 * @brief Construct NameComponent.
+		 * @param name The name.
+		*/
 		NameComponent(const std::string& name) : name(name) { }
+
+		NameComponent(const NameComponent&) = default;
 
 		/**
 		 * @brief Entity name.

@@ -67,7 +67,7 @@ namespace Honey {
 		 * in flag format.
 		 * @return Category flag.
 		*/
-		virtual int getCategoryFlags() const = 0;
+		virtual Int getCategoryFlags() const = 0;
 
 		/**
 		 * @brief Convert event to string.
@@ -80,7 +80,7 @@ namespace Honey {
 		 * @param category Category to perform the check with.
 		 * @return A boolean expressing if event belongs to category.
 		*/
-		bool isInCategory(int category) { return getCategoryFlags() & category; }
+		bool isInCategory(Int category) { return getCategoryFlags() & category; }
 
 		/**
 		 * @brief Event has already been handled?

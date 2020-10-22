@@ -11,7 +11,7 @@ namespace Honey::Math {
 	struct Vector2Int {
 
 		/** @brief Axes of the vector. */
-		enum class Axis {
+		enum class Axis : Byte {
 			X = 0, /** @brief X-axis. */
 			Y = 1 /** @brief Y-axis. */
 		};
@@ -21,14 +21,14 @@ namespace Honey::Math {
 		 * All components will be initialized to value.
 		 * @param value The value.
 		*/
-		constexpr Vector2Int(int value = 0) : x(value), y(value) {}
+		constexpr Vector2Int(Int value = 0) : x(value), y(value) {}
 
 		/**
 		 * @brief Construct Vector2Int from its components.
 		 * @param x X component.
 		 * @param y Y component.
 		*/
-		constexpr Vector2Int(int x, int y) : x(x), y(y) {}
+		constexpr Vector2Int(Int x, Int y) : x(x), y(y) {}
 
 		/* @brief Vector2Int(-1, 0) */
 		static const Vector2Int& left();
@@ -54,7 +54,7 @@ namespace Honey::Math {
 		 * @param y New Y component.
 		 * @return A reference to the vector.
 		*/
-		Vector2Int& set(int x, int y);
+		Vector2Int& set(Int x, Int y);
 
 		/**
 		 * @brief Clamp vector.
@@ -74,13 +74,13 @@ namespace Honey::Math {
 		 * @brief Get vector magnitude.
 		 * @return The magnitude.
 		*/
-		float getMagnitude() const;
+		Float getMagnitude() const;
 
 		/**
 		 * @brief Get vector magnitude squared.
 		 * @return The squared magnitude.
 		*/
-		int getSquaredMagnitude() const;
+		Int getSquaredMagnitude() const;
 
 		/**
 		 * @brief Get a vector made up of the absolute value
@@ -152,7 +152,7 @@ namespace Honey::Math {
 		 * @param b Second vector.
 		 * @return Distance between two vectors.
 		*/
-		static float distance(const Vector2Int& a, const Vector2Int& b);
+		static Float distance(const Vector2Int& a, const Vector2Int& b);
 
 		/**
 		 * @brief Get squared distance between two vectors.
@@ -196,7 +196,7 @@ namespace Honey::Math {
 		 * @brief Multiply Vector2Int by scalar.
 		 * @param scalar The scalar.
 		*/
-		Vector2Int operator *(int scalar) const { return Vector2Int(x * scalar, y * scalar); }
+		Vector2Int operator *(Int scalar) const { return Vector2Int(x * scalar, y * scalar); }
 
 		/**
 		 * @brief Multiply two Vector2Int.
@@ -208,7 +208,7 @@ namespace Honey::Math {
 		 * @brief Divide Vector2Int by scalar.
 		 * @param scalar The scalar.
 		*/
-		Vector2Int operator /(int scalar) const { return Vector2Int(x / scalar, y / scalar); }
+		Vector2Int operator /(Int scalar) const { return Vector2Int(x / scalar, y / scalar); }
 
 		/**
 		 * @brief Divide Vector2Int by another.
@@ -231,7 +231,7 @@ namespace Honey::Math {
 		Vector2Int& operator *=(const Vector2Int& other);
 
 		/** @brief Divide self by scalar. */
-		Vector2Int& operator /=(int scalar);
+		Vector2Int& operator /=(Int scalar);
 
 		/** @brief Divide self by Vector2Int. */
 		Vector2Int& operator /=(const Vector2Int& other);
@@ -244,7 +244,7 @@ namespace Honey::Math {
 		 * @param index Component index.
 		 * @return A reference to component.
 		*/
-		int& operator [](int index) { return (Axis)index == Axis::X ? x : y; }
+		Int& operator [](Int index) { return static_cast<Axis>(index) == Axis::X ? x : y; }
 
 		/**
 		 * @brief Get component by its index.
@@ -252,31 +252,31 @@ namespace Honey::Math {
 		 * @param index Component index.
 		 * @return A copy of the component.
 		*/
-		int operator [](int index) const { return (Axis)index == Axis::X ? x : y; }
+		Int operator [](Int index) const { return static_cast<Axis>(index) == Axis::X ? x : y; }
 
 		/**
 		 * @brief Get component by its axis.
 		 * @param axis Component axis.
 		 * @return A reference to component.
 		*/
-		int& operator [](Axis axis) { return axis == Axis::X ? x : y; }
+		Int& operator [](Axis axis) { return axis == Axis::X ? x : y; }
 
 		/**
 		 * @brief Get component by its axis.
 		 * @param axis Component axis.
 		 * @return A copy of the component.
 		*/
-		int operator [](Axis axis) const { return axis == Axis::X ? x : y; }
+		Int operator [](Axis axis) const { return axis == Axis::X ? x : y; }
 
 		/**
 		 * @brief Convert Vector2Int to Vector2.
 		*/
-		operator Vector2() const { return Vector2(static_cast<float>(x), static_cast<float>(y)); }
+		operator Vector2() const { return Vector2(static_cast<Float>(x), static_cast<Float>(y)); }
 		//operator Vector3Int() const { return Vector3Int(X, Y, 0); };
 
-		int x; /** @brief X component. */
-		int y; /** @brief Y component. */
+		Int x; /** @brief X component. */
+		Int y; /** @brief Y component. */
 	};
 
-	static Vector2Int operator *(int scalar, const Vector2Int& vector) { return vector * scalar; }
+	static Vector2Int operator *(Int scalar, const Vector2Int& vector) { return vector * scalar; }
 }

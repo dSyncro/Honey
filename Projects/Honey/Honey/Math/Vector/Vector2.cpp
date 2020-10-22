@@ -5,6 +5,7 @@
 #include "Vector3.h"
 #include "Vector4.h"
 
+using namespace Honey;
 using namespace Honey::Math;
 
 const Vector2& Vector2::left()
@@ -58,7 +59,7 @@ const Vector2& Vector2::negativeInfinity()
 Vector2& Vector2::normalize()
 {
 	// Just divide this by its magnitude.
-	float magnitude = getMagnitude();
+	Float magnitude = getMagnitude();
 	return *this /= magnitude;
 }
 
@@ -70,7 +71,7 @@ Vector2& Vector2::round()
 	return *this;
 }
 
-Vector2& Vector2::set(float x, float y)
+Vector2& Vector2::set(Float x, Float y)
 {
 	// Set each component
 	this->x = x;
@@ -87,8 +88,8 @@ float Vector2::getSquaredMagnitude() const { return x * x + y * y; }
 Vector2 Vector2::normalized() const
 {
 	// Just divide by magnitude
-	float magnitude = getMagnitude();
-	return (*this) / magnitude;
+	Float magnitude = getMagnitude();
+	return *this / magnitude;
 }
 
 Vector2 Vector2::rounded() const
@@ -105,7 +106,7 @@ std::string Vector2::toString() const
 	return  out;
 }
 
-float Vector2::angle(const Vector2& a, const Vector2& b)
+Float Vector2::angle(const Vector2& a, const Vector2& b)
 {
 	// The angle between two vectors, deferred by a single point, 
 	// called the shortest angle at which you have to turn around one of the vectors 
@@ -119,7 +120,7 @@ float Vector2::angle(const Vector2& a, const Vector2& b)
 	return theta;
 }
 
-float Vector2::dot(const Vector2& a, const Vector2& b)
+Float Vector2::dot(const Vector2& a, const Vector2& b)
 {
 	// the dot product is the sum of the products of the corresponding entries of the two sequences of numbers.
 	// HACK: scale a by b and just sum its components.
@@ -128,13 +129,13 @@ float Vector2::dot(const Vector2& a, const Vector2& b)
 	return scaled.x + scaled.y;
 }
 
-float Vector2::distance(const Vector2& a, const Vector2& b)
+Float Vector2::distance(const Vector2& a, const Vector2& b)
 {
 	Vector2 diff = Vector2(a.x - b.x, a.y - b.y);
 	return diff.getMagnitude();
 }
 
-float Vector2::squaredDistance(const Vector2& a, const Vector2& b)
+Float Vector2::squaredDistance(const Vector2& a, const Vector2& b)
 {
 	Vector2 diff = Vector2(a.x - b.x, a.y - b.y);
 	return diff.getSquaredMagnitude();
@@ -162,9 +163,9 @@ Vector2 Vector2::perpendicularCounterClockwise(const Vector2& vector)
 	return Vector2(-vector.y, vector.x);
 }
 
-Vector2 Vector2::clampMagnitude(const Vector2& vector, float magnitude)
+Vector2 Vector2::clampMagnitude(const Vector2& vector, Float magnitude)
 {
-	float oldMagnitude = vector.getMagnitude();
+	Float oldMagnitude = vector.getMagnitude();
 
 	// if it was already small enough just return it.
 	if (oldMagnitude <= magnitude) return vector;
@@ -173,14 +174,14 @@ Vector2 Vector2::clampMagnitude(const Vector2& vector, float magnitude)
 	return vector * (magnitude / oldMagnitude);
 }
 
-Vector2 Vector2::rotate(const Vector2& vector, float angle)
+Vector2 Vector2::rotate(const Vector2& vector, Float angle)
 {
 	// The new coordinates (x1, y1) of a point (x, y) after rotation are
 	// x1 = x * cos(angle) - y * sin(angle)
 	// y1 = x * sin(angle) + y * cos(angle)
 
-	float x = vector.x * Mathf::cos(angle) - vector.y * Mathf::sin(angle);
-	float y = vector.x * Mathf::sin(angle) + vector.y * Mathf::cos(angle);
+	Float x = vector.x * Mathf::cos(angle) - vector.y * Mathf::sin(angle);
+	Float y = vector.x * Mathf::sin(angle) + vector.y * Mathf::cos(angle);
 	return Vector2(x, y);
 }
 
@@ -207,22 +208,22 @@ Vector2 Vector2::reflect(const Vector2& vector, const Vector2& normal)
 	return vector - 2 * Vector2::dot(vector, normal) * normal;
 }
 
-Vector2 Vector2::lerp(const Vector2& a, const Vector2& b, float t)
+Vector2 Vector2::lerp(const Vector2& a, const Vector2& b, Float t)
 {
 	return a + (b - a) * t;
 }
 
-Vector2 Vector2::lerpClamped(const Vector2& a, const Vector2& b, float t)
+Vector2 Vector2::lerpClamped(const Vector2& a, const Vector2& b, Float t)
 {
 	// Clamp t and then lerp
 	t = Mathf::clamp01(t);
 	return lerp(a, b, t);
 }
 
-Vector2 Vector2::moveTowards(const Vector2& a, const Vector2& b, float distance)
+Vector2 Vector2::moveTowards(const Vector2& a, const Vector2& b, Float distance)
 {
 	Vector2 dir = b - a;
-	float magnitude = dir.getMagnitude();
+	Float magnitude = dir.getMagnitude();
 
 	if (magnitude <= distance) return b;
 	return a + dir * (distance / magnitude);
@@ -240,7 +241,7 @@ Vector2& Vector2::operator -=(const Vector2& other)
 	return *this;
 }
 
-Vector2& Vector2::operator *=(float scalar)
+Vector2& Vector2::operator *=(Float scalar)
 {
 	*this = *this * scalar;
 	return *this;
@@ -252,7 +253,7 @@ Vector2& Vector2::operator *=(const Vector2& other)
 	return *this;
 }
 
-Vector2& Vector2::operator /=(float scalar)
+Vector2& Vector2::operator /=(Float scalar)
 {
 	*this = *this / scalar;
 	return *this;

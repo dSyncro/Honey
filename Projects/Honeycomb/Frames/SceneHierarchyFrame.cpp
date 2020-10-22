@@ -67,10 +67,12 @@ void SceneHierarchyFrame::DrawComponents(Entity entity)
 	if (entity.hasComponent<TransformComponent>())
 	{
 		TransformComponent& transform = entity.getComponent<TransformComponent>();
-		Math::Vector3 eulerAngles = transform.rotation.ToEulerAngles();
+		Math::Vector3 degrees = transform.rotation * Mathf::radians2Degrees();
 		ImGui::DragFloat3("Position", &transform.position[0], 0.5f);
-		ImGui::DragFloat3("Rotation", &eulerAngles[0], 0.5f);
+		ImGui::DragFloat3("Rotation", &degrees[0], 0.5f);
+		transform.rotation = degrees * Mathf::degrees2Radians();
 		ImGui::DragFloat3("Scale", &transform.scale[0], 0.5f);
-		transform.rotation = Math::Quaternion::FromEulerAngles(eulerAngles);
+
+		HNY_APP_INFO("Radians are: {0}; Normal is: {1};", degrees.toString(), transform.rotation.toString());
 	}
 }

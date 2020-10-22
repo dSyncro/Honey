@@ -21,7 +21,7 @@ namespace Honey {
 		*/
 		MouseButton getMouseButton() const { return _mouseButton; }
 
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput | EventCategoryMouseButton)
 
 	protected:
 

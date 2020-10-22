@@ -10,7 +10,16 @@ namespace Honey {
 	*/
 	struct SpriteRendererComponent {
 		
+		/**
+		 * @brief Construct SpriteRendererComponent.
+		*/
 		SpriteRendererComponent() : tint(Color::white()) {};
+
+		/**
+		 * @brief Construct SpriteRendererComponent.
+		 * @param sprite The sprite.
+		 * @param tint Sprite tint.
+		*/
 		SpriteRendererComponent(const Reference<Sprite>& sprite, const Color& tint = Color::white())
 			: sprite(sprite), tint(tint) { }
 

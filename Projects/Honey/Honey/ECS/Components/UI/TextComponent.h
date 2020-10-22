@@ -16,10 +16,18 @@ namespace Honey {
 
 		TextComponent() = default;
 		~TextComponent() = default;
+
+		/**
+		 * @brief Construct TextComponent.
+		 * @param text The text.
+		 * @param color Text color.
+		*/
+		TextComponent(const std::string& text, const Color& color = Color::black()) : text(text), color(color) {}
+
 		TextComponent(const TextComponent&) = default;
-		TextComponent(const std::string& text) : text(text) {}
 
 		std::string text; /** @brief Text to display. */
+		Color color; /** @brief Text color. */
 		Reference<FontAtlas> atlas; /** @brief Font atlas used to display text. */
 	};
 

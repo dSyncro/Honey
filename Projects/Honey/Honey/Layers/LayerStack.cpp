@@ -42,7 +42,7 @@ void LayerStack::pushOverlay(Layer* overlay)
 void LayerStack::popLayer(Layer* layer)
 {
 	// Find layer
-	std::vector<Layer*>::iterator it = std::find(_layers.begin(), _layers.begin() + _layerInsertIndex, layer);
+	iterator it = std::find(_layers.begin(), _layers.begin() + _layerInsertIndex, layer);
 
 	// If not found just return
 	if (it == _layers.begin() + _layerInsertIndex) return;
@@ -55,7 +55,7 @@ void LayerStack::popLayer(Layer* layer)
 void LayerStack::popOverlay(Layer* overlay)
 {
 	// Find overlay
-	std::vector<Layer*>::iterator it = std::find(_layers.begin() + _layerInsertIndex, _layers.end(), overlay);
+	iterator it = std::find(_layers.begin() + _layerInsertIndex, _layers.end(), overlay);
 
 	// If not found just return
 	if (it == _layers.end()) return;

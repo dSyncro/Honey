@@ -6,6 +6,7 @@
 #include "Vector2.h"
 #include "Vector3.h"
 
+using namespace Honey;
 using namespace Honey::Math;
 
 const Vector4& Vector4::zero()
@@ -34,7 +35,7 @@ const Vector4& Vector4::negativeInfinity()
 
 Vector4& Vector4::normalize()
 {
-	float magnitude = getMagnitude();
+	Float magnitude = getMagnitude();
 	return *this /= magnitude;
 }
 
@@ -47,7 +48,7 @@ Vector4& Vector4::round()
 	return *this;
 }
 
-Vector4& Vector4::set(float x, float y, float z, float w)
+Vector4& Vector4::set(Float x, Float y, Float z, Float w)
 {
 	this->x = x;
 	this->y = y;
@@ -59,12 +60,12 @@ Vector4& Vector4::set(float x, float y, float z, float w)
 bool Vector4::exactlyEquals(const Vector4& other) { return x == other.x && y == other.y && z == other.z && w == other.w; }
 bool Vector4::essentiallyEquals(const Vector4& other) { return *this == other; }
 
-float Vector4::getMagnitude() const { return Mathf::sqrt(getSquaredMagnitude()); }
-float Vector4::getSquaredMagnitude() const { return x * x + y * y + z * z + w * w; }
+Float Vector4::getMagnitude() const { return Mathf::sqrt(getSquaredMagnitude()); }
+Float Vector4::getSquaredMagnitude() const { return x * x + y * y + z * z + w * w; }
 
 Vector4 Vector4::normalized() const
 {
-	float magnitude = getMagnitude();
+	Float magnitude = getMagnitude();
 	return (*this) / magnitude;
 }
 
@@ -73,19 +74,19 @@ Vector4 Vector4::rounded() const
 	return Vector4(Mathf::round(x), Mathf::round(y), Mathf::round(z), Mathf::round(w));
 }
 
-float Vector4::dot(const Vector4& a, const Vector4& b)
+Float Vector4::dot(const Vector4& a, const Vector4& b)
 {
 	Vector4 scaled = a * b;
 	return scaled.x + scaled.y + scaled.z + scaled.w;
 }
 
-float Vector4::distance(const Vector4& a, const Vector4& b)
+Float Vector4::distance(const Vector4& a, const Vector4& b)
 {
 	Vector4 diff = Vector4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
 	return diff.getMagnitude();
 }
 
-float Vector4::squaredDistance(const Vector4& a, const Vector4& b)
+Float Vector4::squaredDistance(const Vector4& a, const Vector4& b)
 {
 	Vector4 diff = Vector4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
 	return diff.getSquaredMagnitude();
@@ -103,9 +104,9 @@ Vector4 Vector4::sign(const Vector4& vector)
 	return sign;
 }
 
-Vector4 Vector4::clampMagnitude(const Vector4& vector, float magnitude)
+Vector4 Vector4::clampMagnitude(const Vector4& vector, Float magnitude)
 {
-	float oldMagnitude = vector.getMagnitude();
+	Float oldMagnitude = vector.getMagnitude();
 	if (oldMagnitude <= magnitude) return vector;
 	return vector * (magnitude / oldMagnitude);	
 }
@@ -130,25 +131,25 @@ Vector4 Vector4::scale(const Vector4& a, const Vector4& b)
 
 Vector4 Vector4::project(const Vector4& vector, const Vector4& normal)
 {
-	float c = Vector4::dot(vector, normal) / normal.getSquaredMagnitude();
+	Float c = Vector4::dot(vector, normal) / normal.getSquaredMagnitude();
 	return normal * c;
 }
 
-Vector4 Vector4::lerp(const Vector4& a, const Vector4& b, float t)
+Vector4 Vector4::lerp(const Vector4& a, const Vector4& b, Float t)
 {
 	return a + (b - a) * t;
 }
 
-Vector4 Vector4::lerpClamped(const Vector4& a, const Vector4& b, float t)
+Vector4 Vector4::lerpClamped(const Vector4& a, const Vector4& b, Float t)
 {
 	t = Mathf::clamp01(t);
 	return lerp(a, b, t);
 }
 
-Vector4 Vector4::moveTowards(const Vector4& a, const Vector4& b, float distance)
+Vector4 Vector4::moveTowards(const Vector4& a, const Vector4& b, Float distance)
 {
 	Vector4 dir = b - a;
-	float magnitude = dir.getMagnitude();
+	Float magnitude = dir.getMagnitude();
 
 	if (magnitude <= distance) return b;
 	return a + dir * (distance / magnitude);
@@ -184,7 +185,7 @@ Vector4& Vector4::operator -=(const Vector4& other)
 	return *this;
 }
 
-Vector4& Vector4::operator *=(float scalar)
+Vector4& Vector4::operator *=(Float scalar)
 {
 	*this = *this * scalar;
 	return *this;
@@ -196,7 +197,7 @@ Vector4& Vector4::operator *=(const Vector4& vector)
 	return *this;
 }
 
-Vector4& Vector4::operator /=(float scalar)
+Vector4& Vector4::operator /=(Float scalar)
 {
 	*this = *this / scalar;
 	return *this;
@@ -208,17 +209,17 @@ Vector4& Vector4::operator /=(const Vector4& vector)
 	return *this;
 }
 
-float& Vector4::operator [](int index)
+Float& Vector4::operator [](Int index)
 {
-	return operator[]((Axis)index);
+	return operator[](static_cast<Axis>(index));
 }
 
-float Vector4::operator [](int index) const
+Float Vector4::operator [](Int index) const
 {
-	return operator[]((Axis)index);
+	return operator[](static_cast<Axis>(index));
 }
 
-float& Vector4::operator [](Axis axis)
+Float& Vector4::operator [](Axis axis)
 {
 	switch (axis)
 	{
@@ -230,7 +231,7 @@ float& Vector4::operator [](Axis axis)
 	}
 }
 
-float Vector4::operator [](Axis axis) const
+Float Vector4::operator [](Axis axis) const
 {
 	switch (axis)
 	{

@@ -19,7 +19,7 @@ namespace Honey {
 		 * @param keycode Pressed keycode.
 		 * @param repeatCount Repeat count.
 		*/
-		KeyPressedEvent(Keycode keycode, int repeatCount) : KeyEvent(keycode), _repeatCount(repeatCount) {}
+		KeyPressedEvent(Keycode keycode, UInt repeatCount) : KeyEvent(keycode), _repeatCount(repeatCount) {}
 
 		/**
 		 * @brief Get the number of times the keystroke is autorepeated 
@@ -42,7 +42,7 @@ namespace Honey {
 
 	private:
 
-		int _repeatCount;
+		UInt _repeatCount;
 	};
 
 }

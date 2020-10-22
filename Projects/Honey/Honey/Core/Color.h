@@ -32,7 +32,7 @@ namespace Honey {
 		 * @param b -> Blue Component.
 		 * @param a -> Alpha Component.
 		*/
-		constexpr Color(float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 1.0f)
+		constexpr Color(Float r = 0.0f, Float g = 0.0f, Float b = 0.0f, Float a = 1.0f)
 			: r(r), g(g), b(b), a(a) { }
 
 		/**
@@ -122,10 +122,10 @@ namespace Honey {
 		*/
 		Color& operator /=(const Color& other) { return *this = *this / other; }
 
-		float r; /** @brief Red Component */
-		float g; /** @brief Green Component */
-		float b; /** @brief Blue Component */
-		float a; /** @brief Alpha Component */
+		Float r; /** @brief Red Component */
+		Float g; /** @brief Green Component */
+		Float b; /** @brief Blue Component */
+		Float a; /** @brief Alpha Component */
 
 	};
 

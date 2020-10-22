@@ -4,12 +4,9 @@
 #include <Honey/Math/Matrix/Matrix4x4.h>
 
 #include "Vector2.h"
-#include "Vector4.h"
 
+using namespace Honey;
 using namespace Honey::Math;
-
-Vector3::Vector3(const Vector2& vector) : x(vector.x), y(vector.y), z(0.0f) {}
-Vector3::Vector3(const Vector2& vector, float z) : x(vector.x), y(vector.y), z(z) {}
 
 const Vector3& Vector3::left()
 {
@@ -73,7 +70,7 @@ const Vector3& Vector3::negativeInfinity()
 
 Vector3& Vector3::normalize()
 {
-	float magnitude = getMagnitude();
+	Float magnitude = getMagnitude();
 	return *this /= magnitude;
 }
 
@@ -85,7 +82,7 @@ Vector3& Vector3::round()
 	return *this;
 }
 
-Vector3& Vector3::set(float x, float y, float z)
+Vector3& Vector3::set(Float x, Float y, Float z)
 {
 	this->x = x;
 	this->y = y;
@@ -96,13 +93,13 @@ Vector3& Vector3::set(float x, float y, float z)
 bool Vector3::exactlyEquals(const Vector3& other) { return x == other.x && y == other.y && z == other.z; }
 bool Vector3::essentiallyEquals(const Vector3& other) { return *this == other; }
 
-float Vector3::getMagnitude() const { return Mathf::sqrt(getSquaredMagnitude()); }
-float Vector3::getSquaredMagnitude() const { return x * x + y * y + z * z; }
+Float Vector3::getMagnitude() const { return Mathf::sqrt(getSquaredMagnitude()); }
+Float Vector3::getSquaredMagnitude() const { return x * x + y * y + z * z; }
 
 Vector3 Vector3::normalized() const
 {
-	float magnitude = getMagnitude();
-	return (*this) / magnitude;
+	Float magnitude = getMagnitude();
+	return *this / magnitude;
 }
 
 Vector3 Vector3::rounded() const
@@ -122,8 +119,8 @@ std::string Vector3::toString() const
 
 float Vector3::angle(const Vector3& a, const Vector3& b)
 {
-	float dot = Vector3::dot(a, b);
-	float theta = Mathf::acos(dot / (a.getMagnitude() * b.getMagnitude()));
+	Float dot = Vector3::dot(a, b);
+	Float theta = Mathf::acos(dot / (a.getMagnitude() * b.getMagnitude()));
 	return theta;
 }
 
@@ -157,9 +154,9 @@ Vector3 Vector3::sign(const Vector3& vector)
 	return sign;
 }
 
-Vector3 Vector3::clampMagnitude(const Vector3& vector, float magnitude)
+Vector3 Vector3::clampMagnitude(const Vector3& vector, Float magnitude)
 {
-	float oldMagnitude = vector.getMagnitude();
+	Float oldMagnitude = vector.getMagnitude();
 
 	if (oldMagnitude <= magnitude) return vector;
 
@@ -168,9 +165,9 @@ Vector3 Vector3::clampMagnitude(const Vector3& vector, float magnitude)
 
 Vector3 Vector3::cross(const Vector3& a, const Vector3& b)
 {
-	float x = a.y * b.z - a.z * b.y;
-	float y = a.z * b.x - a.x * b.z;
-	float z = a.x * b.y - a.y * b.x;
+	Float x = a.y * b.z - a.z * b.y;
+	Float y = a.z * b.x - a.x * b.z;
+	Float z = a.x * b.y - a.y * b.x;
 	return Vector3(x, y, z);
 }
 
@@ -194,7 +191,7 @@ Vector3 Vector3::scale(const Vector3& a, const Vector3& b)
 
 Vector3 Vector3::project(const Vector3& vector, const Vector3& normal)
 {
-	float c = Vector3::dot(vector, normal) / normal.getSquaredMagnitude();
+	Float c = Vector3::dot(vector, normal) / normal.getSquaredMagnitude();
 	return normal * c;
 }
 
@@ -209,21 +206,21 @@ Vector3 Vector3::reflect(const Vector3& vector, const Vector3& normal)
 	return vector - 2 * Vector3::dot(vector, normal) * normal;
 }
 
-Vector3 Vector3::lerp(const Vector3& a, const Vector3& b, float t)
+Vector3 Vector3::lerp(const Vector3& a, const Vector3& b, Float t)
 {
 	return a + (b - a) * t;
 }
 
-Vector3 Vector3::lerpClamped(const Vector3& a, const Vector3& b, float t)
+Vector3 Vector3::lerpClamped(const Vector3& a, const Vector3& b, Float t)
 {
 	t = Mathf::clamp01(t);
 	return lerp(a, b, t);
 }
 
-Vector3 Vector3::moveTowards(const Vector3& a, const Vector3& b, float distance)
+Vector3 Vector3::moveTowards(const Vector3& a, const Vector3& b, Float distance)
 {
 	Vector3 dir = b - a;
-	float magnitude = dir.getMagnitude();
+	Float magnitude = dir.getMagnitude();
 
 	if (magnitude <= distance) return b;
 	return a + dir * (distance / magnitude);
@@ -257,7 +254,7 @@ Vector3& Vector3::operator -=(const Vector3& other)
 	return *this;
 }
 
-Vector3& Vector3::operator *=(float scalar)
+Vector3& Vector3::operator *=(Float scalar)
 {
 	*this = *this * scalar;
 	return *this;
@@ -269,7 +266,7 @@ Vector3& Vector3::operator *=(const Vector3& vector)
 	return *this;
 }
 
-Vector3& Vector3::operator /=(float scalar)
+Vector3& Vector3::operator /=(Float scalar)
 {
 	*this = *this / scalar;
 	return *this;
@@ -281,17 +278,17 @@ Vector3& Vector3::operator /=(const Vector3& vector)
 	return *this;
 }
 
-float& Vector3::operator [](int index)
+Float& Vector3::operator [](Int index)
 {
-	return operator[]((Axis)index);
+	return operator[](static_cast<Axis>(index));
 }
 
-float Vector3::operator [](int index) const
+Float Vector3::operator [](Int index) const
 {
-	return operator[]((Axis)index);
+	return operator[](static_cast<Axis>(index));
 }
 
-float& Vector3::operator [](Axis axis)
+Float& Vector3::operator [](Axis axis)
 {
 	switch (axis)
 	{
@@ -302,7 +299,7 @@ float& Vector3::operator [](Axis axis)
 	}
 }
 
-float Vector3::operator [](Axis axis) const
+Float Vector3::operator [](Axis axis) const
 {
 	switch (axis)
 	{

@@ -15,7 +15,6 @@ namespace Honey {
 
 	public:
 
-		NativeScriptComponent(const Entity& entity) : entity(entity) {};
 		NativeScriptComponent(const NativeScriptComponent&) = default;
 		~NativeScriptComponent() = default;
 
@@ -78,6 +77,8 @@ namespace Honey {
 		{
 			return entity.addComponent<NativeScriptComponent>(entity);
 		}
+
+		NativeScriptComponent(const Entity& entity) : entity(entity) {};
 
 		friend class Scene;
 	};

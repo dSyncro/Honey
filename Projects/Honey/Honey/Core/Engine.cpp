@@ -51,5 +51,5 @@ void Engine::Timer::markFrame()
 Timestamp Engine::Timer::getTime() const noexcept
 {
 	system_clock::time_point now = system_clock::now();
-	return duration_cast<duration<float>>(now - _start).count();
+	return duration_cast<duration<Float>>(now - _start).count();
 }

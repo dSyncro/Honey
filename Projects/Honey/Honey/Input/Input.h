@@ -39,13 +39,13 @@ namespace Honey {
 		 * @brief Get mouse X position.
 		 * @return Mouse X position.
 		*/
-		static float getMouseX();
+		static Float getMouseX();
 
 		/**
 		 * @brief Get mouse Y position.
 		 * @return Mouse Y position.
 		*/
-		static float getMouseY();
+		static Float getMouseY();
 
 		/**
 		 * @brief Get mouse position.
@@ -57,20 +57,26 @@ namespace Honey {
 		 * @brief Get mouse vertical scroll.
 		 * @return Mouse vertical scroll since last frame.
 		*/
-		static float getVMouseScroll();
+		static Float getVMouseScroll();
 
 		/**
 		 * @brief Get mouse horizontal scroll.
 		 * @return Mouse horizontal scroll since last frame.
 		*/
-		static float getHMouseScroll();
+		static Float getHMouseScroll();
+
+		/**
+		 * @brief Get both horizontal and vertical mouse scroll.
+		 * @return Mouse scroll since last frame.
+		*/
+		static Math::Vector2 getMouseScroll();
 
 		/**
 		 * @brief Get key mods.
 		 * Common key mods are [CTRL], [ALT], [SUPER].
 		 * @return Get key mods.
 		*/
-		static uint16_t getKeyMods();
+		static UShort getKeyMods();
 
 		/**
 		 * @brief Get state of a certain key.

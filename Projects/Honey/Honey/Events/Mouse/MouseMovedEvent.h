@@ -26,19 +26,19 @@ namespace Honey {
 		 * @param x X coordinate.
 		 * @param y Y coordinate.
 		*/
-		MouseMovedEvent(uint32_t x, uint32_t y) : _position(x, y) { }
+		MouseMovedEvent(Int x, Int y) : _position(x, y) { }
 
 		/**
 		 * @brief New x-coordinate.
 		 * @return x-coordinate.
 		*/
-		uint32_t x() const { return _position.x; }
+		Int x() const { return _position.x; }
 
 		/**
 		 * @brief New y-coordinate.
 		 * @return y-coordinate.
 		*/
-		uint32_t y() const { return _position.y; }
+		Int y() const { return _position.y; }
 
 		const Math::Point& getPosition() const { return _position; }
 

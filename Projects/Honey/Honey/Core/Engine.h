@@ -52,12 +52,12 @@ namespace Honey {
 			 * @return Delta Time.
 			*/
 			Timestamp getDeltaTime() const noexcept { return _deltaTime; }
-			std::size_t getFrameCount() const noexcept { return _frameCount; }
+			UInt getFrameCount() const noexcept { return _frameCount; }
 
 		private:
 
 			Timestamp _deltaTime;
-			std::size_t _frameCount;
+			UInt _frameCount;
 			std::chrono::system_clock::time_point _start;
 			std::chrono::system_clock::time_point _last;
 		};

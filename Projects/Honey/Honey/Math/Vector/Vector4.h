@@ -12,7 +12,7 @@ namespace Honey::Math {
 	*/
 	struct Vector4 {
 
-		enum class Axis {
+		enum class Axis : Byte {
 			X = 0, /** @brief X axis. */
 			Y = 1, /** @brief Y axis. */
 			Z = 2, /** @brief Z axis. */
@@ -26,7 +26,7 @@ namespace Honey::Math {
 		 * All components will be initialized to it.
 		 * @param value The value.
 		*/
-		constexpr Vector4(float value = 0.0f) : x(value), y(value), z(value), w(value) {}
+		constexpr Vector4(Float value = 0.0f) : x(value), y(value), z(value), w(value) {}
 
 		/**
 		 * @brief Construct a Vector4 from its components.
@@ -35,7 +35,7 @@ namespace Honey::Math {
 		 * @param z Z component.
 		 * @param w W component.
 		*/
-		constexpr Vector4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
+		constexpr Vector4(Float x, Float y, Float z, Float w) : x(x), y(y), z(z), w(w) {}
 
 		/**
 		 * @brief Construct a Vector4 from a Vector2.
@@ -61,7 +61,7 @@ namespace Honey::Math {
 		 * @param vector The Vector3.
 		 * @param w The fourth component.
 		*/
-		constexpr explicit Vector4(const Vector3& vector, float w) : x(vector.x), y(vector.y), z(vector.z), w(w) {}
+		constexpr explicit Vector4(const Vector3& vector, Float w) : x(vector.x), y(vector.y), z(vector.z), w(w) {}
 
 		// Shorthands
 
@@ -111,7 +111,7 @@ namespace Honey::Math {
 		 * @param w W component.
 		 * @return This vector with new values set.
 		*/
-		Vector4& set(float x, float y, float z, float w);
+		Vector4& set(Float x, Float y, Float z, Float w);
 
 		/**
 		 * @brief Check if two Vector4 are exactly the same.
@@ -131,13 +131,13 @@ namespace Honey::Math {
 		 * @brief Get vector magnitude.
 		 * @return The vector magnitude.
 		*/
-		float getMagnitude() const;
+		Float getMagnitude() const;
 
 		/**
 		 * @brief Get vector squared magnitude.
 		 * @return The vector squared magnitude.
 		*/
-		float getSquaredMagnitude() const;
+		Float getSquaredMagnitude() const;
 
 		/**
 		 * @brief Get normalized version of this vector.
@@ -159,7 +159,7 @@ namespace Honey::Math {
 		 * @param b Second vector.
 		 * @return The dot product.
 		*/
-		static float dot(const Vector4& a, const Vector4& b);
+		static Float dot(const Vector4& a, const Vector4& b);
 
 		/**
 		 * @brief Get distance between two Vector4.
@@ -167,7 +167,7 @@ namespace Honey::Math {
 		 * @param b Second vector.
 		 * @return The distance.
 		*/
-		static float distance(const Vector4& a, const Vector4& b);
+		static Float distance(const Vector4& a, const Vector4& b);
 
 		/**
 		 * @brief Get squared distance between two Vector4.
@@ -175,7 +175,7 @@ namespace Honey::Math {
 		 * @param b Second vector.
 		 * @return The squared distance.
 		*/
-		static float squaredDistance(const Vector4& a, const Vector4& b);
+		static Float squaredDistance(const Vector4& a, const Vector4& b);
 
 		/**
 		 * @brief Get a vector made up of the absolute value of each component
@@ -199,7 +199,7 @@ namespace Honey::Math {
 		 * @param magnitude The magnitude.
 		 * @return A new vector based on the one provided but with clamped magnitude.
 		*/
-		static Vector4 clampMagnitude(const Vector4& vector, float magnitude);
+		static Vector4 clampMagnitude(const Vector4& vector, Float magnitude);
 
 		/**
 		 * @brief Get a vector made up of the maximum of each component
@@ -242,7 +242,7 @@ namespace Honey::Math {
 		 * @param t Interpolant.
 		 * @return The interpolated vector.
 		*/
-		static Vector4 lerp(const Vector4& a, const Vector4& b, float t);
+		static Vector4 lerp(const Vector4& a, const Vector4& b, Float t);
 
 		/**
 		 * @brief Linear interpolate from a vector to another.
@@ -251,7 +251,7 @@ namespace Honey::Math {
 		 * @param t Interpolant. Clamped to a maximum of 1.
 		 * @return The interpolated vector.
 		*/
-		static Vector4 lerpClamped(const Vector4& a, const Vector4& b, float t);
+		static Vector4 lerpClamped(const Vector4& a, const Vector4& b, Float t);
 
 		/**
 		 * @brief Interpolate from a vector to another using distance.
@@ -260,7 +260,7 @@ namespace Honey::Math {
 		 * @param distance Interpolation distance.
 		 * @return The interpolated vector.
 		*/
-		static Vector4 moveTowards(const Vector4& a, const Vector4& b, float distance);
+		static Vector4 moveTowards(const Vector4& a, const Vector4& b, Float distance);
 
 		// Comparison operators
 
@@ -323,7 +323,7 @@ namespace Honey::Math {
 		 * @param scalar The scalar.
 		 * @return The resulting vector.
 		*/
-		Vector4 operator /(float scalar) const { return Vector4(x / scalar, y / scalar, z / scalar, w / scalar); }
+		Vector4 operator /(Float scalar) const { return Vector4(x / scalar, y / scalar, z / scalar, w / scalar); }
 
 		/**
 		 * @brief Divide a vector by another.
@@ -350,7 +350,7 @@ namespace Honey::Math {
 		 * @brief Multiply this by a scalar.
 		 * @param scalar The scalar.
 		*/
-		Vector4& operator *=(float scalar);
+		Vector4& operator *=(Float scalar);
 
 		/**
 		 * @brief Multiply this by a vector.
@@ -362,7 +362,7 @@ namespace Honey::Math {
 		 * @brief Divide this by a scalar.
 		 * @param scalar The scalar.
 		*/
-		Vector4& operator /=(float scalar);
+		Vector4& operator /=(Float scalar);
 
 		/**
 		 * @brief Divide this by a vector.
@@ -377,33 +377,33 @@ namespace Honey::Math {
 		 * @param index Index of component.
 		 * @return Component at index. (returns last component if overflown)
 		*/
-		float& operator [](int index);
+		Float& operator [](Int index);
 
 		/**
 		 * @brief Get component by index. (const version)
 		 * @param index Index of component.
 		 * @return Component at index. (returns last component if overflown)
 		*/
-		float operator [](int index) const;
+		Float operator [](Int index) const;
 
 		/**
 		 * @brief Get component by axis.
 		 * @param axis component Axis.
 		 * @return Component at axis.
 		*/
-		float& operator [](Axis axis);
+		Float& operator [](Axis axis);
 
 		/**
 		 * @brief Get component by axis. (const version)
 		 * @param axis component Axis.
 		 * @return Component at axis.
 		*/
-		float operator [](Axis axis) const;
+		Float operator [](Axis axis) const;
 
-		float x; /** @brief X component. */
-		float y; /** @brief Y component. */
-		float z; /** @brief Z component. */
-		float w; /** @brief W component. */
+		Float x; /** @brief X component. */
+		Float y; /** @brief Y component. */
+		Float z; /** @brief Z component. */
+		Float w; /** @brief W component. */
 	};
 
 
@@ -413,6 +413,6 @@ namespace Honey::Math {
 	 * @param vector The vector.
 	 * @return The resulting vector.
 	*/
-	static Vector4 operator *(float scalar, const Vector4& vector) { return vector * scalar; }
+	static Vector4 operator *(Float scalar, const Vector4& vector) { return vector * scalar; }
 
 }

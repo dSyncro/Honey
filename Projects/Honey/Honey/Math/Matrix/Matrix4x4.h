@@ -17,7 +17,7 @@ namespace Honey::Math {
 		union
 		{
 			// [row + col * 4]
-			float elements[4 * 4];
+			Float elements[4 * 4];
 			Vector4 rows[4];
 		};
 
@@ -32,7 +32,7 @@ namespace Honey::Math {
 		 * @brief Construct Matrix4x4 with a single value.
 		 * @param diagonal -> Diagonal value.
 		 */
-		Matrix4x4(float diagonal);
+		Matrix4x4(Float diagonal);
 
 		// Unsafe: Matrix4x4(float* elements);
 
@@ -71,7 +71,7 @@ namespace Honey::Math {
 		 * @param index -> Index of the column to change.
 		 * @param column -> New value.
 		 */
-		void setColumn(std::size_t index, const Vector4& column);
+		void setColumn(UInt index, const Vector4& column);
 
 		/**
 		 * @brief Set position in a TRS matrix.
@@ -91,7 +91,7 @@ namespace Honey::Math {
 		 * @param index -> Index of the column to get.
 		 * @return The column.
 		*/
-		Vector4 getColumn(std::size_t index) const;
+		Vector4 getColumn(UInt index) const;
 
 		/**
 		 * @brief Get position in a TRS matrix.
@@ -111,7 +111,7 @@ namespace Honey::Math {
 		 * @param far -> Far clipping plane depth.
 		 * @return Orthograpic projection matrix.
 		 */
-		static Matrix4x4 orthographic(float left, float right, float bottom, float top, float zNear, float zFar);
+		static Matrix4x4 orthographic(Float left, Float right, Float bottom, Float top, Float zNear, Float zFar);
 
 		/**
 		 * @brief Generate perspective projection matrix.
@@ -121,7 +121,7 @@ namespace Honey::Math {
 		 * @param far -> Far clipping plane depth.
 		 * @return Perspective projection matrix.
 		*/
-		static Matrix4x4 perspective(float fov, float aspectRatio, float zNear, float zFar);
+		static Matrix4x4 perspective(Float fov, Float aspectRatio, Float zNear, Float zFar);
 
 		/**
 		 * @brief Create a "look at" matrix.
@@ -146,7 +146,7 @@ namespace Honey::Math {
 		 * @param angle -> Angle of the rotation (in radians).
 		 * @param axis -> Axis of the rotation.
 		 */
-		static Matrix4x4 rotate(float angle, const Vector3& axis);
+		static Matrix4x4 rotate(Float angle, const Vector3& axis);
 
 		/**
 		 * @brief Create a rotation matrix.

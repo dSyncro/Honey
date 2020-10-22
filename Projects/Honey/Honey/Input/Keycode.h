@@ -8,7 +8,7 @@ namespace Honey {
 	/**
 	 * @brief All possible keycodes.
 	*/
-	typedef enum class Keycode : uint16_t
+	enum class Keycode : UShort
 	{
 		// From glfw3.h
 
@@ -142,138 +142,138 @@ namespace Honey {
 		RightAlt = 346,
 		RightSuper = 347,
 		Menu = 348
-	} Key;
+	};
 
 	inline std::ostream& operator<<(std::ostream& os, Keycode keyCode)
 	{
-		os << static_cast<int32_t>(keyCode);
+		os << static_cast<UShort>(keyCode);
 		return os;
 	}
 }
 
 // From glfw3.h
-#define HNY_KEY_SPACE           ::Honey::Key::Space
-#define HNY_KEY_APOSTROPHE      ::Honey::Key::Apostrophe    /* ' */
-#define HNY_KEY_COMMA           ::Honey::Key::Comma         /* , */
-#define HNY_KEY_MINUS           ::Honey::Key::Minus         /* - */
-#define HNY_KEY_PERIOD          ::Honey::Key::Period        /* . */
-#define HNY_KEY_SLASH           ::Honey::Key::Slash         /* / */
-#define HNY_KEY_0               ::Honey::Key::D0
-#define HNY_KEY_1               ::Honey::Key::D1
-#define HNY_KEY_2               ::Honey::Key::D2
-#define HNY_KEY_3               ::Honey::Key::D3
-#define HNY_KEY_4               ::Honey::Key::D4
-#define HNY_KEY_5               ::Honey::Key::D5
-#define HNY_KEY_6               ::Honey::Key::D6
-#define HNY_KEY_7               ::Honey::Key::D7
-#define HNY_KEY_8               ::Honey::Key::D8
-#define HNY_KEY_9               ::Honey::Key::D9
-#define HNY_KEY_SEMICOLON       ::Honey::Key::Semicolon     /* ; */
-#define HNY_KEY_EQUAL           ::Honey::Key::Equal         /* = */
-#define HNY_KEY_A               ::Honey::Key::A
-#define HNY_KEY_B               ::Honey::Key::B
-#define HNY_KEY_C               ::Honey::Key::C
-#define HNY_KEY_D               ::Honey::Key::D
-#define HNY_KEY_E               ::Honey::Key::E
-#define HNY_KEY_F               ::Honey::Key::F
-#define HNY_KEY_G               ::Honey::Key::G
-#define HNY_KEY_H               ::Honey::Key::H
-#define HNY_KEY_I               ::Honey::Key::I
-#define HNY_KEY_J               ::Honey::Key::J
-#define HNY_KEY_K               ::Honey::Key::K
-#define HNY_KEY_L               ::Honey::Key::L
-#define HNY_KEY_M               ::Honey::Key::M
-#define HNY_KEY_N               ::Honey::Key::N
-#define HNY_KEY_O               ::Honey::Key::O
-#define HNY_KEY_P               ::Honey::Key::P
-#define HNY_KEY_Q               ::Honey::Key::Q
-#define HNY_KEY_R               ::Honey::Key::R
-#define HNY_KEY_S               ::Honey::Key::S
-#define HNY_KEY_T               ::Honey::Key::T
-#define HNY_KEY_U               ::Honey::Key::U
-#define HNY_KEY_V               ::Honey::Key::V
-#define HNY_KEY_W               ::Honey::Key::W
-#define HNY_KEY_X               ::Honey::Key::X
-#define HNY_KEY_Y               ::Honey::Key::Y
-#define HNY_KEY_Z               ::Honey::Key::Z
-#define HNY_KEY_LEFT_BRACKET    ::Honey::Key::LeftBracket   /* [ */
-#define HNY_KEY_BACKSLASH       ::Honey::Key::Backslash     /* \ */
-#define HNY_KEY_RIGHT_BRACKET   ::Honey::Key::RightBracket  /* ] */
-#define HNY_KEY_GRAVE_ACCENT    ::Honey::Key::GraveAccent   /* ` */
-#define HNY_KEY_WORLD_1         ::Honey::Key::World1        /* non-US #1 */
-#define HNY_KEY_WORLD_2         ::Honey::Key::World2        /* non-US #2 */
+#define HNY_KEY_SPACE           ::Honey::Keycode::Space
+#define HNY_KEY_APOSTROPHE      ::Honey::Keycode::Apostrophe    /* ' */
+#define HNY_KEY_COMMA           ::Honey::Keycode::Comma         /* , */
+#define HNY_KEY_MINUS           ::Honey::Keycode::Minus         /* - */
+#define HNY_KEY_PERIOD          ::Honey::Keycode::Period        /* . */
+#define HNY_KEY_SLASH           ::Honey::Keycode::Slash         /* / */
+#define HNY_KEY_0               ::Honey::Keycode::D0
+#define HNY_KEY_1               ::Honey::Keycode::D1
+#define HNY_KEY_2               ::Honey::Keycode::D2
+#define HNY_KEY_3               ::Honey::Keycode::D3
+#define HNY_KEY_4               ::Honey::Keycode::D4
+#define HNY_KEY_5               ::Honey::Keycode::D5
+#define HNY_KEY_6               ::Honey::Keycode::D6
+#define HNY_KEY_7               ::Honey::Keycode::D7
+#define HNY_KEY_8               ::Honey::Keycode::D8
+#define HNY_KEY_9               ::Honey::Keycode::D9
+#define HNY_KEY_SEMICOLON       ::Honey::Keycode::Semicolon     /* ; */
+#define HNY_KEY_EQUAL           ::Honey::Keycode::Equal         /* = */
+#define HNY_KEY_A               ::Honey::Keycode::A
+#define HNY_KEY_B               ::Honey::Keycode::B
+#define HNY_KEY_C               ::Honey::Keycode::C
+#define HNY_KEY_D               ::Honey::Keycode::D
+#define HNY_KEY_E               ::Honey::Keycode::E
+#define HNY_KEY_F               ::Honey::Keycode::F
+#define HNY_KEY_G               ::Honey::Keycode::G
+#define HNY_KEY_H               ::Honey::Keycode::H
+#define HNY_KEY_I               ::Honey::Keycode::I
+#define HNY_KEY_J               ::Honey::Keycode::J
+#define HNY_KEY_K               ::Honey::Keycode::K
+#define HNY_KEY_L               ::Honey::Keycode::L
+#define HNY_KEY_M               ::Honey::Keycode::M
+#define HNY_KEY_N               ::Honey::Keycode::N
+#define HNY_KEY_O               ::Honey::Keycode::O
+#define HNY_KEY_P               ::Honey::Keycode::P
+#define HNY_KEY_Q               ::Honey::Keycode::Q
+#define HNY_KEY_R               ::Honey::Keycode::R
+#define HNY_KEY_S               ::Honey::Keycode::S
+#define HNY_KEY_T               ::Honey::Keycode::T
+#define HNY_KEY_U               ::Honey::Keycode::U
+#define HNY_KEY_V               ::Honey::Keycode::V
+#define HNY_KEY_W               ::Honey::Keycode::W
+#define HNY_KEY_X               ::Honey::Keycode::X
+#define HNY_KEY_Y               ::Honey::Keycode::Y
+#define HNY_KEY_Z               ::Honey::Keycode::Z
+#define HNY_KEY_LEFT_BRACKET    ::Honey::Keycode::LeftBracket   /* [ */
+#define HNY_KEY_BACKSLASH       ::Honey::Keycode::Backslash     /* \ */
+#define HNY_KEY_RIGHT_BRACKET   ::Honey::Keycode::RightBracket  /* ] */
+#define HNY_KEY_GRAVE_ACCENT    ::Honey::Keycode::GraveAccent   /* ` */
+#define HNY_KEY_WORLD_1         ::Honey::Keycode::World1        /* non-US #1 */
+#define HNY_KEY_WORLD_2         ::Honey::Keycode::World2        /* non-US #2 */
 
 /* Function keys */
-#define HNY_KEY_ESCAPE          ::Honey::Key::Escape
-#define HNY_KEY_ENTER           ::Honey::Key::Enter
-#define HNY_KEY_TAB             ::Honey::Key::Tab
-#define HNY_KEY_BACKSPACE       ::Honey::Key::Backspace
-#define HNY_KEY_INSERT          ::Honey::Key::Insert
-#define HNY_KEY_DELETE          ::Honey::Key::Delete
-#define HNY_KEY_RIGHT           ::Honey::Key::Right
-#define HNY_KEY_LEFT            ::Honey::Key::Left
-#define HNY_KEY_DOWN            ::Honey::Key::Down
-#define HNY_KEY_UP              ::Honey::Key::Up
-#define HNY_KEY_PAGE_UP         ::Honey::Key::PageUp
-#define HNY_KEY_PAGE_DOWN       ::Honey::Key::PageDown
-#define HNY_KEY_HOME            ::Honey::Key::Home
-#define HNY_KEY_END             ::Honey::Key::End
-#define HNY_KEY_CAPS_LOCK       ::Honey::Key::CapsLock
-#define HNY_KEY_SCROLL_LOCK     ::Honey::Key::ScrollLock
-#define HNY_KEY_NUM_LOCK        ::Honey::Key::NumLock
-#define HNY_KEY_PRINT_SCREEN    ::Honey::Key::PrintScreen
-#define HNY_KEY_PAUSE           ::Honey::Key::Pause
-#define HNY_KEY_F1              ::Honey::Key::F1
-#define HNY_KEY_F2              ::Honey::Key::F2
-#define HNY_KEY_F3              ::Honey::Key::F3
-#define HNY_KEY_F4              ::Honey::Key::F4
-#define HNY_KEY_F5              ::Honey::Key::F5
-#define HNY_KEY_F6              ::Honey::Key::F6
-#define HNY_KEY_F7              ::Honey::Key::F7
-#define HNY_KEY_F8              ::Honey::Key::F8
-#define HNY_KEY_F9              ::Honey::Key::F9
-#define HNY_KEY_F10             ::Honey::Key::F10
-#define HNY_KEY_F11             ::Honey::Key::F11
-#define HNY_KEY_F12             ::Honey::Key::F12
-#define HNY_KEY_F13             ::Honey::Key::F13
-#define HNY_KEY_F14             ::Honey::Key::F14
-#define HNY_KEY_F15             ::Honey::Key::F15
-#define HNY_KEY_F16             ::Honey::Key::F16
-#define HNY_KEY_F17             ::Honey::Key::F17
-#define HNY_KEY_F18             ::Honey::Key::F18
-#define HNY_KEY_F19             ::Honey::Key::F19
-#define HNY_KEY_F20             ::Honey::Key::F20
-#define HNY_KEY_F21             ::Honey::Key::F21
-#define HNY_KEY_F22             ::Honey::Key::F22
-#define HNY_KEY_F23             ::Honey::Key::F23
-#define HNY_KEY_F24             ::Honey::Key::F24
-#define HNY_KEY_F25             ::Honey::Key::F25
+#define HNY_KEY_ESCAPE          ::Honey::Keycode::Escape
+#define HNY_KEY_ENTER           ::Honey::Keycode::Enter
+#define HNY_KEY_TAB             ::Honey::Keycode::Tab
+#define HNY_KEY_BACKSPACE       ::Honey::Keycode::Backspace
+#define HNY_KEY_INSERT          ::Honey::Keycode::Insert
+#define HNY_KEY_DELETE          ::Honey::Keycode::Delete
+#define HNY_KEY_RIGHT           ::Honey::Keycode::Right
+#define HNY_KEY_LEFT            ::Honey::Keycode::Left
+#define HNY_KEY_DOWN            ::Honey::Keycode::Down
+#define HNY_KEY_UP              ::Honey::Keycode::Up
+#define HNY_KEY_PAGE_UP         ::Honey::Keycode::PageUp
+#define HNY_KEY_PAGE_DOWN       ::Honey::Keycode::PageDown
+#define HNY_KEY_HOME            ::Honey::Keycode::Home
+#define HNY_KEY_END             ::Honey::Keycode::End
+#define HNY_KEY_CAPS_LOCK       ::Honey::Keycode::CapsLock
+#define HNY_KEY_SCROLL_LOCK     ::Honey::Keycode::ScrollLock
+#define HNY_KEY_NUM_LOCK        ::Honey::Keycode::NumLock
+#define HNY_KEY_PRINT_SCREEN    ::Honey::Keycode::PrintScreen
+#define HNY_KEY_PAUSE           ::Honey::Keycode::Pause
+#define HNY_KEY_F1              ::Honey::Keycode::F1
+#define HNY_KEY_F2              ::Honey::Keycode::F2
+#define HNY_KEY_F3              ::Honey::Keycode::F3
+#define HNY_KEY_F4              ::Honey::Keycode::F4
+#define HNY_KEY_F5              ::Honey::Keycode::F5
+#define HNY_KEY_F6              ::Honey::Keycode::F6
+#define HNY_KEY_F7              ::Honey::Keycode::F7
+#define HNY_KEY_F8              ::Honey::Keycode::F8
+#define HNY_KEY_F9              ::Honey::Keycode::F9
+#define HNY_KEY_F10             ::Honey::Keycode::F10
+#define HNY_KEY_F11             ::Honey::Keycode::F11
+#define HNY_KEY_F12             ::Honey::Keycode::F12
+#define HNY_KEY_F13             ::Honey::Keycode::F13
+#define HNY_KEY_F14             ::Honey::Keycode::F14
+#define HNY_KEY_F15             ::Honey::Keycode::F15
+#define HNY_KEY_F16             ::Honey::Keycode::F16
+#define HNY_KEY_F17             ::Honey::Keycode::F17
+#define HNY_KEY_F18             ::Honey::Keycode::F18
+#define HNY_KEY_F19             ::Honey::Keycode::F19
+#define HNY_KEY_F20             ::Honey::Keycode::F20
+#define HNY_KEY_F21             ::Honey::Keycode::F21
+#define HNY_KEY_F22             ::Honey::Keycode::F22
+#define HNY_KEY_F23             ::Honey::Keycode::F23
+#define HNY_KEY_F24             ::Honey::Keycode::F24
+#define HNY_KEY_F25             ::Honey::Keycode::F25
 
 /* Keypad */
-#define HNY_KEY_KP_0            ::Honey::Key::KP0
-#define HNY_KEY_KP_1            ::Honey::Key::KP1
-#define HNY_KEY_KP_2            ::Honey::Key::KP2
-#define HNY_KEY_KP_3            ::Honey::Key::KP3
-#define HNY_KEY_KP_4            ::Honey::Key::KP4
-#define HNY_KEY_KP_5            ::Honey::Key::KP5
-#define HNY_KEY_KP_6            ::Honey::Key::KP6
-#define HNY_KEY_KP_7            ::Honey::Key::KP7
-#define HNY_KEY_KP_8            ::Honey::Key::KP8
-#define HNY_KEY_KP_9            ::Honey::Key::KP9
-#define HNY_KEY_KP_DECIMAL      ::Honey::Key::KPDecimal
-#define HNY_KEY_KP_DIVIDE       ::Honey::Key::KPDivide
-#define HNY_KEY_KP_MULTIPLY     ::Honey::Key::KPMultiply
-#define HNY_KEY_KP_SUBTRACT     ::Honey::Key::KPSubtract
-#define HNY_KEY_KP_ADD          ::Honey::Key::KPAdd
-#define HNY_KEY_KP_ENTER        ::Honey::Key::KPEnter
-#define HNY_KEY_KP_EQUAL        ::Honey::Key::KPEqual
+#define HNY_KEY_KP_0            ::Honey::Keycode::KP0
+#define HNY_KEY_KP_1            ::Honey::Keycode::KP1
+#define HNY_KEY_KP_2            ::Honey::Keycode::KP2
+#define HNY_KEY_KP_3            ::Honey::Keycode::KP3
+#define HNY_KEY_KP_4            ::Honey::Keycode::KP4
+#define HNY_KEY_KP_5            ::Honey::Keycode::KP5
+#define HNY_KEY_KP_6            ::Honey::Keycode::KP6
+#define HNY_KEY_KP_7            ::Honey::Keycode::KP7
+#define HNY_KEY_KP_8            ::Honey::Keycode::KP8
+#define HNY_KEY_KP_9            ::Honey::Keycode::KP9
+#define HNY_KEY_KP_DECIMAL      ::Honey::Keycode::KPDecimal
+#define HNY_KEY_KP_DIVIDE       ::Honey::Keycode::KPDivide
+#define HNY_KEY_KP_MULTIPLY     ::Honey::Keycode::KPMultiply
+#define HNY_KEY_KP_SUBTRACT     ::Honey::Keycode::KPSubtract
+#define HNY_KEY_KP_ADD          ::Honey::Keycode::KPAdd
+#define HNY_KEY_KP_ENTER        ::Honey::Keycode::KPEnter
+#define HNY_KEY_KP_EQUAL        ::Honey::Keycode::KPEqual
 
-#define HNY_KEY_LEFT_SHIFT      ::Honey::Key::LeftShift
-#define HNY_KEY_LEFT_CONTROL    ::Honey::Key::LeftControl
-#define HNY_KEY_LEFT_ALT        ::Honey::Key::LeftAlt
-#define HNY_KEY_LEFT_SUPER      ::Honey::Key::LeftSuper
-#define HNY_KEY_RIGHT_SHIFT     ::Honey::Key::RightShift
-#define HNY_KEY_RIGHT_CONTROL   ::Honey::Key::RightControl
-#define HNY_KEY_RIGHT_ALT       ::Honey::Key::RightAlt
-#define HNY_KEY_RIGHT_SUPER     ::Honey::Key::RightSuper
-#define HNY_KEY_MENU            ::Honey::Key::Menu
+#define HNY_KEY_LEFT_SHIFT      ::Honey::Keycode::LeftShift
+#define HNY_KEY_LEFT_CONTROL    ::Honey::Keycode::LeftControl
+#define HNY_KEY_LEFT_ALT        ::Honey::Keycode::LeftAlt
+#define HNY_KEY_LEFT_SUPER      ::Honey::Keycode::LeftSuper
+#define HNY_KEY_RIGHT_SHIFT     ::Honey::Keycode::RightShift
+#define HNY_KEY_RIGHT_CONTROL   ::Honey::Keycode::RightControl
+#define HNY_KEY_RIGHT_ALT       ::Honey::Keycode::RightAlt
+#define HNY_KEY_RIGHT_SUPER     ::Honey::Keycode::RightSuper
+#define HNY_KEY_MENU            ::Honey::Keycode::Menu

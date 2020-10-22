@@ -7,11 +7,11 @@ using namespace Honey::Math;
 Matrix4x4::Matrix4x4()
 {
 	// Set all the elements to 0
-	for (std::size_t i = 0; i < 16; i++)
+	for (UInt i = 0; i < 16; i++)
 		elements[i] = 0;
 }
 
-Matrix4x4::Matrix4x4(float diagonal) : Matrix4x4()
+Matrix4x4::Matrix4x4(Float diagonal) : Matrix4x4()
 {
 	// Set diagonal
 	elements[0 + 0 * 4] = diagonal;
@@ -63,7 +63,7 @@ Matrix4x4& Matrix4x4::invert()
 	return *this;
 }
 
-void Matrix4x4::setColumn(std::size_t index, const Vector4& column)
+void Matrix4x4::setColumn(UInt index, const Vector4& column)
 {
 	elements[index + 0 * 4] = column.x;
 	elements[index + 1 * 4] = column.y;
@@ -187,20 +187,20 @@ Matrix4x4 Matrix4x4::inverse() const
 		elements[8] * elements[1] * elements[6] -
 		elements[8] * elements[2] * elements[5];
 
-	float determinant = elements[0] * out.elements[0] + 
+	Float determinant = elements[0] * out.elements[0] +
 		elements[1] * out.elements[4] + 
 		elements[2] * out.elements[8] + 
 		elements[3] * out.elements[12];
 
 	determinant = 1.0f / determinant;
 
-	for (int i = 0; i < 4 * 4; i++)
+	for (UInt i = 0; i < 4 * 4; i++)
 		out.elements[i] *= determinant;
 
 	return out;
 }
 
-Vector4 Matrix4x4::getColumn(std::size_t index) const
+Vector4 Matrix4x4::getColumn(UInt index) const
 {
 	return Vector4(
 		elements[index + 0 * 4],
@@ -210,7 +210,7 @@ Vector4 Matrix4x4::getColumn(std::size_t index) const
 	);
 }
 
-Matrix4x4 Matrix4x4::orthographic(float left, float right, float bottom, float top, float zNear, float zFar)
+Matrix4x4 Matrix4x4::orthographic(Float left, Float right, Float bottom, Float top, Float zNear, Float zFar)
 {
 	Matrix4x4 result(1.0f);
 
@@ -225,15 +225,15 @@ Matrix4x4 Matrix4x4::orthographic(float left, float right, float bottom, float t
 	return result;
 }
 
-Matrix4x4 Matrix4x4::perspective(float fov, float aspectRatio, float zNear, float zFar)
+Matrix4x4 Matrix4x4::perspective(Float fov, Float aspectRatio, Float zNear, Float zFar)
 {
 	Matrix4x4 result = zero();
 
-	float q = 1.0f / Mathf::tan(Mathf::degrees2Radians() * 0.5f * fov);
+	Float q = 1.0f / Mathf::tan(Mathf::degrees2Radians() * 0.5f * fov);
 
-	float a = q / aspectRatio;
-	float b = (zNear + zFar) / (zNear - zFar);
-	float c = (2.0f * zNear * zFar) / (zNear - zFar);
+	Float a = q / aspectRatio;
+	Float b = (zNear + zFar) / (zNear - zFar);
+	Float c = (2.0f * zNear * zFar) / (zNear - zFar);
 
 	result.elements[0 + 0 * 4] = a;
 	result.elements[1 + 1 * 4] = q;
@@ -277,18 +277,18 @@ Matrix4x4 Matrix4x4::translate(const Vector3& translation)
 	return result;
 }
 
-Matrix4x4 Matrix4x4::rotate(float angle, const Vector3& axis)
+Matrix4x4 Matrix4x4::rotate(Float angle, const Vector3& axis)
 {
 	Matrix4x4 result = identity();
 
-	float r = angle;
-	float c = Mathf::cos(r);
-	float s = Mathf::sin(r);
-	float omc = 1.0f - c;
+	Float r = angle;
+	Float c = Mathf::cos(r);
+	Float s = Mathf::sin(r);
+	Float omc = 1.0f - c;
 
-	float x = axis.x;
-	float y = axis.y;
-	float z = axis.z;
+	Float x = axis.x;
+	Float y = axis.y;
+	Float z = axis.z;
 
 	result.elements[0 + 0 * 4] = x * x * omc + c;
 	result.elements[0 + 1 * 4] = y * x * omc + z * s;
@@ -309,7 +309,7 @@ Matrix4x4 Matrix4x4::rotate(const Quaternion& quaternion)
 {
 	Matrix4x4 result = identity();
 
-	float qx, qy, qz, qw, qx2, qy2, qz2, qxqx2, qyqy2, qzqz2, qxqy2, qyqz2, qzqw2, qxqz2, qyqw2, qxqw2;
+	Float qx, qy, qz, qw, qx2, qy2, qz2, qxqx2, qyqy2, qzqz2, qxqy2, qyqz2, qzqw2, qxqz2, qyqw2, qxqw2;
 
 	qx = quaternion.x;
 	qy = quaternion.y;
@@ -364,13 +364,13 @@ Matrix4x4 Matrix4x4::operator *(const Matrix4x4& other) const
 {
 	Matrix4x4 data;
 
-	for (int row = 0; row < 4; row++)
+	for (UInt row = 0; row < 4; row++)
 	{
-		for (int col = 0; col < 4; col++)
+		for (UInt col = 0; col < 4; col++)
 		{
-			float sum = 0.0f;
+			Float sum = 0.0f;
 
-			for (int e = 0; e < 4; e++)
+			for (UInt e = 0; e < 4; e++)
 				sum += elements[e + row * 4] * other.elements[col + e * 4];
 
 			data.elements[col + row * 4] = sum;

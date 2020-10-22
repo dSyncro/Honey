@@ -26,19 +26,19 @@ namespace Honey {
 		 * @param xOffset Offset X component.
 		 * @param yOffset Offset Y component.
 		*/
-		MouseScrolledEvent(float xOffset, float yOffset) : _offset(xOffset, yOffset) {}
+		MouseScrolledEvent(Float xOffset, Float yOffset) : _offset(xOffset, yOffset) {}
 
 		/**
 		 * @brief Get horizontal scroll offset.
 		 * @return X scroll offset.
 		*/
-		float getXOffset() const { return _offset.x; }
+		Float getXOffset() const { return _offset.x; }
 
 		/**
 		 * @brief Get vertical scroll offset.
 		 * @return Y scroll offset.
 		*/
-		float getYOffset() const { return _offset.y; }
+		Float getYOffset() const { return _offset.y; }
 
 		/**
 		 * @see Event::toString()

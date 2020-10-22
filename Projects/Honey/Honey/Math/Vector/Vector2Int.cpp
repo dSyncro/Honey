@@ -1,5 +1,6 @@
 #include "Vector2Int.h"
 
+using namespace Honey;
 using namespace Honey::Math;
 
 const Vector2Int& Vector2Int::left()
@@ -38,7 +39,7 @@ const Vector2Int& Vector2Int::one()
 	return one;
 }
 
-Vector2Int& Vector2Int::set(int x, int y)
+Vector2Int& Vector2Int::set(Int x, Int y)
 {
 	// Set components
 	this->x = x;
@@ -49,20 +50,20 @@ Vector2Int& Vector2Int::set(int x, int y)
 Vector2Int& Vector2Int::clamp(const Vector2Int& min, const Vector2Int& max)
 {
 	// Get clamped components
-	int x = Mathf::clamp(this->x, min.x, max.x);
-	int y = Mathf::clamp(this->y, min.y, max.y);
+	Int x = Mathf::clamp(this->x, min.x, max.x);
+	Int y = Mathf::clamp(this->y, min.y, max.y);
 
 	return set(x, y); // Set clamped components
 }
 
 bool Vector2Int::equals(const Vector2Int& other) const { return *this == other; }
 
-float Vector2Int::getMagnitude() const
+Float Vector2Int::getMagnitude() const
 {
 	return Mathf::sqrt(getSquaredMagnitude());
 }
 
-int Vector2Int::getSquaredMagnitude() const
+Int Vector2Int::getSquaredMagnitude() const
 {
 	return x * x + y * y;
 }
@@ -108,14 +109,14 @@ Vector2Int Vector2Int::scale(const Vector2Int& a, const Vector2Int& b)
 	return a * b;
 }
 
-float Vector2Int::distance(const Vector2Int& a, const Vector2Int& b)
+Float Vector2Int::distance(const Vector2Int& a, const Vector2Int& b)
 {
 	// Distance is the magnitude of the vector from a to b.
 	Vector2Int diff = Vector2Int(a.x - b.x, a.y - b.y);
 	return diff.getMagnitude();
 }
 
-float Vector2Int::squaredDistance(const Vector2Int& a, const Vector2Int& b)
+Float Vector2Int::squaredDistance(const Vector2Int& a, const Vector2Int& b)
 {
 	// Squared distance is the squared magnitude of the vector from a to b.
 	Vector2Int diff = Vector2Int(a.x - b.x, a.y - b.y);
@@ -134,7 +135,7 @@ Vector2Int& Vector2Int::operator -=(const Vector2Int& other)
 	return *this;
 }
 
-Vector2Int& Honey::Math::Vector2Int::operator *=(int scalar)
+Vector2Int& Honey::Math::Vector2Int::operator *=(Int scalar)
 {
 	*this = *this * scalar;
 	return *this;
@@ -146,7 +147,7 @@ Vector2Int& Vector2Int::operator *=(const Vector2Int& other)
 	return *this;
 }
 
-Vector2Int& Vector2Int::operator/=(int scalar)
+Vector2Int& Vector2Int::operator/=(Int scalar)
 {
 	*this = *this / scalar;
 	return *this;
