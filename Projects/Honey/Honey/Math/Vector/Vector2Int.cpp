@@ -60,7 +60,8 @@ bool Vector2Int::equals(const Vector2Int& other) const { return *this == other; 
 
 Float Vector2Int::getMagnitude() const
 {
-	return Mathf::sqrt(getSquaredMagnitude());
+	Float sqrMagnitude = static_cast<Float>(getSquaredMagnitude());
+	return Mathf::sqrt(sqrMagnitude);
 }
 
 Int Vector2Int::getSquaredMagnitude() const
@@ -116,7 +117,7 @@ Float Vector2Int::distance(const Vector2Int& a, const Vector2Int& b)
 	return diff.getMagnitude();
 }
 
-Float Vector2Int::squaredDistance(const Vector2Int& a, const Vector2Int& b)
+Int Vector2Int::squaredDistance(const Vector2Int& a, const Vector2Int& b)
 {
 	// Squared distance is the squared magnitude of the vector from a to b.
 	Vector2Int diff = Vector2Int(a.x - b.x, a.y - b.y);

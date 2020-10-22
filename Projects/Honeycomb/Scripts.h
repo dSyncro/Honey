@@ -8,19 +8,20 @@ class CameraScrollController : public Behaviour {
 
 public:
 
-	float ZoomSpeed = 5.0f;
+	Float ZoomSpeed = 5.0f;
 
-	float Size = 10.0f;
+	Float Size = 10.0f;
 
 	void onUpdate() override
 	{
-		float deltaTime = Time::getDeltaTime();
+		Timestamp deltaTime = Time::getDeltaTime();
 
 		SceneCamera& camera = getComponent<CameraComponent>().camera;
-		float scroll = Input::getVMouseScroll();
+		Float scroll = Input::getVMouseScroll();
+		Size = camera.getOrthographicSize();
 		Size -= scroll * ZoomSpeed;
 		Size = Mathf::clamp(Size, 0.1f, Mathf::infinity());
-		camera.setOrthographic(Size, -1.0f, 1.0f);
+		camera.setOrthographicSize(Size);
 	}
 };
 
@@ -28,11 +29,11 @@ class CameraWASDController : public Behaviour {
 
 public:
 
-	float Speed = 1.0f;
+	Float Speed = 1.0f;
 
 	void onUpdate() override
 	{
-		float deltaTime = Time::getDeltaTime();
+		Timestamp deltaTime = Time::getDeltaTime();
 
 		SceneCamera& camera = getComponent<CameraComponent>().camera;
 

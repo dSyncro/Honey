@@ -160,7 +160,7 @@ namespace Honey::Math {
 		 * @param b Second vector.
 		 * @return Squared distance between two vectors.
 		*/
-		static float squaredDistance(const Vector2Int& a, const Vector2Int& b);
+		static Int squaredDistance(const Vector2Int& a, const Vector2Int& b);
 
 		/**
 		 * @brief Check if two Vector2Int are equal to each other.

@@ -65,7 +65,6 @@ void EditorLayer::onUpdate()
 	HNY_PROFILE_FUNCTION();
 
 	Timestamp deltaTime = Time::getDeltaTime();
-	HNY_CORE_INFO("Delta Time: {0}", (float)deltaTime);
 	
 	_cameraController.onUpdate();
 
