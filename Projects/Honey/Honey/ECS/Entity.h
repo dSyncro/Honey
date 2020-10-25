@@ -88,7 +88,7 @@ namespace Honey {
 		 * @tparam T Component type.
 		*/
 		template <typename T>
-		bool hasComponent() { return _scene->_registry.has<T>(_entityID); }
+		bool hasComponent() const { return _scene->_registry.has<T>(_entityID); }
 
 		/**
 		 * @brief Convert entity to entt::entity.
@@ -111,6 +111,12 @@ namespace Honey {
 		 * @param other The other entity.
 		*/
 		bool operator !=(const Entity& other) const { return !(*this == other); }
+
+		/**
+		 * @brief Null entity.
+		 * @return A null entity.
+		*/
+		static const Entity& null() { static Entity entity; return entity; }
 
 	private:
 

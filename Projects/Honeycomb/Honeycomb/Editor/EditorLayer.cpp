@@ -2,7 +2,7 @@
 
 #include <ImGui/imgui.h>
 
-#include "Scripts.h"
+#include <Honeycomb/Scripts.h>
 
 using namespace Honey;
 
@@ -52,7 +52,7 @@ void EditorLayer::onAttach()
 	text.getComponent<TextComponent>().atlas = _atlas;
 
 	_activeScene->onStart();
-	_hierarchy.SetContext(_activeScene);
+	_hierarchy.setContext(_activeScene);
 }
 
 void EditorLayer::onDetach()
@@ -150,9 +150,8 @@ void EditorLayer::onImGuiRender()
     }
 
     {
-        HNY_PROFILE_SCOPE("Settings");
-        ImGui::Begin("Settings");
-        ImGui::Text("Renderer2D Stats");
+        HNY_PROFILE_SCOPE("Renderer2D Stats");
+        ImGui::Begin("Renderer2D Stats");
         const Renderer2D::Statistics& stats = Renderer2D::getStatistics();
         ImGui::Text("Draw Calls: %d", stats.drawCalls);
         ImGui::Text("Quad Count: %d", stats.quadCount);
@@ -160,7 +159,6 @@ void EditorLayer::onImGuiRender()
         ImGui::Text("Index Count: %d", stats.getIndexCount());
 		ImGui::Text("Frame Rate: %f", (float)Time::getFrameRate());
 		ImGui::Text("Frame Count: %d", Time::getFrameCount());
-        ImGui::ColorEdit4("Square Color", (float*)&_entity.getComponent<SpriteRendererComponent>().tint);
         ImGui::End();
     }
 
@@ -186,5 +184,6 @@ void EditorLayer::onImGuiRender()
 
     ImGui::End();
 
-	_hierarchy.OnImGuiRender();
+	_hierarchy.onImGuiRender();
+	_inspector.onImGuiRender();
 }

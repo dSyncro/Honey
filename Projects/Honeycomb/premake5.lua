@@ -16,6 +16,7 @@ project "Honeycomb"
 
 	includedirs
 	{
+		"%{wks.location}/Projects/Honeycomb/",
 		"%{IncludeDir.Honey}",
 		"%{IncludeDir.ThirdParty}",
 		"%{IncludeDir.spdlog}",

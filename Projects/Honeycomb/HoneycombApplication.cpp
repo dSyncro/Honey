@@ -1,4 +1,4 @@
-#include "EditorLayer.h"
+#include <Honeycomb/Editor/EditorLayer.h>
 
 #include <Honey/Entrypoint.h>
 

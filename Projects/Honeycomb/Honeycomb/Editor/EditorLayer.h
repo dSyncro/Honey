@@ -1,7 +1,8 @@
 #pragma once
 
 #include <Honey.h>
-#include "Frames/SceneHierarchyFrame.h"
+#include <Honeycomb/Frames/InspectorFrame.h>
+#include <Honeycomb/Frames/SceneHierarchyFrame.h>
 
 namespace Honey {
 
@@ -37,5 +38,6 @@ namespace Honey {
 		Reference<FontAtlas> _atlas;
 
 		SceneHierarchyFrame _hierarchy;
+		InspectorFrame _inspector;
 	};
 }

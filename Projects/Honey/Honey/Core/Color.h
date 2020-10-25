@@ -50,6 +50,19 @@ namespace Honey {
 			: r(color.x), g(color.y), b(color.z), a(color.w) { }
 
 		/**
+		 * @brief Clamp exceeding components to one.
+		 * @return A reference to the color itself.
+		*/
+		Color& clampToOne()
+		{
+			if (r > 1.0f) r = 1.0f;
+			if (g > 1.0f) g = 1.0f;
+			if (b > 1.0f) b = 1.0f;
+			if (a > 1.0f) a = 1.0f;
+			return *this;
+		}
+
+		/**
 		 * @brief Convert Color to a RGB vector.
 		 * @return A RGB color vector.
 		*/

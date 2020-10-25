@@ -4,6 +4,12 @@
 #define HNY_STRINGIFY(x) #x
 #define HNY_CONCAT(a, b) a##b
 
+#define HNY_PURE_STATIC(type) type() = delete; \
+	type(const type&) = delete;               \
+	type(type&&) = delete;                    \
+	type& operator =(const type&) = delete;  \
+	type& operator =(type&&) = delete
+
 // Always inline
 #if defined(HNY_COMPILER_GCC)
 #	define HNY_ALWAYS_INLINE __attribute__((always_inline)) inline
