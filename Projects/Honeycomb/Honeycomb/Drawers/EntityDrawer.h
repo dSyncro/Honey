@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ComponentDrawers.h"
+#include <Honey.h>
 
 namespace Honey {
 
@@ -13,13 +13,13 @@ namespace Honey {
 		template <typename ComponentType, typename DrawerType>
 		void drawComponent(const std::string& name, bool isOpenable = true, bool isRemovable = true)
 		{
+			bool isNodeOpened = false;
+			bool shouldComponentBeRemoved = false;
+
 			if (!_entity.hasComponent<ComponentType>()) return;
 
-			ComponentInfo info;
-			info.entity = _entity;
-
 			if (isOpenable)
-				info.isNodeOpened = ImGui::TreeNodeEx((void*)typeid(ComponentType).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, name.c_str());
+				isNodeOpened = ImGui::TreeNodeEx((void*)typeid(ComponentType).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, name.c_str());
 
 			if (isRemovable)
 			{
@@ -30,21 +30,21 @@ namespace Honey {
 				if (ImGui::BeginPopup("ComponentCommands"))
 				{
 					if (ImGui::MenuItem("Remove component"))
-						info.shouldComponentBeRemoved = true;
+						shouldComponentBeRemoved = true;
 
 					ImGui::EndPopup();
 				}
 			}
 
-			if (info.isNodeOpened)
+			if (isNodeOpened)
 			{
-				DrawerType::draw(info);
+				DrawerType::draw(_entity);
 				ImGui::TreePop();
 			}
-			else if (!isOpenable) DrawerType::draw(info);
+			else if (!isOpenable) DrawerType::draw(_entity);
 
-			if (info.shouldComponentBeRemoved)
-				info.entity.removeComponent<ComponentType>();
+			if (shouldComponentBeRemoved)
+				_entity.removeComponent<ComponentType>();
 		}
 
 	private:

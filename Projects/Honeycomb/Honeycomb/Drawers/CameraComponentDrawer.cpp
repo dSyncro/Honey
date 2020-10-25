@@ -2,9 +2,11 @@
 
 using namespace Honey;
 
-COMPONENT_DRAWER_FUNCTION(CameraComponentDrawer, info)
+#include <ImGui/imgui.h>
+
+COMPONENT_DRAWER_FUNCTION(CameraComponentDrawer, entity)
 {
-	CameraComponent& cameraComponent = info.entity.getComponent<CameraComponent>();
+	CameraComponent& cameraComponent = entity.getComponent<CameraComponent>();
 	SceneCamera& cam = cameraComponent.camera;
 
 	const char* projectionTypes[2] = { "Perspective", "Orthographic" };

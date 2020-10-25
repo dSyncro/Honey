@@ -9,12 +9,7 @@ namespace Honey {
 	public:
 
 		// Pure virtual class
-
-		Editor() = delete;
-		Editor(const Editor&) = delete;
-		Editor(Editor&&) = delete;
-		Editor& operator =(const Editor&) = delete;
-		Editor& operator =(Editor&&) = delete;
+		HNY_PURE_STATIC(Editor);
 
 		static void select(Entity entity);
 		static Entity getSelectedEntity();

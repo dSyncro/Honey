@@ -1,8 +1,9 @@
 #include "InspectorFrame.h"
 
+#include <Honeycomb/ComponentDrawers.h>
+#include <Honeycomb/Drawers/EntityDrawer.h>
 #include <Honeycomb/Editor/Editor.h>
 #include <Honeycomb/Editor/EditorGUI.h>
-#include <Honeycomb/Frames/Drawers/EntityDrawer.h>
 
 #include <ImGui/imgui.h>
 
