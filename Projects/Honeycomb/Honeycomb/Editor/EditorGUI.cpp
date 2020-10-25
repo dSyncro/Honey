@@ -29,6 +29,9 @@ static void pushStyleColor(ImGuiCol colorType, Color color)
 
 void EditorGUI::vector2Field(const std::string& label, Math::Vector2& values, Float resetValue, Float columnWidth)
 {
+	ImGuiIO& io = ImGui::GetIO();
+	ImFont* boldFont = io.Fonts->Fonts[0];
+
 	const Color activeColorOffset = Color(0.1f, 0.1f, 0.1f, 0.0f);
 	const Color hoveredColorOffset = Color(0.5f, 0.5f, 0.5f, 0.0f);
 
@@ -53,8 +56,10 @@ void EditorGUI::vector2Field(const std::string& label, Math::Vector2& values, Fl
 	pushStyleColor(ImGuiCol_Button, style.xAxisColor);
 	pushStyleColor(ImGuiCol_ButtonActive, (style.xAxisColor + activeColorOffset).clampToOne());
 	pushStyleColor(ImGuiCol_ButtonHovered, (style.xAxisColor + hoveredColorOffset).clampToOne());
+	ImGui::PushFont(boldFont);
 	if (ImGui::Button("X", buttonSize))
 		values.x = resetValue;
+	ImGui::PopFont();
 	ImGui::PopStyleColor(3);
 
 	ImGui::SameLine();
@@ -64,8 +69,10 @@ void EditorGUI::vector2Field(const std::string& label, Math::Vector2& values, Fl
 	pushStyleColor(ImGuiCol_Button, style.yAxisColor);
 	pushStyleColor(ImGuiCol_ButtonActive, (style.yAxisColor + activeColorOffset).clampToOne());
 	pushStyleColor(ImGuiCol_ButtonHovered, (style.yAxisColor + hoveredColorOffset).clampToOne());
+	ImGui::PushFont(boldFont);
 	if (ImGui::Button("Y", buttonSize))
 		values.y = resetValue;
+	ImGui::PopFont();
 	ImGui::PopStyleColor(3);
 
 	ImGui::SameLine();
@@ -82,6 +89,9 @@ void EditorGUI::vector2Field(const std::string& label, Math::Vector2& values, Fl
 
 void EditorGUI::vector3Field(const std::string& label, Math::Vector3& values, Float resetValue, Float columnWidth)
 {
+	ImGuiIO& io = ImGui::GetIO();
+	ImFont* boldFont = io.Fonts->Fonts[0];
+
 	const Color activeColorOffset = Color(0.1f, 0.1f, 0.1f, 0.0f);
 	const Color hoveredColorOffset = Color(0.5f, 0.5f, 0.5f, 0.0f);
 
@@ -106,8 +116,10 @@ void EditorGUI::vector3Field(const std::string& label, Math::Vector3& values, Fl
 	pushStyleColor(ImGuiCol_Button, style.xAxisColor);
 	pushStyleColor(ImGuiCol_ButtonActive, (style.xAxisColor + activeColorOffset).clampToOne());
 	pushStyleColor(ImGuiCol_ButtonHovered, (style.xAxisColor + hoveredColorOffset).clampToOne());
+	ImGui::PushFont(boldFont);
 	if (ImGui::Button("X", buttonSize))
 		values.x = resetValue;
+	ImGui::PopFont();
 	ImGui::PopStyleColor(3);
 
 	ImGui::SameLine();
@@ -117,8 +129,10 @@ void EditorGUI::vector3Field(const std::string& label, Math::Vector3& values, Fl
 	pushStyleColor(ImGuiCol_Button, style.yAxisColor);
 	pushStyleColor(ImGuiCol_ButtonActive, (style.yAxisColor + activeColorOffset).clampToOne());
 	pushStyleColor(ImGuiCol_ButtonHovered, (style.yAxisColor + hoveredColorOffset).clampToOne());
+	ImGui::PushFont(boldFont);
 	if (ImGui::Button("Y", buttonSize))
 		values.y = resetValue;
+	ImGui::PopFont();
 	ImGui::PopStyleColor(3);
 
 	ImGui::SameLine();
@@ -128,8 +142,10 @@ void EditorGUI::vector3Field(const std::string& label, Math::Vector3& values, Fl
 	pushStyleColor(ImGuiCol_Button, style.zAxisColor);
 	pushStyleColor(ImGuiCol_ButtonActive, (style.zAxisColor + activeColorOffset).clampToOne());
 	pushStyleColor(ImGuiCol_ButtonHovered, (style.zAxisColor + hoveredColorOffset).clampToOne());
+	ImGui::PushFont(boldFont);
 	if (ImGui::Button("Z", buttonSize))
 		values.z = resetValue;
+	ImGui::PopFont();
 	ImGui::PopStyleColor(3);
 
 	ImGui::SameLine();

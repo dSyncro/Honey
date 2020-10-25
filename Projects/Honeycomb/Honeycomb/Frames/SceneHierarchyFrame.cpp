@@ -35,7 +35,7 @@ void SceneHierarchyFrame::drawEntityNode(Entity entity)
 {
 	NameComponent& nc = entity.getComponent<NameComponent>();
 	Entity selectedEntity = Editor::getSelectedEntity();
-	ImGuiTreeNodeFlags flags = (selectedEntity == entity ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
+	ImGuiTreeNodeFlags flags = (selectedEntity == entity ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth;
 
 	bool isOpened = ImGui::TreeNodeEx((void*)(entt::entity)entity, flags, nc.name.c_str());
 

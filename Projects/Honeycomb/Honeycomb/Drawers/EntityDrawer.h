@@ -13,18 +13,28 @@ namespace Honey {
 		template <typename ComponentType, typename DrawerType>
 		void drawComponent(const std::string& name, bool isOpenable = true, bool isRemovable = true)
 		{
+			const ImGuiTreeNodeFlags treeFlags = ImGuiTreeNodeFlags_DefaultOpen | 
+				ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_Framed | 
+				ImGuiTreeNodeFlags_AllowItemOverlap | ImGuiTreeNodeFlags_FramePadding;
+
 			bool isNodeOpened = false;
 			bool shouldComponentBeRemoved = false;
 
 			if (!_entity.hasComponent<ComponentType>()) return;
 
+			Float contentRegionAvail = ImGui::GetContentRegionAvailWidth();
+
+			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 4.0f, 4.0f });
+			ImGui::Separator();
 			if (isOpenable)
-				isNodeOpened = ImGui::TreeNodeEx((void*)typeid(ComponentType).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, name.c_str());
+				isNodeOpened = ImGui::TreeNodeEx((void*)typeid(ComponentType).hash_code(), treeFlags, name.c_str());
+			ImGui::PopStyleVar();
 
 			if (isRemovable)
 			{
-				ImGui::SameLine();
-				if (ImGui::Button("+"))
+				Float lineHeight = ImGui::GetFrameHeightWithSpacing();
+				ImGui::SameLine(contentRegionAvail - lineHeight * 0.5f);
+				if (ImGui::Button("+", { lineHeight, lineHeight }))
 					ImGui::OpenPopup("ComponentCommands");
 
 				if (ImGui::BeginPopup("ComponentCommands"))

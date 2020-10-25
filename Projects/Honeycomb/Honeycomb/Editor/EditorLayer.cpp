@@ -65,8 +65,6 @@ void EditorLayer::onUpdate()
 	HNY_PROFILE_FUNCTION();
 
 	Timestamp deltaTime = Time::getDeltaTime();
-	
-	_cameraController.onUpdate();
 
 	Renderer2D::resetStatistics();
 
@@ -83,7 +81,6 @@ void EditorLayer::onUpdate()
 void EditorLayer::onEvent(Honey::Event& e)
 {
 	HNY_PROFILE_FUNCTION();
-	_cameraController.onEvent(e);
 }
 
 void EditorLayer::onImGuiRender()
@@ -173,7 +170,6 @@ void EditorLayer::onImGuiRender()
         {
             _frameBuffer->resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
             _viewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-            _cameraController.resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
 			_activeScene->onViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
         }
 

@@ -10,7 +10,7 @@ namespace Honey {
 
 	public:
 
-		EditorLayer() : Layer("Editor Layer"), _cameraController(1.6f, 0.9f) {}
+		EditorLayer() : Layer("Editor Layer") {}
 		~EditorLayer() = default;
 
 		virtual void onAttach() override;
@@ -30,7 +30,6 @@ namespace Honey {
 		Reference<FrameBuffer> _frameBuffer;
 
 		ShaderLibrary _shaderLib;
-		OrthographicCameraController _cameraController;
 
 		Math::Vector2 _viewportSize;
 
